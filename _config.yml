@@ -1,1 +1,8 @@
+title: HOL Light From The Ground Up
+github_username:  FDSouthern
+
+# Build settings
 theme: jekyll-theme-minimal
+markdown: kramdown
+permalink: pretty
+highlighter: rouge
