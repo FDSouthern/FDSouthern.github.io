@@ -5,7 +5,10 @@ This is where the actual OCaml gets started.
 
 ```ocaml
 let fail() = failwith "";;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Combinators.                                                              *)
 (* ------------------------------------------------------------------------- *)
@@ -25,7 +28,10 @@ let W f x = f x x;;
 let (o) = fun f g x -> f(g x);;
 
 let (F_F) = fun f g (x,y) -> (f x,g y);;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* List basics.                                                              *)
 (* ------------------------------------------------------------------------- *)
@@ -74,6 +80,10 @@ let rec map2 f l1 l2 =
     [],[] -> []
   | (h1::t1),(h2::t2) -> let h = f h1 h2 in h::(map2 f t1 t2)
   | _ -> failwith "map2: length mismatch";;
+```
+Saves us a few vital characters.
+
+```ocaml
 
 (* ------------------------------------------------------------------------- *)
 (* Attempting function or predicate applications.                            *)
@@ -82,7 +92,10 @@ let rec map2 f l1 l2 =
 let can f x = try (f x; true) with Failure _ -> false;;
 
 let check p x = if p x then x else failwith "check";;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Repetition of a function.                                                 *)
 (* ------------------------------------------------------------------------- *)
@@ -92,14 +105,20 @@ let rec funpow n f x =
 
 let rec repeat f x =
   try let y = f x in repeat f y with Failure _ -> x;;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* To avoid consing in various situations, we propagate this exception.      *)
 (* I should probably eliminate this and use pointer EQ tests instead.        *)
 (* ------------------------------------------------------------------------- *)
 
 exception Unchanged;;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Various versions of list iteration.                                       *)
 (* ------------------------------------------------------------------------- *)
@@ -131,7 +150,10 @@ let rec rev_itlist2 f l1 l2 b =
      ([],[]) -> b
    | (h1::t1,h2::t2) -> rev_itlist2 f t1 t2 (f h1 h2 b)
       | _ -> failwith "rev_itlist2";;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Iterative splitting (list) and stripping (tree) via destructor.           *)
 (* ------------------------------------------------------------------------- *)
@@ -155,7 +177,10 @@ let striplist dest =
         strip l (strip r acc)
     with Failure _ -> x::acc in
   fun x -> strip x [];;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Apply a destructor as many times as elements in list.                     *)
 (* ------------------------------------------------------------------------- *)
@@ -165,7 +190,10 @@ let rec nsplit dest clist x =
   let l,r = dest x in
   let ll,y = nsplit dest (tl clist) r in
   l::ll,y;;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Replication and sequences.                                                *)
 (* ------------------------------------------------------------------------- *)
@@ -175,7 +203,10 @@ let rec replicate x n =
     else x::(replicate x (n - 1));;
 
 let rec (--) = fun m n -> if m > n then [] else m::((m + 1) -- n);;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Various useful list operations.                                           *)
 (* ------------------------------------------------------------------------- *)
@@ -250,7 +281,10 @@ let index x =
       [] -> failwith "index"
     | (h::t) -> if Pervasives.compare x h = 0 then n else ind (n + 1) t in
   ind 0;;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* "Set" operations on lists.                                                *)
 (* ------------------------------------------------------------------------- *)
@@ -274,7 +308,10 @@ let subtract l1 l2 = filter (fun x -> not (mem x l2)) l1;;
 let subset l1 l2 = forall (fun t -> mem t l2) l1;;
 
 let set_eq l1 l2 = subset l1 l2 && subset l2 l1;;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Association lists.                                                        *)
 (* ------------------------------------------------------------------------- *)
@@ -288,7 +325,10 @@ let rec rev_assoc a l =
   match l with
     (x,y)::t -> if Pervasives.compare y a = 0 then x else rev_assoc a t
   | [] -> failwith "find";;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Zipping, unzipping etc.                                                   *)
 (* ------------------------------------------------------------------------- *)
@@ -303,7 +343,10 @@ let rec unzip =
   function [] -> [],[]
          | ((a,b)::rest) -> let alist,blist = unzip rest in
                             (a::alist,b::blist);;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Sharing out a list according to pattern in list-of-lists.                 *)
 (* ------------------------------------------------------------------------- *)
@@ -312,7 +355,10 @@ let rec shareout pat all =
   if pat = [] then [] else
   let l,r = chop_list (length (hd pat)) all in
   l::(shareout (tl pat) r);;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Iterating functions over lists.                                           *)
 (* ------------------------------------------------------------------------- *)
@@ -321,7 +367,10 @@ let rec do_list f l =
   match l with
     [] -> ()
   | (h::t) -> (f h; do_list f t);;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Sorting.                                                                  *)
 (* ------------------------------------------------------------------------- *)
@@ -332,7 +381,10 @@ let rec sort cmp lis =
   | piv::rest ->
       let r,l = partition (cmp piv) rest in
       (sort cmp l) @ (piv::(sort cmp r));;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Removing adjacent (NB!) equal elements from list.                         *)
 (* ------------------------------------------------------------------------- *)
@@ -343,13 +395,19 @@ let rec uniq l =
                       if Pervasives.compare x y = 0 then t' else
                       if t'==t then l else x::t'
  | _ -> l;;
+```
+I'm sure I learnt this as `destutter`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Convert list into set by eliminating duplicates.                          *)
 (* ------------------------------------------------------------------------- *)
 
 let setify s = uniq (sort (fun x y -> Pervasives.compare x y <= 0) s);;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* String operations (surely there is a better way...)                       *)
 (* ------------------------------------------------------------------------- *)
@@ -361,7 +419,10 @@ let explode s =
       if n < 0 then l else
       exap (n - 1) ((String.sub s n 1)::l) in
   exap (String.length s - 1) [];;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Greatest common divisor.                                                  *)
 (* ------------------------------------------------------------------------- *)
@@ -371,7 +432,10 @@ let gcd =
     if y = 0 then x else gxd y (x mod y) in
   fun x y -> let x' = abs x and y' = abs y in
               if x' < y' then gxd y' x' else gxd x' y';;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Some useful functions on "num" type.                                      *)
 (* ------------------------------------------------------------------------- *)
@@ -398,7 +462,10 @@ let gcd_num n1 n2 =
 let lcm_num x y =
   if x =/ num_0 && y =/ num_0 then num_0
   else abs_num((x */ y) // gcd_num x y);;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* All pairs arising from applying a function over two lists.                *)
 (* ------------------------------------------------------------------------- *)
@@ -407,7 +474,10 @@ let rec allpairs f l1 l2 =
   match l1 with
    h1::t1 ->  itlist (fun x a -> f h1 x :: a) l2 (allpairs f t1 l2)
   | [] -> [];;
+```
+Saves us a few vital characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Issue a report with a newline.                                            *)
 (* ------------------------------------------------------------------------- *)
@@ -435,7 +505,10 @@ let report_timing = ref true;;
 
 let remark s =
   if !verbose then report s else ();;
+```
+I don't think there's much of interest here.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Time a function.                                                          *)
 (* ------------------------------------------------------------------------- *)
@@ -452,7 +525,10 @@ let time f x =
       Format.print_string("Failed after (user) CPU time of "^
                           (string_of_float(finish_time -. start_time))^": ");
       raise e;;
+```
+I don't think there's much of interest here.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Versions of assoc and rev_assoc with default rather than failure.         *)
 (* ------------------------------------------------------------------------- *)
@@ -466,7 +542,10 @@ let rec rev_assocd a l d =
   match l with
     [] -> d
   | (x,y)::t -> if Pervasives.compare y a = 0 then x else rev_assocd a t d;;
+```
+I don't think there's much of interest here.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Version of map that avoids rebuilding unchanged subterms.                 *)
 (* ------------------------------------------------------------------------- *)
@@ -476,7 +555,10 @@ let rec qmap f l =
     h::t -> let h' = f h and t' = qmap f t in
             if h' == h && t' == t then l else h'::t'
   | _ -> l;;
+```
+I don't think there's much of interest here.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Merging and bottom-up mergesort.                                          *)
 (* ------------------------------------------------------------------------- *)
@@ -497,7 +579,10 @@ let mergesort ord =
       | (l,[s1]) -> mergepairs (s1::l) []
       | (l,(s1::s2::ss)) -> mergepairs ((merge ord s1 s2)::l) ss in
   fun l -> if l = [] then [] else mergepairs [] (map (fun x -> [x]) l);;
+```
+I don't think there's much of interest here.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Common measure predicates to use with "sort".                             *)
 (* ------------------------------------------------------------------------- *)
@@ -519,7 +604,10 @@ type ('a,'b)func =
    Empty
  | Leaf of int * ('a*'b)list
  | Branch of int * int * ('a,'b)func * ('a,'b)func;;
+```
+Source for Patricia trees.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Undefined function.                                                       *)
 (* ------------------------------------------------------------------------- *)
@@ -550,7 +638,10 @@ let mapf =
     | Leaf(h,l) -> Leaf(h,map_list f l)
     | Branch(p,b,l,r) -> Branch(p,b,mapf f l,mapf f r) in
   mapf;;
+```
+I don't think there's much of interest here.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Operations analogous to "fold" for lists.                                 *)
 (* ------------------------------------------------------------------------- *)
@@ -578,7 +669,10 @@ let foldr =
     | Leaf(h,l) -> foldr_list f l a
     | Branch(p,b,l,r) -> foldr f l (foldr f r a) in
   foldr;;
+```
+I don't think there's much of interest here.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Mapping to sorted-list representation of the graph, domain and range.     *)
 (* ------------------------------------------------------------------------- *)
@@ -588,7 +682,10 @@ let graph f = setify (foldl (fun a x y -> (x,y)::a) [] f);;
 let dom f = setify(foldl (fun a x y -> x::a) [] f);;
 
 let ran f = setify(foldl (fun a x y -> y::a) [] f);;
+```
+I don't think there's much of interest here.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Application.                                                              *)
 (* ------------------------------------------------------------------------- *)
@@ -614,7 +711,10 @@ let apply f = applyd f (fun x -> failwith "apply");;
 let tryapplyd f a d = applyd f (fun x -> d) a;;
 
 let defined f x = try apply f x; true with Failure _ -> false;;
+```
+I don't think there's much of interest here.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Undefinition.                                                             *)
 (* ------------------------------------------------------------------------- *)
@@ -649,7 +749,10 @@ let undefine =
             else (match r' with Empty -> l | _ -> Branch(p,b,l,r'))
       | _ -> t in
     und;;
+```
+I don't think there's much of interest here.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Redefinition and combination.                                             *)
 (* ------------------------------------------------------------------------- *)
@@ -744,13 +847,19 @@ let (|->),combine =
           else
             newbranch p1 t1 p2 t2 in
   (|->),combine;;
+```
+I don't think there's much of interest here.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Special case of point function.                                           *)
 (* ------------------------------------------------------------------------- *)
 
 let (|=>) = fun x y -> (x |-> y) undefined;;
+```
+I don't think there's much of interest here.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Grab an arbitrary element.                                                *)
 (* ------------------------------------------------------------------------- *)
@@ -760,7 +869,10 @@ let rec choose t =
     Empty -> failwith "choose: completely undefined function"
   | Leaf(h,l) -> hd l
   | Branch(b,p,t1,t2) -> choose t1;;
+```
+I don't think there's much of interest here.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Install a trivial printer for the general polymorphic case.               *)
 (* ------------------------------------------------------------------------- *)
@@ -768,7 +880,10 @@ let rec choose t =
 let print_fpf (f:('a,'b)func) = Format.print_string "<func>";;
 
 #install_printer print_fpf;;
+```
+I don't think there's much of interest here.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Set operations parametrized by equality (from Steven Obua).               *)
 (* ------------------------------------------------------------------------- *)
@@ -788,7 +903,10 @@ let union' eq l1 l2 = itlist (insert' eq) l1 l2;;
 let unions' eq l = itlist (union' eq) l [];;
 
 let subtract' eq l1 l2 = filter (fun x -> not (mem' eq x l2)) l1;;
+```
+I don't think there's much of interest here.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Accepts decimal, hex or binary numeral, using C notation 0x... for hex    *)
 (* and analogous 0b... for binary.                                           *)
@@ -816,7 +934,10 @@ let num_of_string =
       | "0"::"x"::hexdigits -> num_of_stringlist sixteen (rev hexdigits)
       | "0"::"b"::bindigits -> num_of_stringlist two (rev bindigits)
       | decdigits -> num_of_stringlist ten (rev decdigits);;
+```
+I don't think there's much of interest here.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Convenient conversion between files and (lists of) strings.               *)
 (* ------------------------------------------------------------------------- *)
@@ -839,3 +960,5 @@ let file_of_string filename s =
   let fd = Pervasives.open_out filename in
   output_string fd s; close_out fd;;
 ```
+
+Now we move on to the 'logical core' of HOL Light in [fusion.ml](fusion.md).

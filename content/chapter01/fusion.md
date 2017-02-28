@@ -1,6 +1,8 @@
 ---
 title: fusion.ml
 ---
+I wonder why this is called `fusion.ml`.  There is a history document that John
+Harrison wrote.  It may be answered there.
 
 ```ocaml
 module type Hol_kernel =
@@ -80,7 +82,9 @@ module type Hol_kernel =
       val new_basic_type_definition :
               string -> string * string -> thm -> thm * thm
 end;;
-
+```
+Epic signature.
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* This is the implementation of those primitives.                           *)
 (* ------------------------------------------------------------------------- *)
