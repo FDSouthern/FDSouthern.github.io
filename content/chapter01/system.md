@@ -1,9 +1,11 @@
-(* ========================================================================= *)
-(* Some miscellaneous OCaml system hacking before we get started.            *)
-(*                                                                           *)
-(*              (c) Copyright, John Harrison 1998-2014                       *)
-(* ========================================================================= *)
+Here is an example MathJax inline rendering \\( 1/x^{2} \\), and here is a block rendering:
+\\[ \frac{1}{n^{2}} \\]
 
+Or this:
+$$\sum_{n=1}^\infty 1/n^2 = \frac{\pi^2}{6}$$
+?
+
+```ocaml
 Gc.set { (Gc.get()) with Gc.stack_limit = 16777216 };;
 
 (* ------------------------------------------------------------------------- *)
@@ -28,7 +30,7 @@ let quotexpander s =
   else if c = ";" then "parse_qproof \""^(String.escaped s)^"\"" else
   let n = String.length s - 1 in
   if String.sub s n 1 = ":"
-  then "\""^(String.escaped (String.sub s 0 n))^"\"" 
+  then "\""^(String.escaped (String.sub s 0 n))^"\""
   else "parse_term \""^(String.escaped s)^"\"";;
 
 Quotation.add "tot" (Quotation.ExStr (fun x -> quotexpander));;
@@ -53,3 +55,4 @@ let print_num n =
   Format.close_box();;
 
 #install_printer print_num;;
+```
