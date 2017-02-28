@@ -1,0 +1,96 @@
+# g `!m n. m + n = n + m`;;
+# e INDUCT_TAC ;;
+# e (REWRITE_TAC [ADD_0]) ;;
+# e INDUCT_TAC ;;
+# e (REWRITE_TAC [ADD_0]);;
+# e (REWRITE_TAC [ADD_SUC]);;
+# e (REWRITE_TAC [SUC_INJ]);;
+# b () ;;
+# b () ;;
+# e (ASM_REWRITE_TAC [ADD_SUC]);;
+# e (ASM_REWRITE_TAC [ADD_SUC]);;
+# e (RULE_ASSUM_TAC GSYM) ;;
+# e (ASM_REWRITE_TAC []) ;;
+# e (ASM_REWRITE_TAC [ADD]) ;;
+# b() ;;
+# e INDUCT_TAC ;;
+# e (ASM_REWRITE_TAC [ADD_0]) ;;
+# e (ASM_REWRITE_TAC [ADD_SUC]) ;;
+
+# g `!m n. m + n = n + m`;;
+# e INDUCT_TAC ;;
+# e (REWRITE_TAC [ADD_0]) ;;
+# e INDUCT_TAC ;;
+# e (REWRITE_TAC [ADD_0]) ;;
+# e (ASM_REWRITE_TAC [ADD_SUC]) ;;
+val it : goalstack = 1 subgoal (1 total)
+
+  0 [`!n. m + n = n + m`]
+
+`!n. SUC m + n = n + SUC m`
+
+# e (RULE_ASSUM_TAC GSYM) ;;
+val it : goalstack = 1 subgoal (1 total)
+
+  0 [`!n. n + m = m + n`]
+
+`!n. SUC m + n = n + SUC m`
+
+# e (ASM_REWRITE_TAC []) ;;
+val it : goalstack = 1 subgoal (1 total)
+
+  0 [`!n. n + m = m + n`]
+
+`!n. SUC m + n = n + SUC m`
+
+# 9e INDUCT_TAC ;;
+Toplevel input:
+# 9e INDUCT_TAC ;;
+    ^
+Lexing error: ill-formed floating-point constant
+# e INDUCT_TAC ;;
+val it : goalstack = 2 subgoals (2 total)
+
+  0 [`!n. n + m = m + n`]
+  1 [`SUC m + n = n + SUC m`]
+
+`SUC m + SUC n = SUC n + SUC m`
+
+  0 [`!n. n + m = m + n`]
+
+`SUC m + 0 = 0 + SUC m`
+
+# e (ASM_REWRITE_TAC [ADD_0]) ;;
+val it : goalstack = 1 subgoal (2 total)
+
+  0 [`!n. n + m = m + n`]
+
+`SUC m = 0 + SUC m`
+
+# e (ASM_REWRITE_TAC [ADD_SUC]) ;;
+val it : goalstack = 1 subgoal (2 total)
+
+  0 [`!n. n + m = m + n`]
+
+`SUC m = SUC (m + 0)`
+
+# ^Z
+[1]+  Stopped                 ocaml
+fds@torbellino:~/code/hol-light/hol-light$ fg
+ocaml
+# let ADD_COMM = top_thm ();;
+Toplevel input:
+# # let ADD_COMM = top_thm ();;
+  ^
+Parse error: illegal begin of top_phrase
+# let ADD_COMM = top_thm ();;
+Exception:
+Match_failure ("/home/fds/code/hol-light/hol-light/tactics.ml", 917, 6).
+# p () ;;
+val it : goalstack = 1 subgoal (2 total)
+
+  0 [`!n. n + m = m + n`]
+
+`SUC m = SUC (m + 0)`
+
+#
