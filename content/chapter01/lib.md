@@ -1,6 +1,7 @@
 ---
 title: lib.ml
 ---
+This is where the actual OCaml gets started.
 
 ```ocaml
 let fail() = failwith "";;

@@ -1,16 +1,23 @@
 ---
 title: system.ml
 ---
+This file is also a bit of an awkward one, but it's also mercifully short.
 
 ```ocaml
 Gc.set { (Gc.get()) with Gc.stack_limit = 16777216 };;
+```
+This is a significant increase in the stack limit.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Make sure user interrupts generate an exception, not kill the process.    *)
 (* ------------------------------------------------------------------------- *)
 
 Sys.catch_break true;;
+```
+This is a significant increase in the stack limit.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Set up a quotation expander for the `...` quotes.                         *)
 (* This includes the case `;...` to support miz3, even if that isn't loaded. *)
@@ -31,13 +38,20 @@ let quotexpander s =
   else "parse_term \""^(String.escaped s)^"\"";;
 
 Quotation.add "tot" (Quotation.ExStr (fun x -> quotexpander));;
+```
+Some important code for handling Camlp4 quotations that I just want to skip
+over.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Modify the lexical analysis of uppercase identifiers.                     *)
 (* ------------------------------------------------------------------------- *)
 
 set_jrh_lexer;;
+```
+The final piece of magic from Camlp4.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Load in the bignum library and set up printing in the toplevel.           *)
 (* ------------------------------------------------------------------------- *)
@@ -53,5 +67,6 @@ let print_num n =
 
 #install_printer print_num;;
 ```
+Some stuff to load in and display arbitrary precision integers.
 
-Next up:  [lib.ml](lib.md)
+Let's hurry along to [lib.ml](lib.md)
