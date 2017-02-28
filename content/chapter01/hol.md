@@ -2,13 +2,22 @@
 title: hol.ml
 ---
 This file is mostly miscellaneous odds and ends that aren't too important for
-the rest of the discussion, but I thought I'd briefly go through them anyway.
+the rest of the discussion, but I thought I'd briefly go through them anyway,
+for the sake of completeness.
 
 ```ocaml
 let hol_version = "2.20++";;
+```
+This variable is used in the generation of the help files.
 
+```ocaml
 #directory "+compiler-libs";;
+```
+This toplevel directive enables the loading of files from the `compiler-libs`
+library, described in the OCaml manual
+[here](http://caml.inria.fr/pub/docs/manual-ocaml/parsing.html).
 
+```ocaml
 let hol_dir = ref
   (try Sys.getenv "HOLLIGHT_DIR" with Not_found -> Sys.getcwd());;
 
@@ -19,7 +28,10 @@ let hol_dir = ref
 (* ------------------------------------------------------------------------- *)
 
 let temp_path = ref "/tmp";;
+```
+Fairly obvious things, I think.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Load in parsing extensions.                                               *)
 (* For Ocaml < 3.10, use the built-in camlp4                                 *)
@@ -32,7 +44,12 @@ then (Topdirs.dir_directory "+camlp5";
 else (Topdirs.dir_load Format.std_formatter "camlp4o.cma");;
 
 Topdirs.dir_load Format.std_formatter (Filename.concat (!hol_dir) "pa_j.cmo");;
+```
+This section is a little bit hairy, but I'm going to skip over it for now.
+I may at some future time add a section to this guide on the syntax extensions
+used by HOL Light.  Or I may not.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Load files from system and/or user-settable directories.                  *)
 (* Paths map initial "$/" to !hol_dir dynamically; use $$ to get the actual  *)
@@ -78,6 +95,6 @@ let needs s =
   if List.mem fileid (!loaded_files)
   then Format.print_string("File \""^s^"\" already loaded\n") else loadt s;;
 ```
-
-The file then finishes with a wall of `loads`, beginning with
-[system.ml](system.md).
+And these functions are not terribly exciting, but necessary for loading the
+HOL system into the toplevel.  I'll skip such loading code in the sequel, so
+let's get on with the other files, beginning with [system.ml](system.md).
