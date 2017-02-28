@@ -1,14 +1,8 @@
-(* ========================================================================= *)
-(* Complete HOL kernel of types, terms and theorems.                         *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: fusion.ml
+---
 
-needs "lib.ml";;
-
+```ocaml
 module type Hol_kernel =
   sig
       type hol_type = private
@@ -670,3 +664,4 @@ let aconv s t = alphaorder s t = 0;;
 (* ------------------------------------------------------------------------- *)
 
 let equals_thm th th' = dest_thm th = dest_thm th';;
+```

@@ -1,6 +1,8 @@
 ---
 title: hol.ml
 ---
+This file is mostly miscellaneous odds and ends that aren't too important for
+the rest of the discussion, but I thought I'd briefly go through them anyway.
 
 ```ocaml
 let hol_version = "2.20++";;

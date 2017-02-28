@@ -1,14 +1,8 @@
-(* ========================================================================= *)
-(* More syntax constructors, and prelogical utilities like matching.         *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: basics.ml
+---
 
-needs "fusion.ml";;
-
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Create probably-fresh variable                                            *)
 (* ------------------------------------------------------------------------- *)
@@ -425,3 +419,4 @@ let follow_path =
     | "r"::t -> follow_path t (rand tm)
     | _::t -> follow_path t (body tm) in
   fun s tm -> follow_path (explode s) tm;;
+```

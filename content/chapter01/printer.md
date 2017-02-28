@@ -1,3 +1,8 @@
+---
+title: printer.ml
+---
+
+```ocaml
 (* ========================================================================= *)
 (* Simplistic HOL Light prettyprinter, using the OCaml "Format" library.     *)
 (*                                                                           *)
@@ -542,3 +547,4 @@ let print_to_string printer =
 let string_of_type = print_to_string pp_print_type;;
 let string_of_term = print_to_string pp_print_term;;
 let string_of_thm = print_to_string pp_print_thm;;
+```

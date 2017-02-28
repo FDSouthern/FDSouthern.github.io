@@ -1,3 +1,8 @@
+---
+title: parser.ml
+---
+
+```ocaml
 (* ========================================================================= *)
 (* Lexical analyzer, type and preterm parsers.                               *)
 (*                                                                           *)
@@ -500,3 +505,4 @@ let parse_term s =
   if l = [] then
    (term_of_preterm o (retypecheck [])) ptm
   else failwith "Unparsed input following term";;
+```

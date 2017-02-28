@@ -1,12 +1,8 @@
-(* ========================================================================= *)
-(* Convenient library functions.                                             *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: lib.ml
+---
 
+```ocaml
 let fail() = failwith "";;
 
 (* ------------------------------------------------------------------------- *)
@@ -841,3 +837,4 @@ let string_of_file filename =
 let file_of_string filename s =
   let fd = Pervasives.open_out filename in
   output_string fd s; close_out fd;;
+```

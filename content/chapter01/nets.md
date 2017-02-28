@@ -1,3 +1,8 @@
+---
+title: nets.ml
+---
+
+```ocaml
 (* ========================================================================= *)
 (* Term nets: reasonably fast lookup based on term matchability.             *)
 (*                                                                           *)
@@ -118,3 +123,4 @@ let merge_nets =
     Netnode(itlist add_node l2 (itlist add_node l1 []),
             set_merge data1 data2) in
   merge_nets;;
+```
