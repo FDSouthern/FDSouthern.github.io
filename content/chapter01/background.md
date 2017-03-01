@@ -3,6 +3,8 @@ title: Background
 ---
 # Background
 
+This document is a **work in progress**.
+
 I'm assuming that you've HOL Light installed correctly, so that when you type
 ```ocaml
 #use "hol.ml" ;;

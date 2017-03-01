@@ -4,6 +4,9 @@ title: fusion.ml
 I wonder why this is called `fusion.ml`.  There is a history document that John
 Harrison wrote.  It may be answered there.
 
+This is the small trusted core you've heard so much about, so let's try and
+focus here!
+
 ```ocaml
 module type Hol_kernel =
   sig
@@ -83,7 +86,8 @@ module type Hol_kernel =
               string -> string * string -> thm -> thm * thm
 end;;
 ```
-Epic signature.
+Epic signature, but we'll save the comments for below:
+
 ```ocaml
 (* ------------------------------------------------------------------------- *)
 (* This is the implementation of those primitives.                           *)

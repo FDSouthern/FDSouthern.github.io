@@ -24,12 +24,18 @@ let K x y = x;;
 let C f x y = f y x;;
 
 let W f x = f x x;;
+```
+This appears to be a variant of the
+[B, C, K, W system](https://en.wikipedia.org/wiki/B,_C,_K,_W_system).
+I'll try and keep an eye out for where they're used later and put some links
+here.
 
+```ocaml
 let (o) = fun f g x -> f(g x);;
 
 let (F_F) = fun f g (x,y) -> (f x,g y);;
 ```
-Saves us a few vital characters.
+Composition and some kind of 'apply over pairs' (I wonder if this has a name?).
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -81,10 +87,10 @@ let rec map2 f l1 l2 =
   | (h1::t1),(h2::t2) -> let h = f h1 h2 in h::(map2 f t1 t2)
   | _ -> failwith "map2: length mismatch";;
 ```
-Saves us a few vital characters.
+These are pretty standard functional goodies.  I'm not really sure why they are
+preferable to the standard library versions.
 
 ```ocaml
-
 (* ------------------------------------------------------------------------- *)
 (* Attempting function or predicate applications.                            *)
 (* ------------------------------------------------------------------------- *)
@@ -93,7 +99,7 @@ let can f x = try (f x; true) with Failure _ -> false;;
 
 let check p x = if p x then x else failwith "check";;
 ```
-Saves us a few vital characters.
+These are quite neat.  I wonder if I can think of anything to say about them.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -106,7 +112,7 @@ let rec funpow n f x =
 let rec repeat f x =
   try let y = f x in repeat f y with Failure _ -> x;;
 ```
-Saves us a few vital characters.
+Pretty standard again.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -116,7 +122,8 @@ Saves us a few vital characters.
 
 exception Unchanged;;
 ```
-Saves us a few vital characters.
+This does seem a little hacky.  I wonder if it actually results in any
+measurable performance improvement.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -151,7 +158,8 @@ let rec rev_itlist2 f l1 l2 b =
    | (h1::t1,h2::t2) -> rev_itlist2 f t1 t2 (f h1 h2 b)
       | _ -> failwith "rev_itlist2";;
 ```
-Saves us a few vital characters.
+A whole bouquet.  It strikes me as odd that `end_itlist` doesn't apply `f` to
+the final `x`.  Let's look up some uses of it.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -178,7 +186,7 @@ let striplist dest =
     with Failure _ -> x::acc in
   fun x -> strip x [];;
 ```
-Saves us a few vital characters.
+Again, I should look up some examples from other parts of the code.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -191,7 +199,7 @@ let rec nsplit dest clist x =
   let ll,y = nsplit dest (tl clist) r in
   l::ll,y;;
 ```
-Saves us a few vital characters.
+For this one too...
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -204,7 +212,8 @@ let rec replicate x n =
 
 let rec (--) = fun m n -> if m > n then [] else m::((m + 1) -- n);;
 ```
-Saves us a few vital characters.
+I don't think these require much comment.  `m -- n` generates the sequence m to
+n inclusive.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -282,7 +291,8 @@ let index x =
     | (h::t) -> if Pervasives.compare x h = 0 then n else ind (n + 1) t in
   ind 0;;
 ```
-Saves us a few vital characters.
+Again, a few of these exist in the standard library.  I wonder if these are
+from a time before they were included, or if John is just a control freak!
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -309,7 +319,7 @@ let subset l1 l2 = forall (fun t -> mem t l2) l1;;
 
 let set_eq l1 l2 = subset l1 l2 && subset l2 l1;;
 ```
-Saves us a few vital characters.
+These don't seem too troublesome (is `mem` distinct from `el` above?).
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -326,7 +336,7 @@ let rec rev_assoc a l =
     (x,y)::t -> if Pervasives.compare y a = 0 then x else rev_assoc a t
   | [] -> failwith "find";;
 ```
-Saves us a few vital characters.
+Nice and simple.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -344,7 +354,7 @@ let rec unzip =
          | ((a,b)::rest) -> let alist,blist = unzip rest in
                             (a::alist,b::blist);;
 ```
-Saves us a few vital characters.
+Dum dee dum.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -356,7 +366,7 @@ let rec shareout pat all =
   let l,r = chop_list (length (hd pat)) all in
   l::(shareout (tl pat) r);;
 ```
-Saves us a few vital characters.
+This definitely deserves some examples!!
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -368,7 +378,7 @@ let rec do_list f l =
     [] -> ()
   | (h::t) -> (f h; do_list f t);;
 ```
-Saves us a few vital characters.
+Different from `itlist`..?
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -382,7 +392,7 @@ let rec sort cmp lis =
       let r,l = partition (cmp piv) rest in
       (sort cmp l) @ (piv::(sort cmp r));;
 ```
-Saves us a few vital characters.
+There's also `mergesort` below.  Do they behave identically?
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -405,7 +415,7 @@ I'm sure I learnt this as `destutter`.
 
 let setify s = uniq (sort (fun x y -> Pervasives.compare x y <= 0) s);;
 ```
-Saves us a few vital characters.
+Why isn't this with the set functions above?!
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -420,7 +430,7 @@ let explode s =
       exap (n - 1) ((String.sub s n 1)::l) in
   exap (String.length s - 1) [];;
 ```
-Saves us a few vital characters.
+Maybe something from `Str`?
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -433,7 +443,7 @@ let gcd =
   fun x y -> let x' = abs x and y' = abs y in
               if x' < y' then gxd y' x' else gxd x' y';;
 ```
-Saves us a few vital characters.
+Nothing to see here.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -463,7 +473,7 @@ let lcm_num x y =
   if x =/ num_0 && y =/ num_0 then num_0
   else abs_num((x */ y) // gcd_num x y);;
 ```
-Saves us a few vital characters.
+Not many surprises here.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -475,7 +485,7 @@ let rec allpairs f l1 l2 =
    h1::t1 ->  itlist (fun x a -> f h1 x :: a) l2 (allpairs f t1 l2)
   | [] -> [];;
 ```
-Saves us a few vital characters.
+Example!
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -526,7 +536,7 @@ let time f x =
                           (string_of_float(finish_time -. start_time))^": ");
       raise e;;
 ```
-I don't think there's much of interest here.
+Timing could be fun.  Where is it used?
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -543,7 +553,7 @@ let rec rev_assocd a l d =
     [] -> d
   | (x,y)::t -> if Pervasives.compare y a = 0 then x else rev_assocd a t d;;
 ```
-I don't think there's much of interest here.
+I'd put these with the other versions above too.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -556,7 +566,7 @@ let rec qmap f l =
             if h' == h && t' == t then l else h'::t'
   | _ -> l;;
 ```
-I don't think there's much of interest here.
+This looks potentially interesting.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -580,7 +590,9 @@ let mergesort ord =
       | (l,(s1::s2::ss)) -> mergepairs ((merge ord s1 s2)::l) ss in
   fun l -> if l = [] then [] else mergepairs [] (map (fun x -> [x]) l);;
 ```
-I don't think there's much of interest here.
+Again, is this better than `sort` above?  Why have both?  Are either of them
+better than the generic sort in the standard library?  Is there a generic
+sort in the standard library?!
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -638,10 +650,7 @@ let mapf =
     | Leaf(h,l) -> Leaf(h,map_list f l)
     | Branch(p,b,l,r) -> Branch(p,b,mapf f l,mapf f r) in
   mapf;;
-```
-I don't think there's much of interest here.
 
-```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Operations analogous to "fold" for lists.                                 *)
 (* ------------------------------------------------------------------------- *)
@@ -670,7 +679,7 @@ let foldr =
     | Branch(p,b,l,r) -> foldr f l (foldr f r a) in
   foldr;;
 ```
-I don't think there's much of interest here.
+Looks okay.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -683,7 +692,7 @@ let dom f = setify(foldl (fun a x y -> x::a) [] f);;
 
 let ran f = setify(foldl (fun a x y -> y::a) [] f);;
 ```
-I don't think there's much of interest here.
+Example!
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -712,7 +721,7 @@ let tryapplyd f a d = applyd f (fun x -> d) a;;
 
 let defined f x = try apply f x; true with Failure _ -> false;;
 ```
-I don't think there's much of interest here.
+There are definitely things to say here.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -750,7 +759,7 @@ let undefine =
       | _ -> t in
     und;;
 ```
-I don't think there's much of interest here.
+And here.  What is this??
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -848,7 +857,7 @@ let (|->),combine =
             newbranch p1 t1 p2 t2 in
   (|->),combine;;
 ```
-I don't think there's much of interest here.
+Bloop.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -857,7 +866,8 @@ I don't think there's much of interest here.
 
 let (|=>) = fun x y -> (x |-> y) undefined;;
 ```
-I don't think there's much of interest here.
+This worth a comment.
+[?](http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.singlefun.html)
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -870,7 +880,7 @@ let rec choose t =
   | Leaf(h,l) -> hd l
   | Branch(b,p,t1,t2) -> choose t1;;
 ```
-I don't think there's much of interest here.
+Hmm
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -881,7 +891,7 @@ let print_fpf (f:('a,'b)func) = Format.print_string "<func>";;
 
 #install_printer print_fpf;;
 ```
-I don't think there's much of interest here.
+Double hmm
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -904,7 +914,8 @@ let unions' eq l = itlist (union' eq) l [];;
 
 let subtract' eq l1 l2 = filter (fun x -> not (mem' eq x l2)) l1;;
 ```
-I don't think there's much of interest here.
+These should be with the others in a *Sets* section!  But not much to comment
+on.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -960,5 +971,6 @@ let file_of_string filename s =
   let fd = Pervasives.open_out filename in
   output_string fd s; close_out fd;;
 ```
+These file interactions always drive me crazy in OCaml.
 
 Now we move on to the 'logical core' of HOL Light in [fusion.ml](fusion.md).
