@@ -1,16 +1,10 @@
-(* ========================================================================= *)
-(* Implicational conversions, implicational rewriting and target rewriting.  *)
-(*                                                                           *)
-(*   (c) Copyright, Vincent Aravantinos, 2012-2013                           *)
-(*                  Analysis and Design of Dependable Systems                *)
-(*                  fortiss GmbH, Munich, Germany                            *)
-(*                                                                           *)
-(*       Formerly:  Hardware Verification Group,                             *)
-(*                  Concordia University                                     *)
-(*                                                                           *)
-(*           Contact: <vincent.aravantinos@fortiss.org>                      *)
-(* ========================================================================= *)
+---
+title: impconv.ml
+---
 
+Implicational conversions, implicational rewriting and target rewriting.
+
+```ocaml
 let IMP_REWRITE_TAC,TARGET_REWRITE_TAC,HINT_EXISTS_TAC,
     SEQ_IMP_REWRITE_TAC,CASE_REWRITE_TAC =
 
@@ -1855,3 +1849,6 @@ Impconv.TARGET_REWRITE_TAC,
 Impconv.HINT_EXISTS_TAC,
 Impconv.SEQ_IMP_REWRITE_TAC,
 Impconv.CASE_REWRITE_TAC;;
+```
+
+[pair.ml](pair.md)

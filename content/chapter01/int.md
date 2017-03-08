@@ -1,17 +1,13 @@
-(* ========================================================================= *)
-(* Theory of integers.                                                       *)
-(*                                                                           *)
-(* The integers are carved out of the real numbers; hence all the            *)
-(* universal theorems can be derived trivially from the real analog.         *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: int.ml
+---
 
-needs "calc_rat.ml";;
+Theory of integers.
 
+The integers are carved out of the real numbers; hence all the
+universal theorems can be derived trivially from the real analog.
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Representing predicate. The "is_int" variant is useful for backwards      *)
 (* compatibility with former definition of "is_int" constant, now removed.   *)
@@ -1455,3 +1451,6 @@ let DIVIDES_LE = prove
 (* ------------------------------------------------------------------------- *)
 
 prioritize_num();;
+```
+
+[sets.ml](sets.md)

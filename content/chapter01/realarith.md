@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Framework for universal real decision procedures, and a simple instance.  *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: realarith.ml
+---
 
-needs "calc_int.ml";;
+Framework for universal real decision procedures, and a simple instance.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Some lemmas needed now just to drive the decision procedure.              *)
 (* ------------------------------------------------------------------------- *)
@@ -635,3 +631,6 @@ let REAL_ARITH =
     REAL_INT_EQ_CONV,REAL_INT_GE_CONV,REAL_INT_GT_CONV,
     REAL_POLY_CONV,REAL_POLY_NEG_CONV,REAL_POLY_ADD_CONV,REAL_POLY_MUL_CONV,
     REAL_LINEAR_PROVER);;
+```
+
+[real.ml](real.md)

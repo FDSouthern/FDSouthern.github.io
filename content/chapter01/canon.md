@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Reasonably efficient conversions for various canonical forms.             *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: canon.ml
+---
 
-needs "trivia.ml";;
+Reasonably efficient conversions for various canonical forms.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Pre-simplification.                                                       *)
 (* ------------------------------------------------------------------------- *)
@@ -731,3 +727,6 @@ let rec PROP_ATOM_CONV conv tm =
         -> BINOP_CONV (PROP_ATOM_CONV conv) tm
   | Comb(Const("~",_),_) -> RAND_CONV (PROP_ATOM_CONV conv) tm
   | _ -> TRY_CONV conv tm;;
+```
+
+[meson.ml](meson.md)

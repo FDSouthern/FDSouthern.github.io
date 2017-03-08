@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Theory of wellfounded relations.                                          *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: wf.ml
+---
 
-needs "arith.ml";;
+Theory of wellfounded relations.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Definition of wellfoundedness for arbitrary (infix) relation <<           *)
 (* ------------------------------------------------------------------------- *)
@@ -375,3 +371,6 @@ let WF_INDUCT_TAC =
     let th2 = CONV_RULE(LAND_CONV qqconvs) (DISCH_ALL th1) in
     (MATCH_MP_TAC th2 THEN MAP_EVERY X_GEN_TAC fvs THEN
      CONV_TAC(LAND_CONV qqconvs) THEN DISCH_THEN ASSUME_TAC) gl;;
+```
+
+[calc_num.ml](calc_num.md)

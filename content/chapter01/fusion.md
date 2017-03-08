@@ -104,7 +104,13 @@ module Hol : Hol_kernel = struct
             | Abs of term * term
 
   type thm = Sequent of (term list * term)
+```
+HOL famously introduces three OCaml types - `hol_type`, `term` and `thm`.
+Here they are.
 
+Types and vartypes?  Type variables.
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* List of current type constants with their arities.                        *)
 (*                                                                           *)
@@ -148,7 +154,10 @@ module Hol : Hol_kernel = struct
     else failwith ("mk_type: wrong number of arguments to "^tyop)
 
   let mk_vartype v = Tyvar(v)
+```
+I think this deserves a comment.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Basic type destructors.                                                   *)
 (* ------------------------------------------------------------------------- *)
@@ -673,3 +682,5 @@ let aconv s t = alphaorder s t = 0;;
 
 let equals_thm th th' = dest_thm th = dest_thm th';;
 ```
+
+[basics.ml](basics.md)

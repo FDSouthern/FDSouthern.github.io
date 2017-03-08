@@ -1,15 +1,10 @@
-(* ========================================================================= *)
-(* More basic properties of the reals.                                       *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(*              (c) Copyright, Valentina Bruno 2010                          *)
-(* ========================================================================= *)
+---
+title: real.ml
+---
 
-needs "realarith.ml";;
+More basic properties of the reals.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Additional commutativity properties of the inclusion map.                 *)
 (* ------------------------------------------------------------------------- *)
@@ -1495,3 +1490,6 @@ let REAL_WLOG_LT = prove
  (`(!x. P x x) /\ (!x y. P x y <=> P y x) /\ (!x y. x < y ==> P x y)
    ==> !x y. P x y`,
   MESON_TAC[REAL_LT_TOTAL]);;
+```
+
+[calc_rat.ml](calc_rat.md)

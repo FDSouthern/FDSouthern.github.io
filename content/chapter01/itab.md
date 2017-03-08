@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Intuitionistic theorem prover (complete for propositional fragment).      *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: itab.ml
+---
 
-needs "tactics.ml";;
+Intuitionistic theorem prover (complete for propositional fragment).
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Accept a theorem modulo unification.                                      *)
 (* ------------------------------------------------------------------------- *)
@@ -71,3 +67,6 @@ let ITAUT_TAC =
 (* ------------------------------------------------------------------------- *)
 
 let ITAUT tm = prove(tm,ITAUT_TAC);;
+```
+
+[simp.ml](simp.md)

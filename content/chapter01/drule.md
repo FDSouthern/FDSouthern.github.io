@@ -1,14 +1,8 @@
-(* ========================================================================= *)
-(* More sophisticated derived rules including definitions and rewriting.     *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
-
-needs "bool.ml";;
-
+---
+title: drule.ml
+---
+More sophisticated derived rules including definitions and rewriting.
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Type of instantiations, with terms, types and higher-order data.          *)
 (* ------------------------------------------------------------------------- *)
@@ -486,3 +480,6 @@ let new_definition tm =
                   TRANS ith (BETA_CONV(rand(concl ith)))) largs th1 in
   let rvs = filter (not o C mem avs) largs in
   itlist GEN rvs (itlist GEN avs th2);;
+```
+
+[tactics.ml](tactics.md)

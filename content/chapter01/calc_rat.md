@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Calculation with rational-valued reals.                                   *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: calc_rat.ml
+---
 
-needs "real.ml";;
+Calculation with rational-valued reals.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Constant for decimal fractions written #xxx.yyy                           *)
 (* ------------------------------------------------------------------------- *)
@@ -582,3 +578,6 @@ let REAL_FIELD =
     let th1 = setup_conv bod in
     let ths = map BASIC_REAL_FIELD (conjuncts(rand(concl th1))) in
     EQ_MP (SYM th0) (GENL avs (EQ_MP (SYM th1) (end_itlist CONJ ths)));;
+```
+
+[int.ml](int.md)

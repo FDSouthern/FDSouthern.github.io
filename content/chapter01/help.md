@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Simple online help system, based on old HOL88 one.                        *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: help.ml
+---
 
-needs "define.ml";;
+Simple online help system, based on old HOL88 one.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Help system.                                                              *)
 (* ------------------------------------------------------------------------- *)
@@ -136,3 +132,6 @@ let search =
      else ());
     (if nontriv = [] && triv <> [] then []
      else itlist (filter o filterpred) pats (!theorems));;
+```
+
+[database.ml](database.md)

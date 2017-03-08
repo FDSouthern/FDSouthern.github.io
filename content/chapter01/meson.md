@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Version of the MESON procedure a la PTTP. Various search options.         *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: meson.ml
+---
 
-needs "canon.ml";;
+Version of the MESON procedure a la PTTP. Various search options.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Some parameters controlling MESON behaviour.                              *)
 (* ------------------------------------------------------------------------- *)
@@ -845,3 +841,6 @@ let MESON_TAC ths = POP_ASSUM_LIST(K ALL_TAC) THEN ASM_MESON_TAC ths;;
 (* ------------------------------------------------------------------------- *)
 
 let MESON ths tm = prove(tm,MESON_TAC ths);;
+```
+
+[metis.ml](metis.md)

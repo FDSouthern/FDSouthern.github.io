@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Mutually inductively defined relations.                                   *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: ind_defs.ml
+---
 
-needs "theorems.ml";;
+Mutually inductively defined relations.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Strip off exactly n arguments from combination.                           *)
 (* ------------------------------------------------------------------------- *)
@@ -438,3 +434,6 @@ let derive_strong_induction =
     let nasm = lhand(concl th3) in
     let th4 = GENL ps (DISCH nasm (weaken_triv(UNDISCH th3))) in
     GENL svs (prove_monotonicity_hyps th4);;
+```
+
+[class.ml](class.md)

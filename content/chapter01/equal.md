@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Basic equality reasoning including conversionals.                         *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: equal.ml
+---
 
-needs "printer.ml";;
+Basic equality reasoning including conversionals.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Type abbreviation for conversions.                                        *)
 (* ------------------------------------------------------------------------- *)
@@ -82,7 +78,7 @@ let GEN_ALPHA_CONV v tm =
   let b,abs = dest_comb tm in
   AP_TERM b (ALPHA_CONV v abs);;
 
-let MK_BINOP op = 
+let MK_BINOP op =
   let afn = AP_TERM op in
   fun (lth,rth) -> MK_COMB(afn lth,rth);;
 
@@ -138,15 +134,15 @@ let (RATOR_CONV:conv->conv) =
 
 let (RAND_CONV:conv->conv) =
   fun conv tm ->
-   match tm with    
-     Comb(l,r) -> MK_COMB(REFL l,conv r)    
+   match tm with
+     Comb(l,r) -> MK_COMB(REFL l,conv r)
    |  _ -> failwith "RAND_CONV: Not a combination";;
 
 let LAND_CONV = RATOR_CONV o RAND_CONV;;
 
 let (COMB2_CONV: conv->conv->conv) =
-  fun lconv rconv tm -> 
-   match tm with    
+  fun lconv rconv tm ->
+   match tm with
      Comb(l,r) -> MK_COMB(lconv l,rconv r)
   | _ -> failwith "COMB2_CONV: Not a combination";;
 
@@ -202,11 +198,11 @@ let (ONCE_DEPTH_CONV: conv->conv),
     with Failure _ -> th1
   and COMB_QCONV conv tm =
     match tm with
-      Comb(l,r) -> 
+      Comb(l,r) ->
         (try let th1 = conv l in
              try let th2 = conv r in MK_COMB(th1,th2)
              with Failure _ -> AP_THM th1 r
-         with Failure _ -> AP_TERM l (conv r)) 
+         with Failure _ -> AP_TERM l (conv r))
     | _ -> failwith "COMB_QCONV: Not a combination" in
   let rec REPEATQC conv tm = THENCQC conv (REPEATQC conv) tm in
   let SUB_QCONV conv tm =
@@ -332,3 +328,6 @@ let CACHE_CONV =
               with Failure _ ->
                   let th = conv tm in
                   (net := enter [] (tm,ALPHA_HACK th) (!net); th);;
+```
+
+[bool.ml](bool.md)

@@ -1,12 +1,10 @@
-(* ========================================================================= *)
-(* Generic iterated operations and special cases of sums over N and R.       *)
-(*                                                                           *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(*              (c) Copyright, Lars Schewe 2007                              *)
-(* ========================================================================= *)
+---
+title: iterate.ml
+---
 
-needs "sets.ml";;
+Generic iterated operations and special cases of sums over N and R.
 
+```ocaml
 prioritize_num();;
 
 (* ------------------------------------------------------------------------- *)
@@ -2487,3 +2485,6 @@ let POLYNOMIAL_FUNCTION_FINITE_ROOTS = prove
 (* ------------------------------------------------------------------------- *)
 
 prioritize_num();;
+```
+
+[cart.ml](cart.md)

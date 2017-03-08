@@ -1,11 +1,10 @@
-(* ========================================================================= *)
-(* Relatively efficient HOL conversions for canonical polynomial form.       *)
-(*                                                                           *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: normalizer.ml
+---
 
-needs "calc_num.ml";;
+Relatively efficient HOL conversions for canonical polynomial form.
 
+```ocaml
 let SEMIRING_NORMALIZERS_CONV =
   let SEMIRING_PTHS = prove
    (`(!x:A y z. add x (add y z) = add (add x y) z) /\
@@ -563,3 +562,6 @@ let NUM_NORMALIZE_CONV =
       SEMIRING_ADD_CONV,SEMIRING_MUL_CONV,SEMIRING_POW_CONV)
      (<) in
   NUM_NORMALIZE_CONV;;
+```
+
+[grobner.ml](grobner.md)

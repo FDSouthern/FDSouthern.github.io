@@ -1,15 +1,10 @@
-(* ========================================================================= *)
-(* Additional theorems, mainly about quantifiers, and additional tactics.    *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(*                 (c) Copyright, Marco Maggesi 2012                         *)
-(* ========================================================================= *)
+---
+title: theorems.ml
+---
 
-needs "simp.ml";;
+Additional theorems, mainly about quantifiers, and additional tactics.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* More stuff about equality.                                                *)
 (* ------------------------------------------------------------------------- *)
@@ -543,3 +538,6 @@ let DESTRUCT_TAC,FIX_TAC,INTRO_TAC,HYP_TAC =
   DESTRUCT_TAC,FIX_TAC,INTRO_TAC,HYP_TAC;;
 
 let CLAIM_TAC s tm = SUBGOAL_THEN tm (DESTRUCT_TAC s);;
+```
+
+[ind_defs.ml](ind_defs.md)

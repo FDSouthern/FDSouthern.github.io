@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Theory of real numbers.                                                   *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: realax.ml
+---
 
-needs "lists.ml";;
+Theory of real numbers.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* The main infix overloaded operations                                      *)
 (* ------------------------------------------------------------------------- *)
@@ -1969,3 +1965,6 @@ do_list reduce_interface
   "inv",`hreal_inv:hreal->hreal`];;
 
 do_list remove_interface ["**"; "++"; "<<="; "==="; "fn"; "afn"];;
+```
+
+[calc_int.ml](calc_int.md)

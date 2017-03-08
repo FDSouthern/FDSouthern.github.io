@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* The axiom of infinity; construction of the natural numbers.               *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: nums.ml
+---
 
-needs "pair.ml";;
+The axiom of infinity; construction of the natural numbers.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Declare a new type "ind" of individuals.                                  *)
 (* ------------------------------------------------------------------------- *)
@@ -304,3 +300,6 @@ let new_specification =
           let sth = specifies names th in
           the_specifications := ((names,th),sth)::(!the_specifications);
           sth;;
+```
+
+[recursion.ml](recursion.md)

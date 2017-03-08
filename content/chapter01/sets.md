@@ -1,15 +1,10 @@
-(* ========================================================================= *)
-(* Very basic set theory (using predicates as sets).                         *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(*              (c) Copyright, Marco Maggesi 2012-2015                       *)
-(* ========================================================================= *)
+---
+title: sets.ml
+---
 
-needs "int.ml";;
+Very basic set theory (using predicates as sets).
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Infix symbols for set operations.                                         *)
 (* ------------------------------------------------------------------------- *)
@@ -3778,3 +3773,6 @@ let new_inductive_set =
     insert_in_rule th_rules,
     insert_in_rule th_induct,
     insert_in_rule th_cases;;
+```
+
+[iterate.ml](iterate.md)

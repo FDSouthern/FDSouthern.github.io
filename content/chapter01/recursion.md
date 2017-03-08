@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Definition by primitive recursion and other tools for inductive types.    *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: recursion.ml
+---
 
-needs "nums.ml";;
+Definition by primitive recursion and other tools for inductive types.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Prove existence of recursive function. The inner "raw" version requires   *)
 (* exact correspondence with recursion theorem; "canon" requires the         *)
@@ -113,3 +109,6 @@ let new_recursive_definition =
     let dths = map2 SPECL fvs (CONJUNCTS dth) in
     let th = end_itlist CONJ dths in
     the_recursive_definitions := th::(!the_recursive_definitions); th;;
+```
+
+[arith.ml](arith.md)

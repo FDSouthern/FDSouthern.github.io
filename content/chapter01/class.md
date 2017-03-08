@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Extensional, classical reasoning with AC starts now!                      *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: class.ml
+---
 
-needs "ind_defs.ml";;
+Extensional, classical reasoning with AC starts now!
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Eta-axiom, corresponding conversion, and extensionality.                  *)
 (* ------------------------------------------------------------------------- *)
@@ -360,10 +356,10 @@ let COND_ABS = prove
  (`!b (f:A->B) g. (\x. if b then f x else g x) = (if b then f else g)`,
   REPEAT GEN_TAC THEN BOOL_CASES_TAC `b:bool` THEN REWRITE_TAC[ETA_AX]);;
 
-let COND_SWAP = prove                                                          
+let COND_SWAP = prove
  (`!p x y:A. (if ~p then x else y) = (if p then y else x)`,
   REPEAT GEN_TAC THEN BOOL_CASES_TAC `p:bool` THEN REWRITE_TAC[]);;
-                                                    
+
 (* ------------------------------------------------------------------------- *)
 (* Redefine TAUT to freeze in the rewrites including COND.                   *)
 (* ------------------------------------------------------------------------- *)
@@ -485,3 +481,6 @@ let bool_RECURSION = prove
 
 let inductive_type_store = ref
  ["bool",(2,bool_INDUCT,bool_RECURSION)];;
+```
+
+[trivia.ml](trivia.md)

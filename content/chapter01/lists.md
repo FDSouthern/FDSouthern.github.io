@@ -1,15 +1,10 @@
-(* ========================================================================= *)
-(* Theory of lists, plus characters and strings as lists of characters.      *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(*                 (c) Copyright, Marco Maggesi 2014                         *)
-(* ========================================================================= *)
+---
+title: lists.ml
+---
 
-needs "ind_types.ml";;
+Theory of lists, plus characters and strings as lists of characters.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Standard tactic for list induction using MATCH_MP_TAC list_INDUCT         *)
 (* ------------------------------------------------------------------------- *)
@@ -133,9 +128,9 @@ let PAIRWISE = new_recursive_definition list_RECURSION
   `(PAIRWISE (r:A->A->bool) [] <=> T) /\
    (PAIRWISE (r:A->A->bool) (CONS h t) <=> ALL (r h) t /\ PAIRWISE r t)`;;
 
-let list_of_seq = new_recursive_definition num_RECURSION        
- `list_of_seq (s:num->A) 0 = [] /\                                
-  list_of_seq s (SUC n) = APPEND (list_of_seq s n) [s n]`;;           
+let list_of_seq = new_recursive_definition num_RECURSION
+ `list_of_seq (s:num->A) 0 = [] /\
+  list_of_seq s (SUC n) = APPEND (list_of_seq s n) [s n]`;;
 
 (* ------------------------------------------------------------------------- *)
 (* Various trivial theorems.                                                 *)
@@ -404,15 +399,15 @@ let APPEND_EQ_NIL = prove
  (`!l m. (APPEND l m = []) <=> (l = []) /\ (m = [])`,
   REWRITE_TAC[GSYM LENGTH_EQ_NIL; LENGTH_APPEND; ADD_EQ_0]);;
 
-let APPEND_LCANCEL = prove                              
- (`!l1 l2 l3:A list. APPEND l1 l2 = APPEND l1 l3 <=> l2 = l3`,     
-  LIST_INDUCT_TAC THEN ASM_REWRITE_TAC[APPEND; CONS_11]);;      
-                                                                             
-let APPEND_RCANCEL = prove                                                
- (`!l1 l2 l3:A list. APPEND l1 l3 = APPEND l2 l3 <=> l1 = l2`,   
-  ONCE_REWRITE_TAC[MESON[REVERSE_REVERSE]                      
-   `l = l' <=> REVERSE l = REVERSE l'`] THEN                                 
-  REWRITE_TAC[REVERSE_APPEND; APPEND_LCANCEL]);;                             
+let APPEND_LCANCEL = prove
+ (`!l1 l2 l3:A list. APPEND l1 l2 = APPEND l1 l3 <=> l2 = l3`,
+  LIST_INDUCT_TAC THEN ASM_REWRITE_TAC[APPEND; CONS_11]);;
+
+let APPEND_RCANCEL = prove
+ (`!l1 l2 l3:A list. APPEND l1 l3 = APPEND l2 l3 <=> l1 = l2`,
+  ONCE_REWRITE_TAC[MESON[REVERSE_REVERSE]
+   `l = l' <=> REVERSE l = REVERSE l'`] THEN
+  REWRITE_TAC[REVERSE_APPEND; APPEND_LCANCEL]);;
 
 let LENGTH_MAP2 = prove
  (`!f l m. (LENGTH l = LENGTH m) ==> (LENGTH(MAP2 f l m) = LENGTH m)`,
@@ -450,12 +445,12 @@ let MAP_I = prove
  (`MAP I = I`,
   REWRITE_TAC[FUN_EQ_THM; I_DEF; MAP_ID]);;
 
-let BUTLAST_APPEND = prove                          
- (`!l m:A list. BUTLAST(APPEND l m) =           
+let BUTLAST_APPEND = prove
+ (`!l m:A list. BUTLAST(APPEND l m) =
                 if m = [] then BUTLAST l else APPEND l (BUTLAST m)`,
-  SIMP_TAC[COND_RAND; APPEND_NIL; MESON[]               
-   `(if p then T else q) <=> ~p ==> q`] THEN                   
-  LIST_INDUCT_TAC THEN ASM_SIMP_TAC[APPEND; BUTLAST; APPEND_EQ_NIL]);;   
+  SIMP_TAC[COND_RAND; APPEND_NIL; MESON[]
+   `(if p then T else q) <=> ~p ==> q`] THEN
+  LIST_INDUCT_TAC THEN ASM_SIMP_TAC[APPEND; BUTLAST; APPEND_EQ_NIL]);;
 
 let APPEND_BUTLAST_LAST = prove
  (`!l. ~(l = []) ==> APPEND (BUTLAST l) [LAST l] = l`,
@@ -753,3 +748,6 @@ let dest_char,mk_char,dest_string,mk_string,CHAR_EQ_CONV,STRING_EQ_CONV =
     if compare ltm rtm = 0 then EQT_INTRO (REFL ltm) else
     STRING_DISTINCTNESS ltm rtm in
   char_of_term,mk_char,dest_string,mk_string,CHAR_EQ_CONV,STRING_EQ_CONV;;
+```
+
+[realax.ml](realax.md)

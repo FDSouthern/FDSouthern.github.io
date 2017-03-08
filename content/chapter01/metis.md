@@ -1,21 +1,19 @@
-(* ========================================================================= *)
-(* Metis first-order theorem proving derived rule/tactic for HOL Light.      *)
-(*                                                                           *)
-(* The original Metis was written by Joe Hurd, and it has been widely used   *)
-(* for first-order proofs in HOL4 and Isabelle; see:                         *)
-(*                                                                           *)
-(*            http://www.gilith.com/research/metis/                          *)
-(*                                                                           *)
-(* This is a port from SML to OCaml and proof-reconstructing integration     *)
-(* with HOL Light, written by Michael Färber and Cezary Kaliszyk.            *)
-(*                                                                           *)
-(*                (c) Copyright, Joe Hurd, 2001                              *)
-(*             (c) Copyright, Joe Leslie-Hurd, 2004                          *)
-(*   (c) Copyright, Michael Färber and Cezary Kaliszyk, 2014-2016.           *)
-(* ========================================================================= *)
+---
+title: metis.ml
+---
 
-needs "meson.ml";;
+Metis first-order theorem proving derived rule/tactic for HOL Light.
 
+The original Metis was written by Joe Hurd, and it has been widely used
+for first-order proofs in HOL4 and Isabelle; see:
+http://www.gilith.com/research/metis/
+
+This is a port from SML to OCaml and proof-reconstructing integration
+with HOL Light, written by Michael Färber and Cezary Kaliszyk.
+
+This is a big file!
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Convenient utility modules.                                               *)
 (* ------------------------------------------------------------------------- *)
@@ -10159,3 +10157,6 @@ let ASM_METIS_TAC = Metis.GEN_METIS_TAC;;
 let METIS_TAC ths = POP_ASSUM_LIST(K ALL_TAC) THEN ASM_METIS_TAC ths;;
 
 let METIS ths tm = prove(tm,METIS_TAC ths);;
+```
+
+[quot.ml](quot.md)

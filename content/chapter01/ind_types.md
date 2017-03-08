@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Inductive (or free recursive) types.                                      *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: ind_types.ml
+---
 
-needs "grobner.ml";;
+Inductive (or free recursive) types.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Abstract left inverses for binary injections (we could construct them...) *)
 (* ------------------------------------------------------------------------- *)
@@ -1553,3 +1549,6 @@ let FORALL_UNWIND_CONV =
         CONV_RULE (RAND_CONV FORALL_UNWIND_CONV) (TRANS th3 th4)
     with Failure _ -> REFL tm in
   FORALL_UNWIND_CONV;;
+```
+
+[lists.ml](lists.md)

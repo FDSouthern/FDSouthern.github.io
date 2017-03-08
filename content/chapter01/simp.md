@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Simplification and rewriting.                                             *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: simp.ml
+---
 
-needs "itab.ml";;
+Simplification and rewriting.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Generalized conversion (conversion plus a priority).                      *)
 (* ------------------------------------------------------------------------- *)
@@ -559,3 +555,6 @@ let ABBREV_TAC tm =
 
 let EXPAND_TAC s = FIRST_ASSUM(SUBST1_TAC o SYM o
   check((=) s o fst o dest_var o rhs o concl)) THEN BETA_TAC;;
+```
+
+[theorems.ml](theorems.md)

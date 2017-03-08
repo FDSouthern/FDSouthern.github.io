@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Trivial odds and ends.                                                    *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: trivia.ml
+---
 
-needs "class.ml";;
+Trivial odds and ends.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Combinators. We don't bother with S and K, which seem of little use.      *)
 (* ------------------------------------------------------------------------- *)
@@ -89,3 +85,6 @@ let one_Axiom = prove
 
 inductive_type_store :=
   ("1",(1,one_INDUCT,one_RECURSION))::(!inductive_type_store);;
+```
+
+[canon.ml](canon.md)

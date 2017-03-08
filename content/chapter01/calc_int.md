@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Calculation with integer-valued reals.                                    *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: calc_int.ml
+---
 
-needs "realax.ml";;
+Calculation with integer-valued reals.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Syntax operations on integer constants of type ":real".                   *)
 (* ------------------------------------------------------------------------- *)
@@ -389,3 +385,6 @@ let REAL_INT_RED_CONV =
   REWRITES_CONV gconv_net;;
 
 let REAL_INT_REDUCE_CONV = DEPTH_CONV REAL_INT_RED_CONV;;
+```
+
+[realarith.ml](realarith.md)

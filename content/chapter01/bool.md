@@ -1,14 +1,8 @@
-(* ========================================================================= *)
-(* Boolean theory including (intuitionistic) defs of logical connectives.    *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
-
-needs "equal.ml";;
-
+---
+title: bool.ml
+---
+Boolean theory including (intuitionistic) definitions of logical connectives.
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Set up parse status of basic and derived logical constants.               *)
 (* ------------------------------------------------------------------------- *)
@@ -160,23 +154,23 @@ let IMP_DEF = new_basic_definition
 
 let mk_imp = mk_binary "==>";;
 
-let MP = 
+let MP =
   let p = `p:bool` and q = `q:bool` in
-  let pth = 
-    let th1 = BETA_RULE (AP_THM (AP_THM IMP_DEF p) q)                        
-    and th2 = CONJ (ASSUME p) (ASSUME q)        
+  let pth =
+    let th1 = BETA_RULE (AP_THM (AP_THM IMP_DEF p) q)
+    and th2 = CONJ (ASSUME p) (ASSUME q)
     and th3 = CONJUNCT1(ASSUME(mk_conj(p,q))) in
     EQ_MP (SYM th1) (DEDUCT_ANTISYM_RULE th2 th3)
-  and qth = 
+  and qth =
     let th1 = BETA_RULE (AP_THM (AP_THM IMP_DEF p) q) in
     let th2 = EQ_MP th1 (ASSUME(mk_imp(p,q))) in
     CONJUNCT2 (EQ_MP (SYM th2) (ASSUME p)) in
   let rth = DEDUCT_ANTISYM_RULE pth qth in
-  fun ith th ->                           
+  fun ith th ->
     let ant,con = dest_imp (concl ith) in
     if aconv ant (concl th) then
       EQ_MP (PROVE_HYP th (INST [ant,p; con,q] rth)) ith
-    else failwith "MP: theorems do not agree";;      
+    else failwith "MP: theorems do not agree";;
 
 let DISCH =
   let p = `p:bool`
@@ -481,3 +475,6 @@ let EXISTENCE =
         let ty = snd(dest_var(bndvar abs)) in
         MP (PINST [ty,aty] [abs,P] pth) th
     with Failure _ -> failwith "EXISTENCE";;
+```
+
+[drule.ml](drule.md)

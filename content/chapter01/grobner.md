@@ -1,17 +1,16 @@
-(* ========================================================================= *)
-(* Generic Grobner basis algorithm.                                          *)
-(*                                                                           *)
-(* Whatever the instantiation, it basically solves the universal theory of   *)
-(* the complex numbers, or equivalently something like the theory of all     *)
-(* commutative cancellation semirings with no nilpotent elements and having  *)
-(* characteristic zero. We could do "all rings" by a more elaborate integer  *)
-(* version of Grobner bases, but I don't have any useful applications.       *)
-(*                                                                           *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: grobner.ml
+---
 
-needs "normalizer.ml";;
+Generic Grobner basis algorithm.
 
+Whatever the instantiation, it basically solves the universal theory of
+the complex numbers, or equivalently something like the theory of all
+commutative cancellation semirings with no nilpotent elements and having
+characteristic zero. We could do "all rings" by a more elaborate integer
+version of Grobner bases, but I don't have any useful applications.
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Type for recording history, i.e. how a polynomial was obtained.           *)
 (* ------------------------------------------------------------------------- *)
@@ -696,3 +695,6 @@ let NUM_RING =
   fun tm -> let th = initconv tm in
             if rand(concl th) = t_tm then th
             else EQ_MP (SYM th) (rawring(rand(concl th)));;
+```
+
+[ind_types.ml](ind_types.md)

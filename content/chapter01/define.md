@@ -1,11 +1,10 @@
-(* ========================================================================= *)
-(* Automated support for general recursive definitions.                      *)
-(*                                                                           *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: define.ml
+---
 
-needs "cart.ml";;
+Automated support for general recursive definitions.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Constant supporting casewise definitions.                                 *)
 (* ------------------------------------------------------------------------- *)
@@ -987,3 +986,6 @@ let define =
       let g = mk_mconst(dest_var f) in
       let th3 = PROVE_HYP th2 (INST [g,f] th) in
       the_definitions := th3::(!the_definitions); th3;;
+```
+
+There's only the help system left: [help.ml](help.md)

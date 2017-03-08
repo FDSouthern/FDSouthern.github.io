@@ -1,15 +1,10 @@
-(* ========================================================================= *)
-(* Natural number arithmetic.                                                *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(*                 (c) Copyright, Marco Maggesi 2015                         *)
-(* ========================================================================= *)
+---
+title: arith.ml
+---
 
-needs "recursion.ml";;
+Natural number arithmetic.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Note: all the following proofs are intuitionistic and intensional, except *)
 (* for the least number principle num_WOP.                                   *)
@@ -1572,3 +1567,6 @@ let DEPENDENT_CHOICE = prove
         (?a. P 0 a) /\ (!n x. P n x ==> ?y. P (SUC n) y /\ R n x y)
         ==> ?f. (!n. P n (f n)) /\ (!n. R n (f n) (f(SUC n)))`,
   MESON_TAC[DEPENDENT_CHOICE_FIXED]);;
+```
+
+[wf.ml](wf.md)

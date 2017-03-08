@@ -506,3 +506,5 @@ let parse_term s =
    (term_of_preterm o (retypecheck [])) ptm
   else failwith "Unparsed input following term";;
 ```
+
+[equal.ml](equal.md)

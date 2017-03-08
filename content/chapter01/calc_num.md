@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Calculation with naturals.                                                *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: calc_num.ml
+---
 
-needs "wf.ml";;
+Calculation with naturals.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Simple rule to get rid of NUMERAL constant.                               *)
 (* ------------------------------------------------------------------------- *)
@@ -1490,3 +1486,6 @@ let EXPAND_CASES_CONV =
   let rec conv tm =
     (base_CONV ORELSEC (step_CONV THENC LAND_CONV conv)) tm in
   conv THENC (REWRITE_CONV[GSYM CONJ_ASSOC]);;
+```
+
+[normalizer.ml](normalizer.md)

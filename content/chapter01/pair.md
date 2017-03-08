@@ -1,15 +1,12 @@
-(* ========================================================================= *)
-(* Syntax sugaring; theory of pairing, with a bit of support.                *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(*                 (c) Copyright, Marco Maggesi 2015                         *)
-(* ========================================================================= *)
+---
+title: pair.ml
+---
 
-needs "quot.ml";;
+We're now entering Mathematical theories and additional proof tools.
 
+Syntax sugaring; theory of pairing, with a bit of support.
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Constants implementing (or at least tagging) syntactic sugar.             *)
 (* ------------------------------------------------------------------------- *)
@@ -450,3 +447,6 @@ let (LET_TAC:tactic) =
      W(fun (asl',w') ->
         let tm' = follow_path path w' in
         CONV_TAC(PATH_CONV path (K(let_CONV tm'))))) gl;;
+```
+
+[nums.ml](nums.md)

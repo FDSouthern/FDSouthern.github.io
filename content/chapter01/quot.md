@@ -1,14 +1,10 @@
-(* ========================================================================= *)
-(* Tools for defining quotient types and lifting first order theorems.       *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
+---
+title: quot.ml
+---
 
-needs "meson.ml";;
+Tools for defining quotient types and lifting first order theorems.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Given a type name "ty" and a curried binary relation R, this defines      *)
 (* a new type "ty" of R-equivalence classes. The abstraction and             *)
@@ -160,3 +156,6 @@ let lift_theorem =
     let ith = MATCH_MP pth cth in
     fun trths ->
       REWRITE_RULE (ith::trths);;
+```
+
+[impconv.ml](impconv.md)
