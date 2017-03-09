@@ -2,18 +2,9 @@
 title: printer.ml
 ---
 
+Simplistic HOL Light prettyprinter, using the OCaml "Format" library.
+
 ```ocaml
-(* ========================================================================= *)
-(* Simplistic HOL Light prettyprinter, using the OCaml "Format" library.     *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
-
-needs "nets.ml";;
-
 (* ------------------------------------------------------------------------- *)
 (* Character discrimination.                                                 *)
 (* ------------------------------------------------------------------------- *)

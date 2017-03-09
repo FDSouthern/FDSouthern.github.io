@@ -2,20 +2,9 @@
 title: preterm.ml
 ---
 
+Preterms and pretypes; typechecking; translation to types and terms.
+
 ```ocaml
-(* ========================================================================= *)
-(* Preterms and pretypes; typechecking; translation to types and terms.      *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(*                 (c) Copyright, Marco Maggesi 2012                         *)
-(*               (c) Copyright, Vincent Aravantinos 2012                     *)
-(* ========================================================================= *)
-
-needs "printer.ml";;
-
 (* ------------------------------------------------------------------------- *)
 (* Flag to say whether to treat varstruct "\const. bod" as variable.         *)
 (* ------------------------------------------------------------------------- *)

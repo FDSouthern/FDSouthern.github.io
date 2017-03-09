@@ -2,18 +2,9 @@
 title: parser.ml
 ---
 
+Lexical analyzer, type and preterm parsers.
+
 ```ocaml
-(* ========================================================================= *)
-(* Lexical analyzer, type and preterm parsers.                               *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
-
-needs "preterm.ml";;
-
 (* ------------------------------------------------------------------------- *)
 (* Need to have this now for set enums, since "," isn't a reserved word.     *)
 (* ------------------------------------------------------------------------- *)

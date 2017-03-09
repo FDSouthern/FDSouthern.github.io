@@ -2,18 +2,9 @@
 title: nets.ml
 ---
 
+Term nets: reasonably fast lookup based on term matchability.
+
 ```ocaml
-(* ========================================================================= *)
-(* Term nets: reasonably fast lookup based on term matchability.             *)
-(*                                                                           *)
-(*       John Harrison, University of Cambridge Computer Laboratory          *)
-(*                                                                           *)
-(*            (c) Copyright, University of Cambridge 1998                    *)
-(*              (c) Copyright, John Harrison 1998-2007                       *)
-(* ========================================================================= *)
-
-needs "basics.ml";;
-
 (* ------------------------------------------------------------------------- *)
 (* Term nets are a finitely branching tree structure; at each level we       *)
 (* have a set of branches and a set of "values". Linearization is            *)

@@ -2,6 +2,8 @@
 title: basics.ml
 ---
 
+More syntax constructors, and prelogical utilities like matching.
+
 ```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Create probably-fresh variable                                            *)

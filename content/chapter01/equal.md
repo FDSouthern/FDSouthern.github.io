@@ -2,6 +2,7 @@
 title: equal.ml
 ---
 
+Now we're entering the higher-level deductive system.
 Basic equality reasoning including conversionals.
 
 ```ocaml
