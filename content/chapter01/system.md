@@ -67,6 +67,6 @@ let print_num n =
 
 #install_printer print_num;;
 ```
-Some stuff to load in and display arbitrary precision integers.
+Some stuff to handle and display arbitrary precision integers.
 
 Let's hurry along to [lib.ml](lib.md)

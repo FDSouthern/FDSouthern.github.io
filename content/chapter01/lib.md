@@ -35,7 +35,8 @@ let (o) = fun f g x -> f(g x);;
 
 let (F_F) = fun f g (x,y) -> (f x,g y);;
 ```
-Composition and some kind of 'apply over pairs' (I wonder if this has a name?).
+Composition and 'apply over pairs' (I wonder if this has a name?
+I've seen it mentioned in a paper from Mark Adams comparing HOL systems).
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -100,6 +101,7 @@ let can f x = try (f x; true) with Failure _ -> false;;
 let check p x = if p x then x else failwith "check";;
 ```
 These are quite neat.  I wonder if I can think of anything to say about them.
+`can` makes it very easy to define `is_` functions?
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -122,8 +124,8 @@ Pretty standard again.
 
 exception Unchanged;;
 ```
-This does seem a little hacky.  I wonder if it actually results in any
-measurable performance improvement.
+This does seem a little hacky.  I wonder if it still results in a measurable
+performance improvement.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -292,7 +294,7 @@ let index x =
   ind 0;;
 ```
 Again, a few of these exist in the standard library.  I wonder if these are
-from a time before they were included, or if John is just a control freak!
+from a time before they were included, or if John's just a control freak!
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -319,7 +321,7 @@ let subset l1 l2 = forall (fun t -> mem t l2) l1;;
 
 let set_eq l1 l2 = subset l1 l2 && subset l2 l1;;
 ```
-These don't seem too troublesome (is `mem` distinct from `el` above?).
+These don't seem too troublesome.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -378,7 +380,7 @@ let rec do_list f l =
     [] -> ()
   | (h::t) -> (f h; do_list f t);;
 ```
-Different from `itlist`..?
+Very imperative.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)

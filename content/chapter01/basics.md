@@ -14,7 +14,10 @@ let genvar =
   fun ty -> let count = !gcounter in
              (gcounter := count + 1;
               mk_var("_"^(string_of_int count),ty));;
+```
+This seems suspicious.  Is it really the case that this can't cause problems?
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Convenient functions for manipulating types.                              *)
 (* ------------------------------------------------------------------------- *)
@@ -225,7 +228,11 @@ let find_terms =
 (*                                                                           *)
 (* NB! The "mk_binder" function expects polytype "A", which is the domain.   *)
 (* ------------------------------------------------------------------------- *)
+```
+'Polytype' means a polymorphic type variable?
+I don't understand this section yet..
 
+```ocaml
 let is_binder s tm =
   match tm with
     Comb(Const(s',_),Abs(_,_)) -> s' = s
@@ -321,7 +328,10 @@ let dest_numeral =
   fun tm -> try let l,r = dest_comb tm in
                 if fst(dest_const l) = "NUMERAL" then dest_num r else fail()
             with Failure _ -> failwith "dest_numeral";;
+```
+This is definitely worth noting.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Syntax for generalized abstractions.                                      *)
 (*                                                                           *)

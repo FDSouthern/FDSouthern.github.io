@@ -501,20 +501,29 @@ I think this deserves a comment.
   let hyp (Sequent(asl,c)) = asl
 
   let concl (Sequent(asl,c)) = c
+```
+Okay, below here we've got the first of HOL Light's axioms:
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Basic equality properties; TRANS is derivable but included for efficiency *)
 (* ------------------------------------------------------------------------- *)
 
   let REFL tm =
     Sequent([],safe_mk_eq tm tm)
+```
+`REFL \`x\`` gives `|- x = x`.
 
+```ocaml
   let TRANS (Sequent(asl1,c1)) (Sequent(asl2,c2)) =
     match (c1,c2) with
       Comb((Comb(Const("=",_),_) as eql),m1),Comb(Comb(Const("=",_),m2),r)
         when alphaorder m1 m2 = 0 -> Sequent(term_union asl1 asl2,Comb(eql,r))
     | _ -> failwith "TRANS"
+```
+`TRANS \`ASM1 |- a = b\` \`ASM2 |- b = c\`` gives `ASM1+ASM2 |- a = c`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Congruence properties of equality.                                        *)
 (* ------------------------------------------------------------------------- *)
@@ -528,13 +537,20 @@ I think this deserves a comment.
                         safe_mk_eq (Comb(l1,l2)) (Comb(r1,r2)))
          | _ -> failwith "MK_COMB: types do not agree")
      | _ -> failwith "MK_COMB: not both equations"
+```
+`MK_COMB (\`ASM1 |- f = g\`, \`ASM2 |- a = b\`)` gives
+`ASM1+ASM2 |- (f a) = (g b)`.
 
+```ocaml
   let ABS v (Sequent(asl,c)) =
     match (v,c) with
       Var(_,_),Comb(Comb(Const("=",_),l),r) when not(exists (vfree_in v) asl)
          -> Sequent(asl,safe_mk_eq (Abs(v,l)) (Abs(v,r)))
     | _ -> failwith "ABS";;
+```
+`ABS \`x\` \`ASM1{-x} |- a=b\`` gives `ASM1 |- \x.a = \x.b`
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Trivial case of lambda calculus beta-conversion.                          *)
 (* ------------------------------------------------------------------------- *)
@@ -544,7 +560,11 @@ I think this deserves a comment.
       Comb(Abs(v,bod),arg) when Pervasives.compare arg v = 0
         -> Sequent([],safe_mk_eq tm bod)
     | _ -> failwith "BETA: not a trivial beta-redex"
+```
+In practice, you probably want to use `BETA_CONV` as defined in
+[equal.ml](equal.md).
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Rules connected with deduction.                                           *)
 (* ------------------------------------------------------------------------- *)
@@ -552,17 +572,31 @@ I think this deserves a comment.
   let ASSUME tm =
     if Pervasives.compare (type_of tm) bool_ty = 0 then Sequent([tm],tm)
     else failwith "ASSUME: not a proposition"
+```
+`ASSUME \`a\`` gives `a |- a`.
 
+```ocaml
   let EQ_MP (Sequent(asl1,eq)) (Sequent(asl2,c)) =
     match eq with
       Comb(Comb(Const("=",_),l),r) when alphaorder l c = 0
         -> Sequent(term_union asl1 asl2,r)
     | _ -> failwith "EQ_MP"
+```
+`EQ_MP \`ASM1 |- a = b\` \`ASM2 |- a\`` gives `\`ASM1+ASM2 |- b\``.
 
+```ocaml
   let DEDUCT_ANTISYM_RULE (Sequent(asl1,c1)) (Sequent(asl2,c2)) =
     let asl1' = term_remove c2 asl1 and asl2' = term_remove c1 asl2 in
     Sequent(term_union asl1' asl2',safe_mk_eq c1 c2)
+```
+`DEDUCT_ANTISYM_RULE \`ASM1 |- a\` \`ASM2 |- b\` gives
+`(ASM1-{b})+(ASM2-{a}) |- a=b`.
 
+To me, this is by far the weirdest rule.  It makes sense in the single sentence
+case (if from `p` you can derive `q` and from `q` you can derive `p`, then
+`p` and `q` have the same truth value), but in general, I'm not sure.
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Type and term instantiation.                                              *)
 (* ------------------------------------------------------------------------- *)
@@ -570,11 +604,18 @@ I think this deserves a comment.
   let INST_TYPE theta (Sequent(asl,c)) =
     let inst_fn = inst theta in
     Sequent(term_image inst_fn asl,inst_fn c)
+```
+`INST_TYPE instantiation theorem` gives a new theorem with type variables
+instantiated.
 
+```ocaml
   let INST theta (Sequent(asl,c)) =
     let inst_fun = vsubst theta in
     Sequent(term_image inst_fun asl,inst_fun c)
+```
+`INST instantiation theorem` gives a new theorem with variables instantiated.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Handling of axioms.                                                       *)
 (* ------------------------------------------------------------------------- *)
@@ -668,7 +709,11 @@ let mk_eq =
         let eq_tm = inst [ty,aty] eq in
         mk_comb(mk_comb(eq_tm,l),r)
     with Failure _ -> failwith "mk_eq";;
+```
+Checks whether two terms are the same type, and if they are, forms a new term
+for their equality.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Tests for alpha-convertibility (equality ignoring names in abstractions). *)
 (* ------------------------------------------------------------------------- *)
@@ -682,5 +727,7 @@ let aconv s t = alphaorder s t = 0;;
 
 let equals_thm th th' = dest_thm th = dest_thm th';;
 ```
+I want to write something about proof-recording.  Even if just to mention it's
+outside the core system.
 
 [basics.ml](basics.md)

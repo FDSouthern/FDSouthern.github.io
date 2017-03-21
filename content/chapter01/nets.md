@@ -4,6 +4,9 @@ title: nets.ml
 
 Term nets: reasonably fast lookup based on term matchability.
 
+I can't seem to find any references for term nets online, just a few mentions.
+Maybe they're just that obvious.
+
 ```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Term nets are a finitely branching tree structure; at each level we       *)
