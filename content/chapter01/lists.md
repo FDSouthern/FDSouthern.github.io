@@ -750,4 +750,6 @@ let dest_char,mk_char,dest_string,mk_string,CHAR_EQ_CONV,STRING_EQ_CONV =
   char_of_term,mk_char,dest_string,mk_string,CHAR_EQ_CONV,STRING_EQ_CONV;;
 ```
 
-[realax.ml](realax.md)
+Previous: [ind_types.ml](ind_types.md)
+[Index](index.md)
+Next: [realax.ml](realax.md)

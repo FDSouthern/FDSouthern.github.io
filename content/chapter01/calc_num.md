@@ -1488,4 +1488,6 @@ let EXPAND_CASES_CONV =
   conv THENC (REWRITE_CONV[GSYM CONJ_ASSOC]);;
 ```
 
-[normalizer.ml](normalizer.md)
+Previous: [wf.ml](wf.md)
+[Index](index.md)
+Next: [normalizer.ml](normalizer.md)

@@ -302,4 +302,6 @@ let new_specification =
           sth;;
 ```
 
-[recursion.ml](recursion.md)
+Previous: [pair.ml](pair.md)
+[Index](index.md)
+Next: [recursion.ml](recursion.md)

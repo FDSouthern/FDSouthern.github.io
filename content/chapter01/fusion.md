@@ -730,4 +730,6 @@ let equals_thm th th' = dest_thm th = dest_thm th';;
 I want to write something about proof-recording.  Even if just to mention it's
 outside the core system.
 
-[basics.ml](basics.md)
+Previous: [lib.ml](lib.md)
+[Index](index.md)
+Next: [basics.ml](basics.md)

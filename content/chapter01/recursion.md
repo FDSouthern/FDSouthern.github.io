@@ -111,4 +111,6 @@ let new_recursive_definition =
     the_recursive_definitions := th::(!the_recursive_definitions); th;;
 ```
 
-[arith.ml](arith.md)
+Previous: [nums.ml](nums.md)
+[Index](index.md)
+Next: [arith.ml](arith.md)

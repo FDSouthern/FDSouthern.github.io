@@ -433,4 +433,6 @@ let follow_path =
   fun s tm -> follow_path (explode s) tm;;
 ```
 
-[nets.ml](nets.md)
+Previous: [fusion.ml](fusion.md)
+[Index](index.md)
+Next: [nets.ml](nets.md)

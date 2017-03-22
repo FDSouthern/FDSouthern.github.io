@@ -436,4 +436,6 @@ let derive_strong_induction =
     GENL svs (prove_monotonicity_hyps th4);;
 ```
 
-[class.ml](class.md)
+Previous: [theorems.ml](theorems.md)
+[Index](index.md)
+Next: [class.ml](class.md)

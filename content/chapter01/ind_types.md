@@ -1551,4 +1551,6 @@ let FORALL_UNWIND_CONV =
   FORALL_UNWIND_CONV;;
 ```
 
-[lists.ml](lists.md)
+Previous: [grobner.ml](grobner.md)
+[Index](index.md)
+Next: [lists.ml](lists.md)

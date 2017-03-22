@@ -477,4 +477,6 @@ let EXISTENCE =
     with Failure _ -> failwith "EXISTENCE";;
 ```
 
-[drule.ml](drule.md)
+Previous: [equal.ml](equal.md)
+[Index](index.md)
+Next: [drule.ml](drule.md)

@@ -387,4 +387,6 @@ let REAL_INT_RED_CONV =
 let REAL_INT_REDUCE_CONV = DEPTH_CONV REAL_INT_RED_CONV;;
 ```
 
-[realarith.ml](realarith.md)
+Previous: [realax.ml](realax.md)
+[Index](index.md)
+Next: [realarith.ml](realarith.md)

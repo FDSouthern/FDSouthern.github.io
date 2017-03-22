@@ -540,4 +540,6 @@ let DESTRUCT_TAC,FIX_TAC,INTRO_TAC,HYP_TAC =
 let CLAIM_TAC s tm = SUBGOAL_THEN tm (DESTRUCT_TAC s);;
 ```
 
-[ind_defs.ml](ind_defs.md)
+Previous: [simp.ml](simp.md)
+[Index](index.md)
+Next: [ind_defs.ml](ind_defs.md)

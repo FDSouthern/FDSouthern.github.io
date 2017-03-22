@@ -18,4 +18,5 @@ but I don't think that the core system has changed much in recent times!
 All rights to the source code are obviously held by John Harrison and
 contributors.
 
-Let's get started with [hol.ml](hol.md).
+[Index](index.md)
+Next: [hol.ml](hol.md)

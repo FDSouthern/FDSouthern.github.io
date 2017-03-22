@@ -134,4 +134,6 @@ let search =
      else itlist (filter o filterpred) pats (!theorems));;
 ```
 
-[database.ml](database.md)
+Previous: [define.ml](define.md)
+[Index](index.md)
+Next: [database.ml](database.md)

@@ -119,4 +119,6 @@ let merge_nets =
   merge_nets;;
 ```
 
-[printer.ml](printer.md)
+Previous: [basics.ml](basics.md)
+[Index](index.md)
+Next: [printer.ml](printer.md)

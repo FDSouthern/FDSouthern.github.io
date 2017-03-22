@@ -1851,4 +1851,6 @@ Impconv.SEQ_IMP_REWRITE_TAC,
 Impconv.CASE_REWRITE_TAC;;
 ```
 
-[pair.ml](pair.md)
+Previous: [quot.ml](quot.md)
+[Index](index.md)
+Next: [pair.ml](pair.md)

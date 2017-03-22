@@ -564,4 +564,6 @@ let NUM_NORMALIZE_CONV =
   NUM_NORMALIZE_CONV;;
 ```
 
-[grobner.ml](grobner.md)
+Previous: [calc_num.ml](calc_num.md)
+[Index](index.md)
+Next: [grobner.ml](grobner.md)

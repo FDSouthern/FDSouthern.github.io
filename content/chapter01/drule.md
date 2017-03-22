@@ -482,4 +482,6 @@ let new_definition tm =
   itlist GEN rvs (itlist GEN avs th2);;
 ```
 
-[tactics.ml](tactics.md)
+Previous: [bool.ml](bool.md)
+[Index](index.md)
+Next: [tactics.ml](tactics.md)

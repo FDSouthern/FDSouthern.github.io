@@ -498,4 +498,6 @@ let parse_term s =
   else failwith "Unparsed input following term";;
 ```
 
-[equal.ml](equal.md)
+Previous: [preterm.ml](preterm.md)
+[Index](index.md)
+Next: [equal.ml](equal.md)

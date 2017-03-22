@@ -729,4 +729,6 @@ let rec PROP_ATOM_CONV conv tm =
   | _ -> TRY_CONV conv tm;;
 ```
 
-[meson.ml](meson.md)
+Previous: [trivia.ml](trivia.md)
+[Index](index.md)
+Next: [meson.ml](meson.md)

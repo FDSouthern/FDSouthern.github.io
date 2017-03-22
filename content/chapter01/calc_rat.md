@@ -580,4 +580,6 @@ let REAL_FIELD =
     EQ_MP (SYM th0) (GENL avs (EQ_MP (SYM th1) (end_itlist CONJ ths)));;
 ```
 
-[int.ml](int.md)
+Previous: [real.ml](real.md)
+[Index](index.md)
+Next: [int.ml](int.md)

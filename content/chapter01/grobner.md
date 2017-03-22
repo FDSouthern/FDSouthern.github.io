@@ -697,4 +697,6 @@ let NUM_RING =
             else EQ_MP (SYM th) (rawring(rand(concl th)));;
 ```
 
-[ind_types.ml](ind_types.md)
+Previous: [normalizer.ml](normalizer.md)
+[Index](index.md)
+Next: [ind_types.ml](ind_types.md)

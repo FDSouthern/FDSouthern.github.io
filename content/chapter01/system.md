@@ -69,4 +69,6 @@ let print_num n =
 ```
 Some stuff to handle and display arbitrary precision integers.
 
-Let's hurry along to [lib.ml](lib.md)
+Previous: [hol.ml](hol.md)
+[Index](index.md)
+Next: [lib.ml](lib.md)

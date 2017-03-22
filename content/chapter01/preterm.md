@@ -444,4 +444,6 @@ let type_of_pretype,term_of_preterm,retypecheck =
   type_of_pretype,term_of_preterm,retypecheck;;
 ```
 
-[parser.ml](parser.md)
+Previous: [printer.ml](printer.md)
+[Index](index.md)
+Next: [parser.ml](parser.md)

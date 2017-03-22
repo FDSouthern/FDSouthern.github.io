@@ -2487,4 +2487,6 @@ let POLYNOMIAL_FUNCTION_FINITE_ROOTS = prove
 prioritize_num();;
 ```
 
-[cart.ml](cart.md)
+Previous: [sets.ml](sets.md)
+[Index](index.md)
+Next: [cart.ml](cart.md)

@@ -1967,4 +1967,6 @@ do_list reduce_interface
 do_list remove_interface ["**"; "++"; "<<="; "==="; "fn"; "afn"];;
 ```
 
-[calc_int.ml](calc_int.md)
+Previous: [lists.ml](lists.md)
+[Index](index.md)
+Next: [calc_int.ml](calc_int.md)

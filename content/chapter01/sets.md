@@ -3775,4 +3775,6 @@ let new_inductive_set =
     insert_in_rule th_cases;;
 ```
 
-[iterate.ml](iterate.md)
+Previous: [int.ml](int.md)
+[Index](index.md)
+Next: [iterate.ml](iterate.md)

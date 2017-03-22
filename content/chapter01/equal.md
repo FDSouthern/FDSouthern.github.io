@@ -331,4 +331,6 @@ let CACHE_CONV =
                   (net := enter [] (tm,ALPHA_HACK th) (!net); th);;
 ```
 
-[bool.ml](bool.md)
+Previous: [parser.ml](parser.md)
+[Index](index.md)
+Next: [bool.ml](bool.md)

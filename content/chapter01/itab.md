@@ -69,4 +69,6 @@ let ITAUT_TAC =
 let ITAUT tm = prove(tm,ITAUT_TAC);;
 ```
 
-[simp.ml](simp.md)
+Previous: [tactics.ml](tactics.md)
+[Index](index.md)
+Next: [simp.ml](simp.md)

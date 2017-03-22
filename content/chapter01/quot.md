@@ -158,4 +158,6 @@ let lift_theorem =
       REWRITE_RULE (ith::trths);;
 ```
 
-[impconv.ml](impconv.md)
+Previous: [metis.ml](metis.md)
+[Index](index.md)
+Next: [impconv.ml](impconv.md)

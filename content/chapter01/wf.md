@@ -373,4 +373,6 @@ let WF_INDUCT_TAC =
      CONV_TAC(LAND_CONV qqconvs) THEN DISCH_THEN ASSUME_TAC) gl;;
 ```
 
-[calc_num.ml](calc_num.md)
+Previous: [arith.ml](arith.md)
+[Index](index.md)
+Next: [calc_num.ml](calc_num.md)

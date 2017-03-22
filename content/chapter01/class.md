@@ -483,4 +483,6 @@ let inductive_type_store = ref
  ["bool",(2,bool_INDUCT,bool_RECURSION)];;
 ```
 
-[trivia.ml](trivia.md)
+Previous: [ind_defs.ml](ind_defs.md)
+[Index](index.md)
+Next: [trivia.ml](trivia.md)

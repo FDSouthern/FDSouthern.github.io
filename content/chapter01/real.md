@@ -1492,4 +1492,6 @@ let REAL_WLOG_LT = prove
   MESON_TAC[REAL_LT_TOTAL]);;
 ```
 
-[calc_rat.ml](calc_rat.md)
+Previous: [realarith.ml](realarith.md)
+[Index](index.md)
+Next: [calc_rat.ml](calc_rat.md)

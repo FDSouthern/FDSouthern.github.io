@@ -920,4 +920,6 @@ let top_thm() =
 #install_printer print_goalstack;;
 ```
 
-[itab.ml](itab.md)
+Previous: [drule.ml](drule.md)
+[Index](index.md)
+Next: [itab.ml](itab.md)

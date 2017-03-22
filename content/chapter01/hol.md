@@ -96,5 +96,9 @@ let needs s =
   then Format.print_string("File \""^s^"\" already loaded\n") else loadt s;;
 ```
 And these functions are not terribly exciting, but necessary for loading the
-HOL system into the toplevel.  I'll skip such loading code in the sequel, so
-let's get on with the other files, beginning with [system.ml](system.md).
+HOL system into the toplevel.  In the rest of this guide, I'll skip over this
+kind of loading code.
+
+Previous: [background.ml](background.md)
+[Index](index.md)
+Next: [system.ml](system.md)

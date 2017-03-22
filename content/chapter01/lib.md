@@ -975,4 +975,6 @@ let file_of_string filename s =
 ```
 These file interactions always drive me crazy in OCaml.
 
-Now we move on to the 'logical core' of HOL Light in [fusion.ml](fusion.md).
+Previous: [system.ml](system.md)
+[Index](index.md)
+Next: [fusion.ml](fusion.md)

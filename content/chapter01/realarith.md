@@ -633,4 +633,6 @@ let REAL_ARITH =
     REAL_LINEAR_PROVER);;
 ```
 
-[real.ml](real.md)
+Previous: [calc_int.ml](calc_int.md)
+[Index](index.md)
+Next: [real.ml](real.md)

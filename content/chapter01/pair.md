@@ -449,4 +449,6 @@ let (LET_TAC:tactic) =
         CONV_TAC(PATH_CONV path (K(let_CONV tm'))))) gl;;
 ```
 
-[nums.ml](nums.md)
+Previous: [impconv.ml](impconv.md)
+[Index](index.md)
+Next: [nums.ml](nums.md)

@@ -10159,4 +10159,6 @@ let METIS_TAC ths = POP_ASSUM_LIST(K ALL_TAC) THEN ASM_METIS_TAC ths;;
 let METIS ths tm = prove(tm,METIS_TAC ths);;
 ```
 
-[quot.ml](quot.md)
+Previous: [meson.ml](meson.md)
+[Index](index.md)
+Next: [quot.ml](quot.md)

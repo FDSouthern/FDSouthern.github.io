@@ -540,4 +540,6 @@ let string_of_term = print_to_string pp_print_term;;
 let string_of_thm = print_to_string pp_print_thm;;
 ```
 
-[preterm.ml](preterm.md)
+Previous: [nets.ml](nets.md)
+[Index](index.md)
+Next: [preterm.ml](preterm.md)

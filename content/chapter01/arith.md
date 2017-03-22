@@ -1569,4 +1569,6 @@ let DEPENDENT_CHOICE = prove
   MESON_TAC[DEPENDENT_CHOICE_FIXED]);;
 ```
 
-[wf.ml](wf.md)
+Previous: [recursion.ml](recursion.md)
+[Index](index.md)
+Next: [wf.ml](wf.md)

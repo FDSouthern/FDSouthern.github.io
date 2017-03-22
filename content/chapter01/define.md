@@ -988,4 +988,6 @@ let define =
       the_definitions := th3::(!the_definitions); th3;;
 ```
 
-There's only the help system left: [help.ml](help.md)
+Previous: [cart.ml](cart.md)
+[Index](index.md)
+Next: [help.ml](help.md)
