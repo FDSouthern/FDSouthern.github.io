@@ -2,6 +2,8 @@
 title: theorems.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/theorems.ml)
+
 Additional theorems, mainly about quantifiers, and additional tactics.
 
 ```ocaml
@@ -540,6 +542,6 @@ let DESTRUCT_TAC,FIX_TAC,INTRO_TAC,HYP_TAC =
 let CLAIM_TAC s tm = SUBGOAL_THEN tm (DESTRUCT_TAC s);;
 ```
 
-Previous: [simp.ml](simp.md)
-[Index](index.md)
-Next: [ind_defs.ml](ind_defs.md)
+- Previous: [simp.ml](simp.md)
+- [Index](index.md)
+- Next: [ind_defs.ml](ind_defs.md)

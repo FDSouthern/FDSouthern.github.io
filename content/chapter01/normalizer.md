@@ -2,6 +2,8 @@
 title: normalizer.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/normalizer.ml)
+
 Relatively efficient HOL conversions for canonical polynomial form.
 
 ```ocaml
@@ -564,6 +566,6 @@ let NUM_NORMALIZE_CONV =
   NUM_NORMALIZE_CONV;;
 ```
 
-Previous: [calc_num.ml](calc_num.md)
-[Index](index.md)
-Next: [grobner.ml](grobner.md)
+- Previous: [calc_num.ml](calc_num.md)
+- [Index](index.md)
+- Next: [grobner.ml](grobner.md)

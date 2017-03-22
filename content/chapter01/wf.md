@@ -2,6 +2,8 @@
 title: wf.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/wf.ml)
+
 Theory of wellfounded relations.
 
 ```ocaml
@@ -373,6 +375,6 @@ let WF_INDUCT_TAC =
      CONV_TAC(LAND_CONV qqconvs) THEN DISCH_THEN ASSUME_TAC) gl;;
 ```
 
-Previous: [arith.ml](arith.md)
-[Index](index.md)
-Next: [calc_num.ml](calc_num.md)
+- Previous: [arith.ml](arith.md)
+- [Index](index.md)
+- Next: [calc_num.ml](calc_num.md)

@@ -2,6 +2,8 @@
 title: trivia.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/trivia.ml)
+
 Trivial odds and ends.
 
 ```ocaml
@@ -87,6 +89,6 @@ inductive_type_store :=
   ("1",(1,one_INDUCT,one_RECURSION))::(!inductive_type_store);;
 ```
 
-Previous: [ind_defs.ml](ind_defs.md)
-[Index](index.md)
-Next: [canon.ml](canon.md)
+- Previous: [ind_defs.ml](ind_defs.md)
+- [Index](index.md)
+- Next: [canon.ml](canon.md)

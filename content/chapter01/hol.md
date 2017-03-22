@@ -1,6 +1,9 @@
 ---
 title: hol.ml
 ---
+
+[Original file](https://github.com/jrh13/hol-light/blob/master/hol.ml)
+
 This file is mostly miscellaneous odds and ends that aren't too important for
 the rest of the discussion, but I thought I'd briefly go through them anyway,
 for the sake of completeness.
@@ -99,6 +102,6 @@ And these functions are not terribly exciting, but necessary for loading the
 HOL system into the toplevel.  In the rest of this guide, I'll skip over this
 kind of loading code.
 
-Previous: [background.ml](background.md)
-[Index](index.md)
-Next: [system.ml](system.md)
+- Previous: [background.ml](background.md)
+- [Index](index.md)
+- Next: [system.ml](system.md)

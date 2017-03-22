@@ -2,6 +2,8 @@
 title: help.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/help.ml)
+
 Simple online help system, based on old HOL88 one.
 
 ```ocaml
@@ -134,6 +136,6 @@ let search =
      else itlist (filter o filterpred) pats (!theorems));;
 ```
 
-Previous: [define.ml](define.md)
-[Index](index.md)
-Next: [database.ml](database.md)
+- Previous: [define.ml](define.md)
+- [Index](index.md)
+- Next: [database.ml](database.md)

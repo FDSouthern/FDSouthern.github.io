@@ -2,6 +2,8 @@
 title: impconv.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/impconv.ml)
+
 Implicational conversions, implicational rewriting and target rewriting.
 
 ```ocaml
@@ -1851,6 +1853,6 @@ Impconv.SEQ_IMP_REWRITE_TAC,
 Impconv.CASE_REWRITE_TAC;;
 ```
 
-Previous: [quot.ml](quot.md)
-[Index](index.md)
-Next: [pair.ml](pair.md)
+- Previous: [quot.ml](quot.md)
+- [Index](index.md)
+- Next: [pair.ml](pair.md)

@@ -1,6 +1,9 @@
 ---
 title: fusion.ml
 ---
+
+[Original file](https://github.com/jrh13/hol-light/blob/master/fusion.ml)
+
 I wonder why this is called `fusion.ml`.  There is a history document that John
 Harrison wrote.  It may be answered there.
 
@@ -502,7 +505,7 @@ I think this deserves a comment.
 
   let concl (Sequent(asl,c)) = c
 ```
-Okay, below here we've got the first of HOL Light's axioms:
+Okay, below here we've got HOL Light's inference rules:
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -730,6 +733,6 @@ let equals_thm th th' = dest_thm th = dest_thm th';;
 I want to write something about proof-recording.  Even if just to mention it's
 outside the core system.
 
-Previous: [lib.ml](lib.md)
-[Index](index.md)
-Next: [basics.ml](basics.md)
+- Previous: [lib.ml](lib.md)
+- [Index](index.md)
+- Next: [basics.ml](basics.md)

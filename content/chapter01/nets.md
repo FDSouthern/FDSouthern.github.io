@@ -2,6 +2,8 @@
 title: nets.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/nets.ml)
+
 Term nets: reasonably fast lookup based on term matchability.
 
 I can't seem to find any references for term nets online, just a few mentions.
@@ -119,6 +121,6 @@ let merge_nets =
   merge_nets;;
 ```
 
-Previous: [basics.ml](basics.md)
-[Index](index.md)
-Next: [printer.ml](printer.md)
+- Previous: [basics.ml](basics.md)
+- [Index](index.md)
+- Next: [printer.ml](printer.md)

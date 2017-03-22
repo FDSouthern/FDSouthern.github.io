@@ -2,6 +2,8 @@
 title: realarith.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/realarith.ml)
+
 Framework for universal real decision procedures, and a simple instance.
 
 ```ocaml
@@ -633,6 +635,6 @@ let REAL_ARITH =
     REAL_LINEAR_PROVER);;
 ```
 
-Previous: [calc_int.ml](calc_int.md)
-[Index](index.md)
-Next: [real.ml](real.md)
+- Previous: [calc_int.ml](calc_int.md)
+- [Index](index.md)
+- Next: [real.ml](real.md)

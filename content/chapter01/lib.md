@@ -1,6 +1,9 @@
 ---
 title: lib.ml
 ---
+
+[Original file](https://github.com/jrh13/hol-light/blob/master/lib.ml)
+
 This is where the actual OCaml gets started.
 
 ```ocaml
@@ -975,6 +978,6 @@ let file_of_string filename s =
 ```
 These file interactions always drive me crazy in OCaml.
 
-Previous: [system.ml](system.md)
-[Index](index.md)
-Next: [fusion.ml](fusion.md)
+- Previous: [system.ml](system.md)
+- [Index](index.md)
+- Next: [fusion.ml](fusion.md)

@@ -2,6 +2,8 @@
 title: calc_rat.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/calc_rat.ml)
+
 Calculation with rational-valued reals.
 
 ```ocaml
@@ -580,6 +582,6 @@ let REAL_FIELD =
     EQ_MP (SYM th0) (GENL avs (EQ_MP (SYM th1) (end_itlist CONJ ths)));;
 ```
 
-Previous: [real.ml](real.md)
-[Index](index.md)
-Next: [int.ml](int.md)
+- Previous: [real.ml](real.md)
+- [Index](index.md)
+- Next: [int.ml](int.md)

@@ -2,6 +2,8 @@
 title: sets.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/sets.ml)
+
 Very basic set theory (using predicates as sets).
 
 ```ocaml
@@ -3775,6 +3777,6 @@ let new_inductive_set =
     insert_in_rule th_cases;;
 ```
 
-Previous: [int.ml](int.md)
-[Index](index.md)
-Next: [iterate.ml](iterate.md)
+- Previous: [int.ml](int.md)
+- [Index](index.md)
+- Next: [iterate.ml](iterate.md)

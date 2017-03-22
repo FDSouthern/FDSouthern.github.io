@@ -2,6 +2,8 @@
 title: class.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/class.ml)
+
 Extensional, classical reasoning with AC starts now!
 
 ```ocaml
@@ -483,6 +485,6 @@ let inductive_type_store = ref
  ["bool",(2,bool_INDUCT,bool_RECURSION)];;
 ```
 
-Previous: [ind_defs.ml](ind_defs.md)
-[Index](index.md)
-Next: [trivia.ml](trivia.md)
+- Previous: [ind_defs.ml](ind_defs.md)
+- [Index](index.md)
+- Next: [trivia.ml](trivia.md)

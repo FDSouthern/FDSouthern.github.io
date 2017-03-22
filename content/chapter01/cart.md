@@ -2,6 +2,8 @@
 title: cart.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/cart.ml)
+
 Definition of finite Cartesian product types.
 
 ```ocaml
@@ -574,6 +576,6 @@ let PCROSS_INTERS_INTERS,PCROSS_INTERS = (CONJ_PAIR o prove)
   ASM SET_TAC[]);;
 ```
 
-Previous: [iterate.ml](iterate.md)
-[Index](index.md)
-Next: [define.ml](define.md)
+- Previous: [iterate.ml](iterate.md)
+- [Index](index.md)
+- Next: [define.ml](define.md)

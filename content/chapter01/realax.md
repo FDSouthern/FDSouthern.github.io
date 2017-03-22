@@ -2,6 +2,8 @@
 title: realax.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/realax.ml)
+
 Theory of real numbers.
 
 ```ocaml
@@ -1967,6 +1969,6 @@ do_list reduce_interface
 do_list remove_interface ["**"; "++"; "<<="; "==="; "fn"; "afn"];;
 ```
 
-Previous: [lists.ml](lists.md)
-[Index](index.md)
-Next: [calc_int.ml](calc_int.md)
+- Previous: [lists.ml](lists.md)
+- [Index](index.md)
+- Next: [calc_int.ml](calc_int.md)

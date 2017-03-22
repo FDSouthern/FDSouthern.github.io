@@ -2,6 +2,8 @@
 title: printer.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/printer.ml)
+
 Simplistic HOL Light prettyprinter, using the OCaml "Format" library.
 
 ```ocaml
@@ -540,6 +542,6 @@ let string_of_term = print_to_string pp_print_term;;
 let string_of_thm = print_to_string pp_print_thm;;
 ```
 
-Previous: [nets.ml](nets.md)
-[Index](index.md)
-Next: [preterm.ml](preterm.md)
+- Previous: [nets.ml](nets.md)
+- [Index](index.md)
+- Next: [preterm.ml](preterm.md)

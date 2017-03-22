@@ -2,6 +2,8 @@
 title: basics.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/basics.ml)
+
 More syntax constructors, and prelogical utilities like matching.
 
 ```ocaml
@@ -433,6 +435,6 @@ let follow_path =
   fun s tm -> follow_path (explode s) tm;;
 ```
 
-Previous: [fusion.ml](fusion.md)
-[Index](index.md)
-Next: [nets.ml](nets.md)
+- Previous: [fusion.ml](fusion.md)
+- [Index](index.md)
+- Next: [nets.ml](nets.md)

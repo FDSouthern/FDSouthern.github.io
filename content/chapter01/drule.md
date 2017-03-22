@@ -1,7 +1,11 @@
 ---
 title: drule.ml
 ---
+
+[Original file](https://github.com/jrh13/hol-light/blob/master/drule.ml)
+
 More sophisticated derived rules including definitions and rewriting.
+
 ```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Type of instantiations, with terms, types and higher-order data.          *)
@@ -482,6 +486,6 @@ let new_definition tm =
   itlist GEN rvs (itlist GEN avs th2);;
 ```
 
-Previous: [bool.ml](bool.md)
-[Index](index.md)
-Next: [tactics.ml](tactics.md)
+- Previous: [bool.ml](bool.md)
+- [Index](index.md)
+- Next: [tactics.ml](tactics.md)

@@ -2,6 +2,8 @@
 title: arith.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/arith.ml)
+
 Natural number arithmetic.
 
 ```ocaml
@@ -1569,6 +1571,6 @@ let DEPENDENT_CHOICE = prove
   MESON_TAC[DEPENDENT_CHOICE_FIXED]);;
 ```
 
-Previous: [recursion.ml](recursion.md)
-[Index](index.md)
-Next: [wf.ml](wf.md)
+- Previous: [recursion.ml](recursion.md)
+- [Index](index.md)
+- Next: [wf.ml](wf.md)

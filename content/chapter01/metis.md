@@ -2,6 +2,8 @@
 title: metis.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/metis.ml)]
+
 Metis first-order theorem proving derived rule/tactic for HOL Light.
 
 The original Metis was written by Joe Hurd, and it has been widely used
@@ -10159,6 +10161,6 @@ let METIS_TAC ths = POP_ASSUM_LIST(K ALL_TAC) THEN ASM_METIS_TAC ths;;
 let METIS ths tm = prove(tm,METIS_TAC ths);;
 ```
 
-Previous: [meson.ml](meson.md)
-[Index](index.md)
-Next: [quot.ml](quot.md)
+- Previous: [meson.ml](meson.md)
+- [Index](index.md)
+- Next: [quot.ml](quot.md)

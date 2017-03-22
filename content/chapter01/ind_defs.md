@@ -2,6 +2,8 @@
 title: ind_defs.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/ind_defs.ml)
+
 Mutually inductively defined relations.
 
 ```ocaml
@@ -436,6 +438,6 @@ let derive_strong_induction =
     GENL svs (prove_monotonicity_hyps th4);;
 ```
 
-Previous: [theorems.ml](theorems.md)
-[Index](index.md)
-Next: [class.ml](class.md)
+- Previous: [theorems.ml](theorems.md)
+- [Index](index.md)
+- Next: [class.ml](class.md)

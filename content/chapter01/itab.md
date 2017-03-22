@@ -2,6 +2,8 @@
 title: itab.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/itab.ml)
+
 Intuitionistic theorem prover (complete for propositional fragment).
 
 ```ocaml
@@ -69,6 +71,6 @@ let ITAUT_TAC =
 let ITAUT tm = prove(tm,ITAUT_TAC);;
 ```
 
-Previous: [tactics.ml](tactics.md)
-[Index](index.md)
-Next: [simp.ml](simp.md)
+- Previous: [tactics.ml](tactics.md)
+- [Index](index.md)
+- Next: [simp.ml](simp.md)

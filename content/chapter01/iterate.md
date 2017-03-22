@@ -2,6 +2,8 @@
 title: iterate.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/iterate.ml)
+
 Generic iterated operations and special cases of sums over N and R.
 
 ```ocaml
@@ -2487,6 +2489,6 @@ let POLYNOMIAL_FUNCTION_FINITE_ROOTS = prove
 prioritize_num();;
 ```
 
-Previous: [sets.ml](sets.md)
-[Index](index.md)
-Next: [cart.ml](cart.md)
+- Previous: [sets.ml](sets.md)
+- [Index](index.md)
+- Next: [cart.ml](cart.md)

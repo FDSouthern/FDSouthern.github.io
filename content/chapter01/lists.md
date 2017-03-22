@@ -2,6 +2,8 @@
 title: lists.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/lists.ml)
+
 Theory of lists, plus characters and strings as lists of characters.
 
 ```ocaml
@@ -750,6 +752,6 @@ let dest_char,mk_char,dest_string,mk_string,CHAR_EQ_CONV,STRING_EQ_CONV =
   char_of_term,mk_char,dest_string,mk_string,CHAR_EQ_CONV,STRING_EQ_CONV;;
 ```
 
-Previous: [ind_types.ml](ind_types.md)
-[Index](index.md)
-Next: [realax.ml](realax.md)
+- Previous: [ind_types.ml](ind_types.md)
+- [Index](index.md)
+- Next: [realax.ml](realax.md)

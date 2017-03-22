@@ -2,6 +2,8 @@
 title: simp.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/simp.ml)
+
 Simplification and rewriting.
 
 ```ocaml
@@ -557,6 +559,6 @@ let EXPAND_TAC s = FIRST_ASSUM(SUBST1_TAC o SYM o
   check((=) s o fst o dest_var o rhs o concl)) THEN BETA_TAC;;
 ```
 
-Previous: [itab.ml](itab.md)
-[Index](index.md)
-Next: [theorems.ml](theorems.md)
+- Previous: [itab.ml](itab.md)
+- [Index](index.md)
+- Next: [theorems.ml](theorems.md)

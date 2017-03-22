@@ -2,6 +2,8 @@
 title: meson.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/meson.ml)
+
 Version of the MESON procedure a la PTTP. Various search options.
 
 ```ocaml
@@ -843,6 +845,6 @@ let MESON_TAC ths = POP_ASSUM_LIST(K ALL_TAC) THEN ASM_MESON_TAC ths;;
 let MESON ths tm = prove(tm,MESON_TAC ths);;
 ```
 
-Previous: [canon.ml](canon.md)
-[Index](index.md)
-Next: [metis.ml](metis.md)
+- Previous: [canon.ml](canon.md)
+- [Index](index.md)
+- Next: [metis.ml](metis.md)

@@ -2,6 +2,8 @@
 title: preterm.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/preterm.ml)
+
 Preterms and pretypes; typechecking; translation to types and terms.
 
 ```ocaml
@@ -444,6 +446,6 @@ let type_of_pretype,term_of_preterm,retypecheck =
   type_of_pretype,term_of_preterm,retypecheck;;
 ```
 
-Previous: [printer.ml](printer.md)
-[Index](index.md)
-Next: [parser.ml](parser.md)
+- Previous: [printer.ml](printer.md)
+- [Index](index.md)
+- Next: [parser.ml](parser.md)

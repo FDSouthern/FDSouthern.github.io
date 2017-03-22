@@ -2,6 +2,8 @@
 title: tactics.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/tactics.ml)
+
 System of tactics (slightly different from any traditional LCF method).
 
 ```ocaml
@@ -920,6 +922,6 @@ let top_thm() =
 #install_printer print_goalstack;;
 ```
 
-Previous: [drule.ml](drule.md)
-[Index](index.md)
-Next: [itab.ml](itab.md)
+- Previous: [drule.ml](drule.md)
+- [Index](index.md)
+- Next: [itab.ml](itab.md)

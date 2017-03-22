@@ -2,6 +2,8 @@
 title: int.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/int.ml)
+
 Theory of integers.
 
 The integers are carved out of the real numbers; hence all the
@@ -1453,6 +1455,6 @@ let DIVIDES_LE = prove
 prioritize_num();;
 ```
 
-Previous: [calc_rat.ml](calc_rat.md)
-[Index](index.md)
-Next: [sets.ml](sets.md)
+- Previous: [calc_rat.ml](calc_rat.md)
+- [Index](index.md)
+- Next: [sets.ml](sets.md)

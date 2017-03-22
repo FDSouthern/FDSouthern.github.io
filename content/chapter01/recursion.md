@@ -2,6 +2,8 @@
 title: recursion.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/recursion.ml)
+
 Definition by primitive recursion and other tools for inductive types.
 
 ```ocaml
@@ -111,6 +113,6 @@ let new_recursive_definition =
     the_recursive_definitions := th::(!the_recursive_definitions); th;;
 ```
 
-Previous: [nums.ml](nums.md)
-[Index](index.md)
-Next: [arith.ml](arith.md)
+- Previous: [nums.ml](nums.md)
+- [Index](index.md)
+- Next: [arith.ml](arith.md)

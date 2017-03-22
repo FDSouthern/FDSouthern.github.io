@@ -2,6 +2,8 @@
 title: nums.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/nums.ml)
+
 The axiom of infinity; construction of the natural numbers.
 
 ```ocaml
@@ -302,6 +304,6 @@ let new_specification =
           sth;;
 ```
 
-Previous: [pair.ml](pair.md)
-[Index](index.md)
-Next: [recursion.ml](recursion.md)
+- Previous: [pair.ml](pair.md)
+- [Index](index.md)
+- Next: [recursion.ml](recursion.md)

@@ -2,6 +2,8 @@
 title: quot.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/quot.ml)
+
 Tools for defining quotient types and lifting first order theorems.
 
 ```ocaml
@@ -158,6 +160,6 @@ let lift_theorem =
       REWRITE_RULE (ith::trths);;
 ```
 
-Previous: [metis.ml](metis.md)
-[Index](index.md)
-Next: [impconv.ml](impconv.md)
+- Previous: [metis.ml](metis.md)
+- [Index](index.md)
+- Next: [impconv.ml](impconv.md)

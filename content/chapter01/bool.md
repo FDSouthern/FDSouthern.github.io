@@ -1,7 +1,11 @@
 ---
 title: bool.ml
 ---
+
+[Original file](https://github.com/jrh13/hol-light/blob/master/bool.ml)
+
 Boolean theory including (intuitionistic) definitions of logical connectives.
+
 ```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Set up parse status of basic and derived logical constants.               *)
@@ -477,6 +481,6 @@ let EXISTENCE =
     with Failure _ -> failwith "EXISTENCE";;
 ```
 
-Previous: [equal.ml](equal.md)
-[Index](index.md)
-Next: [drule.ml](drule.md)
+- Previous: [equal.ml](equal.md)
+- [Index](index.md)
+- Next: [drule.ml](drule.md)

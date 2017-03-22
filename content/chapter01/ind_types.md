@@ -2,6 +2,8 @@
 title: ind_types.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/ind_types.ml)
+
 Inductive (or free recursive) types.
 
 ```ocaml
@@ -1551,6 +1553,6 @@ let FORALL_UNWIND_CONV =
   FORALL_UNWIND_CONV;;
 ```
 
-Previous: [grobner.ml](grobner.md)
-[Index](index.md)
-Next: [lists.ml](lists.md)
+- Previous: [grobner.ml](grobner.md)
+- [Index](index.md)
+- Next: [lists.ml](lists.md)

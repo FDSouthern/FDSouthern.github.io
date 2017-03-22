@@ -2,6 +2,8 @@
 title: equal.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/equal.ml)
+
 Now we're entering the higher-level deductive system.
 Basic equality reasoning including conversionals.
 
@@ -331,6 +333,6 @@ let CACHE_CONV =
                   (net := enter [] (tm,ALPHA_HACK th) (!net); th);;
 ```
 
-Previous: [parser.ml](parser.md)
-[Index](index.md)
-Next: [bool.ml](bool.md)
+- Previous: [parser.ml](parser.md)
+- [Index](index.md)
+- Next: [bool.ml](bool.md)

@@ -2,6 +2,8 @@
 title: calc_num.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/calc_num.ml)
+
 Calculation with naturals.
 
 ```ocaml
@@ -1488,6 +1490,6 @@ let EXPAND_CASES_CONV =
   conv THENC (REWRITE_CONV[GSYM CONJ_ASSOC]);;
 ```
 
-Previous: [wf.ml](wf.md)
-[Index](index.md)
-Next: [normalizer.ml](normalizer.md)
+- Previous: [wf.ml](wf.md)
+- [Index](index.md)
+- Next: [normalizer.ml](normalizer.md)

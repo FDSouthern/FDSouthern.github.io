@@ -2,6 +2,8 @@
 title: pair.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/pair.ml)
+
 We're now entering Mathematical theories and additional proof tools.
 
 Syntax sugaring; theory of pairing, with a bit of support.
@@ -449,6 +451,6 @@ let (LET_TAC:tactic) =
         CONV_TAC(PATH_CONV path (K(let_CONV tm'))))) gl;;
 ```
 
-Previous: [impconv.ml](impconv.md)
-[Index](index.md)
-Next: [nums.ml](nums.md)
+- Previous: [impconv.ml](impconv.md)
+- [Index](index.md)
+- Next: [nums.ml](nums.md)

@@ -2,6 +2,8 @@
 title: define.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/define.ml)
+
 Automated support for general recursive definitions.
 
 ```ocaml
@@ -988,6 +990,6 @@ let define =
       the_definitions := th3::(!the_definitions); th3;;
 ```
 
-Previous: [cart.ml](cart.md)
-[Index](index.md)
-Next: [help.ml](help.md)
+- Previous: [cart.ml](cart.md)
+- [Index](index.md)
+- Next: [help.ml](help.md)

@@ -2,6 +2,8 @@
 title: canon.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/canon.ml)
+
 Reasonably efficient conversions for various canonical forms.
 
 ```ocaml
@@ -729,6 +731,6 @@ let rec PROP_ATOM_CONV conv tm =
   | _ -> TRY_CONV conv tm;;
 ```
 
-Previous: [trivia.ml](trivia.md)
-[Index](index.md)
-Next: [meson.ml](meson.md)
+- Previous: [trivia.ml](trivia.md)
+- [Index](index.md)
+- Next: [meson.ml](meson.md)

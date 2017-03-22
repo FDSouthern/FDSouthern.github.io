@@ -2,6 +2,8 @@
 title: real.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/real.ml)
+
 More basic properties of the reals.
 
 ```ocaml
@@ -1492,6 +1494,6 @@ let REAL_WLOG_LT = prove
   MESON_TAC[REAL_LT_TOTAL]);;
 ```
 
-Previous: [realarith.ml](realarith.md)
-[Index](index.md)
-Next: [calc_rat.ml](calc_rat.md)
+- Previous: [realarith.ml](realarith.md)
+- [Index](index.md)
+- Next: [calc_rat.ml](calc_rat.md)

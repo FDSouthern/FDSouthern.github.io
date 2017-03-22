@@ -2,6 +2,8 @@
 title: parser.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/parser.ml)
+
 Lexical analyzer, type and preterm parsers.
 
 ```ocaml
@@ -498,6 +500,6 @@ let parse_term s =
   else failwith "Unparsed input following term";;
 ```
 
-Previous: [preterm.ml](preterm.md)
-[Index](index.md)
-Next: [equal.ml](equal.md)
+- Previous: [preterm.ml](preterm.md)
+- [Index](index.md)
+- Next: [equal.ml](equal.md)

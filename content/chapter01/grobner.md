@@ -2,6 +2,8 @@
 title: grobner.ml
 ---
 
+[Original file](https://github.com/jrh13/hol-light/blob/master/grobner.ml)
+
 Generic Grobner basis algorithm.
 
 Whatever the instantiation, it basically solves the universal theory of
@@ -697,6 +699,6 @@ let NUM_RING =
             else EQ_MP (SYM th) (rawring(rand(concl th)));;
 ```
 
-Previous: [normalizer.ml](normalizer.md)
-[Index](index.md)
-Next: [ind_types.ml](ind_types.md)
+- Previous: [normalizer.ml](normalizer.md)
+- [Index](index.md)
+- Next: [ind_types.ml](ind_types.md)
