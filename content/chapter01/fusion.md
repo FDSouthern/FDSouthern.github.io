@@ -515,7 +515,7 @@ Okay, below here we've got HOL Light's inference rules:
   let REFL tm =
     Sequent([],safe_mk_eq tm tm)
 ```
-`REFL \`x\`` gives `|- x = x`.
+`` REFL `x` `` gives `|- x = x`.
 
 ```ocaml
   let TRANS (Sequent(asl1,c1)) (Sequent(asl2,c2)) =
@@ -524,7 +524,7 @@ Okay, below here we've got HOL Light's inference rules:
         when alphaorder m1 m2 = 0 -> Sequent(term_union asl1 asl2,Comb(eql,r))
     | _ -> failwith "TRANS"
 ```
-`TRANS \`ASM1 |- a = b\` \`ASM2 |- b = c\`` gives `ASM1+ASM2 |- a = c`.
+`` TRANS `ASM1 |- a = b` `ASM2 |- b = c` `` gives `ASM1+ASM2 |- a = c`.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -541,7 +541,7 @@ Okay, below here we've got HOL Light's inference rules:
          | _ -> failwith "MK_COMB: types do not agree")
      | _ -> failwith "MK_COMB: not both equations"
 ```
-`MK_COMB (\`ASM1 |- f = g\`, \`ASM2 |- a = b\`)` gives
+`` MK_COMB (`ASM1 |- f = g`, `ASM2 |- a = b`) `` gives
 `ASM1+ASM2 |- (f a) = (g b)`.
 
 ```ocaml
@@ -551,7 +551,7 @@ Okay, below here we've got HOL Light's inference rules:
          -> Sequent(asl,safe_mk_eq (Abs(v,l)) (Abs(v,r)))
     | _ -> failwith "ABS";;
 ```
-`ABS \`x\` \`ASM1{-x} |- a=b\`` gives `ASM1 |- \x.a = \x.b`
+`` ABS `x` `ASM1{-x} |- a=b` `` gives `ASM1 |- \x.a = \x.b`.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -564,6 +564,8 @@ Okay, below here we've got HOL Light's inference rules:
         -> Sequent([],safe_mk_eq tm bod)
     | _ -> failwith "BETA: not a trivial beta-redex"
 ```
+`` BETA `(\x.x) x` `` gives `|- (\x. x) x = x`.
+
 In practice, you probably want to use `BETA_CONV` as defined in
 [equal.ml](equal.md).
 
@@ -576,7 +578,7 @@ In practice, you probably want to use `BETA_CONV` as defined in
     if Pervasives.compare (type_of tm) bool_ty = 0 then Sequent([tm],tm)
     else failwith "ASSUME: not a proposition"
 ```
-`ASSUME \`a\`` gives `a |- a`.
+`` ASSUME `a` `` gives `a |- a`.
 
 ```ocaml
   let EQ_MP (Sequent(asl1,eq)) (Sequent(asl2,c)) =
@@ -585,19 +587,19 @@ In practice, you probably want to use `BETA_CONV` as defined in
         -> Sequent(term_union asl1 asl2,r)
     | _ -> failwith "EQ_MP"
 ```
-`EQ_MP \`ASM1 |- a = b\` \`ASM2 |- a\`` gives `\`ASM1+ASM2 |- b\``.
+`` EQ_MP `ASM1 |- a = b` `ASM2 |- a` `` gives `ASM1+ASM2 |- b`.
 
 ```ocaml
   let DEDUCT_ANTISYM_RULE (Sequent(asl1,c1)) (Sequent(asl2,c2)) =
     let asl1' = term_remove c2 asl1 and asl2' = term_remove c1 asl2 in
     Sequent(term_union asl1' asl2',safe_mk_eq c1 c2)
 ```
-`DEDUCT_ANTISYM_RULE \`ASM1 |- a\` \`ASM2 |- b\` gives
+`` DEDUCT_ANTISYM_RULE `ASM1 |- a` `ASM2 |- b` `` gives
 `(ASM1-{b})+(ASM2-{a}) |- a=b`.
 
 To me, this is by far the weirdest rule.  It makes sense in the single sentence
 case (if from `p` you can derive `q` and from `q` you can derive `p`, then
-`p` and `q` have the same truth value), but in general, I'm not sure.
+`p` and `q` have the same truth value), but in the general case, I'm less sure.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)

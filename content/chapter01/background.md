@@ -18,5 +18,7 @@ but I'll try and keep up with changes to the system.
 All rights to the source code are obviously held by John Harrison and
 contributors.
 
+This guide contains text taken from an older summary written by Carl Witty.
+
 - [Index](index.md)
 - Next: [hol.ml](hol.md)
