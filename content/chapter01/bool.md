@@ -57,7 +57,11 @@ let PINST tyin tmin =
   and itype_fn = INST_TYPE tyin in
   fun th -> try iterm_fn (itype_fn th)
             with Failure _ -> failwith "PINST";;
+```
+`PINST tyin tmin th` instantiates types in `th` according to `tyin` and terms
+according to `tmin`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Useful derived deductive rule.                                            *)
 (* ------------------------------------------------------------------------- *)
@@ -66,7 +70,12 @@ let PROVE_HYP ath bth =
   if exists (aconv (concl ath)) (hyp bth)
   then EQ_MP (DEDUCT_ANTISYM_RULE ath bth) ath
   else bth;;
+```
+If the conclusion of `ath` is a hypothesis of `bth`, then returns `bth` except
+that this hypothesis is replaced by the hypotheses of `ath`; otherwise returns
+`bth` unchanged.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Rules for T                                                               *)
 (* ------------------------------------------------------------------------- *)
@@ -75,11 +84,17 @@ let T_DEF = new_basic_definition
  `T = ((\p:bool. p) = (\p:bool. p))`;;
 
 let TRUTH = EQ_MP (SYM T_DEF) (REFL `\p:bool. p`);;
+```
+`TRUTH`: `|- T`
 
+```ocaml
 let EQT_ELIM th =
   try EQ_MP (SYM th) TRUTH
   with Failure _ -> failwith "EQT_ELIM";;
+```
+`` EQT_ELIM `ASM |- a = T` ``  gives `` `ASM |- a` ``.
 
+```ocaml
 let EQT_INTRO =
   let t = `t:bool` in
   let pth =
@@ -87,7 +102,10 @@ let EQT_INTRO =
     let th2 = EQT_ELIM(ASSUME(concl th1)) in
     DEDUCT_ANTISYM_RULE th2 th1 in
   fun th -> EQ_MP (INST[concl th,t] pth) th;;
+```
+`` EQT_INTRO `ASM |- a` `` gives `` `ASM |- a = T` ``.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Rules for /\                                                              *)
 (* ------------------------------------------------------------------------- *)
@@ -118,7 +136,10 @@ let CONJ =
   fun th1 th2 ->
     let th = INST [concl th1,p; concl th2,q] pth in
     EQ_MP (PROVE_HYP th1 th) th2;;
+```
+`` CONJ `ASM1 |- a` `ASM2 |- b` `` gives `` `ASM1+ASM2 |- a /\ b` ``.
 
+```ocaml
 let CONJUNCT1 =
   let P = `P:bool` and Q = `Q:bool` in
   let pth =
@@ -130,7 +151,10 @@ let CONJUNCT1 =
     try let l,r = dest_conj(concl th) in
         PROVE_HYP th (INST [l,P; r,Q] pth)
     with Failure _ -> failwith "CONJUNCT1";;
+```
+`` CONJUNCT1 `ASM |- a /\ b` `` gives `` `ASM |- a` ``.
 
+```ocaml
 let CONJUNCT2 =
   let P = `P:bool` and Q = `Q:bool` in
   let pth =
@@ -142,13 +166,23 @@ let CONJUNCT2 =
     try let l,r = dest_conj(concl th) in
         PROVE_HYP th (INST [l,P; r,Q] pth)
     with Failure _ -> failwith "CONJUNCT2";;
+```
+`` CONJUNCT2 `ASM |- a /\ b` `` gives `` `ASM |- b` ``.
 
+```ocaml
 let CONJ_PAIR th =
   try CONJUNCT1 th,CONJUNCT2 th
   with Failure _ -> failwith "CONJ_PAIR: Not a conjunction";;
+```
+`CONJ_PAIR th` is basically `(CONJUNCT1 th, CONJUNCT2 th)`.
 
+```ocaml
 let CONJUNCTS = striplist CONJ_PAIR;;
+```
+`CONJUNCTS th` gives a list of theorems, one for each conjunct of the conclusion
+of `th` (no matter how they are associated).
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Rules for ==>                                                             *)
 (* ------------------------------------------------------------------------- *)
@@ -175,7 +209,10 @@ let MP =
     if aconv ant (concl th) then
       EQ_MP (PROVE_HYP th (INST [ant,p; con,q] rth)) ith
     else failwith "MP: theorems do not agree";;
+```
+`` MP `ASM1 |- a ==> b` `ASM2 |- a` `` gives `` `ASM1+ASM2 |- b` ``.
 
+```ocaml
 let DISCH =
   let p = `p:bool`
   and q = `q:bool` in
@@ -186,19 +223,31 @@ let DISCH =
     let th3 = DEDUCT_ANTISYM_RULE th1 th2 in
     let th4 = INST [a,p; concl th,q] pth in
     EQ_MP th4 th3;;
+```
+`` DISCH `a` `ASM,a |- b` `` gives `` `ASM |- a ==> b` ``.
 
+```ocaml
 let rec DISCH_ALL th =
   try DISCH_ALL (DISCH (hd (hyp th)) th)
   with Failure _ -> th;;
+```
+`DISCH_ALL` repeats `DISCH` until there are no more hypotheses.
 
+```ocaml
 let UNDISCH th =
   try MP th (ASSUME(rand(rator(concl th))))
   with Failure _ -> failwith "UNDISCH";;
+```
+`` UNDISCH `ASM |- a ==> b` `` gives `` `ASM,a |- b` ``.
 
+```ocaml
 let rec UNDISCH_ALL th =
   if is_imp (concl th) then UNDISCH_ALL (UNDISCH th)
   else th;;
+```
+`UNDISCH_ALL` repeats `UNDISCH` until the conclusion is not an implication.
 
+```ocaml
 let IMP_ANTISYM_RULE =
   let p = `p:bool` and q = `q:bool` and imp_tm = `(==>)` in
   let pq = mk_imp(p,q) and qp = mk_imp(q,p) in
@@ -211,9 +260,16 @@ let IMP_ANTISYM_RULE =
   fun th1 th2 ->
     let p1,q1 = dest_imp(concl th1) and p2,q2 = dest_imp(concl th2) in
     EQ_MP (INST [p1,p; q1,q] pth) (CONJ th1 th2);;
+```
+`` IMP_ANTISYM_RULE `ASM1 |- a ==> b` `ASM2 |- b ==> a` `` gives
+`` `ASM1+ASM2 |- a = b` ``.
 
+```ocaml
 let ADD_ASSUM tm th = MP (DISCH tm th) (ASSUME tm);;
+```
+`` ADD_ASSUM `a` `ASM |- b` `` gives `` `ASM,a |- b` ``.
 
+```ocaml
 let EQ_IMP_RULE =
   let peq = `p <=> q` in
   let p,q = dest_iff peq in
@@ -221,7 +277,11 @@ let EQ_IMP_RULE =
   and pth2 = DISCH peq (DISCH q (EQ_MP (SYM(ASSUME peq)) (ASSUME q))) in
   fun th -> let l,r = dest_iff(concl th) in
             MP (INST [l,p; r,q] pth1) th,MP (INST [l,p; r,q] pth2) th;;
+```
+`` EQ_IMP_RULE `ASM |- (a:bool) = b` `` gives
+`` (`ASM |- a ==> b`, `ASM |- b ==> a`) ``.
 
+```ocaml
 let IMP_TRANS =
   let pq = `p ==> q`
   and qr = `q ==> r` in
@@ -233,7 +293,11 @@ let IMP_TRANS =
         and y',z = dest_imp(concl th2) in
         if y <> y' then failwith "IMP_TRANS" else
         MP (MP (INST [x,p; y,q; z,r] pth) th1) th2;;
+```
+`` IMP_TRANS `ASM1 |- a ==> b` `ASM2 |- b ==> c` `` gives
+`` `ASM1+ASM2 |- a ==> c` ``.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Rules for !                                                               *)
 (* ------------------------------------------------------------------------- *)
@@ -257,18 +321,32 @@ let SPEC =
         CONV_RULE BETA_CONV
          (MP (PINST [snd(dest_var(bndvar abs)),aty] [abs,P; tm,x] pth) th)
     with Failure _ -> failwith "SPEC";;
+```
+`` SPEC `a` `ASM |- !x.P[x]` `` gives `` `ASM |- P[a]` ``.
 
+```ocaml
 let SPECL tms th =
   try rev_itlist SPEC tms th
   with Failure _ -> failwith "SPECL";;
+```
+`` SPECL [`a`;`b`;`c`] `ASM |- !x y z.P[x,y,z]` `` gives
+`` `ASM |- P[a,b,c]` ``.
 
+```ocaml
 let SPEC_VAR th =
   let bv = variant (thm_frees th) (bndvar(rand(concl th))) in
   bv,SPEC bv th;;
+```
+`` SPEC_VAR `ASM |- !x.P[x]` `` gives `` (`x17`, `ASM |- P[x17]`) ``.
 
+```ocaml
 let rec SPEC_ALL th =
   if is_forall(concl th) then SPEC_ALL(snd(SPEC_VAR th)) else th;;
+```
+`SPEC_ALL` repeats `SPEC_VAR` until the conclusion is not a "forall", and
+returns the final theorem.
 
+```ocaml
 let ISPEC t th =
   let x,_ = try dest_forall(concl th) with Failure _ ->
     failwith "ISPEC: input theorem not universally quantified" in
@@ -276,7 +354,12 @@ let ISPEC t th =
     failwith "ISPEC can't type-instantiate input theorem" in
   try SPEC t (INST_TYPE tyins th)
   with Failure _ -> failwith "ISPEC: type variable(s) free in assumptions";;
+```
+`ISPEC` is like `SPEC`, except that the specialised term may be an instance of
+the type of the quantified variable (in which case the theorem is
+type-instantiated first), rather than matching exactly.
 
+```ocaml
 let ISPECL tms th =
   try if tms = [] then th else
       let avs = fst (chop_list (length tms) (fst(strip_forall(concl th)))) in
@@ -284,7 +367,10 @@ let ISPECL tms th =
                           (map type_of tms) [] in
       SPECL tms (INST_TYPE tyins th)
   with Failure _ -> failwith "ISPECL";;
+```
+`ISPECL` is like `SPECL` with type instantiations.
 
+```ocaml
 let GEN =
   let pth = SYM(CONV_RULE (RAND_CONV BETA_CONV)
                           (AP_THM FORALL_DEF `P:A->bool`)) in
@@ -296,14 +382,26 @@ let GEN =
         let phi = lhand(concl th') in
         let rth = INST[phi,ptm] qth in
         EQ_MP rth th';;
+```
+`` GEN `x` `ASM |- P[x]` `` gives `` `ASM |- !x. P[x]` ``
+(if x is not free in `ASM`).
 
+```ocaml
 let GENL = itlist GEN;;
+```
+`` GENL [`x`;`y`;`z`] `ASM |- P[x,y,z]` `` gives
+`` `ASM |- !x y z. P[x,y,z]` ``.
 
+```ocaml
 let GEN_ALL th =
   let asl,c = dest_thm th in
   let vars = subtract (frees c) (freesl asl) in
   GENL vars th;;
+```
+`GEN_ALL` generalises over all variables free in the conclusion but not in the
+assumptions.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Rules for ?                                                               *)
 (* ------------------------------------------------------------------------- *)
@@ -327,10 +425,16 @@ let EXISTS =
         let cth = PINST [type_of stm,aty] [abs,P; stm,x] pth in
         PROVE_HYP (EQ_MP (SYM bth) th) cth
     with Failure _ -> failwith "EXISTS";;
+```
+`` EXISTS (`?x. P[x]`,`a`) `ASM |- P[a]` `` gives `` `ASM |- ?x. P[x]` ``.
 
+```ocaml
 let SIMPLE_EXISTS v th =
   EXISTS (mk_exists(v,concl th),v) th;;
+```
+`` SIMPLE_EXISTS `x` `ASM |- P[x]` `` gives `` `ASM |- ?x. P[x]` ``.
 
+```ocaml
 let CHOOSE =
   let P = `P:A->bool` and Q = `Q:bool` in
   let pth =
@@ -347,10 +451,18 @@ let CHOOSE =
         let th5 = PINST [snd(dest_var v),aty] [abs,P; concl th2,Q] pth in
         MP (MP th5 th4) th1
     with Failure _ -> failwith "CHOOSE";;
+```
+`` CHOOSE (`x`,`ASM1 |- ?y.P[y]`) `ASM2,P[x] |- a` `` gives
+`` `ASM1+ASM2 |- a` ``.
 
+```ocaml
 let SIMPLE_CHOOSE v th =
   CHOOSE(v,ASSUME (mk_exists(v,hd(hyp th)))) th;;
+```
+`` SIMPLE_CHOOSE `x` `ASM,P[x] |- a` `` gives `` `ASM,?x.P[x] |- a` ``
+(`P[x]` must be the first hypothesis).
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Rules for \/                                                              *)
 (* ------------------------------------------------------------------------- *)
@@ -372,7 +484,10 @@ let DISJ1 =
   fun th tm ->
     try PROVE_HYP th (INST [concl th,P; tm,Q] pth)
     with Failure _ -> failwith "DISJ1";;
+```
+`` DISJ1 `ASM |- a` `b` `` gives `` `ASM |- a \/ b` ``.
 
+```ocaml
 let DISJ2 =
   let P = `P:bool` and Q = `Q:bool` in
   let pth =
@@ -384,7 +499,10 @@ let DISJ2 =
   fun tm th ->
     try PROVE_HYP th (INST [tm,P; concl th,Q] pth)
     with Failure _ -> failwith "DISJ2";;
+```
+`` DISJ2 `a` `ASM |- b` `` gives `` `ASM |- a \/ b`.
 
+```ocaml
 let DISJ_CASES =
   let P = `P:bool` and Q = `Q:bool` and R = `R:bool` in
   let pth =
@@ -399,10 +517,18 @@ let DISJ_CASES =
         let th = INST [l,P; r,Q; c1,R] pth in
         PROVE_HYP (DISCH r th2) (PROVE_HYP (DISCH l th1) (PROVE_HYP th0 th))
     with Failure _ -> failwith "DISJ_CASES";;
+```
+`` DISJ_CASES `ASM1 |- a \/ b` `ASM2,a |- c` `ASM3,b |- c` `` gives
+`` `ASM1,ASM2,ASM3 |- c` ``.
 
+```ocaml
 let SIMPLE_DISJ_CASES th1 th2 =
   DISJ_CASES (ASSUME(mk_disj(hd(hyp th1),hd(hyp th2)))) th1 th2;;
+```
+`` SIMPLE_DISJ_CASES `ASM1,a |- c` `ASM2,b |- c` `` gives
+`` `ASM1,ASM2,a \/ b |- c` `` (`a` and `b` must be the first hypotheses).
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Rules for negation and falsity.                                           *)
 (* ------------------------------------------------------------------------- *)
@@ -424,14 +550,20 @@ let NOT_ELIM =
   fun th ->
     try EQ_MP (INST [rand(concl th),P] pth) th
     with Failure _ -> failwith "NOT_ELIM";;
+```
+`` NOT_ELIM `ASM |- ~a` `` gives `` `ASM |- a ==> F` ``.
 
+```ocaml
 let NOT_INTRO =
   let P = `P:bool` in
   let pth = SYM(CONV_RULE(RAND_CONV BETA_CONV) (AP_THM NOT_DEF P)) in
   fun th ->
     try EQ_MP (INST [rand(rator(concl th)),P] pth) th
     with Failure _ -> failwith "NOT_INTRO";;
+```
+`` NOT_INTRO `ASM |- a ==> F` `` gives `` `ASM |- ~a` ``.
 
+```ocaml
 let EQF_INTRO =
   let P = `P:bool` in
   let pth =
@@ -441,7 +573,10 @@ let EQF_INTRO =
   fun th ->
     try MP (INST [rand(concl th),P] pth) th
     with Failure _ -> failwith "EQF_INTRO";;
+```
+`` EQF_INTRO `ASM |- ~a` `` gives `` `ASM |- a = F` ``.
 
+```ocaml
 let EQF_ELIM =
   let P = `P:bool` in
   let pth =
@@ -451,14 +586,25 @@ let EQF_ELIM =
   fun th ->
     try MP (INST [rand(rator(concl th)),P] pth) th
     with Failure _ -> failwith "EQF_ELIM";;
+```
+`` EQF_ELIM `ASM |- a = F` `` gives `` `ASM |- ~a` ``.
 
+
+Removed (but still in (Examples/hol88.ml):
+`` NEG_DISCH `a` `ASM,a |- F` `` gives ` ``ASM |- ~a` `` (if the conclusion of
+the initial theorem is not `F`, then `NEG_DISCH` acts like `DISCH`).
+
+```ocaml
 let CONTR =
   let P = `P:bool` and f_tm = `F` in
   let pth = SPEC P (EQ_MP F_DEF (ASSUME `F`)) in
   fun tm th ->
     if concl th <> f_tm then failwith "CONTR"
     else PROVE_HYP th (INST [tm,P] pth);;
+```
+`` CONTR `a` `ASM |- F` `` gives `` `ASM |- a` ``.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Rules for unique existence.                                               *)
 (* ------------------------------------------------------------------------- *)
@@ -480,6 +626,7 @@ let EXISTENCE =
         MP (PINST [ty,aty] [abs,P] pth) th
     with Failure _ -> failwith "EXISTENCE";;
 ```
+`` EXISTENCE `ASM |- ?!x. P[x]` `` gives `` `ASM |- ?x. P[x]` ``.
 
 - Previous: [equal.ml](equal.md)
 - [Index](index.md)

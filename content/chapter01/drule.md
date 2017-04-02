@@ -29,19 +29,33 @@ let mk_thm(asl,c) =
 let MK_CONJ =
   let andtm = `(/\)` in
   fun eq1 eq2 -> MK_COMB(AP_TERM andtm eq1,eq2);;
+```
+`` MK_CONJ `ASM1 |- a = b` `ASM2 |- c = d` `` gives
+`` `ASM1+ASM2 |- a /\ c = b /\ d` ``.
 
+```ocaml
 let MK_DISJ =
   let ortm = `(\/)` in
   fun eq1 eq2 -> MK_COMB(AP_TERM ortm eq1,eq2);;
+```
+`` MK_DISJ `ASM1 |- a = b` `ASM2 |- c = d` `` gives
+`` `ASM1+ASM2 |- a \/ c = b \/ d` ``.
 
+```ocaml
 let MK_FORALL =
   let atm = mk_const("!",[]) in
   fun v th -> AP_TERM (inst [type_of v,aty] atm) (ABS v th);;
+```
+`` MK_FORALL `x` `ASM |- a = b` `` gives `` `ASM |- (!x.a) = (!x.b)` ``.
 
+```ocaml
 let MK_EXISTS =
   let atm = mk_const("?",[]) in
   fun v th -> AP_TERM (inst [type_of v,aty] atm) (ABS v th);;
+```
+`` MK_EXISTS `x` `ASM |- a = b` `` gives `` `ASM |- (?x.a) = (?x.b)` ``.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Eliminate the antecedent of a theorem using a conversion/proof rule.      *)
 (* ------------------------------------------------------------------------- *)
@@ -60,7 +74,11 @@ let rec BETAS_CONV tm =
     Comb(Abs(_,_),_) -> BETA_CONV tm
   | Comb(Comb(_,_),_) -> (RATOR_CONV BETAS_CONV THENC BETA_CONV) tm
   | _ -> failwith "BETAS_CONV";;
+```
+BETAS_CONV (n:int) is a conversion which rewrites with BETA_CONV n times.
+(so BETAS_CONV 3 rewrites `(\x y z.P[x,y,z]) a b c` to `P[a,b,c]`)
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Instantiators.                                                            *)
 (* ------------------------------------------------------------------------- *)
@@ -129,7 +147,11 @@ let (INSTANTIATE : instantiation->thm->thm) =
           EQ_MP eth tth
       with Failure _ -> tth
     else failwith "INSTANTIATE: term || type var free in assumptions";;
+```
+`INSTANTIATE` takes an "instantiation" and a theorem and instantiates the
+theorem.  (I haven't figured out yet what an "instantiation" is.)
 
+```ocaml
 let (INSTANTIATE_ALL : instantiation->thm->thm) =
   fun ((_,tmin,tyin) as i) th ->
     if tmin = [] && tyin = [] then th else
@@ -149,7 +171,10 @@ let (INSTANTIATE_ALL : instantiation->thm->thm) =
     let th1 = rev_itlist DISCH rhyps th in
     let th2 = INSTANTIATE i th1 in
     funpow (length rhyps) UNDISCH th2;;
+```
+`INSTANTIATE_ALL` has the same type as `INSTANTIATE`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Higher order matching of terms.                                           *)
 (*                                                                           *)
@@ -158,7 +183,17 @@ let (INSTANTIATE_ALL : instantiation->thm->thm) =
 (* anyway. A test could be put in (see if any "env" variables are left in    *)
 (* the term after abstracting out the pattern instances) but it'd be slower. *)
 (* ------------------------------------------------------------------------- *)
+```
+For the rest of the file, I will treat `@` as a metavariable for an
+instantiation (written postfix).  For instance, I may mention the terms
+`` `a ==> b` ``, `` `a@` ``, and `` `b@` ``; this means that
+`` `a@ ==> b@` `` is an instantiation of `` `a ==> b` ``.
 
+In some cases where I use this notation, universal quantification is allowed;
+that is, where I mention terms `` `a` `` and `` `a@` ``, the implementation
+would allow `` `!x. P[x]` `` and `` `P[b]` ``.
+
+```ocaml
 let (term_match:term list -> term -> term -> instantiation) =
   let safe_inserta ((y,x) as n) l =
     try let z = rev_assoc x l in
@@ -376,6 +411,11 @@ let PART_MATCH,GEN_PART_MATCH =
       if Pervasives.compare tm' tm = 0 then fth else
       try SUBS[ALPHA tm' tm] fth
       with Failure _ -> failwith "PART_MATCH: Sanity check failure"
+```
+`PART_MATCH partfn th tm` matches `(partfn (concl (SPEC_ALL th)))` against `tm`
+and instantiates the theorem appropriately.
+
+```ocaml
   and GEN_PART_MATCH partfn th =
     let sth = SPEC_ALL th in
     let bod = concl sth in
@@ -414,7 +454,11 @@ let MATCH_MP ith =
   let match_fun = PART_MATCH (fst o dest_imp) sth in
   fun th -> try MP (match_fun (concl th)) th
             with Failure _ -> failwith "MATCH_MP: No match";;
+```
+`MATCH_MP ith th` is like MP, except it uses matching instead of requiring an
+exact match.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Useful instance of more general higher order matching.                    *)
 (* ------------------------------------------------------------------------- *)
@@ -465,7 +509,13 @@ let HIGHER_REWRITE_CONV =
       let abs = mk_abs(gv,subst[gv,stm] tm) in
       let _,tmin0,tyin0 = term_match [] pred abs in
       CONV_RULE beta_fn (INST tmin (INST tmin0 (INST_TYPE tyin0 th)));;
+```
+`HIGHER_REWRITE_CONV ths top`:
+A conversion which finds the first largest (if `top` = true) or smallest
+(if `top` == false) subterm which matches (using higher-order matching) a lhs of
+a conclusion in `ths`, and rewrites it.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Derived principle of definition justifying |- c x1 .. xn = t[x1,..,xn]    *)
 (* ------------------------------------------------------------------------- *)
