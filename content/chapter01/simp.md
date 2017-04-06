@@ -554,10 +554,16 @@ let ABBREV_TAC tm =
                 PURE_ONCE_REWRITE_TAC[th] THEN
                 ASSUME_TAC th)
      th3 gl;;
+```
+`` ABBREV_TAC `x = a` `` rewrites `a` to `x` in the goal and all assumptions,
+then adds `a = x` as a new assumption.
 
+```ocaml
 let EXPAND_TAC s = FIRST_ASSUM(SUBST1_TAC o SYM o
   check((=) s o fst o dest_var o rhs o concl)) THEN BETA_TAC;;
 ```
+`` EXPAND_TAC `x` `` finds the first assumption of the form `a = x`, rewrites
+`x` to `a` in the goal, and beta-reduces the goal.
 
 - Previous: [itab.ml](itab.md)
 - [Index](index.md)

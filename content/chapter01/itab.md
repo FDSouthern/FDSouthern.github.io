@@ -63,7 +63,17 @@ let ITAUT_TAC =
     remark ("Searching with limit "^(string_of_int n));
     ((ITAUT_TAC [] n THEN NO_TAC) ORELSE ITAUT_ITERDEEP_TAC (n + 1)) gl in
   ITAUT_ITERDEEP_TAC 0;;
+```
+`ITAUT_TAC` understands `AND`, `FORALL`, `IMPLIES`, `NOT`, `IFF`
+(boolean equality), `OR`, `EXISTS`, `T`, and `F`.  It applies a long list of
+rules dealing with the above types of terms until it runs out of rules to apply
+or proves the theorem.  It either succeeds or leaves the goal state unchanged.
 
+`` ITAUT `a` `` gives `` `|- a` `` if `ITAUT` can prove it.
+
+`` CONTRAPOS `|- a ==> b` `` gives `` `|- ~b ==> ~a` ``.
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Alternative interface.                                                    *)
 (* ------------------------------------------------------------------------- *)

@@ -159,78 +159,173 @@ let (THEN),(THENL) =
       if gls = [] then tacsequence gstate []
       else tacsequence gstate tac2l in
   then_,thenl_;;
+```
+`tac1 THEN tac2` means apply `tac1`, then apply `tac2` to all subgoals created.
 
+`t THENL [t1;t2;...;tn]` means apply `t`, then apply `t1` to the first subgoal,
+..., `tn` to the last subgoal (there must be exactly n subgoals).
+
+```ocaml
 let ((ORELSE): tactic -> tactic -> tactic) =
   fun tac1 tac2 g ->
     try tac1 g with Failure _ -> tac2 g;;
+```
+`tac1 ORELSE tac2` means apply `tac1`; if it fails, apply `tac2`.
 
+```ocaml
 let (FAIL_TAC: string -> tactic) =
   fun tok g -> failwith tok;;
+```
+`FAIL_TAC s` is a tactic which always fails (with error message `s`).
 
+```ocaml
 let (NO_TAC: tactic) =
   FAIL_TAC "NO_TAC";;
+```
+`NO_TAC` is a tactic which always fails.
 
+```ocaml
 let (ALL_TAC:tactic) =
   fun g -> null_meta,[g],fun _ [th] -> th;;
+```
+`ALL_TAC` is a tactic which does nothing (the identity tactic).
 
+```ocaml
 let TRY tac =
   tac ORELSE ALL_TAC;;
+```
+`TRY tac` is `tac ORELSE ALL_TAC`.
 
+```ocaml
 let rec REPEAT tac g =
   ((tac THEN REPEAT tac) ORELSE ALL_TAC) g;;
+```
+`REPEAT tac` means apply `t`, then apply it again to all subgoals, etc.; until
+it fails.
 
+```ocaml
 let EVERY tacl =
   itlist (fun t1 t2 -> t1 THEN t2) tacl ALL_TAC;;
+```
+`EVERY [t1;...;tn]` is equivalent to `t1 THEN ... THEN tn`
 
+```ocaml
 let (FIRST: tactic list -> tactic) =
   fun tacl g -> end_itlist (fun t1 t2 -> t1 ORELSE t2) tacl g;;
+```
+`FIRST [t1;...;tn]` is equivalent to `t1 ORELSE ... ORELSE tn`.
 
+```ocaml
 let MAP_EVERY tacf lst =
   EVERY (map tacf lst);;
+```
+`MAP_EVERY tacf [x1;...;xn]` is equivalent to `tacf x1 THEN ... THEN tacf xn`.
 
+```ocaml
 let MAP_FIRST tacf lst =
   FIRST (map tacf lst);;
+```
+`MAP_FIRST tacf [x1;...;xn]` is equivalent to
+`tacf x1 ORELSE ... ORELSE tacf xn`.
 
+```ocaml
 let (CHANGED_TAC: tactic -> tactic) =
   fun tac g ->
     let (meta,gl,_ as gstate) = tac g in
     if meta = null_meta && length gl = 1 && equals_goal (hd gl) g
     then failwith "CHANGED_TAC" else gstate;;
+```
+`CHANGED_TAC tac` means apply `tac`; fail if the result is a single subgoal
+which is equal to the original goal (warning: does not use alpha-equivalence!).
 
+```ocaml
 let rec REPLICATE_TAC n tac =
   if n <= 0 then ALL_TAC else tac THEN (REPLICATE_TAC (n - 1) tac);;
 
 (* ------------------------------------------------------------------------- *)
 (* Combinators for theorem continuations / "theorem tacticals".              *)
 (* ------------------------------------------------------------------------- *)
+```
+A "theorem tactic" is a function from theorems to tactics.
+A "theorem tactical" is a function from theorem tactics to theorem tactics.
+Equivalently: a theorem tactical is a function from theorem tactics
+and theorems to tactics.
 
+In other words, a theorem tactic takes a theorem and does something
+to the current goal using that theorem.
+
+A theorem tactical takes a theorem tactic and a theorem and does something
+to the current goal.  Typically, it will preprocess the theorem somehow
+before handing the result to the theorem tactic.  (In fact, the
+tactical may apply the theorem tactic multiple times, sequentially
+or in parallel (in different subgoals).)
+
+The functions in this section manipulate theorem tacticals.
+I will write out pseudo-definitions of these functions that pretend
+that a theorem tactical is a function from theorems to theorems which
+happens to side-effect the goal; remember that the actual type is
+very different from this.
+
+```ocaml
 let ((THEN_TCL): thm_tactical -> thm_tactical -> thm_tactical) =
   fun ttcl1 ttcl2 ttac -> ttcl1 (ttcl2 ttac);;
+```
+`(thtc1 THEN_TCL thtc2) tht th` is equivalent to `tht (thtc1 (thtc2 th))`.
 
+```ocaml
 let ((ORELSE_TCL): thm_tactical -> thm_tactical -> thm_tactical) =
   fun ttcl1 ttcl2 ttac th ->
     try ttcl1 ttac th with Failure _ -> ttcl2 ttac th;;
+```
+`(thtc1 ORELSE_TCL thtc2) tht th` is equivalent to
+`(tht (thtc1 th)) ORELSE (tht (thtc2 th))`.
 
+```ocaml
 let rec REPEAT_TCL ttcl ttac th =
   ((ttcl THEN_TCL (REPEAT_TCL ttcl)) ORELSE_TCL I) ttac th;;
+```
+`REPEAT_TCL thtc` is equivalent to
+`(thtc THEN_TCL (REPEAT_TCL thtc)) ORELSE_TCL ALL_THEN`.
 
+```ocaml
 let (REPEAT_GTCL: thm_tactical -> thm_tactical) =
   let rec REPEAT_GTCL ttcl ttac th g =
     try ttcl (REPEAT_GTCL ttcl ttac) th g with Failure _ -> ttac th g in
   REPEAT_GTCL;;
+```
+`REPEAT_GTCL` ???
+I don't understand how `REPEAT_GTCL` is different from `REPEAT_TCL`.
+Fortunately, `REPEAT_GTCL` is never used, so it can't be very important :-)
 
+```ocaml
 let (ALL_THEN: thm_tactical) =
   I;;
+```
+`ALL_THEN` is equivalent to `I`.
+(`ALL_THEN` is the theorem tactical which does nothing to the theorem
+before handing it to the theorem tactic.)
 
+```ocaml
 let (NO_THEN: thm_tactical) =
   fun ttac th -> failwith "NO_THEN";;
+```
+`NO_THEN` is the theorem tactical which always fails.
 
+```ocaml
 let EVERY_TCL ttcll =
   itlist (fun t1 t2 -> t1 THEN_TCL t2) ttcll ALL_THEN;;
+```
+`EVERY_TCL [thtc1;...;thtcn]` is equivalent to
+`thtc1 THEN_TCL ... THEN_TCL thtcn`.
 
+```ocaml
 let FIRST_TCL ttcll =
   end_itlist (fun t1 t2 -> t1 ORELSE_TCL t2) ttcll;;
+```
+`FIRST_TCL [thtc1;...;thtcn]` is equivalent to
+`thtc1 ORELSE_TCL ... ORELSE_TCL thtcn`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Tactics to augment assumption list. Note that to allow "ASSUME p" for     *)
 (* any assumption "p", these add a PROVE_HYP in the justification function,  *)
@@ -241,7 +336,11 @@ let (LABEL_TAC: string -> thm_tactic) =
   fun s thm (asl,w) ->
     null_meta,[(s,thm)::asl,w],
     fun i [th] -> PROVE_HYP (INSTANTIATE_ALL i thm) th;;
+```
+`LABEL_TAC s th` adds `th` as a new assumption, with label `s`.
+(Assumes that any hypotheses of `th` are also hypotheses of the goal.)
 
+```ocaml
 let ASSUME_TAC = LABEL_TAC "";;
 
 (* ------------------------------------------------------------------------- *)
@@ -251,29 +350,57 @@ let ASSUME_TAC = LABEL_TAC "";;
 let (FIND_ASSUM: thm_tactic -> term -> tactic) =
   fun ttac t ((asl,w) as g) ->
     ttac(snd(find (fun (_,th) -> concl th = t) asl)) g;;
+```
+`FIND_ASSUM tht tm` finds the first assumption whose conclusion is equal (not
+alpha-equivalent!) to `tm` (call this assumption `th`) and applies tactic
+`(tht th)`.
 
+```ocaml
 let (POP_ASSUM: thm_tactic -> tactic) =
   fun ttac ->
    function (((_,th)::asl),w) -> ttac th (asl,w)
     | _ -> failwith "POP_ASSUM: No assumption to pop";;
+```
+`POP_ASSUM tht` removes the first (most recently added) assumption (call it
+`th`) from assumption list, and applies tactic `(tht th)`.
 
+```ocaml
 let (ASSUM_LIST: (thm list -> tactic) -> tactic) =
     fun aslfun (asl,w) -> aslfun (map snd asl) (asl,w);;
+```
+`ASSUM_LIST thlt` applies the tactic `(thlt thl)`, where `thl` is the list of
+assumptions.
 
+```ocaml
 let (POP_ASSUM_LIST: (thm list -> tactic) -> tactic) =
   fun asltac (asl,w) -> asltac (map snd asl) ([],w);;
 
+```
+`POP_ASSUM_LIST thlt` applies tactic `(thlt thl)` after removing all
+assumptions, where `thl` is the list of assumptions.
+
+```ocaml
 let (EVERY_ASSUM: thm_tactic -> tactic) =
   fun ttac -> ASSUM_LIST (MAP_EVERY ttac);;
+```
+`EVERY_ASSUM tht` is `ASSUM_LIST (MAP_EVERY tht)`.
 
+```ocaml
 let (FIRST_ASSUM: thm_tactic -> tactic) =
   fun ttac (asl,w as g) -> tryfind (fun (_,th) -> ttac th g) asl;;
+```
+`FIRST_ASSUM tht` is equivalent to `ASSUM_LIST (MAP_FIRST tht)`.
 
+```ocaml
 let (RULE_ASSUM_TAC :(thm->thm)->tactic) =
   fun rule (asl,w) -> (POP_ASSUM_LIST(K ALL_TAC) THEN
                        MAP_EVERY (fun (s,th) -> LABEL_TAC s (rule th))
                                  (rev asl)) (asl,w);;
+```
+`RULE_ASSUM_TAC thth` replaces every assumption with `thth` applied to that
+assumption.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Operate on assumption identified by a label.                              *)
 (* ------------------------------------------------------------------------- *)
@@ -283,7 +410,11 @@ let (USE_THEN:string->thm_tactic->tactic) =
     let th = try assoc s asl with Failure _ ->
              failwith("USE_TAC: didn't find assumption "^s) in
     ttac th gl;;
+```
+`USE_THEN s tht` finds the first assumption with label `s`
+(call this assumption `th`) and applies tactic `(tht th)`.
 
+```ocaml
 let (REMOVE_THEN:string->thm_tactic->tactic) =
   fun s ttac (asl,w) ->
     let th = try assoc s asl with Failure _ ->
@@ -300,7 +431,11 @@ let (REMOVE_THEN:string->thm_tactic->tactic) =
 
 let (ASM :(thm list -> tactic)->(thm list -> tactic)) =
   fun tltac ths (asl,w as g) -> tltac (map snd asl @ ths) g;;
+```
+`ASM thlt thl` applies tactic `(thlt (asm @ thl))`, where `asm` is the list of
+assumptions.
 
+```ocaml
 let HYP =
   let ident = function
       Ident s::rest when isalnum s -> s,rest
@@ -322,7 +457,11 @@ let (ACCEPT_TAC: thm_tactic) =
     if aconv (concl th) w then
       null_meta,[],propagate_thm th
     else failwith "ACCEPT_TAC";;
+```
+`ACCEPT_TAC th` is a tactic which solves the current goal, assuming the
+conclusion of `th` is alpha-equivalent to the goal.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Create tactic from a conversion. This allows the conversion to return     *)
 (* |- p rather than |- p = T on a term "p". It also eliminates any goals of  *)
@@ -340,7 +479,12 @@ let (CONV_TAC: conv -> tactic) =
     if r = t_tm then ACCEPT_TAC(EQT_ELIM th) g else
     let th' = SYM th in
     null_meta,[asl,r],fun i [th] -> EQ_MP (INSTANTIATE_ALL i th') th;;
+```
+`CONV_TAC c` creates a tactic from a conversion. This allows the conversion to
+return `|- p` rather than `|- p = T` on a term `p`. It also eliminates any goals
+of the form `T` automatically.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Tactics for equality reasoning.                                           *)
 (* ------------------------------------------------------------------------- *)
@@ -349,7 +493,10 @@ let (REFL_TAC: tactic) =
   fun ((asl,w) as g) ->
     try ACCEPT_TAC(REFL(rand w)) g
     with Failure _ -> failwith "REFL_TAC";;
+```
+`REFL_TAC` accepts if the current goal is of the form `` `a = a` ``.
 
+```ocaml
 let (ABS_TAC: tactic) =
   fun (asl,w) ->
     try let l,r = dest_eq w in
@@ -361,7 +508,10 @@ let (ABS_TAC: tactic) =
         fun i [th] -> let ath = ABS v th in
                       EQ_MP (ALPHA (concl ath) (instantiate i w)) ath
     with Failure _ -> failwith "ABS_TAC";;
+```
+`ABS_TAC` converts goal `` `(\x. a) = (\x. b)` `` to `` `a = b` ``.
 
+```ocaml
 let (MK_COMB_TAC: tactic) =
   fun (asl,gl) ->
     try let l,r = dest_eq gl in
@@ -370,27 +520,51 @@ let (MK_COMB_TAC: tactic) =
         null_meta,[asl,mk_eq(f,g); asl,mk_eq(x,y)],
         fun _ [th1;th2] -> MK_COMB(th1,th2)
     with Failure _ -> failwith "MK_COMB_TAC";;
+```
+`MK_COMB_TAC` converts goal `` `f a = g b` `` to `` `f = g` `` and
+`` `a = b` `` .
 
+```ocaml
 let (AP_TERM_TAC: tactic) =
   let tac = MK_COMB_TAC THENL [REFL_TAC; ALL_TAC] in
   fun gl -> try tac gl with Failure _ -> failwith "AP_TERM_TAC";;
+```
+`AP_TERM_TAC` converts goal `` `f a = f b` `` to `` `a = b` ``.
 
+```ocaml
 let (AP_THM_TAC: tactic) =
   let tac = MK_COMB_TAC THENL [ALL_TAC; REFL_TAC] in
   fun gl -> try tac gl with Failure _ -> failwith "AP_THM_TAC";;
+```
+`AP_THM_TAC` converts goal `` `f a = g a` `` to `` `f = g` ``.
 
+```ocaml
 let (BINOP_TAC: tactic) =
   let tac = MK_COMB_TAC THENL [AP_TERM_TAC; ALL_TAC] in
   fun gl -> try tac gl with Failure _ -> failwith "AP_THM_TAC";;
+```
+`BINOP_TAC` converts goal `` `f a b = f c d` `` to `` `a = c` `` and
+`` `b = d` ``.
 
+```ocaml
 let (SUBST1_TAC: thm_tactic) =
   fun th -> CONV_TAC(SUBS_CONV [th]);;
+```
+`` SUBST1_TAC `|- a = b` `` converts goal `` `P[a]` `` to `` `P[b]` ``.
 
+```ocaml
 let SUBST_ALL_TAC rth =
   SUBST1_TAC rth THEN RULE_ASSUM_TAC (SUBS [rth]);;
+```
+`` SUBST_ALL_TAC `|- a = b` ` rewrites `` `a` `` to `` `b` `` in goal and all
+assumptions.
 
+```ocaml
 let BETA_TAC = CONV_TAC(REDEPTH_CONV BETA_CONV);;
+```
+`BETA_TAC` performs all possible beta-reductions in goal.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Just use an equation to substitute if possible and uninstantiable.        *)
 (* ------------------------------------------------------------------------- *)
@@ -424,19 +598,30 @@ let (DISCH_TAC: tactic) =
         null_meta,[("",th1)::asl,f_tm],
         fun i [th] -> NOT_INTRO(DISCH (instantiate i ant) th)
     with Failure _ -> failwith "DISCH_TAC";;
+```
+`DISCH_TAC` converts goal `` `a ==> b` `` to `` `b` `` and adds `` `a` `` as a
+new assumption. (It treats goal `` `~a` `` as `` `a ==> F` ``.)
 
+```ocaml
 let (MP_TAC: thm_tactic) =
   fun thm (asl,w) ->
     null_meta,[asl,mk_imp(concl thm,w)],
     fun i [th] -> MP th (INSTANTIATE_ALL i thm);;
+```
+`` MP_TAC `|- a` `` converts goal `` `b` `` to `` `a ==> b` ``.
 
+```ocaml
 let (EQ_TAC: tactic) =
   fun (asl,w) ->
     try let l,r = dest_eq w in
         null_meta,[asl, mk_imp(l,r); asl, mk_imp(r,l)],
         fun _ [th1; th2] -> IMP_ANTISYM_RULE th1 th2
     with Failure _ -> failwith "EQ_TAC";;
+```
+`EQ_TAC` converts goal `` `(a:bool) = b` `` to `` `a ==> b` `` and
+`` `b ==> a` ``.
 
+```ocaml
 let (UNDISCH_TAC: term -> tactic) =
  fun tm (asl,w) ->
    try let sthm,asl' = remove (fun (_,asm) -> aconv (concl asm) tm) asl in
@@ -444,13 +629,21 @@ let (UNDISCH_TAC: term -> tactic) =
        null_meta,[asl',mk_imp(tm,w)],
        fun i [th] -> MP th (INSTANTIATE_ALL i thm)
    with Failure _ -> failwith "UNDISCH_TAC";;
+```
+`` UNDISCH_TAC `a` `` finds an assumption with a conclusion alpha-equivalent to
+`` `a` ``, removes this assumption, and converts goal `` `b` `` to
+`` `a ==> b` ``.
 
+```ocaml
 let (SPEC_TAC: term * term -> tactic) =
   fun (t,x) (asl,w) ->
     try null_meta,[asl, mk_forall(x,subst[x,t] w)],
         fun i [th] -> SPEC (instantiate i t) th
     with Failure _ -> failwith "SPEC_TAC";;
+```
+`` SPEC_TAC (`x`,`a`) `` converts goal `` `P[a]` `` to `` `!x. P[x]` ``.
 
+```ocaml
 let (X_GEN_TAC: term -> tactic),
     (X_CHOOSE_TAC: term -> thm_tactic),
     (EXISTS_TAC: term -> tactic) =
@@ -490,7 +683,14 @@ let (X_GEN_TAC: term -> tactic),
     null_meta,[asl,vsubst[t,v] bod],
     fun i [th] -> EXISTS (instantiate i w,instantiate i t) th in
   X_GEN_TAC,X_CHOOSE_TAC,EXISTS_TAC;;
+```
+`` X_GEN_TAC `x` `` converts a goal `` `!y. P[y]` `` to `` `P[x]` ``.
 
+`` X_CHOOSE_TAC `x` `|- ?y. P[y]` `` adds a new assumption `` `P[x]` ``.
+
+`` EXISTS_TAC `a` `` converts a goal `` `?x. P[x]` `` to `` `P[a]` ``.
+
+```ocaml
 let (GEN_TAC: tactic) =
   fun (asl,w) ->
     try let x = fst(dest_forall w) in
@@ -498,7 +698,10 @@ let (GEN_TAC: tactic) =
         let x' = mk_primed_var avoids x in
         X_GEN_TAC x' (asl,w)
     with Failure _ -> failwith "GEN_TAC";;
+```
+``GEN_TAC`` converts a goal `` `!x. P[x]` `` to `` `P[x]` ``.
 
+```ocaml
 let (CHOOSE_TAC: thm_tactic) =
   fun xth ->
     try let x = fst(dest_exists(concl xth)) in
@@ -508,25 +711,37 @@ let (CHOOSE_TAC: thm_tactic) =
           let x' = mk_primed_var avoids x in
           X_CHOOSE_TAC x' xth (asl,w)
       with Failure _ -> failwith "CHOOSE_TAC";;
+```
+`` CHOOSE_TAC `|- ?x. P[x]` `` adds a new assumption `` `P[x]` ``.
 
+```ocaml
 let (CONJ_TAC: tactic) =
   fun (asl,w) ->
     try let l,r = dest_conj w in
         null_meta,[asl,l; asl,r],fun _ [th1;th2] -> CONJ th1 th2
     with Failure _ -> failwith "CONJ_TAC";;
+```
+`CONJ_TAC` converts a goal `` `a /\ b` `` to `` `a` `` and `` `b` ``.
 
+```ocaml
 let (DISJ1_TAC: tactic) =
   fun (asl,w) ->
     try let l,r = dest_disj w in
         null_meta,[asl,l],fun i [th] -> DISJ1 th (instantiate i r)
     with Failure _ -> failwith "DISJ1_TAC";;
+```
+`DISJ1_TAC` converts a goal `` `a \/ b` `` to `` `a` ``.
 
+```ocaml
 let (DISJ2_TAC: tactic) =
   fun (asl,w) ->
     try let l,r = dest_disj w in
           null_meta,[asl,r],fun i [th] -> DISJ2 (instantiate i l) th
     with Failure _ -> failwith "DISJ2_TAC";;
+```
+`DISJ2_TAC` converts a goal `` `a \/ b` `` to `` `b` ``.
 
+```ocaml
 let (DISJ_CASES_TAC: thm_tactic) =
   fun dth ->
     try let dtm = concl dth in
@@ -537,14 +752,21 @@ let (DISJ_CASES_TAC: thm_tactic) =
           null_meta,[("",thl)::asl,w; ("",thr)::asl,w],
           fun i [th1;th2] -> DISJ_CASES (INSTANTIATE_ALL i dth) th1 th2
     with Failure _ -> failwith "DISJ_CASES_TAC";;
+```
+`` DISJ_CASES_TAC `|- a \/ b` `` creates two subgoals and adds assumption
+`` `a` `` in one subgoal, `` `b` `` in the other.
 
+```ocaml
 let (CONTR_TAC: thm_tactic) =
   let propagate_thm th i [] = INSTANTIATE_ALL i th in
   fun cth (asl,w) ->
     try let th = CONTR w cth in
         null_meta,[],propagate_thm th
     with Failure _ -> failwith "CONTR_TAC";;
+```
+`` CONTR_TAC `|- F` `` accepts the goal.
 
+```ocaml
 let (MATCH_ACCEPT_TAC:thm_tactic) =
   let propagate_thm th i [] = INSTANTIATE_ALL i th in
   let rawtac th (asl,w) =
@@ -552,7 +774,11 @@ let (MATCH_ACCEPT_TAC:thm_tactic) =
         null_meta,[],propagate_thm ith
     with Failure _ -> failwith "ACCEPT_TAC" in
   fun th -> REPEAT GEN_TAC THEN rawtac th;;
+```
+`` MATCH_ACCEPT_TAC `|- a` `` first applies `(REPEAT GEN_TAC)`, then accepts if
+the conclusion is an instance of `` `a` ``.
 
+```ocaml
 let (MATCH_MP_TAC :thm_tactic) =
   fun th ->
     let sth =
@@ -573,7 +799,10 @@ let (MATCH_MP_TAC :thm_tactic) =
                        null_meta,[asl,lant],
                        fun i [th] -> MP (INSTANTIATE_ALL i xth) th
                    with Failure _ -> failwith "MATCH_MP_TAC: No match";;
+```
+`` MATCH_MP_TAC `|- a ==> b` `` converts a goal `` `b@` `` into `` `a@` ``.
 
+```ocaml
 let (TRANS_TAC:thm->term->tactic) =
   fun th ->
     let ctm = snd(strip_forall(concl th)) in
@@ -599,33 +828,63 @@ let (CONJUNCTS_THEN2:thm_tactic->thm_tactic->thm_tactic) =
                   let th1,th2 = CONJ_PAIR(INSTANTIATE_ALL i cth) in
                   PROVE_HYP th1 (PROVE_HYP th2 (jfn i ths)) in
                 ti,gls,jfn';;
+```
+`` CONJUNCTS_THEN2 tht1 tht2 `|- a /\ b` `` applies tactic
+`` (tht1 `|- a`) THEN (tht2 `|- b`) ``.
 
+```ocaml
 let (CONJUNCTS_THEN: thm_tactical) =
   W CONJUNCTS_THEN2;;
+```
+`` CONJUNCTS_THEN tht `|- a /\ b` `` applies tactic
+`` (tht `|- a`) THEN (tht `|- b`) ``.
 
+```ocaml
 let (DISJ_CASES_THEN2:thm_tactic->thm_tactic->thm_tactic) =
   fun ttac1 ttac2 cth ->
     DISJ_CASES_TAC cth THENL [POP_ASSUM ttac1; POP_ASSUM ttac2];;
+```
+`` DISJ_CASES_THEN2 tht1 tht2 `|- a \/ b` `` generates two subgoals and applies
+`` (tht1 `|- a`) `` to one subgoal, `` (tht2 `|- b`) `` to the other.
 
+```ocaml
 let (DISJ_CASES_THEN: thm_tactical) =
   W DISJ_CASES_THEN2;;
+```
+`` DISJ_CASES_THEN tht `|- a \/ b` `` generates two subgoals and applies
+`` (tht `|- a`) `` to one subgoal, `` (tht `|- b`) `` to the other.
 
+```ocaml
 let (DISCH_THEN: thm_tactic -> tactic) =
   fun ttac -> DISCH_TAC THEN POP_ASSUM ttac;;
+```
+`DISCH_THEN tht` converts a goal `` `a ==> b` `` to `` `b` ``, then applies
+tactic `` (tht `|- a`) ``. (It treats `` `~a` `` as `` `a ==> F` ``.)
 
+```ocaml
 let (X_CHOOSE_THEN: term -> thm_tactical) =
   fun x ttac th -> X_CHOOSE_TAC x th THEN POP_ASSUM ttac;;
+```
+`` X_CHOOSE_THEN `x` tht `|- ?y. P[y]` `` applies tactic `` (tht `|- P[x]`) ``.
 
+```ocaml
 let (CHOOSE_THEN: thm_tactical) =
   fun ttac th -> CHOOSE_TAC th THEN POP_ASSUM ttac;;
+```
+`` CHOOSE_THEN tht `|- ?x. P[x]` `` applies tactic `` (tht `|- P[x]`) ``.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Various derived tactics and theorem continuations.                        *)
 (* ------------------------------------------------------------------------- *)
 
 let STRIP_THM_THEN =
   FIRST_TCL [CONJUNCTS_THEN; DISJ_CASES_THEN; CHOOSE_THEN];;
+```
+`STRIP_THM_THEN` acts like `CONJUNCTS_THEN`, `DISJ_CASES_THEN`, or `CHOOSE_THEN`
+depending on whether the theorem is a conjunction, disjunction, or existial.
 
+```ocaml
 let (ANTE_RES_THEN: thm_tactical) =
   fun ttac ante ->
     ASSUM_LIST
@@ -633,7 +892,11 @@ let (ANTE_RES_THEN: thm_tactical) =
         let tacs = mapfilter (fun imp -> ttac (MATCH_MP imp ante)) asl in
         if tacs = [] then failwith "IMP_RES_THEN"
         else EVERY tacs);;
+```
+`` ANTE_RES_THEN tht `|- a@` `` applies tactic `` (tht `|- b@`) `` for every
+assumption `` `|- a ==> b` ``.
 
+```ocaml
 let (IMP_RES_THEN: thm_tactical) =
   fun ttac imp ->
     ASSUM_LIST
@@ -641,7 +904,11 @@ let (IMP_RES_THEN: thm_tactical) =
         let tacs = mapfilter (fun ante -> ttac (MATCH_MP imp ante)) asl in
         if tacs = [] then failwith "IMP_RES_THEN"
         else EVERY tacs);;
+```
+`` IMP_RES_THEN tht `|- a ==> b` `` applies tactic `` (tht `|- b@`) `` for every
+assumption `` `|- a@` ``.
 
+```ocaml
 let STRIP_ASSUME_TAC =
   let DISCARD_TAC th =
     let tm = concl th in
@@ -651,27 +918,54 @@ let STRIP_ASSUME_TAC =
   (REPEAT_TCL STRIP_THM_THEN)
   (fun gth -> FIRST [CONTR_TAC gth; ACCEPT_TAC gth;
                      DISCARD_TAC gth; ASSUME_TAC gth]);;
+```
+`STRIP_ASSUME_TAC th` starts with `(REPEAT_TCL STRIP_THM_THEN)` applied to `th`
+(call the resulting theorem(s) `gth`), then if `gth` is `` `F` ``, or equal to
+the goal, then solve the goal; if `gth` is already an assumption, do nothing;
+otherwise, add `gth` as an assumption.
 
+```ocaml
 let STRUCT_CASES_THEN ttac = REPEAT_TCL STRIP_THM_THEN ttac;;
 
 let STRUCT_CASES_TAC = STRUCT_CASES_THEN
      (fun th -> SUBST1_TAC th ORELSE ASSUME_TAC th);;
+```
+`STRUCT_CASES_TAC th` starts with `(REPEAT_TCL STRIP_THM_THEN)` applied to `th`
+(call the resulting theorem(s) `gth`), then if `gth` is an equality, use it to
+rewrite the goal; otherwise, add `gth` as an assumption.
 
+```ocaml
 let STRIP_GOAL_THEN ttac =  FIRST [GEN_TAC; CONJ_TAC; DISCH_THEN ttac];;
+```
+`STRIP_GOAL_THEN tht`:  If the current goal is a universal, then generalise;
+if it is a conjunction, prove the two cases separately; if it is an implication
+`` `a ==> b` `` then convert to `` `b` `` and apply `` (tht `a`) ``.
 
+```ocaml
 let (STRIP_TAC: tactic) =
   fun g ->
     try STRIP_GOAL_THEN STRIP_ASSUME_TAC g
     with Failure _ -> failwith "STRIP_TAC";;
+```
+`STRIP_TAC` is equivalent to `STRIP_GOAL_THEN STRIP_ASSUME_TAC`.
 
+```ocaml
 let (UNDISCH_THEN:term->thm_tactic->tactic) =
   fun tm ttac (asl,w) ->
     let thp,asl' = remove (fun (_,th) -> aconv (concl th) tm) asl in
     ttac (snd thp) (asl',w);;
+```
+`` UNDISCH_THEN `a` tht `` finds an assumption `|- a`, removes the assumption,
+and applies the tactic `` (tht `|- a`) ``.
 
+```ocaml
 let FIRST_X_ASSUM ttac =
     FIRST_ASSUM(fun th -> UNDISCH_THEN (concl th) ttac);;
+```
+`FIRST_X_ASSUM tht` is like `FIRST_ASSUM`, but it removes the assumption
+successfully used by the tactic.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Subgoaling and freezing variables (latter is especially useful now).      *)
 (* ------------------------------------------------------------------------- *)
@@ -680,7 +974,11 @@ let (SUBGOAL_THEN: term -> thm_tactic -> tactic) =
   fun wa ttac (asl,w) ->
     let meta,gl,just = ttac (ASSUME wa) (asl,w) in
     meta,(asl,wa)::gl,fun i l -> PROVE_HYP (hd l) (just i (tl l));;
+```
+`` SUBGOAL_THEN `a` tht `` creates two subgoals:  In the first, changes the goal
+to `a`, and in the second, applies the tactic `` (tht `|- a`) ``.
 
+```ocaml
 let SUBGOAL_TAC s tm prfs =
   match prfs with
    p::ps -> (warn (ps <> []) "SUBGOAL_TAC: additional subproofs ignored";
@@ -691,7 +989,12 @@ let (FREEZE_THEN :thm_tactical) =
   fun ttac th (asl,w) ->
     let meta,gl,just = ttac (ASSUME(concl th)) (asl,w) in
     meta,gl,fun i l -> PROVE_HYP th (just i l);;
+```
+`` FREEZE_THEN tht `|- a` `` applies the tactic `` (tht `|- a`) ``
+(while "freezing variables"?  Does this have something to do with metavariables?
+I don't understand this...).
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Metavariable tactics.                                                     *)
 (* ------------------------------------------------------------------------- *)
@@ -703,32 +1006,52 @@ let (X_META_EXISTS_TAC: term -> tactic) =
         ([t],null_inst),[asl,vsubst[t,v] bod],
         fun i [th] -> EXISTS (instantiate i w,instantiate i t) th
     with Failure _ -> failwith "X_META_EXISTS_TAC";;
+```
+`` X_META_EXISTS_TAC `x` `` converts goal `?y. P[y]` to `P[x]`, where `x` is a
+metavariable.
 
+```ocaml
 let META_EXISTS_TAC ((asl,w) as gl) =
   let v = fst(dest_exists w) in
   let avoids = itlist (union o frees o concl o snd) asl (frees w) in
   let v' = mk_primed_var avoids v in
   X_META_EXISTS_TAC v' gl;;
+```
+`META_EXISTS_TAC` converts goal `?x. P[x]` to `P[x]`, where `x` is a
+metavariable.
 
+```ocaml
 let (META_SPEC_TAC: term -> thm -> tactic) =
   fun t thm (asl,w) ->
     let sth = SPEC t thm in
     ([t],null_inst),[(("",sth)::asl),w],
     fun i [th] -> PROVE_HYP (SPEC (instantiate i t) thm) th;;
+```
+`` META_SPEC_TAC `x` `!y. P[y]` `` adds a new assumption `P[x]`, where `x` is a
+metavariable.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* If all else fails!                                                        *)
 (* ------------------------------------------------------------------------- *)
 
 let (CHEAT_TAC:tactic) =
   fun (asl,w) -> ACCEPT_TAC(mk_thm([],w)) (asl,w);;
+```
+`CHEAT_TAC` introduces the goal as a new axiom, then solves the goal.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Intended for time-consuming rules; delays evaluation till it sees goal.   *)
 (* ------------------------------------------------------------------------- *)
 
 let RECALL_ACCEPT_TAC r a g = ACCEPT_TAC(time r a) g;;
+```
+`RECALL_ACCEPT_TAC f x` is equivalent to `ACCEPT_TAC (f x)`.
+As a side-effect, it prints out the time taken to compute `(f x)` and delays
+this computation until it is required.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Split off antecedent of antecedent as a subgoal.                          *)
 (* ------------------------------------------------------------------------- *)
@@ -739,7 +1062,10 @@ let ANTS_TAC =
   let th1,th2 = CONJ_PAIR(ASSUME tm1) in
   let th = itlist DISCH [tm1;tm2] (MP th2 (MP(ASSUME tm2) th1)) in
   MATCH_MP_TAC th THEN CONJ_TAC;;
+```
+`ANTS_TAC` converts goal `(p ==> q) ==> r` to `p` and `q ==> r`
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* A printer for goals etc.                                                  *)
 (* ------------------------------------------------------------------------- *)
