@@ -16,10 +16,25 @@ type gconv = int * conv;;
 (* ------------------------------------------------------------------------- *)
 (* Primitive rewriting conversions: unconditional and conditional equations. *)
 (* ------------------------------------------------------------------------- *)
+```
+A conditional rewrite is a conversion which produces a theorem
+of the form `|- P ==> (a = b)`.  This rewrites `a` to `b` under
+the condition `P`.  Previous conversionals cannot deal with conditional
+rewrites.
 
+```ocaml
 let REWR_CONV = PART_MATCH lhs;;
+```
+`` REWR_CONV `|- a = b` `` is a conversion which rewrites `a@` to `b@`.
 
+```ocaml
 let IMP_REWR_CONV = PART_MATCH (lhs o snd o dest_imp);;
+
+```
+`` IMP_REWR_CONV `|- P ==> (a = b)` `` is a conversion which rewrites `a@` to
+`b@` under the condition `P@`.
+
+```ocaml
 
 (* ------------------------------------------------------------------------- *)
 (* Versions with ordered rewriting. We must have l' > r' for the rewrite     *)
@@ -33,7 +48,11 @@ let ORDERED_REWR_CONV ord th =
     let l,r = dest_eq(concl thm) in
     if ord l r then thm
     else failwith "ORDERED_REWR_CONV: wrong orientation";;
+```
+`` ORDERED_REWR_CONV ord `|- a = b` `` is a conversion which rewrites `a@` to
+`b@` if `` (ord `a@` `b@`) ``, otherwise it fails.
 
+```ocaml
 let ORDERED_IMP_REWR_CONV ord th =
   let basic_conv = IMP_REWR_CONV th in
   fun tm ->
@@ -41,7 +60,11 @@ let ORDERED_IMP_REWR_CONV ord th =
     let l,r = dest_eq(rand(concl thm)) in
     if ord l r then thm
     else failwith "ORDERED_IMP_REWR_CONV: wrong orientation";;
+```
+`` ORDERED_IMP_REWR_CONV ord `|- P ==> (a = b)` `` is a conversion which
+rewrites `a@` to `b@` under the condition `P@` if `` (ord `a@` `b@`) ``.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Standard AC-compatible term ordering: a "dynamic" lexicographic ordering. *)
 (*                                                                           *)
@@ -76,7 +99,11 @@ let term_order =
       else if f1 = top then true
       else f1 > f2 in
   dyn_order `T`;;
+```
+`term_order` is an ordering function which is AC-compatible for any binary
+operator.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Create a gconv net for a theorem as a (cond) rewrite. The "rep" flag      *)
 (* will cause any trivially looping rewrites to be modified, and any that    *)
@@ -113,14 +140,27 @@ let net_of_thm rep th =
         else if rep && matchable l r && matchable r l then
           enter lconsts (l,(3,ORDERED_IMP_REWR_CONV term_order th))
         else enter lconsts(l,(3,IMP_REWR_CONV th));;
+```
+`` net_of_thm rep `|- P ==> (a = b)` (or `|- a = b`) net `` adds a component to
+`net` which matches a term and returns a conversion rewriting that term.
+If rep is true and `a` appears in `b`, then it rewrites `(a = b)` to `T`.
+If rep is true and the rewrite is permutative, then it uses an
+ordered rewrite to rewrite `a` to `b`.
+If neither of the above is true, then it uses an ordinary rewrite.
+Conditional rewrites are entered as level 3; unconditional as level 1.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Create a gconv net for a conversion with a term index.                    *)
 (* ------------------------------------------------------------------------- *)
 
 let net_of_conv tm conv sofar =
   enter [] (tm,(2,conv)) sofar;;
+```
+`net_of_conv tm conv net` adds a component to `net` which matches `tm` and
+returns `conv`.  Entered as level 2.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Create a gconv net for a congruence rule (in canonical form!)             *)
 (* ------------------------------------------------------------------------- *)
@@ -131,7 +171,11 @@ let net_of_cong th sofar =
   let pat = lhs conc in
   let conv = GEN_PART_MATCH (lhand o funpow n rand) th in
   enter [] (pat,(4,conv)) sofar;;
+```
+`net_of_cong th net` adds a component to `net` for a congruence rule (a rule of
+the form `` `P1 ==> (P2 ==> (...(Pn ==> (a = b))))` ``).  Entered at level 4.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Rewrite maker for ordinary and conditional rewrites (via "cf" flag).      *)
 (*                                                                           *)
@@ -173,7 +217,22 @@ let mk_rewrites =
     else
       split_rewrites oldhyps cf (EQT_INTRO th) sofar in
   fun cf th sofar -> split_rewrites (hyp th) cf th sofar;;
+```
+`mk_rewrites cf th rew_list` prepends rewrites for `th` to `new_list`.
+I will describe the action in terms of a notional `add_rew` function:
+```
+(add_rew l `|- !x. P[x]`) --> (add_rew l `|- P[x]`)
+(add_rew l `|- P1 /\ P2`) --> (add_rew l `|- P1`), (add_rew l `|- P2`)
+if cf, then (add_rew l `|- P1 ==> P2`) --> (add_rew (`P1`::l) `|- P2`)
+(add_rew l `|- a = b`) adds a conditional rewrite with conditions l
+         (if l is empty, this is an unconditional rewrite;
+         if cf is false, then l is always empty)
+(add_rew l `|- ~(a = b)`) --> (add_rew l `|- (a = b) = F`), (add_rew l `|- (b = a) = F`)
+(add_rew l `|- ~a`) --> (add_rew l `|- a = F`)
+```
+If none of the above hold, `` (add_rew l `|- a`) --> (add_rew l `|- a = T`) ``.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Rewriting (and application of other conversions) based on a convnet.      *)
 (* ------------------------------------------------------------------------- *)
@@ -182,7 +241,11 @@ let REWRITES_CONV net tm =
   let pconvs = lookup tm net in
   try tryfind (fun (_,cnv) -> cnv tm) pconvs
   with Failure _ -> failwith "REWRITES_CONV";;
+```
+`` REWRITES_CONV net `a` `` looks up `a` in the net, and applies the resulting
+conversion to `a`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Decision procedures may accumulate their state in different ways (e.g.    *)
 (* term nets and predicate-indexed lists of Horn clauses). To allow mixing   *)
@@ -219,7 +282,16 @@ type simpset =
            * (thm -> thm list -> thm list)      (* Rewrite maker          *)
 
 and strategy = simpset -> int -> term -> thm;;
+```
+There's a lot of generality in the simpset data structure which is not
+used; I'm not going to try to understand the general-purpose operation,
+but only the portions of it which are actually used in HOL Light.
+Of the four fields in the simpset data structure, only the first ever
+changes: the second is always basic_prover, the third is always the
+empty list, and the fourth is always (mk_rewrites true).
+The first field is a conversion net.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Very simple prover: recursively simplify then try provers.                *)
 (* ------------------------------------------------------------------------- *)
@@ -230,7 +302,11 @@ let basic_prover strat (Simpset(net,prover,provers,rewmaker) as ss) lev tm =
   with Failure _ ->
     let tth = tryfind (fun pr -> apply_prover pr (rand(concl sth))) provers in
     EQ_MP (SYM sth) tth;;
+```
+`` basic_prover strat ss lev `a` `` tries to prove `|- a`.
+Succeeds if `a` = `T`, or if `` (strat ss lev `a`) `` proves `|- a = T`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Functions for changing or augmenting components of simpsets.              *)
 (* ------------------------------------------------------------------------- *)
@@ -239,24 +315,43 @@ let ss_of_thms thms (Simpset(net,prover,provers,rewmaker)) =
   let cthms = itlist rewmaker thms [] in
   let net' = itlist (net_of_thm true) cthms net in
   Simpset(net',prover,provers,rewmaker);;
+```
+`ss_of_thms thms ss` augments a simpset with a list of theorems using the
+rewrite maker from the simpset to add the theorems to the conversion net.
 
+```ocaml
 let ss_of_conv keytm conv (Simpset(net,prover,provers,rewmaker)) =
   let net' = net_of_conv keytm conv net in
   Simpset(net',prover,provers,rewmaker);;
+```
+`ss_of_conv keytm conv ss` augments a simpset with a conversion using
+`(net_of_conv keytm conv)` to add the conversion to the conversion net.
 
+```ocaml
 let ss_of_congs thms (Simpset(net,prover,provers,rewmaker)) =
   let net' = itlist net_of_cong thms net in
   Simpset(net',prover,provers,rewmaker);;
 
 let ss_of_prover newprover (Simpset(net,_,provers,rewmaker)) =
   Simpset(net,newprover,provers,rewmaker);;
+```
+`ss_of_prover newprover ss` replaces the prover in the simpset with `newprover`.
 
+```ocaml
 let ss_of_provers newprovers (Simpset(net,prover,provers,rewmaker)) =
   Simpset(net,prover,newprovers@provers,rewmaker);;
+```
+`ss_of_provers newprovers ss` prepends `newprovers` to the list of subprovers in
+the simpset.
 
+```ocaml
 let ss_of_maker newmaker (Simpset(net,prover,provers,_)) =
   Simpset(net,prover,provers,newmaker);;
+```
+`ss_of_maker newmaker ss` replaces the rewrite maker in the simpset with
+`newmaker`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Perform a context-augmentation operation on a simpset.                    *)
 (* ------------------------------------------------------------------------- *)
@@ -266,11 +361,34 @@ let AUGMENT_SIMPSET cth (Simpset(net,prover,provers,rewmaker)) =
   let cthms = rewmaker cth [] in
   let net' = itlist (net_of_thm true) cthms net in
   Simpset(net',prover,provers',rewmaker);;
+```
+`AUGMENT_SIMPSET th ss` uses the rewrite maker from the simpset
+`(always (mk_rewrites true))` to create a list of rewrite theorems from `th`;
+and uses `(net_of_thm true)` to add these theorems to the conversion net in the
+simpset.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Depth conversions.                                                        *)
 (* ------------------------------------------------------------------------- *)
+```
+Note: `IMP_REWRITES_CONV` and `GEN_SUB_CONV` have a different signature than
+what I am documenting.  I will first describe the meaning of these functions,
+then I will describe their implementation.
 
+`IMP_REWRITES_CONV strat ss lev` is a conversion which looks up the term in the
+ss conversion net.  It tries unconditional rewrites before conditional rewrites.
+It will only accept a conditional rewrite if `strat ss (lev-1)` can rewrite the
+condition to `T`.
+
+`GEN_SUB_CONV strat ss lev` rewrites combinations and abstractions in a
+depth-first manner by calling `strat ss lev` on subterms.  It has special
+handling for if-then-else and implications; it adds the condition to the simpset
+before simplifying the rest of the expression.
+
+Both of these functions fail if they perform no rewrites.
+
+```ocaml
 let ONCE_DEPTH_SQCONV,DEPTH_SQCONV,REDEPTH_SQCONV,
     TOP_DEPTH_SQCONV,TOP_SWEEP_SQCONV =
   let IMP_REWRITES_CONV strat (Simpset(net,prover,provers,rewmaker) as ss) lev
@@ -369,11 +487,61 @@ let ONCE_DEPTH_SQCONV,DEPTH_SQCONV,REDEPTH_SQCONV,
     with Failure _ -> GEN_SUB_CONV TOP_SWEEP_SQCONV ss lev pconvs tm in
   ONCE_DEPTH_SQCONV,DEPTH_SQCONV,REDEPTH_SQCONV,
   TOP_DEPTH_SQCONV,TOP_SWEEP_SQCONV;;
+```
+`IMP_REWRITES_CONV strat ss lev` tris to find a conversion for `tm` at level < 4
+(i.e., not a congruence rule) which is either unconditional or (if lev > 0) such
+that the condition can be rewritten to `T` by `strat ss (lev-1)`.
 
+`RUN_SUB_CONV` is called only by GEN_SUB_CONV; not documented.
+
+`GEN_SUB_CONV strat ss lev` tries to find a congruence rule for `tm`
+(i.e. a rule at level 4).  The conclusion of a congruence rule is of the form
+`A[x1,...,xn] = A[x1',...,xn']`, so `tm` must be of the form `A[a1,...,an]`.
+Each hypothesis of a congruence rule is either of the form
+`xi = xi'` or `P[x1',...,x(i-1)'] ==> (xi = xi')`.
+In the former case, use `strat ss lev` to rewrite `a1` to `a1'`;
+in the latter case, use `AUGMENT_SIMPSET` to add `P[a1',...,a(i-1)']` to `ss`
+(getting `ss'`) and use strat ss' lev` for the rewrite.
+Combine all of these rewrites to rewrite `A[a1,...,an]` to `A[a1',...,an']`.
+If this fails, then if `tm` is `f a` use `strat ss lev` to rewrite `f` to `g`
+and `a` to `b` and return `|- f a = g b`.  If `tm` is `\x. a[x]`, then use
+`strat ss lev` to rewrite `a[x]` to `b[x]` and return
+`|- (\x. a[x]) = (\x. b[x])`.  Throughout `GEN_SUB_CONV` (in both the congruence
+rule case, and the combination case), if the call to `strat` fails to rewrite
+`a`, then it rewrites `a` to `a`; but if all the calls to `strat` fail (so that
+`GEN_SUB_CONV` would rewrite `tm` to `tm`), `GEN_SUB_CONV` fails instead.
+
+Note that there are only two congruence rules used in HOL Light: one for
+rewriting `if g then t else e` and one for rewriting `p ==> q`.
+
+`ONCE_DEPTH_SQCONV ss lev` is basically
+`(IMP_REWRITES_CONV ONCE_DEPTH_SQCONV ss lev)
+  ORELSEC (GEN_SUB_CONV ONCE_DEPTH_SQCONF ss lev)`.
+
+`DEPTH_SQCONV ss lev` is basically
+`THENQC (GEN_SUB_CONV DEPTH_SQCONV ss lev)
+   (IMP_REWRITES_CONV DEPTH_SQCONV ss lev)`.
+
+`REDEPTH_SQCONV ss lev` is basically `REPEATQC (DEPTH_CONV ss lev)`.
+
+`TOP_DEPTH_SQCONV ss lev` is basically
+`REPEATQC ((IMP_REWRITES_CONV TOP_DEPTH_SQCONV ss lev)
+            ORELSEC (GEN_SUB_CONV TOP_DEPTH_SQCONV ss lev))`.
+
+`TOP_SWEEP_SQCONV ss lev` is basically
+`THENQC (REPEATC (IMP_REWRITES_CONV TOP_SWEEP_SQCONV ss lev))
+   (GEN_SUB_CONV TOP_SWEEP_SQCONV ss lev)`.
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Maintenence of basic rewrites and conv nets for rewriting.                *)
 (* ------------------------------------------------------------------------- *)
+```
+There is a global set of "basic rewrites".  These are canonicalized with
+`mk_rewrites false` (so there is no handling of conditional rewrites),
+and added to a basic conversion net.
 
+```ocaml
 let set_basic_rewrites,extend_basic_rewrites,basic_rewrites,
     set_basic_convs,extend_basic_convs,basic_convs,basic_net =
   let rewrites = ref ([]:thm list)
@@ -400,11 +568,25 @@ let set_basic_rewrites,extend_basic_rewrites,basic_rewrites,
   and basic_net() = !conv_net in
   set_basic_rewrites,extend_basic_rewrites,basic_rewrites,
   set_basic_convs,extend_basic_convs,basic_convs,basic_net;;
+```
+`set_basic_rewrites thl` sets the "basic rewrite" set to `thl`.
 
+`extend_basic_rewrites thl` adds `thl` to the "basic rewrite" set.
+
+`basic_rewrites ()` retrieves the (canonicalised) "basic rewrite" set.
+
+`basic_net ()` retrieves the conversion net for the "basic rewrite" set.
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Same thing for the default congruences.                                   *)
 (* ------------------------------------------------------------------------- *)
+```
+There is also a set of basic congruences; since HOL has only two congruence
+rules, I won't bother documenting `set_basic_congs`, `extend_basic_congs`,
+`basic_congs`.
 
+```ocaml
 let set_basic_congs,extend_basic_congs,basic_congs =
   let congs = ref ([]:thm list) in
   (fun thl -> congs := thl),
@@ -419,7 +601,12 @@ let GENERAL_REWRITE_CONV rep (cnvl:conv->conv) (builtin_net:gconv net) thl =
   let thl_canon = itlist (mk_rewrites false) thl [] in
   let final_net = itlist (net_of_thm rep) thl_canon builtin_net in
   cnvl (REWRITES_CONV final_net);;
+```
+`GENERAL_REWRITE_CONV rep cnvl net thl` Canonicalises `thl` with
+`mk_rewrites false`, adds these conversions to `net` with `net_of_thm rep`
+(giving `final_net`), and then rewrites with `cnvl (REWRITES_CONV final_net)`.
 
+```ocaml
 let GEN_REWRITE_CONV (cnvl:conv->conv) thl =
   GENERAL_REWRITE_CONV false cnvl empty_net thl;;
 
@@ -460,7 +647,12 @@ let PURE_ONCE_ASM_REWRITE_RULE thl th =
 
 let ONCE_ASM_REWRITE_RULE thl th =
     ONCE_REWRITE_RULE ((map ASSUME (hyp th)) @ thl) th;;
+```
+`PURE_ASM_REWRITE_RULE`, `ASM_REWRITE_RULE`,
+`PURE_ONCE_ASM_REWRITE_RULE`, `ONCE_ASM_REWRITE_RULE` are the same as the
+non-`ASM_` versions, but they add the theorem hypotheses to the rewrite list.
 
+```ocaml
 let GEN_REWRITE_TAC cnvl thl = CONV_TAC(GEN_REWRITE_CONV cnvl thl);;
 
 let PURE_REWRITE_TAC thl = CONV_TAC(PURE_REWRITE_CONV thl);;
@@ -470,7 +662,12 @@ let REWRITE_TAC thl = CONV_TAC(REWRITE_CONV thl);;
 let PURE_ONCE_REWRITE_TAC thl = CONV_TAC(PURE_ONCE_REWRITE_CONV thl);;
 
 let ONCE_REWRITE_TAC thl = CONV_TAC(ONCE_REWRITE_CONV thl);;
+```
+`GEN_REWRITE_TAC`, `PURE_REWRITE_TAC`, `REWRITE_TAC`, `PURE_ONCE_REWRITE_TAC`,
+`ONCE_REWRITE_TAC` are the same as the `_RULE` variants, but use `CONV_TAC`
+instead of `CONV_RULE`.
 
+```ocaml
 let (PURE_ASM_REWRITE_TAC: thm list -> tactic) =
   ASM PURE_REWRITE_TAC;;
 
@@ -482,7 +679,12 @@ let (PURE_ONCE_ASM_REWRITE_TAC: thm list -> tactic) =
 
 let (ONCE_ASM_REWRITE_TAC: thm list -> tactic) =
   ASM ONCE_REWRITE_TAC;;
+```
+`PURE_ASM_REWRITE_TAC`, `ASM_REWRITE_TAC`, `PURE_ONCE_ASM_REWRITE_TAC`,
+`ONCE_ASM_REWRITE_TAC` are the same as the non-`ASM_` variants, but they add
+the current assumptions to the rewrite list.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Simplification functions.                                                 *)
 (* ------------------------------------------------------------------------- *)
@@ -490,7 +692,11 @@ let (ONCE_ASM_REWRITE_TAC: thm list -> tactic) =
 let GEN_SIMPLIFY_CONV (strat:strategy) ss lev thl =
   let ss' = itlist AUGMENT_SIMPSET thl ss in
   TRY_CONV (strat ss' lev);;
+```
+`GEN_SIMPLIFY_CONV strat ss lev thl` uses `AUGMENT_SIMPSET` to add `thl` to `ss`
+(giving `ss'`); then does `TRY_CONV (strat ss' lev)`.
 
+```ocaml
 let ONCE_SIMPLIFY_CONV ss = GEN_SIMPLIFY_CONV ONCE_DEPTH_SQCONV ss 1;;
 
 let SIMPLIFY_CONV ss = GEN_SIMPLIFY_CONV TOP_DEPTH_SQCONV ss 3;;
@@ -500,7 +706,10 @@ let SIMPLIFY_CONV ss = GEN_SIMPLIFY_CONV TOP_DEPTH_SQCONV ss 3;;
 (* ------------------------------------------------------------------------- *)
 
 let empty_ss = Simpset(empty_net,basic_prover,[],mk_rewrites true);;
+```
+`empty_ss` is the empty simpset (no conversions in the conversion net).
 
+```ocaml
 let basic_ss =
   let rewmaker = mk_rewrites true in
   fun thl ->
@@ -508,7 +717,12 @@ let basic_ss =
     let net' = itlist (net_of_thm true) cthms (basic_net()) in
     let net'' = itlist net_of_cong (basic_congs()) net' in
   Simpset(net'',basic_prover,[],rewmaker);;
+```
+`basic_ss thl` canonicalises `thl` with `mk_rewrites true`, then adds the
+rewrites to `basic_net()` with `net_of_thm true`.  It also adds the basic
+congruences and it returns the resulting simpset.
 
+```ocaml
 let SIMP_CONV thl = SIMPLIFY_CONV (basic_ss []) thl;;
 
 let PURE_SIMP_CONV thl = SIMPLIFY_CONV empty_ss thl;;
@@ -520,19 +734,31 @@ let SIMP_RULE thl = CONV_RULE(SIMP_CONV thl);;
 let PURE_SIMP_RULE thl = CONV_RULE(PURE_SIMP_CONV thl);;
 
 let ONCE_SIMP_RULE thl = CONV_RULE(ONCE_SIMP_CONV thl);;
+```
+`SIMP_RULE`, `PURE_SIMP_RULE`, `ONCE_SIMP_RULE` are the same as the `_CONV`
+variants, but they call `CONV_RULE`.
 
+```ocaml
 let SIMP_TAC thl = CONV_TAC(SIMP_CONV thl);;
 
 let PURE_SIMP_TAC thl = CONV_TAC(PURE_SIMP_CONV thl);;
 
 let ONCE_SIMP_TAC thl = CONV_TAC(ONCE_SIMP_CONV thl);;
+```
+`SIMP_TAC`, `PURE_SIMP_TAC`, `ONCE_SIMP_TAC` are the same as the `_CONV`
+variants, but they call `CONV_TAC`.
 
+```ocaml
 let ASM_SIMP_TAC = ASM SIMP_TAC;;
 
 let PURE_ASM_SIMP_TAC = ASM PURE_SIMP_TAC;;
 
 let ONCE_ASM_SIMP_TAC = ASM ONCE_SIMP_TAC;;
+```
+`ASM_SIMP_TAC`, `PURE_ASM_SIMP_TAC`, `ONCE_ASM_SIMP_TAC` are the same as the
+non-`ASM_` variants, but they add the current assumptions to the rewrite list.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Abbreviation tactics.                                                     *)
 (* ------------------------------------------------------------------------- *)
