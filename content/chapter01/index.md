@@ -1,17 +1,17 @@
  1. [background.ml](background.md)
- 2. [hol.ml](hol.md)
- 3. [system.ml](system.md)
- 4. [lib.ml](lib.md)
- 5. [fusion.ml](fusion.md)
- 6. [basics.ml](basics.md)
- 7. [nets.ml](nets.md)
- 8. [printer.ml](printer.md)
- 9. [preterm.ml](preterm.md)
-10. [parser.ml](parser.md)
-11. [equal.ml](equal.md)
-12. [bool.ml](bool.md)
-13. [drule.ml](drule.md)
-14. [tactics.ml](tactics.md)
+ 2. [hol.ml](hol.md) - lots of loading files
+ 3. [system.ml](system.md) - some changes to OCaml's behaviour
+ 4. [lib.ml](lib.md) - a standard library of sorts
+ 5. [fusion.ml](fusion.md) - the logical core
+ 6. [basics.ml](basics.md) - syntax manipulation like destructors/substitution
+ 7. [nets.ml](nets.md) - term nets
+ 8. [printer.ml](printer.md) - prettyprinter
+ 9. [preterm.ml](preterm.md) - preterm/type to term/type conv, type checking
+10. [parser.ml](parser.md) - lexical analysis and parsing
+11. [equal.ml](equal.md) - basic equality reasoning
+12. [bool.ml](bool.md) - Boolean connectives
+13. [drule.ml](drule.md) - derived rules incl definitions and rewriting
+14. [tactics.ml](tactics.md) - the tactic and subgoal system
 15. [itab.ml](itab.md)
 16. [simp.ml](simp.md)
 17. [theorems.ml](theorems.md)

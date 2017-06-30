@@ -5,6 +5,8 @@ title: theorems.ml
 [Original file](https://github.com/jrh13/hol-light/blob/master/theorems.ml)
 
 Additional theorems, mainly about quantifiers, and additional tactics.
+As you may expect, this file is basically just theorems, so there isn't a lot to
+comment on.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -36,7 +38,11 @@ let EQ_TRANS = prove
 (* ------------------------------------------------------------------------- *)
 
 let AC acsuite = EQT_ELIM o PURE_REWRITE_CONV[acsuite; REFL_CLAUSE];;
+```
+`` AC thl `a = b` `` returns `|- a = b` if ordered rewriting using `thl`
+can rewrite `a = b` to `T` or `c = c`, otherwise it fails.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* A couple of theorems about beta reduction.                                *)
 (* ------------------------------------------------------------------------- *)
@@ -68,7 +74,10 @@ let CONJ_ACI = prove
    (p /\ p <=> p) /\
    (p /\ (p /\ q) <=> p /\ q)`,
   ITAUT_TAC);;
+```
+`_ACI` means associative, commutative and idempotent.
 
+```ocaml
 let DISJ_ASSOC = prove
  (`!t1 t2 t3. t1 \/ t2 \/ t3 <=> (t1 \/ t2) \/ t3`,
   ITAUT_TAC);;
@@ -152,7 +161,9 @@ let IMP_CLAUSES = prove
  (`!t. (T ==> t <=> t) /\ (t ==> T <=> T) /\ (F ==> t <=> T) /\
        (t ==> t <=> T) /\ (t ==> F <=> ~t)`,
   ITAUT_TAC);;
-
+```
+I should write something here about basic rewrites and basic congruences.
+```ocaml
 extend_basic_rewrites
   [REFL_CLAUSE;
    EQ_CLAUSES;
