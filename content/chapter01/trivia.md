@@ -15,10 +15,16 @@ parse_as_infix ("o",(26,"right"));;
 
 let o_DEF = new_definition
  `(o) (f:B->C) g = \x:A. f(g(x))`;;
+```
+This is the definition of the function composition operator.
 
+```ocaml
 let I_DEF = new_definition
  `I = \x:A. x`;;
+```
+This is the definition of the identity function.
 
+```ocaml
 let o_THM = prove
  (`!f:B->C. !g:A->B. !x:A. (f o g) x = f(g(x))`,
   PURE_REWRITE_TAC [o_DEF] THEN
@@ -51,10 +57,18 @@ let EXISTS_ONE_REP = prove
 
 let one_tydef =
   new_type_definition "1" ("one_ABS","one_REP") EXISTS_ONE_REP;;
+```
+This defines a new type `"1"`, with one element; and functions that
+map between bool and one (where the single element of "one" maps to `T`).
+(This description may not be 100% accurate.)
 
+```ocaml
 let one_DEF = new_definition
  `one = @x:1. T`;;
+```
+This is the definition of `"one"`, the name of the sole value of type `"1"`.
 
+```ocaml
 let one = prove
  (`!v:1. v = one`,
   MP_TAC(GEN_ALL (SPEC `one_REP a` (CONJUNCT2 one_tydef))) THEN

@@ -141,7 +141,16 @@ let new_type_definition tyname (absname,repname) th =
     the_type_definitions := ((tyname,absname,repname),(th,tth))::
                             (!the_type_definitions);
     tth;;
+```
+`` new_type_definition "newtype" ("newtypeABS","newtypeREP") `|- ?x. P[x]` ``
+creates a new type `"newtype"`, which is isomorphic to a subset of the type of
+the bound variable `x` (`"oldtype"`).  It also creates new constants
+`"newtypeABS"`, which maps from oldtype to newtype, and `"newtypeREP"`, which
+maps from newtype to oldtype.  It finally returns a theorem:
+`|- (!(a:newtype). newtypeABS (newtypeREP a) = a) /\
+    (!(r:oldtype). P[r] = (newtypeREP (newtypeABS r) = r))`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Derive excluded middle. The proof is an optimization due to Mark Adams of *)
 (* the original Diaconescu proof as presented in Beeson's book.              *)
@@ -171,9 +180,17 @@ let BOOL_CASES_AX = prove
 (* ------------------------------------------------------------------------- *)
 
 let BOOL_CASES_TAC p = STRUCT_CASES_TAC (SPEC p BOOL_CASES_AX);;
+```
+`` BOOL_CASES_TAC `a` `` creates two subgoals.  In the first `a` is rewritten to
+`T` within the goal, and in the second `a` is rewritten to `F`.
 
+```ocaml
 let ASM_CASES_TAC t = DISJ_CASES_TAC(SPEC t EXCLUDED_MIDDLE);;
+```
+`` ASM_CASES_TAC `a` `` creates two subgoals.  In the first `a` is added as an
+assumption, and in the second `~a` is added as an assumption.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Set up a reasonable tautology checker for classical logic.                *)
 (* ------------------------------------------------------------------------- *)
@@ -187,7 +204,12 @@ let TAUT =
        hd o sort free_in o find_terms ok o snd)) (asl,w) in
   let TAUT_TAC = REPEAT(GEN_TAC ORELSE CONJ_TAC) THEN REPEAT RTAUT_TAC in
   fun tm -> prove(tm,TAUT_TAC);;
+```
+`TAUT tm` tries to prove the term.  Starts with `(REPEAT GEN_TAC)`, then
+rewrites with the basic rewrites and does case splits on free boolean variables
+using `BOOL_CASES_TAC`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* A few useful classical tautologies.                                       *)
 (* ------------------------------------------------------------------------- *)
@@ -215,7 +237,10 @@ let CCONTR =
     try let tm' = mk_neg tm in
         MP (INST [tm,P] pth) (DISCH tm' th)
     with Failure _ -> failwith "CCONTR";;
+```
+`` CCONTR `a` `~a |- F` `` gives `` `|- a` ``.
 
+```ocaml
 let CONTRAPOS_CONV =
   let a = `a:bool` and b = `b:bool` in
   let pth = TAUT `(a ==> b) <=> (~b ==> ~a)` in
@@ -223,7 +248,10 @@ let CONTRAPOS_CONV =
     try let P,Q = dest_imp tm in
         INST [P,a; Q,b] pth
     with Failure _ -> failwith "CONTRAPOS_CONV";;
+```
+`CONTRAPOS_CONV` rewrites `a ==> b` to `~b ==> ~a`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* A classicalal "refutation" tactic.                                        *)
 (* ------------------------------------------------------------------------- *)
@@ -325,7 +353,12 @@ let RIGHT_EXISTS_IMP_THM = prove
 let COND_DEF = new_definition
   `COND = \t t1 t2. @x:A. ((t <=> T) ==> (x = t1)) /\
                           ((t <=> F) ==> (x = t2))`;;
+```
+This is the definition of `COND`, also known as `if-then-else`.  That is, if the
+parser sees `"if c then t else e"`, it transforms it into `"COND c t e"`.
+(Actually, it does the same for `"c => t | e"`.)
 
+```ocaml
 let COND_CLAUSES = prove
  (`!(t1:A) t2. ((if T then t1 else t2) = t1) /\
                ((if F then t1 else t2) = t2)`,
@@ -398,7 +431,11 @@ let MONO_COND = prove
   ASM_REWRITE_TAC[]);;
 
 monotonicity_theorems := MONO_COND::(!monotonicity_theorems);;
+```
+`MONO_COND` will automatically be used by `MONO_TAC` to prove
+monotonicity for `COND` expressions.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Tactic for splitting over an arbitrarily chosen conditional.              *)
 (* ------------------------------------------------------------------------- *)
@@ -408,7 +445,11 @@ let COND_ELIM_THM = prove
   BOOL_CASES_TAC `c:bool` THEN REWRITE_TAC[]);;
 
 let COND_ELIM_CONV = HIGHER_REWRITE_CONV[COND_ELIM_THM] true;;
+```
+`COND_ELIM_CONV` rewrites `P[if c then x else y]` to
+`(c ==> P[x]) /\ (~c ==> P[y])`.
 
+```ocaml
 let (COND_CASES_TAC :tactic) =
   let DENEG_RULE = GEN_REWRITE_RULE I [TAUT `~ ~ p <=> p`] in
   CONV_TAC COND_ELIM_CONV THEN CONJ_TAC THENL
@@ -417,7 +458,16 @@ let (COND_CASES_TAC :tactic) =
                               ASSUME_TAC th' THEN SUBST1_TAC(EQT_INTRO th')
                           with Failure _ ->
                               ASSUME_TAC th THEN SUBST1_TAC(EQF_INTRO th))];;
+```
+`COND_CASES_TAC` does a case split on a `COND` expression in the goal.
+If the goal is `P[if c then x else y]`, then in one subgoal,
+it adds an assumption `c` and changes the goal to `P[x]` (and then
+rewrites `c` to `T` in the goal).
+In the other subgoal, it adds an assumption `~c`, changes the goal to
+`P[y]`, and rewrites `c` to `F`.  (If `c` has the form `~d`, then instead,
+it adds an assumption `d` and rewrites `d` to `T`.)
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Skolemization.                                                            *)
 (* ------------------------------------------------------------------------- *)
