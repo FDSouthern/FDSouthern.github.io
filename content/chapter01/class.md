@@ -24,10 +24,10 @@ let ETA_CONV =
           TRANS (REFL tm) (PINST [type_of bv,aty; type_of bod,bty] [l,t] pth)
         else fail()
     with Failure _ -> failwith "ETA_CONV";;
-```ocaml
+```
 `ETA_CONV` rewrites `(\x. f x)` to `f`.
 
-```
+```ocaml
 let EQ_EXT = prove
  (`!(f:A->B) g. (!x. f x = g x) ==> f = g`,
   REPEAT GEN_TAC THEN DISCH_THEN(MP_TAC o ABS `x:A` o SPEC `x:A`) THEN
