@@ -1,94 +1,6 @@
-######## theorems:
-
-######### ind-defs:
-
-RIGHT_BETAS [`x`;`y`] `|- f = \x y. A[x,y]` gives
-`|- f x y = A[x,y]`
-
-HALF_BETA_EXPAND [`x`;`y`] `|- f = \x y. A[x,y]` gives
-`|- !x y. f x y = A[x,y]`
-
-SIMPLE_DISJ_PAIR `P \/ Q |- R` gives
-(`P |- R`, `Q |- R`)
-
-FORALL_IMPS_CONV
-Rewrites `!x y. P[x,y] ==> Q` to `(?x y. P[x,y]) ==> Q`
-
-AND_IMPS_CONV
-Rewrites:
-(*    (!x1..xn. P1[xs] ==> Q[xs]) /\ ... /\ (!x1..xn. Pm[xs] ==> Q[xs])      *)
-(* -> (!x1..xn. P1[xs] \/ ... \/ Pm[xs] ==> Q[xs])                           *)
-
-EXISTS_EQUATION `x = a` `ASM,x = a |- P[x]`
-gives `ASM |- ?x. P[x]`
-
-val ( MONO_AND ) : thm = |- (A ==> B) /\ (C ==> D) ==> A /\ C ==> B /\ D
-val ( MONO_OR ) : thm = |- (A ==> B) /\ (C ==> D) ==> A \/ C ==> B \/ D
-val ( MONO_IMP ) : thm = |- (B ==> A) /\ (C ==> D) ==> (A ==> C) ==> B ==> D
-val ( MONO_NOT ) : thm = |- (B ==> A) ==> ~A ==> ~B
-val ( MONO_FORALL ) : thm = |- (!x. P x ==> Q x) ==> (!x. P x) ==> (!x. Q x)
-val ( MONO_EXISTS ) : thm = |- (!x. P x ==> Q x) ==> (?x. P x) ==> (?x. Q x)
-
-BACKCHAIN_TAC:
-"Simplified version of MATCH_MP_TAC to avoid quantifier troubles."
-
-MONO_ABS_TAC:
-(*   ?- (\x. P[x]) x1 .. xn ==> (\y. Q[y]) x1 .. xn                          *)
-(* ==================================================                        *)
-(*     ?- !x1. P[x1] x2 .. xn ==> Q[x1] x2 .. xn                             *)
-
-mono_tactics:
-A global variable holding a set of tactics for proving monotonicity.
-
-APPLY_MONOTAC
-Prove `a ==> a` automatically; otherwise, select a tactic from
-mono_tactics and apply it.
-
-MONO_STEP_TAC
-= REPEAT GEN_TAC THEN APPLY_MONOTAC
-
-MONO_TAC
-= REPEAT MONO_STEP_TAC THEN ASM_REWRITE_TAC[]
-
 ######## class:
 
-This is an axiom:
-val ( ETA_AX ) : thm = |- !t. (\x. t x) = t
-
-ETA_CONV
-Rewrites `(\x. f x)` to `f`
-
-val ( EQ_EXT ) : thm = |- !f g. (!x. f x = g x) ==> (f = g)
-val ( FUN_EQ_THM ) : thm = |- !f g. (f = g) = (!x. f x = g x)
-
-EXT `|- (!x. f x = g x)``` gives ```|- f = x`
-
-This is an axiom:
-val ( SELECT_AX ) : thm = |- !P x. P x ==> P ((@) P)
-
-val ( EXISTS_THM ) : thm = |- (?) = (\P. P ((@) P))
-
-SELECT_INTRO `|- P a``` gives ```|- P ((@) P)`
-
-SELECT_RULE `|- ?x. P[x]``` gives ```|- P[ @x. P[x] ]`
-
-SELECT_ELIM `|- P ((@) P)` (`x`, `P x |- a`)`` gives ```|- a`
-
-SELECT_CONV rewrites `P[ @x. P[x] ]` to `?x. P[x]`
-
-val ( SELECT_REFL ) : thm = |- !x. (@y. y = x) = x
-val ( SELECT_UNIQUE ) : thm = |- !P x. (!y. P y = y = x) ==> ((@) P = x)
-
-SELECT_REFL is a "basic rewrite".
-
-new_specification ["foo";"bar";"baz"] `?x y z.P[x,y,z]`
-Defines "foo", "bar", and "baz" as new constants, and returns a theorem
-`|- P[foo,bar,baz]`
-
-simple_new_specification th
-Like new_specification, but gets the new constant names from the
-bound variable names in the theorem.
-
+```
 new_type_definition "newtype" ("newtypeABS","newtypeREP") `|- ?x. P[x]`
 Creates a new type "newtype", which is isomorphic to a subset
 of the type of the bound variable `x` ("oldtype").  Creates new constants
@@ -98,21 +10,44 @@ Returns a theorem
 `|- (!(a:newtype). newtypeABS (newtypeREP a) = a) /\
     (!(r:oldtype). P[r] = (newtypeREP (newtypeABS r) = r))`
 
+```ocaml
+
+```
 val ( EXCLUDED_MIDDLE ) : thm = |- !t. t \/ ~t
+
+```ocaml
+
+```
 val ( BOOL_CASES_AX ) : thm = |- !t. (t = T) \/ (t = F)
+
+```ocaml
+
+```
 
 BOOL_CASES_TAC `a`
 Creates two subgoals.  In the first, rewrite `a` to `T` within the goal;
 in the second, rewrite `a` to `F`.
 
+```ocaml
+
+```
+
 ASM_CASES_TAC `a`
 Creates two subgoals.  In the first, add `a` as an assumption; in the second,
 add `~a` as an assumption.
+
+```ocaml
+
+```
 
 TAUT tm
 Tries to prove the term.  Starts with (REPEAT GEN_TAC), then rewrites with
 the basic rewrites and does case splits on free boolean variables
 using BOOL_CASES_TAC.
+
+```ocaml
+
+```
 
 val ( DE_MORGAN_THM ) : thm =
   |- !t1 t2. (~(t1 /\ t2) = ~t1 \/ ~t2) /\ (~(t1 \/ t2) = ~t1 /\ ~t2)
@@ -120,11 +55,27 @@ val ( NOT_CLAUSES ) : thm = |- (!t. ~~t = t) /\ (~T = F) /\ (~F = T)
 val ( NOT_IMP ) : thm = |- !t1 t2. ~(t1 ==> t2) = t1 /\ ~t2
 val ( CONTRAPOS_THM ) : thm = |- !t1 t2. ~t1 ==> ~t2 = t2 ==> t1
 
+```ocaml
+
+```
+
 NOT_CLAUSES is a "basic rewrite".
+
+```ocaml
+
+```
 
 CCONTR `a` `~a |- F``` gives ```|- a`
 
+```ocaml
+
+```
+
 CONTRAPOS_CONV rewrites `a ==> b` to `~b ==> ~a`
+
+```ocaml
+
+```
 
 val ( NOT_EXISTS_THM ) : thm = |- !P. ~(?x. P x) = (!x. ~P x)
 val ( EXISTS_NOT_THM ) : thm = |- !P. (?x. ~P x) = ~(!x. P x)
@@ -143,16 +94,32 @@ val ( RIGHT_IMP_EXISTS_THM ) : thm =
 val ( RIGHT_EXISTS_IMP_THM ) : thm =
   |- !P Q. (?x. P ==> Q x) = P ==> (?x. Q x)
 
+```ocaml
+
+```
+
 This is the definition of COND, also known as if-then-else.  That is,
 if the parser sees "if c then t else e", it transforms it into
 "COND c t e".  (Actually, it does the same for "c => t | e".)
 val ( COND_DEF ) : thm =
   |- COND = (\t t1 t2. @x. ((t = T) ==> (x = t1)) /\ ((t = F) ==> (x = t2)))
 
+```ocaml
+
+```
+
 val ( COND_CLAUSES ) : thm =
   |- !t1 t2. ((if T then t1 else t2) = t1) /\ ((if F then t1 else t2) = t2)
 
+```ocaml
+
+```
+
 COND_CLAUSES is a "basic rewrite".
+
+```ocaml
+
+```
 
 val ( COND_EXPAND ) : thm =
   |- !b t1 t2. (if b then t1 else t2) = (~b \/ t1) /\ (b \/ t2)
@@ -166,14 +133,30 @@ val ( COND_ABS ) : thm =
 val ( MONO_COND ) : thm =
   |- (A ==> B) /\ (C ==> D) ==> (if b then A else C) ==> (if b then B else D)
 
+```ocaml
+
+```
+
 MONO_COND will automatically be used by MONO_TAC to prove
 monotonicity for COND expressions.
+
+```ocaml
+
+```
 
 val ( COND_ELIM_THM ) : thm =
   |- P (if c then x else y) = (c ==> P x) /\ (~c ==> P y)
 
+```ocaml
+
+```
+
 COND_ELIM_CONV rewrites `P[if c then x else y]` to
 `(c ==> P[x]) /\ (~c ==> P[y])`
+
+```ocaml
+
+```
 
 COND_CASES_TAC does a case split on a COND expression in the goal.
 If the goal is `P[if c then x else y]`, then in one subgoal,
@@ -183,19 +166,39 @@ In the other subgoal, it adds an assumption `~c`, changes the goal to
 `P[y]`, and rewrites `c` to `F`.  (If `c` has the form `~d`, then instead,
 it adds an assumption `d` and rewrites `d` to `T`.)
 
+```ocaml
+
+```
+
 val ( SKOLEM_THM ) : thm = |- !P. (!x. ?y. P x y) = (?y. !x. P x (y x))
 val ( UNIQUE_SKOLEM_ALT ) : thm =
   |- !P. (!x. ?!y. P x y) = (?f. !x y. P x y = f x = y)
 val ( UNIQUE_SKOLEM_THM ) : thm =
   |- !P. (!x. ?!y. P x y) = (?!f. !x. P x (f x))
 
+```ocaml
+
+```
+
 The theorem `|- (if x = x then y else z) = y` is a "basic rewrite".
+
+```ocaml
+
+```
 
 This is the definition of `(o)`, the function composition operator.
 val o_DEF : thm = |- !f g. f o g = (\x. f (g x))
 
+```ocaml
+
+```
+
 This is the definition of `I`, the identity function.
 val ( I_DEF ) : thm = |- I = (\x. x)
+
+```ocaml
+
+```
 
 val o_THM : thm = |- !f g x. (f o g) x = f (g x)
 val o_ASSOC : thm = |- !f g h. f o g o h = (f o g) o h
@@ -203,19 +206,35 @@ val ( I_THM ) : thm = |- !x. I x = x
 val ( I_O_ID ) : thm = |- !f. (I o f = f) /\ (f o I = f)
 val ( EXISTS_ONE_REP ) : thm = |- ?b. b
 
+```ocaml
+
+```
+
 This defines a new type "one", with one element; and functions that
 map between bool and one (where the single element of "one" maps to `T`).
 val one_tydef : thm =
   |- (!a. one_ABS (one_REP a) = a) /\ (!r. r = one_REP (one_ABS r) = r)
 
+```ocaml
+
+```
+
 This is the definition of "one", the name of the sole value of type "one".
 val one_DEF : thm = |- one = (@x. T)
+
+```ocaml
+
+```
 
 val one : thm = |- !v. v = one
 val one_axiom : thm = |- !f g. f = g
 val one_Axiom : thm = |- !e. ?!fn. fn one = e
 
-canon:
+```ocaml
+
+```
+
+###### canon:
 
 PRESIMP_CONV is a conversion which simplifies literal `T` and `F` as the
 arguments of not,and,or,implies,equality, etc.; and moves connectives
@@ -270,7 +289,7 @@ ASM_FOL_TAC
 Uses the technique of FOL_CONV, but applies throughout the entire goalstate
 (goal and assumptions).
 
-meson:
+###### meson:
 
 A general first-order theorem prover.
 
@@ -285,7 +304,7 @@ GEN_MESON_TAC min max step thl
 Like MESON_TAC but with explicit start (min), finish (max) and step (step) for
 the iterative deepening.
 
-quot:
+###### quot:
 
 define_quotient_type "newtype" ("newtypeABS","newtypeREP") `\x y. P[x,y]`
 Defines a new type "newtype" with a bijection to a subset of "oldtype->bool"
@@ -318,12 +337,12 @@ lift_theorem:
 (*                                                                           *)
 (* NB! All and only the first order variables must be bound by quantifiers.  *)
 
-recursion.ml:
+###### recursion.ml:
 
 Functions for defining recursive functions. Mostly subsumed by "define", but
 sometimes useful for efficiency or other reasons.
 
-pair.ml:
+###### pair.ml:
 
 This is the definition of LET.
 val ( LET_DEF ) : thm = |- !f x. LET f x = f x
@@ -430,7 +449,7 @@ hypothesis "t = x".
 GEN_BETA_CONV reduces generalized beta-redexes such as
 `(\(x,y). x + y) (1,2)`
 
-num.ml:
+###### num.ml:
 
 We define a new type, "ind"; we are going to axiomatize that "ind" has
 an infinite number of elements.
@@ -508,7 +527,7 @@ val num_RECURSION : thm =
 
 val num_CASES : thm = |- !m. (m = 0) \/ (?n. m = SUC n)
 
-arith.ml:
+###### arith.ml:
 
 This is the definition of PRE (predecessor).
 val ( PRE ) : thm = |- (PRE 0 = 0) /\ (!n. PRE (SUC n) = n)
@@ -819,7 +838,7 @@ NUM_CANCEL_CONV rewrites `(c+(b+a)) = (b+d)+a` to `c=d`
 
 LE_IMP `|- a <= b``` gives ``(GEN_ALL `|- b <= p ==> a <= p`)
 
-wf.ml:
+###### wf.ml:
 
 This is the definition of WF.
 val ( WF ) : thm =
@@ -881,7 +900,7 @@ WF_INDUCT_TAC
 Perform wellfounded induction over a nominated measure function. Sometimes
 avoids explicit "!n t. size(t) = n ==> ..." goal.
 
-calc_num.ml:
+###### calc_num.ml:
 
 mangle takes a theorem and rewrites its conclusion to elide NUMERAL.
 
@@ -1172,7 +1191,7 @@ num_CONV rewrites `j` to `SUC (J-1)`, where J-1 is the numeral for j - 1.
 EXPAND_CASES_CONV rewrites `!n. n < 5 ==> P[n]` to
 `P[0] /\ P[1] /\ P[2] /\ P[3] /\ P[4]`
 
-ind-types.ml:
+###### ind-types.ml:
 
 val ( INJ_INVERSE2 ) : thm =
   |- !P. (!x1 y1 x2 y2. (P x1 y1 = P x2 y2) = (x1 = x2) /\ (y1 = y2))
@@ -1286,7 +1305,7 @@ sucivate 5 = `SUC (SUC (SUC (SUC (SUC 0))))`
 
 SCRUB_EQUATION `x = a` `x = a |- P[x]``` gives ```|- P[a]`
 
-list.ml:
+###### list.ml:
 
 LIST_INDUCT_TAC takes a goal of the form `!l. P[l]` and creates two
 subgoals: `P[ [] ]` and `P[CONS h t]`.  The latter subgoal has a new
@@ -1431,7 +1450,7 @@ MONO_ALL and MONO_ALL2 will automatically be used by MONO_TAC.
 
 LIST_CONV conv uses conv to rewrite every member of a (literal) list.
 
-realax.ml:
+###### realax.ml:
 The operators +,-,*,<,<=,>,>= are overloaded; there are versions for
 num, real, int.  If an expression does not make it clear which type is
 used, they default to the current "prioritized" type.

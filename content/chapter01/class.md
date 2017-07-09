@@ -24,7 +24,10 @@ let ETA_CONV =
           TRANS (REFL tm) (PINST [type_of bv,aty; type_of bod,bty] [l,t] pth)
         else fail()
     with Failure _ -> failwith "ETA_CONV";;
+```ocaml
+`ETA_CONV` rewrites `(\x. f x)` to `f`.
 
+```
 let EQ_EXT = prove
  (`!(f:A->B) g. (!x. f x = g x) ==> f = g`,
   REPEAT GEN_TAC THEN DISCH_THEN(MP_TAC o ABS `x:A` o SPEC `x:A`) THEN
@@ -39,7 +42,10 @@ let FUN_EQ_THM = prove
 (* ------------------------------------------------------------------------- *)
 (* Indefinite descriptor (giving AC).                                        *)
 (* ------------------------------------------------------------------------- *)
+```
+This is the famous Hilber choice operator.
 
+```ocaml
 new_constant("@",`:(A->bool)->A`);;
 
 parse_as_binder "@";;
@@ -77,7 +83,10 @@ let SELECT_RULE =
         let ty = type_of(bndvar abs) in
         CONV_RULE BETA_CONV (MP (PINST [ty,aty] [abs,P] pth) th)
     with Failure _ -> failwith "SELECT_RULE";;
+```
+`` SELECT_RULE `|- ?x. P[x]` `` gives `` `|- P[ @x. P[x] ]` ``.
 
+```ocaml
 let SELECT_CONV =
   let P = `P:A->bool` in
   let pth = prove
@@ -92,7 +101,10 @@ let SELECT_CONV =
          let ty = type_of (bndvar abs) in
          CONV_RULE (LAND_CONV BETA_CONV) (PINST [ty,aty] [abs,P] pth)
      with Failure _ -> failwith "SELECT_CONV";;
+```
+`SELECT_CONV` rewrites `P[ @x. P[x] ]` to `?x. P[x]`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Some basic theorems.                                                      *)
 (* ------------------------------------------------------------------------- *)

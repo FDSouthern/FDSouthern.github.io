@@ -24,7 +24,11 @@ let strip_ncomb =
 
 let RIGHT_BETAS =
   rev_itlist (fun a -> CONV_RULE (RAND_CONV BETA_CONV) o C AP_THM a);;
+```
+``RIGHT_BETAS [`x`;`y`] `|- f = \x y. A[x,y]` `` gives
+`` `|- f x y = A[x,y]` ``.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (*      A, x = t |- P[x]                                                     *)
 (*     ------------------ EXISTS_EQUATION                                    *)
@@ -46,7 +50,10 @@ let EXISTS_EQUATION =
     let th3 = EQ_MP (SYM th1) th in
     let th4 = GEN l (DISCH tm th3) in
     MP th2 th4;;
+```
+`` EXISTS_EQUATION `x = a` `ASM,x = a |- P[x]` `` gives `ASM |- ?x. P[x]`.
 
+```ocaml
 (* ========================================================================= *)
 (* Part 1: The main part of the inductive definitions package.               *)
 (* This proves that a certain definition yields the requires theorems.       *)
@@ -238,14 +245,39 @@ let derive_nonschematic_inductive_relations =
     let rulethm' = EQ_MP canonthm' rulethm
     and indthm' = CONV_RULE (ONCE_DEPTH_CONV (REWR_CONV canonthm')) indthm in
     CONJ rulethm' (CONJ indthm' casethm);;
+```
+`` SIMPLE_DISJ_PAIR `P \/ Q |- R` `` gives `` (`P |- R`, `Q |- R`) ``.
 
+`` HALF_BETA_EXPAND [`x`;`y`] `|- f = \x y. A[x,y]` `` gives
+`` `|- !x y. f x y = A[x,y]` ``.
+
+`AND_IMPS_CONV` rewrites
+`(!x1..xn. P1[xs] ==> Q[xs]) /\ ... /\ (!x1..xn. Pm[xs] ==> Q[xs])` to
+`(!x1..xn. P1[xs] \/ ... \/ Pm[xs] ==> Q[xs])`.
+
+`FORALL_IMPS_CONV` rewrites `!x y. P[x,y] ==> Q` to `(?x y. P[x,y]) ==> Q`.
+
+```ocaml
 (* ========================================================================= *)
 (* Part 2: Tactic-integrated tools for proving monotonicity automatically.   *)
 (* ========================================================================= *)
 
 let monotonicity_theorems = ref
  [MONO_AND; MONO_OR; MONO_IMP; MONO_NOT; MONO_EXISTS; MONO_FORALL];;
+```
+`val ( MONO_AND ) : thm = |- (A ==> B) /\ (C ==> D) ==> A /\ C ==> B /\ D`
 
+`val ( MONO_OR ) : thm = |- (A ==> B) /\ (C ==> D) ==> A \/ C ==> B \/ D`
+
+`val ( MONO_IMP ) : thm = |- (B ==> A) /\ (C ==> D) ==> (A ==> C) ==> B ==> D`
+
+`val ( MONO_NOT ) : thm = |- (B ==> A) ==> ~A ==> ~B`
+
+`val ( MONO_EXISTS ) : thm = |- (!x. P x ==> Q x) ==> (?x. P x) ==> (?x. Q x)`
+
+`val ( MONO_FORALL ) : thm = |- (!x. P x ==> Q x) ==> (!x. P x) ==> (!x. Q x)`
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Attempt to backchain through the monotonicity theorems.                   *)
 (* ------------------------------------------------------------------------- *)
@@ -281,7 +313,21 @@ let MONO_TAC =
       (!monotonicity_theorems) ["",MONO_ABS_TAC] in
     let MONO_STEP_TAC = REPEAT GEN_TAC THEN APPLY_MONOTAC tacs in
     (REPEAT MONO_STEP_TAC THEN ASM_REWRITE_TAC[]) gl;;
+```
+`MONO_TAC` is the same as `REPEAT MONO_STEP_TAC THEN ASM_REWRITE_TAC[]`.
 
+`BACKCHAIN_TAC:` is a simplified version of MATCH_MP_TAC to "avoid quantifier
+troubles".
+
+`MONO_ABS_TAC` rewrites `?- (\x. P[x]) x1 .. xn ==> (\y. Q[y]) x1 .. xn` to
+`?- !x1. P[x1] x2 .. xn ==> Q[x1] x2 .. xn`
+
+`APPLY_MONOTAC` tries to prove `a ==> a` automatically; otherwise, selects a
+tactic from mono_tactics and applies it. (This is out of date.)
+
+`MONO_STEP_TAC` is the same as `REPEAT GEN_TAC THEN APPLY_MONOTAC`.
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Attempt to dispose of the non-equational assumption(s) of a theorem.      *)
 (* ------------------------------------------------------------------------- *)

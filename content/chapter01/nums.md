@@ -303,6 +303,9 @@ let new_specification =
           the_specifications := ((names,th),sth)::(!the_specifications);
           sth;;
 ```
+`` new_specification ["foo";"bar";"baz"] `?x y z.P[x,y,z]` `` defines `"foo"`,
+`"bar"`, and `"baz"` as new constants and returns a theorem `|- P[foo,bar,baz]`.
+
 
 - Previous: [pair.ml](pair.md)
 - [Index](index.md)
