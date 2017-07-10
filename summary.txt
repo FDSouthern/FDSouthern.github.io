@@ -1,46 +1,29 @@
 ###### canon:
 
-PRESIMP_CONV is a conversion which simplifies literal `T` and `F` as the
-arguments of not,and,or,implies,equality, etc.; and moves connectives
-out of quantifiers whenever possible.
 
-NNF_CONV and NNFC_CONV move negations inward past and,or,implies,forall,
-exists,exists_unique,iff.  These conversions also eliminate iff
-and implication.  (There are two possible ways to eliminate
-iff; NNF_CONV uses the method which makes DNF smaller, and NNFC_CONV uses
-the method which makes CNF smaller.)
-
-SKOLEM_CONV moves existential quantifiers outward past or,and,forall.
-(skolemizing when an existential moves past a universal).  Does not handle
-existentials inside negations.
-
-PRENEX_CONV moves universal quantifiers outward past or,and.
-
-MINISCOPE_FORALL moves universal quantifiers inward past or,and,forall.
-(For instance, `!x y. P x y \/ Q y` would become `!y. (!x. P x y) \/ Q y`.)
-
-PROP_CNF_CONV uses DeMorgan's laws and associativity to move to
-conjunctive normal form.
-
-PROP_DNF_CONV uses DeMorgan's laws and associativity to move to
-disjunctive normal form.
-
-REFUTE_THEN tht changes the goal from `p` to `F` and runs tht on the
-assumption `|- ~p`.
-
+```
 SPLIT_TAC lev
 Starts by replacing any assumption `|- a /\ b` with separate assumptions
 `|- a` and `|- b`.  Then, up to lev levels deep, it removes an assumption
 `|- a \/ b`, splits into two subgoals, adds assumption `|- a` in one
 subgoal, and adds assumption `|- b` in the other.
 
+```ocaml
+
+```
 EQ_ABS_CONV rewrites `f = \x y z. A[x,y,z]` to `!x y z. f x y z = A[x,y,z]`.
 It never fails.
 
+```ocaml
+
+```
 DELAMB_CONV repeatedly rewrites `(\x. s x) = t` to `!x. s x = t x`
 (and similarly if the lambda is on the right) and applies beta reduction
 until no more progress can be made.  It never fails.
 
+```ocaml
+
+```
 I'm not documenting GEN_FOL_CONV.
 FOL_CONV takes a term and makes sure that for every constant, whenever
 it is used, it is always applied to the same number of arguments.  It
@@ -49,9 +32,14 @@ anywhere it is applied to more arguments, the application
 `f x1 ... xn` is changed to `I (f x1 ... x(n-1)) xn` (this process
 is repeated, if necessary).
 
+```ocaml
+
+```
 ASM_FOL_TAC
 Uses the technique of FOL_CONV, but applies throughout the entire goalstate
 (goal and assumptions).
+
+```ocaml
 
 ###### meson:
 

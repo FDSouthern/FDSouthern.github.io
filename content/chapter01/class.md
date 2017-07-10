@@ -263,7 +263,11 @@ let REFUTE_THEN =
     if w = f_tm then ALL_TAC gl
     else if is_neg w then DISCH_THEN ttac gl
     else (CONV_TAC conv THEN DISCH_THEN ttac) gl;;
+```
+`REFUTE_THEN tht` changes the goal from `p` to `F` and runs the theorem tactic
+`tht` on the assumption `|- ~p`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Infinite de Morgan laws.                                                  *)
 (* ------------------------------------------------------------------------- *)

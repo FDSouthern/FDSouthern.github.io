@@ -17,7 +17,12 @@ let PRESIMP_CONV =
     FORALL_SIMP; EXISTS_SIMP; EXISTS_OR_THM; FORALL_AND_THM;
     LEFT_EXISTS_AND_THM; RIGHT_EXISTS_AND_THM;
     LEFT_FORALL_OR_THM; RIGHT_FORALL_OR_THM];;
+```
+`PRESIMP_CONV` is a conversion which simplifies the literals `T` and `F` as the
+arguments of not,and,or,implies,equality, etc.; and moves connectives out of the
+scope of quantifiers whenever possible.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* ACI rearrangements of conjunctions and disjunctions. This is much faster  *)
 (* than AC xxx_ACI on large problems, as well as being more controlled.      *)
@@ -348,7 +353,13 @@ let NNF_CONV =
 
 let NNFC_CONV =
   (GEN_NNF_CONV true (ALL_CONV,fun t -> REFL t,REFL(mk_neg t)) :conv);;
+```
+`NNF_CONV` and `NNFC_CONV` move negations inward past and,or,implies,forall,
+exists,exists_unique,iff.  These conversions also eliminate iff and implication.
+(There are two possible ways to eliminate iff; `NNF_CONV` uses the method which
+makes DNF smaller, and `NNFC_CONV` uses the method which makes CNF smaller.)
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Skolemize a term already in NNF (doesn't matter if it's not prenex).      *)
 (* ------------------------------------------------------------------------- *)
@@ -365,7 +376,12 @@ let SKOLEM_CONV =
     RIGHT_OR_EXISTS_THM;
     LEFT_OR_EXISTS_THM;
     SKOLEM_THM];;
+```
+`SKOLEM_CONV` moves existential quantifiers outward past or,and,forall
+(Skolemizing when an existential moves past a universal).  Does not handle
+existentials inside negations.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Put a term already in NNF into prenex form.                               *)
 (* ------------------------------------------------------------------------- *)
@@ -376,7 +392,10 @@ let PRENEX_CONV =
     LEFT_OR_FORALL_THM; RIGHT_OR_FORALL_THM;
     OR_EXISTS_THM; LEFT_OR_EXISTS_THM; RIGHT_OR_EXISTS_THM;
     LEFT_AND_EXISTS_THM; RIGHT_AND_EXISTS_THM];;
+```
+`PRENEX_CONV` moves universal quantifiers outward past or,and.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Weak and normal DNF conversion. The "weak" form gives a disjunction of    *)
 (* conjunctions, but has no particular associativity at either level and     *)
@@ -424,7 +443,11 @@ let WEAK_DNF_CONV,DNF_CONV =
     let th = substrongdnf tm in
     TRANS th (strengthen(rand(concl th))) in
   weakdnf,strongdnf;;
+```
+`DNF_CONV` uses DeMorgan's laws and associativity to move to disjunctive normal
+form.  (What does `WEAK_` mean?)
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Likewise for CNF.                                                         *)
 (* ------------------------------------------------------------------------- *)
@@ -466,7 +489,11 @@ let WEAK_CNF_CONV,CNF_CONV =
     let th = substrongcnf tm in
     TRANS th (strengthen(rand(concl th))) in
   weakcnf,strongcnf;;
+```
+`CNF_CONV` uses DeMorgan's laws and associativity to move to conjunctive normal
+form.  (What does `WEAK_` mean?)
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Simply right-associate w.r.t. a binary operator.                          *)
 (* ------------------------------------------------------------------------- *)
