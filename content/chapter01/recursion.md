@@ -5,6 +5,8 @@ title: recursion.ml
 [Original file](https://github.com/jrh13/hol-light/blob/master/recursion.ml)
 
 Definition by primitive recursion and other tools for inductive types.
+Mostly subsumed by `define`, but sometimes useful for efficiency or other
+reasons.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)

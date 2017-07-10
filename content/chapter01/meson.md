@@ -4,6 +4,7 @@ title: meson.ml
 
 [Original file](https://github.com/jrh13/hol-light/blob/master/meson.ml)
 
+A general first-order theorem prover.
 Version of the MESON procedure a la PTTP. Various search options.
 
 ```ocaml
@@ -798,7 +799,13 @@ module Meson = struct
      (if n > 0 then FIRST_X_ASSUM DISJ_CASES_TAC THEN SPLIT_TAC (n - 1)
       else NO_TAC) ORELSE
      ALL_TAC) g
+```
+`SPLIT_TAC n g` starts by replacing any assumption `|- a /\ b` with separate
+assumptions `|- a` and `|- b`.  Then, up to `n` levels deep, it removes an
+assumption `|- a \/ b`, splits into two subgoals, adds assumption `|- a` in one
+subgoal, and adds assumption `|- b` in the other.
 
+```ocaml
 end;;
 
 (* ------------------------------------------------------------------------- *)
@@ -829,15 +836,26 @@ let GEN_MESON_TAC min max step ths =
   RULE_ASSUM_TAC(CONV_RULE(ASSOC_CONV DISJ_ASSOC)) THEN
   REPEAT (FIRST_X_ASSUM SUBST_VAR_TAC) THEN
   Meson.PURE_MESON_TAC min max step;;
+```
+`GEN_MESON_TAC min max step ths` is like `MESON_TAC` below, but with explicit
+start (`min`), finish (`max`) and step (`step`) for the iterative deepening.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Common cases.                                                             *)
 (* ------------------------------------------------------------------------- *)
 
 let ASM_MESON_TAC = GEN_MESON_TAC 0 50 1;;
+```
+`ASM_MESON_TAC ths` tries to prove the goal using Meson, using the assumptions
+and the theorems in `ths`.
 
+```ocaml
 let MESON_TAC ths = POP_ASSUM_LIST(K ALL_TAC) THEN ASM_MESON_TAC ths;;
+```
+`MESON_TAC ths` tries to prove the goal using Meson, ignoring assumptions.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Also introduce a rule.                                                  *)
 (* ------------------------------------------------------------------------- *)

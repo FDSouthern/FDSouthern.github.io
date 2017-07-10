@@ -741,7 +741,17 @@ let ASM_FOL_TAC =
   fun (asl,w as gl) ->
     let headsp = itlist (get_thm_heads o snd) asl ([],[]) in
     RULE_ASSUM_TAC(CONV_RULE(GEN_FOL_CONV headsp)) gl;;
+```
+`FOL_CONV` takes a term and makes sure that for every constant, whenever it is
+used, it is always applied to the same number of arguments.  It does this by
+finding the minimal number of arguments for each constant.  Anywhere it is
+applied to more arguments, the application `f x1 ... xn` is changed to
+`I (f x1 ... x(n-1)) xn` (this process is repeated, if necessary).
 
+`ASM_FOL_TAC` uses the technique of `FOL_CONV`, but applies throughout the
+entire goalstate (goal and assumptions).
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Depth conversion to apply at "atomic" formulas in "first-order" term.     *)
 (* ------------------------------------------------------------------------- *)

@@ -24,7 +24,15 @@ let GABS_DEF = new_definition
 
 let GEQ_DEF = new_definition
  `GEQ a b = (a:A = b)`;;
+```
+`LET`, `LET_END`, `GABS`, and `GEQ` are syntactic markers used by the parser and
+printer, so that you can read in a let expression, or an extended lambda
+expression, and print it back out.
 
+The term `let x = 3 and y = 4 in x+y` would be parsed as
+`LET (\x y. LET_END (x+y)) 3 4`.
+
+```ocaml
 let _SEQPATTERN = new_definition
  `_SEQPATTERN = \r s x. if ?y. r x y then r x else s x`;;
 
@@ -53,6 +61,15 @@ let PAIR_EXISTS_THM = prove
 
 let prod_tybij = new_type_definition
   "prod" ("ABS_prod","REP_prod") PAIR_EXISTS_THM;;
+```
+This defines a new type `(a,b)prod`, which is in bijection with a subset of the
+type `a->b->bool` (the range of the function mk_pair).
+
+`val prod_tybij : thm =
+   |- (!a. ABS_prod (REP_prod a) = a) /\
+      (!r. (?a b. r = mk_pair a b) = REP_prod (ABS_prod r) = r)`
+
+```ocaml
 
 let REP_ABS_PAIR = prove
  (`!(x:A) (y:B). REP_prod (ABS_prod (mk_pair x y)) = mk_pair x y`,
@@ -191,7 +208,31 @@ let UNCURRY_DEF = new_definition
 
 let PASSOC_DEF = new_definition
  `!f x y z. PASSOC (f:(A#B)#C->D) (x,y,z) = f ((x,y),z)`;;
+```
+I wonder why it's called `PASSOC`.
 
+Let me describe extended lambda expressions.  The "variable" for a lambda
+expression can actually be an arbitrary expression.  For example(?)
+`(\P[x,y]. Q[x,y])` is taken to mean `@f. !x y. (f (P[x,y])) = Q[x,y]`.
+This makes perfect sense for pairs; for instance, `\(x,y).x` is equal to `FST`.
+It also makes sense in other situations:  `\(x+&1).x` is equal to `\x.x-&1`.
+Other cases are stranger:  `\(x*2).x` is a function which divides even numbers
+by 2, but its behaviour on odd numbers is undefined.
+
+Extended binders of all sorts are defined by extension.  `!(x*2).P[x]` means
+`(!) (\(x*2).P[x])`; the value of this expression may not be determined, since
+it may depend on the (unspecified) behaviour of the lambda term on odd
+arguments.  `!(x,y).P[x,y]` is perfectly meaningful, although not necessarily
+useful; it means the same thing as `!x y.P[x,y]`.
+
+I said above that
+`(\P[x,y]. Q[x,y])` is taken to mean `@f. !x y. (f (P[x,y])) = Q[x,y]`, however,
+to allow these functions to be printed back out in the same syntax they were
+read in, special markers are used.  `GABS` is defined to equal `(@)`, and `GEQ`
+is defined to equal `(=)`, so the internal form of the above is actually
+`GABS (\f. !x y. GEQ (f (P[x,y])) Q[x,y])`.
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Analog of ABS_CONV for generalized abstraction.                           *)
 (* ------------------------------------------------------------------------- *)
@@ -277,7 +318,11 @@ let GEN_BETA_CONV =
     let th6 = CONV_RULE BETA_CONV (GABS_RULE th5) in
     INSTANTIATE instn (DEGEQ_RULE (SPEC_ALL th6)) in
   GEN_BETA_CONV;;
+```
+`GEN_BETA_CONV` reduces generalised beta-redexes such as
+`(\(x,y). x + y) (1,2)`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Add this to the basic "rewrites" and pairs to the inductive type store.   *)
 (* ------------------------------------------------------------------------- *)
@@ -408,7 +453,11 @@ let let_CONV =
     let n = length es in
     if length vs <> n then failwith "let_CONV" else
     (EXPAND_BETAS_CONV THENC lete_CONV) tm;;
+```
+let_CONV reduces a "let" expression.  (Again, it handles extended definitions,
+if they only use pairs.)
 
+```ocaml
 let (LET_TAC:tactic) =
   let is_trivlet tm =
     try let assigs,bod = dest_let tm in
@@ -450,6 +499,8 @@ let (LET_TAC:tactic) =
         let tm' = follow_path path w' in
         CONV_TAC(PATH_CONV path (K(let_CONV tm'))))) gl;;
 ```
+`LET_TAC` replaces `let x = t in p[x]` in goal with `p[x]` given a new
+hypothesis `t = x`.
 
 - Previous: [impconv.ml](impconv.md)
 - [Index](index.md)

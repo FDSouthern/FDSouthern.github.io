@@ -12,7 +12,11 @@ The axiom of infinity; construction of the natural numbers.
 (* ------------------------------------------------------------------------- *)
 
 new_type ("ind",0);;
+```
+We define a new type of individuals, `ind`.  We are going to axiomatise that
+`ind` has an infinite number of elements.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* We assert the axiom of infinity as in HOL88, but then we can forget it!   *)
 (* ------------------------------------------------------------------------- *)
@@ -25,7 +29,10 @@ let ONTO = new_definition
 
 let INFINITY_AX = new_axiom
   `?f:ind->ind. ONE_ONE f /\ ~(ONTO f)`;;
+```
+"Forgetting about" this means it's never used again.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Actually introduce constants.                                             *)
 (* ------------------------------------------------------------------------- *)
@@ -44,9 +51,20 @@ let IND_SUC_SPEC =
    `IND_0 = @z:ind. (!x1 x2. IND_SUC x1 = IND_SUC x2 <=> x1 = x2) /\
                     (!x. ~(IND_SUC x = z))` in
   REWRITE_RULE[GSYM th3] (SELECT_RULE th2);;
+```
+This defines two constants `IND_SUC` and `IND_0`, using `new_definition`
+with `IND_SUC_0_EXISTS` (which are wrapped up into one specification?).
 
+```ocaml
 let IND_SUC_INJ,IND_SUC_0 = CONJ_PAIR IND_SUC_SPEC;;
+```
+These are the two theorems returned:
+```
+val ( IND_SUC_INJ ) : thm = |- !x1 x2. (IND_SUC x1 = IND_SUC x2) = x1 = x2
+val ( IND_SUC_0 ) : thm = |- !x. ~(IND_SUC x = IND_0)
+```
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Carve out the natural numbers inductively.                                *)
 (* ------------------------------------------------------------------------- *)
@@ -55,11 +73,32 @@ let NUM_REP_RULES,NUM_REP_INDUCT,NUM_REP_CASES =
   new_inductive_definition
    `NUM_REP IND_0 /\
     (!i. NUM_REP i ==> NUM_REP (IND_SUC i))`;;
+```
+This returns the following theorems:
 
+```
+val ( NUM_REP_RULES ) : thm =
+  |- NUM_REP IND_0 /\ (!i. NUM_REP i ==> NUM_REP (IND_SUC i))
+val ( NUM_REP_INDUCT ) : thm =
+  |- !NUM_REP'. NUM_REP' IND_0 /\ (!i. NUM_REP' i ==> NUM_REP' (IND_SUC i))
+                ==> (!a. NUM_REP a ==> NUM_REP' a)
+val ( NUM_REP_CASES ) : thm =
+  |- !a. NUM_REP a = (a = IND_0) \/ (?i. (a = IND_SUC i) /\ NUM_REP i)
+```
+
+```ocaml
 let num_tydef = new_basic_type_definition
   "num" ("mk_num","dest_num")
     (CONJUNCT1 NUM_REP_RULES);;
+```
+This defines the type `num`, which has a bijection with the `NUM_REP` subset of
+`ind`.  This gives the following theorems:
+```
+val num_tydef : thm * thm =
+  (|- mk_num (dest_num a) = a, |- NUM_REP r = dest_num (mk_num r) = r)
+```
 
+```ocaml
 let ZERO_DEF = new_definition
  `_0 = mk_num IND_0`;;
 
@@ -150,12 +189,30 @@ let NUMERAL =
   let numeral_tm = mk_var("NUMERAL",funn_ty) in
   let n_tm = mk_var("n",num_ty) in
   new_definition(mk_eq(mk_comb(numeral_tm,n_tm),n_tm));;
+```
+This is the definition of `NUMERAL`.  The HOL Light parser reads decimal numbers
+and turns them internally into terms starting with `NUMERAL`, then the printer
+turns them back into decimal numbers.
 
+`val ( NUMERAL ) : thm = |- !n. NUMERAL n = n`
+
+```ocaml
 let [NOT_SUC; num_INDUCTION; num_Axiom] =
   let th = prove(`_0 = 0`,REWRITE_TAC[NUMERAL]) in
   map (GEN_REWRITE_RULE DEPTH_CONV [th])
     [NOT_SUC; num_INDUCTION; num_Axiom];;
+```
+Now we can use the decimal number `0`, rather than the symbol `_0`.  We prove
+new versions of the above three theorems, replacing `_0` with `0`.  (We give
+them the same names as the old theorems, which are now inaccessible.)
+```
+val ( NOT_SUC ) : thm = |- !n. ~(SUC n = 0)
+val num_INDUCTION : thm = |- !P. P 0 /\ (!n. P n ==> P (SUC n)) ==> (!n. P n)
+val num_Axiom : thm =
+  |- !e f. ?!fn. (fn 0 = e) /\ (!n. fn (SUC n) = f (fn n) n)
+```
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Induction tactic.                                                         *)
 (* ------------------------------------------------------------------------- *)
@@ -163,11 +220,19 @@ let [NOT_SUC; num_INDUCTION; num_Axiom] =
 let (INDUCT_TAC:tactic) =
   MATCH_MP_TAC num_INDUCTION THEN
   CONJ_TAC THENL [ALL_TAC; GEN_TAC THEN DISCH_TAC];;
+```
+`INDUCT_TAC` takes a goal `!x. P[x]` and creates subgoals `P[0]` and `P[SUC n]`
+(the latter with an assumption `P[n]`).
 
+```ocaml
 let num_RECURSION =
   let avs = fst(strip_forall(concl num_Axiom)) in
   GENL avs (EXISTENCE (SPECL avs num_Axiom));;
+```
+`val num_RECURSION : thm =
+   |- !e f. ?fn. (fn 0 = e) /\ (!n. fn (SUC n) = f (fn n) n)`
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Cases theorem.                                                            *)
 (* ------------------------------------------------------------------------- *)

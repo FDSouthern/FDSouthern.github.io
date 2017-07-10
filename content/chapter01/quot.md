@@ -30,7 +30,19 @@ let define_quotient_type =
     let th2 = EQ_MP (SYM th0) th1 in
     let abs,rep = new_basic_type_definition tyname (absname,repname) th2 in
     abs,CONV_RULE(LAND_CONV BETA_CONV) rep;;
+```
+`` define_quotient_type "newtype" ("newtypeABS","newtypeREP") `\x y. P[x,y]` ``
+defines a new type `newtype` with a bijection to a subset of `oldtype->bool`
+(where `oldtype` is the type of `x`).  This subset is defined by the predicate
+`\s. ?x. s = \y. P[x,y]`.  (If `P[x,y]` is symmetric, reflexive, and transitive,
+then `newtype` is isomorphic to the quotient of `oldtype` by P.)
+Along with the new type, it also defines new constants `newtypeABS` and
+`newtypeREP`, and returns theorems:
 
+`` (`|- newtypeABS (newtypeREP a) = a`,
+ `|- (?x. r = (\x y. P[x,y]) x) = newtypeREP (newtypeABS r) = r`) ``
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Given a welldefinedness theorem for a curried function f, of the form:    *)
 (*                                                                           *)
