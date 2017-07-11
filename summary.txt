@@ -1,322 +1,11 @@
-###### arith.ml:
-
-```ocaml
-```
-This is the definition of PRE (predecessor).
-val ( PRE ) : thm = |- (PRE 0 = 0) /\ (!n. PRE (SUC n) = n)
-
-This is the definition of (+).
-val ( ADD ) : thm = |- (!n. 0 + n = n) /\ (!m n. SUC m + n = SUC (m + n))
-
-val ( ADD_0 ) : thm = |- !m. m + 0 = m
-val ( ADD_SUC ) : thm = |- !m n. m + SUC n = SUC (m + n)
-val ( ADD_CLAUSES ) : thm =
-  |- (!n. 0 + n = n) /\
-     (!m. m + 0 = m) /\
-     (!m n. SUC m + n = SUC (m + n)) /\
-     (!m n. m + SUC n = SUC (m + n))
-val ( ADD_SYM ) : thm = |- !m n. m + n = n + m
-val ( ADD_ASSOC ) : thm = |- !m n p. m + n + p = (m + n) + p
-val ( ADD_AC ) : thm =
-  |- (m + n = n + m) /\ ((m + n) + p = m + n + p) /\ (m + n + p = n + m + p)
-val ( ADD_EQ_0 ) : thm = |- !m n. (m + n = 0) = (m = 0) /\ (n = 0)
-val ( EQ_ADD_LCANCEL ) : thm = |- !m n p. (m + n = m + p) = n = p
-val ( EQ_ADD_RCANCEL ) : thm = |- !m n p. (m + p = n + p) = m = n
-val ( EQ_ADD_LCANCEL_0 ) : thm = |- !m n. (m + n = m) = n = 0
-val ( EQ_ADD_RCANCEL_0 ) : thm = |- !m n. (m + n = n) = m = 0
-
-These are the definitions of BIT0 and BIT1.  The HOL Light parser
-parses decimal numbers into terms made of 0, BIT0, and BIT1, surrounded
-by NUMERAL.
-val ( BIT0 ) : thm = |- !n. BIT0 n = n + n
-val ( BIT1 ) : thm = |- !n. BIT1 n = SUC (n + n)
-
-val ( BIT0_THM ) : thm = |- !n. NUMERAL (BIT0 n) = NUMERAL n + NUMERAL n
-val ( BIT1_THM ) : thm =
-  |- !n. NUMERAL (BIT1 n) = SUC (NUMERAL n + NUMERAL n)
-val ( ONE ) : thm = |- 1 = SUC 0
-val ( TWO ) : thm = |- 2 = SUC 1
-val ( ADD1 ) : thm = |- !m. SUC m = m + 1
-
-This is the definition of (*)
-val ( MULT ) : thm = |- (!n. 0 * n = 0) /\ (!m n. SUC m * n = m * n + n)
-
-val ( MULT_0 ) : thm = |- !m. m * 0 = 0
-val ( MULT_SUC ) : thm = |- !m n. m * SUC n = m + m * n
-val ( MULT_CLAUSES ) : thm =
-  |- (!n. 0 * n = 0) /\
-     (!m. m * 0 = 0) /\
-     (!n. 1 * n = n) /\
-     (!m. m * 1 = m) /\
-     (!m n. SUC m * n = m * n + n) /\
-     (!m n. m * SUC n = m + m * n)
-val ( MULT_SYM ) : thm = |- !m n. m * n = n * m
-val ( LEFT_ADD_DISTRIB ) : thm = |- !m n p. m * (n + p) = m * n + m * p
-val ( RIGHT_ADD_DISTRIB ) : thm = |- !m n p. (m + n) * p = m * p + n * p
-val ( MULT_ASSOC ) : thm = |- !m n p. m * n * p = (m * n) * p
-val ( MULT_AC ) : thm =
-  |- (m * n = n * m) /\ ((m * n) * p = m * n * p) /\ (m * n * p = n * m * p)
-val ( MULT_EQ_0 ) : thm = |- !m n. (m * n = 0) = (m = 0) \/ (n = 0)
-val ( EQ_MULT_LCANCEL ) : thm =
-  |- !m n p. (m * n = m * p) = (m = 0) \/ (n = p)
-val ( EQ_MULT_RCANCEL ) : thm =
-  |- !m n p. (m * p = n * p) = (m = n) \/ (p = 0)
-val ( MULT_2 ) : thm = |- !n. 2 * n = n + n
-val ( MULT_EQ_1 ) : thm = |- !m n. (m * n = 1) = (m = 1) /\ (n = 1)
-
-This is the definition of EXP (exponentiation).
-val ( EXP ) : thm = |- (!m. m EXP 0 = 1) /\ (!m n. m EXP SUC n = m * m EXP n)
-
-val ( EXP_EQ_0 ) : thm = |- !m n. (m EXP n = 0) = (m = 0) /\ ~(n = 0)
-val ( EXP_ADD ) : thm = |- !m n p. m EXP (n + p) = m EXP n * m EXP p
-val ( EXP_ONE ) : thm = |- !n. 1 EXP n = 1
-val ( EXP_1 ) : thm = |- !n. n EXP 1 = n
-val ( EXP_2 ) : thm = |- !n. n EXP 2 = n * n
-val ( MULT_EXP ) : thm = |- !p m n. (m * n) EXP p = m EXP p * n EXP p
-val ( EXP_MULT ) : thm = |- !m n p. m EXP (n * p) = m EXP n EXP p
-
-This is the definition of (<=)
-val ( LE ) : thm =
-  |- (!m. m <= 0 = m = 0) /\ (!m n. m <= SUC n = (m = SUC n) \/ m <= n)
-
-This is the definition of (<)
-val ( LT ) : thm = |- (!m. m < 0 = F) /\ (!m n. m < SUC n = (m = n) \/ m < n)
-
-This is the definition of (>=)
-val ( GE ) : thm = |- !n m. m >= n = n <= m
-
-This is the definition of (>)
-val ( GT ) : thm = |- !n m. m > n = n < m
-
-val ( LE_SUC_LT ) : thm = |- !m n. SUC m <= n = m < n
-val ( LT_SUC_LE ) : thm = |- !m n. m < SUC n = m <= n
-val ( LE_SUC ) : thm = |- !m n. SUC m <= SUC n = m <= n
-val ( LT_SUC ) : thm = |- !m n. SUC m < SUC n = m < n
-val ( LE_0 ) : thm = |- !n. 0 <= n
-val ( LT_0 ) : thm = |- !n. 0 < SUC n
-val ( LE_REFL ) : thm = |- !n. n <= n
-val ( LT_REFL ) : thm = |- !n. ~(n < n)
-val ( LE_ANTISYM ) : thm = |- !m n. m <= n /\ n <= m = m = n
-val ( LT_ANTISYM ) : thm = |- !m n. ~(m < n /\ n < m)
-val ( LET_ANTISYM ) : thm = |- !m n. ~(m <= n /\ n < m)
-val ( LTE_ANTISYM ) : thm = |- !m n. ~(m < n /\ n <= m)
-val ( LE_TRANS ) : thm = |- !m n p. m <= n /\ n <= p ==> m <= p
-val ( LT_TRANS ) : thm = |- !m n p. m < n /\ n < p ==> m < p
-val ( LET_TRANS ) : thm = |- !m n p. m <= n /\ n < p ==> m < p
-val ( LTE_TRANS ) : thm = |- !m n p. m < n /\ n <= p ==> m < p
-val ( LE_CASES ) : thm = |- !m n. m <= n \/ n <= m
-val ( LT_CASES ) : thm = |- !m n. m < n \/ n < m \/ (m = n)
-val ( LET_CASES ) : thm = |- !m n. m <= n \/ n < m
-val ( LTE_CASES ) : thm = |- !m n. m < n \/ n <= m
-val ( LE_LT ) : thm = |- !m n. m <= n = m < n \/ (m = n)
-val ( LT_LE ) : thm = |- !m n. m < n = m <= n /\ ~(m = n)
-val ( NOT_LE ) : thm = |- !m n. ~(m <= n) = n < m
-val ( NOT_LT ) : thm = |- !m n. ~(m < n) = n <= m
-val ( LT_IMP_LE ) : thm = |- !m n. m < n ==> m <= n
-val ( EQ_IMP_LE ) : thm = |- !m n. (m = n) ==> m <= n
-val ( LE_EXISTS ) : thm = |- !m n. m <= n = (?d. n = m + d)
-val ( LT_EXISTS ) : thm = |- !m n. m < n = (?d. n = m + SUC d)
-val ( LE_ADD ) : thm = |- !m n. m <= m + n
-val ( LE_ADDR ) : thm = |- !m n. n <= m + n
-val ( LT_ADD ) : thm = |- !m n. m < m + n = 0 < n
-val ( LT_ADDR ) : thm = |- !m n. n < m + n = 0 < m
-val ( LE_ADD_LCANCEL ) : thm = |- !m n p. m + n <= m + p = n <= p
-val ( LE_ADD_RCANCEL ) : thm = |- !m n p. m + p <= n + p = m <= n
-val ( LT_ADD_LCANCEL ) : thm = |- !m n p. m + n < m + p = n < p
-val ( LT_ADD_RCANCEL ) : thm = |- !m n p. m + p < n + p = m < n
-val ( LE_ADD2 ) : thm = |- !m n p q. m <= p /\ n <= q ==> m + n <= p + q
-val ( LET_ADD2 ) : thm = |- !m n p q. m <= p /\ n < q ==> m + n < p + q
-val ( LTE_ADD2 ) : thm = |- !m n p q. m < p /\ n <= q ==> m + n < p + q
-val ( LT_ADD2 ) : thm = |- !m n p q. m < p /\ n < q ==> m + n < p + q
-val ( LT_MULT ) : thm = |- !m n. 0 < m * n = 0 < m /\ 0 < n
-val ( LE_MULT2 ) : thm = |- !m n p q. m <= n /\ p <= q ==> m * p <= n * q
-val ( LT_LMULT ) : thm = |- !m n p. ~(m = 0) /\ n < p ==> m * n < m * p
-val ( LE_MULT_LCANCEL ) : thm = |- !m n p. m * n <= m * p = (m = 0) \/ n <= p
-val ( LE_MULT_RCANCEL ) : thm = |- !m n p. m * p <= n * p = m <= n \/ (p = 0)
-val ( LT_MULT_LCANCEL ) : thm = |- !m n p. m * n < m * p = ~(m = 0) /\ n < p
-val ( LT_MULT_RCANCEL ) : thm = |- !m n p. m * p < n * p = m < n /\ ~(p = 0)
-val ( EQ_SUC ) : thm = |- !m n. (SUC m = SUC n) = m = n
-val ( LT_MULT2 ) : thm = |- !m n p q. m < n /\ p < q ==> m * p < n * q
-val ( LE_SQUARE_REFL ) : thm = |- !n. n <= n * n
-val num_WF : thm = |- !P. (!n. (!m. m < n ==> P m) ==> P n) ==> (!n. P n)
-val num_WOP : thm = |- !P. (?n. P n) = (?n. P n /\ (!m. m < n ==> ~P m))
-val num_MAX : thm =
-  |- !P. (?x. P x) /\ (?M. !x. P x ==> x <= M) =
-         (?m. P m /\ (!x. P x ==> x <= m))
-
-These are the definitions of EVEN and ODD.
-val ( EVEN ) : thm = |- (EVEN 0 = T) /\ (!n. EVEN (SUC n) = ~EVEN n)
-val ( ODD ) : thm = |- (ODD 0 = F) /\ (!n. ODD (SUC n) = ~ODD n)
-
-val ( NOT_EVEN ) : thm = |- !n. ~EVEN n = ODD n
-val ( NOT_ODD ) : thm = |- !n. ~ODD n = EVEN n
-val ( EVEN_OR_ODD ) : thm = |- !n. EVEN n \/ ODD n
-val ( EVEN_AND_ODD ) : thm = |- !n. ~(EVEN n /\ ODD n)
-val ( EVEN_ADD ) : thm = |- !m n. EVEN (m + n) = EVEN m = EVEN n
-val ( EVEN_MULT ) : thm = |- !m n. EVEN (m * n) = EVEN m \/ EVEN n
-val ( EVEN_EXP ) : thm = |- !m n. EVEN (m EXP n) = EVEN m /\ ~(n = 0)
-val ( ODD_ADD ) : thm = |- !m n. ODD (m + n) = ~(ODD m = ODD n)
-val ( ODD_MULT ) : thm = |- !m n. ODD (m * n) = ODD m /\ ODD n
-val ( ODD_EXP ) : thm = |- !m n. ODD (m EXP n) = ODD m \/ (n = 0)
-val ( EVEN_DOUBLE ) : thm = |- !n. EVEN (2 * n)
-val ( ODD_DOUBLE ) : thm = |- !n. ODD (SUC (2 * n))
-val ( EVEN_EXISTS_LEMMA ) : thm =
-  |- !n. (EVEN n ==> (?m. n = 2 * m)) /\ (~EVEN n ==> (?m. n = SUC (2 * m)))
-val ( EVEN_EXISTS ) : thm = |- !n. EVEN n = (?m. n = 2 * m)
-val ( ODD_EXISTS ) : thm = |- !n. ODD n = (?m. n = SUC (2 * m))
-
-This is the definition of (-).  Note that according to this
-definition, if a<b, then a-b = 0.
-val ( SUB ) : thm = |- (!m. m - 0 = m) /\ (!m n. m - SUC n = PRE (m - n))
-
-val ( SUB_0 ) : thm = |- !m. (0 - m = 0) /\ (m - 0 = m)
-val ( SUB_PRESUC ) : thm = |- !m n. PRE (SUC m - n) = m - n
-val ( SUB_SUC ) : thm = |- !m n. SUC m - SUC n = m - n
-val ( SUB_REFL ) : thm = |- !n. n - n = 0
-val ( ADD_SUB ) : thm = |- !m n. (m + n) - n = m
-val ( ADD_SUB2 ) : thm = |- !m n. (m + n) - m = n
-val ( SUB_EQ_0 ) : thm = |- !m n. (m - n = 0) = m <= n
-val ( ADD_SUBR2 ) : thm = |- !m n. m - (m + n) = 0
-val ( ADD_SUBR ) : thm = |- !m n. n - (m + n) = 0
-val ( SUB_ADD ) : thm = |- !m n. n <= m ==> (m - n + n = m)
-val ( SUB_ADD_LCANCEL ) : thm = |- !m n p. (m + n) - (m + p) = n - p
-val ( SUB_ADD_RCANCEL ) : thm = |- !m n p. (m + p) - (n + p) = m - n
-val ( LEFT_SUB_DISTRIB ) : thm = |- !m n p. m * (n - p) = m * n - m * p
-val ( RIGHT_SUB_DISTRIB ) : thm = |- !m n p. (m - n) * p = m * p - n * p
-
-This is the definition of FACT (factorial).
-val ( FACT ) : thm = |- (FACT 0 = 1) /\ (!n. FACT (SUC n) = SUC n * FACT n)
-
-val ( FACT_LT ) : thm = |- !n. 0 < FACT n
-val ( FACT_LE ) : thm = |- !n. 1 <= FACT n
-val ( FACT_MONO ) : thm = |- !m n. m <= n ==> FACT m <= FACT n
-val ( DIVMOD_EXIST ) : thm =
-  |- !m n. ~(n = 0) ==> (?q r. (m = q * n + r) /\ r < n)
-
-This is the simultaneous definition, using new_specification, of DIV
-and MOD.
-val ( DIVISION ) : thm =
-  |- !m n. ~(n = 0) ==> (m = m DIV n * n + m MOD n) /\ m MOD n < n
-
-val ( DIVMOD_UNIQ_LEMMA ) : thm =
-  |- !m n q1 r1 q2 r2.
-         ((m = q1 * n + r1) /\ r1 < n) /\ (m = q2 * n + r2) /\ r2 < n
-         ==> (q1 = q2) /\ (r1 = r2)
-val ( DIVMOD_UNIQ ) : thm =
-  |- !m n q r. (m = q * n + r) /\ r < n ==> (m DIV n = q) /\ (m MOD n = r)
-val ( MOD_UNIQ ) : thm =
-  |- !m n q r. (m = q * n + r) /\ r < n ==> (m MOD n = r)
-val ( DIV_UNIQ ) : thm =
-  |- !m n q r. (m = q * n + r) /\ r < n ==> (m DIV n = q)
-val ( MOD_MULT ) : thm = |- !m n. ~(m = 0) ==> ((m * n) MOD m = 0)
-val ( DIV_MULT ) : thm = |- !m n. ~(m = 0) ==> ((m * n) DIV m = n)
-val ( DIV_DIV ) : thm =
-  |- !m n p. ~(n * p = 0) ==> (m DIV n DIV p = m DIV (n * p))
-val ( MOD_LT ) : thm = |- !m n. m < n ==> (m MOD n = m)
-val ( MOD_EQ ) : thm = |- !m n p q. (m = n + q * p) ==> (m MOD p = n MOD p)
-val ( DIV_MOD ) : thm =
-  |- !m n p. ~(n * p = 0) ==> ((m DIV n) MOD p = (m MOD (n * p)) DIV n)
-val ( DIV_1 ) : thm = |- !n. n DIV 1 = n
-val ( EXP_LT_0 ) : thm = |- !n x. 0 < x EXP n = ~(x = 0) \/ (n = 0)
-val ( DIV_LE ) : thm = |- !m n. ~(n = 0) ==> m DIV n <= m
-val ( DIV_MUL_LE ) : thm = |- !m n. n * m DIV n <= m
-val ( DIV_0 ) : thm = |- !n. ~(n = 0) ==> (0 DIV n = 0)
-val ( MOD_0 ) : thm = |- !n. ~(n = 0) ==> (0 MOD n = 0)
-val ( DIV_LT ) : thm = |- !m n. m < n ==> (m DIV n = 0)
-val ( MOD_MOD ) : thm =
-  |- !m n p. ~(n * p = 0) ==> (m MOD (n * p) MOD n = m MOD n)
-val ( MOD_MOD_REFL ) : thm = |- !m n. ~(n = 0) ==> (m MOD n MOD n = m MOD n)
-val ( DIV_MULT2 ) : thm =
-  |- !m n p. ~(m * p = 0) ==> ((m * n) DIV (m * p) = n DIV p)
-val ( MOD_MULT2 ) : thm =
-  |- !m n p. ~(m * p = 0) ==> ((m * n) MOD (m * p) = m * n MOD p)
-val ( MOD_1 ) : thm = |- !n. n MOD 1 = 0
-val ( MOD_EXISTS ) : thm =
-  |- !m n. (?q. m = n * q) = (if n = 0 then m = 0 else m MOD n = 0)
-val ( LT_EXP ) : thm =
-  |- !x m n.
-         x EXP m < x EXP n =
-         2 <= x /\ m < n \/ (x = 0) /\ ~(m = 0) /\ (n = 0)
-val ( LE_EXP ) : thm =
-  |- !x m n.
-         x EXP m <= x EXP n =
-         (if x = 0 then (m = 0) ==> (n = 0) else (x = 1) \/ m <= n)
-val ( DIV_MONO ) : thm = |- !m n p. ~(p = 0) /\ m <= n ==> m DIV p <= n DIV p
-val ( DIV_MONO_LT ) : thm =
-  |- !m n p. ~(p = 0) /\ m + p <= n ==> m DIV p < n DIV p
-val ( LE_LDIV ) : thm = |- !a b n. ~(a = 0) /\ b <= a * n ==> b DIV a <= n
-val ( LE_RDIV_EQ ) : thm =
-  |- !a b n. ~(a = 0) ==> (n <= b DIV a = a * n <= b)
-val ( LE_LDIV_EQ ) : thm =
-  |- !a b n. ~(a = 0) ==> (b DIV a <= n = b < a * (n + 1))
-val ( DIV_EQ_0 ) : thm = |- !m n. ~(n = 0) ==> ((m DIV n = 0) = m < n)
-val ( MOD_EQ_0 ) : thm =
-  |- !m n. ~(n = 0) ==> ((m MOD n = 0) = (?q. m = q * n))
-val ( EVEN_MOD ) : thm = |- !n. EVEN n = n MOD 2 = 0
-val ( ODD_MOD ) : thm = |- !n. ODD n = n MOD 2 = 1
-val ( MOD_MULT_RMOD ) : thm =
-  |- !m n p. ~(n = 0) ==> ((m * p MOD n) MOD n = (m * p) MOD n)
-val ( MOD_MULT_LMOD ) : thm =
-  |- !m n p. ~(n = 0) ==> ((m MOD n * p) MOD n = (m * p) MOD n)
-val ( MOD_MULT_MOD2 ) : thm =
-  |- !m n p. ~(n = 0) ==> ((m MOD n * p MOD n) MOD n = (m * p) MOD n)
-val ( MOD_EXP_MOD ) : thm =
-  |- !m n p. ~(n = 0) ==> ((m MOD n) EXP p MOD n = m EXP p MOD n)
-val ( MOD_MULT_ADD ) : thm = |- !m n p. (m * n + p) MOD n = p MOD n
-val ( MOD_ADD_MOD ) : thm =
-  |- !a b n. ~(n = 0) ==> ((a MOD n + b MOD n) MOD n = (a + b) MOD n)
-val ( DIV_ADD_MOD ) : thm =
-  |- !a b n.
-         ~(n = 0)
-         ==> (((a + b) MOD n = a MOD n + b MOD n) =
-              (a + b) DIV n =
-              a DIV n + b DIV n)
-val ( DIV_REFL ) : thm = |- !n. ~(n = 0) ==> (n DIV n = 1)
-val ( MOD_LE ) : thm = |- !m n. ~(n = 0) ==> m MOD n <= m
-val ( DIV_MONO2 ) : thm =
-  |- !m n p. ~(p = 0) /\ p <= m ==> n DIV m <= n DIV p
-val ( SUB_ELIM_THM ) : thm =
-  |- P (a - b) = (!d. ((b = a + d) ==> P 0) /\ ((a = b + d) ==> P d))
-
-SUB_ELIM_CONV rewrites with SUB_ELIM_THM (directly above).
-
-SUB_ELIM_TAC takes a goal `P[a-b]` and creates two subgoals.  In the
-first, the goal is changed to `P[0]`, `b` is rewritten to `a+d`
-throughout the goal state, and an assumption `b = a+d` is added.
-In the second, the goal is changed to `P[d]`, `a` is rewritten
-to `b+d` throughout the goal state, and an assumption `a=b+d` is added.
-
-val ( PRE_ELIM_THM ) : thm =
-  |- P (PRE n) = (!m. ((n = 0) ==> P 0) /\ ((n = SUC m) ==> P m))
-
-PRE_ELIM_CONV rewrites with PRE_ELIM_THM (directly above).
-
-PRE_ELIM_TAC takes a goal `P[PRE n]` and creates two subgoals.  In the
-first, the goal is changed to `P[0]`, `n` is rewritten to `0` throughout
-the goal state, and an assumption `n=0` is added.  In the second, the
-goal is changed to `P[m]`, `n` is rewritten to `SUC m` throughout
-the goal state, and an assumption `n = SUC m` is added.
-
-val ( DIVMOD_ELIM_THM ) : thm =
-  |- ~(n = 0)
-     ==> (P (m DIV n) (m MOD n) = (!q r. (m = q * n + r) /\ r < n ==> P q r))
-
-DIVMOD_ELIM_TAC finds either a subterm `m DIV n` or `m MOD n` in
-the current goal.  It uses these to view the goal as `P[m DIV n,m MOD n]`.
-It then changes the goal to
-`~(n = 0) /\
-  ((m = q*n + r) /\ r < n ==> P[q;r]`
-
-NUM_CANCEL_CONV rewrites `(c+(b+a)) = (b+d)+a` to `c=d`
-
-LE_IMP `|- a <= b``` gives ``(GEN_ALL `|- b <= p ==> a <= p`)
-
 ###### wf.ml:
 
+```
 This is the definition of WF.
 val ( WF ) : thm =
   |- !(<<). WF (<<) = (!P. (?x. P x) ==> (?x. P x /\ (!y. y << x ==> ~P y)))
-
+```ocaml
+```
 val ( WF_EQ ) : thm =
   |- WF (<<) = (!P. (?x. P x) = (?x. P x /\ (!y. y << x ==> ~P y)))
 val ( WF_IND ) : thm =
@@ -359,24 +48,30 @@ val ( WF_num ) : thm = |- WF (<)
 val ( WF_REC_num ) : thm =
   |- !H. (!f g n. (!m. m < n ==> (f m = g m)) ==> (H f n = H g n))
          ==> (?f. !n. f n = H f n)
-
+```ocaml
+```
 This is the definition of measure.
 val measure : thm = |- !m. measure m = (\x y. m x < m y)
-
+```ocaml
+```
 val ( WF_MEASURE ) : thm = |- !m. WF (measure m)
 val ( WF_REFL ) : thm = |- !x. WF (<<) ==> ~(x << x)
 val ( WF_REC_TAIL ) : thm =
   |- !P g h. ?f. !x. f x = (if P x then f (g x) else h x)
-
+```ocaml
+```
 WF_INDUCT_THEN
 WF_INDUCT_TAC
 Perform wellfounded induction over a nominated measure function. Sometimes
 avoids explicit "!n t. size(t) = n ==> ..." goal.
+```ocaml
 
 ###### calc_num.ml:
-
+```ocaml
+```
 mangle takes a theorem and rewrites its conclusion to elide NUMERAL.
-
+```ocaml
+```
 val ( ARITH_ZERO ) : thm = |- (NUMERAL 0 = 0) /\ (BIT0 _0 = _0)
 val ( ARITH_SUC ) : thm =
   |- (!n. SUC (NUMERAL n) = NUMERAL (SUC n)) /\
@@ -605,40 +300,49 @@ val ( ARITH ) : thm =
      (!m n. BIT0 m - BIT1 n = PRE (BIT0 (m - n))) /\
      (!m n. BIT1 m - BIT0 n = (if n <= m then BIT1 (m - n) else _0)) /\
      (!m n. BIT1 m - BIT1 n = BIT0 (m - n))
-
+```ocaml
+```
 NUM_SUC_CONV rewrites a term of the form `SUC k`, where k is a numeral.
 NUM_ADD_CONV rewrites a term of the form `j + k`, where j and k are numerals.
 NUM_SUC_CONV' and NUM_ADD_CONV' are the same, except that they expect
 numerals without the NUMERAL tag.
-
+```ocaml
+```
 NUM_PRE_CONV rewrites a term of the form `PRE k`, where k is a numeral.
-
+```ocaml
+```
 NUM_REL_CONV rewrites a term of the form `j OP k`, where j and k
 are numerals, and op is (<), (<=), (>), (>=), (=).
 NUM_REL_CONV' is the same, except that it expects numerals without
 the NUMERAL tag and does not deal with (>) or (>=).
-
+```ocaml
+```
 NUM_EQ_CONV, NUM_LE_CONV, NUM_LT_CONV, NUM_GE_CONV, NUM_GT_CONV
 Like NUM_REL_CONV, but only works if the op matches the conversion
 name.  (You could always use NUM_REL_CONV instead of these, unless
 you deliberately want to fail on the wrong op.  These will be
 very slightly more efficient.)
-
+```ocaml
+```
 NUM_EVEN_CONV, NUM_ODD_CONV
 rewrite terms of the form `EVEN k` and `ODD k` respectively, where k
 is a numeral.
-
+```ocaml
+```
 NUM_SUB_CONV rewrites a term of the form `j - k`, where j and k
 are numerals.
-
+```ocaml
+```
 NUM_MULT_CONV rewrites a term of the form `j * k`, where j and k
 are numerals.
 NUM_MULT_CONV' is the same, except that it expects numerals without
 the NUMERAL tag.
-
+```ocaml
+```
 NUM_EXP_CONV rewrites a term of the form `j EXP k`, where j and k
 are numerals.
-
+```ocaml
+```
 NUM_DIV_CONV and NUM_MOD_CONV rewrite terms of the forms `j DIV k`
 and `j MOD k` respectively, where j and k are numerals.
 NUM_DIVMOD_CONV (j:Num.num) (k:Num.num) produces a theorem
@@ -647,85 +351,110 @@ are the numerals for j and k, and JDIVK and JMODK are the appropriate
 numerals.  (NUM_DIV_CONV and NUM_MID_CONV each call this function;
 if you need to compute both DIV and MOD, it's about twice as
 fast to do both together with NUM_DIVMOD_CONV.)
-
+```ocaml
+```
 NUM_FACT_CONV rewrites terms of the form `FACT k` where k is a numeral.
-
+```ocaml
+```
 NUM_RED_CONV reduces `SUC j`, `PRE j`, `FACT j`, `j < k`, `j <= k`,
 `j > k`, `j >= k`, `j = k`, `EVEN j`, `ODD j`, `j + k`, `j - k`,
 `j * k`, `j EXP k`, `j DIV k`, or `j MOD k` (where j and k are numerals).
-
+```ocaml
+```
 NUM_REDUCE_CONV reduces the above numeral expressions depth-first
 throughout the expression.
-
+```ocaml
+```
 NUM_REDUCE_TAC reduces numeral expressions in the goal.
-
+```ocaml
+```
 num_CONV rewrites `j` to `SUC (J-1)`, where J-1 is the numeral for j - 1.
-
+```ocaml
+```
 EXPAND_CASES_CONV rewrites `!n. n < 5 ==> P[n]` to
 `P[0] /\ P[1] /\ P[2] /\ P[3] /\ P[4]`
-
+```ocaml
+```
 ###### ind-types.ml:
-
+```ocaml
+```
 val ( INJ_INVERSE2 ) : thm =
   |- !P. (!x1 y1 x2 y2. (P x1 y1 = P x2 y2) = (x1 = x2) /\ (y1 = y2))
          ==> (?X Y. !x y. (X (P x y) = x) /\ (Y (P x y) = y))
-
+```ocaml
+```
 This is the definition of NUMPAIR.
 val ( NUMPAIR ) : thm = |- !x y. NUMPAIR x y = 2 EXP x * (2 * y + 1)
-
+```ocaml
+```
 val ( NUMPAIR_INJ_LEMMA ) : thm =
   |- !x1 y1 x2 y2. (NUMPAIR x1 y1 = NUMPAIR x2 y2) ==> (x1 = x2)
 val ( NUMPAIR_INJ ) : thm =
   |- !x1 y1 x2 y2. (NUMPAIR x1 y1 = NUMPAIR x2 y2) = (x1 = x2) /\ (y1 = y2)
-
+```ocaml
+```
 This is the simultaneous definition of NUMFST and NUMSND (using
 new_specification).
 val ( NUMPAIR_DEST ) : thm =
   |- !x y. (NUMFST (NUMPAIR x y) = x) /\ (NUMSND (NUMPAIR x y) = y)
-
+```ocaml
+```
 This is the definition of NUMSUM.
 val ( NUMSUM ) : thm =
   |- !b x. NUMSUM b x = (if b then SUC (2 * x) else 2 * x)
-
+```ocaml
+```
 val ( NUMSUM_INJ ) : thm =
   |- !b1 x1 b2 x2. (NUMSUM b1 x1 = NUMSUM b2 x2) = (b1 = b2) /\ (x1 = x2)
-
+```ocaml
+```
 This is the simultaneous definition of NUMLEFT and NUMRIGHT
 (using new_specification).
 val ( NUMSUM_DEST ) : thm =
   |- !x y. (NUMLEFT (NUMSUM x y) = x) /\ (NUMRIGHT (NUMSUM x y) = y)
-
+```ocaml
+```
 This is the definition of INJN.
 val ( INJN ) : thm = |- !m. INJN m = (\n a. n = m)
-
+```ocaml
+```
 val ( INJN_INJ ) : thm = |- !n1 n2. (INJN n1 = INJN n2) = n1 = n2
-
+```ocaml
+```
 This is the definition of INJA.
 val ( INJA ) : thm = |- !a. INJA a = (\n b. b = a)
-
+```ocaml
+```
 val ( INJA_INJ ) : thm = |- !a1 a2. (INJA a1 = INJA a2) = a1 = a2
-
+```ocaml
+```
 This is the definition of INJF.
 val ( INJF ) : thm = |- !f. INJF f = (\n. f (NUMFST n) (NUMSND n))
-
+```ocaml
+```
 val ( INJF_INJ ) : thm = |- !f1 f2. (INJF f1 = INJF f2) = f1 = f2
-
+```ocaml
+```
 This is the definition of INJP.
 val ( INJP ) : thm =
   |- !f1 f2.
          INJP f1 f2 =
          (\n a. if NUMLEFT n then f1 (NUMRIGHT n) a else f2 (NUMRIGHT n) a)
-
+```ocaml
+```
 val ( INJP_INJ ) : thm =
   |- !f1 f1' f2 f2'. (INJP f1 f2 = INJP f1' f2') = (f1 = f1') /\ (f2 = f2')
-
+```ocaml
+```
 These are the definitions of ZCONSTR and ZBOT.
 val ( ZCONSTR ) : thm =
   |- !c i r. ZCONSTR c i r = INJP (INJN (SUC c)) (INJP (INJA i) (INJF r))
 val ( ZBOT ) : thm = |- ZBOT = INJP (INJN 0) (@z. T)
-
+```ocaml
+```
 val ( ZCONSTR_ZBOT ) : thm = |- !c i r. ~(ZCONSTR c i r = ZBOT)
-
+```ocaml
+```
 This is the definition (via new_inductive_definition) of
 ZRECSPACE_ZBOT.
 val ( ZRECSPACE_RULES ) : thm =
@@ -739,17 +468,20 @@ val ( ZRECSPACE_INDUCT ) : thm =
 val ( ZRECSPACE_CASES ) : thm =
   |- !a. ZRECSPACE a =
          (a = ZBOT) \/ (?c i r. (a = ZCONSTR c i r) /\ (!n. ZRECSPACE (r n)))
-
+```ocaml
+```
 This is the definition of a new type, "(A)recspace"; and its in and out
 functions, "_mk_rec" and "_dest_rec".
 val recspace_tydef : thm * thm =
   (|- _mk_rec (_dest_rec a) = a, |- ZRECSPACE r = _dest_rec (_mk_rec r) = r)
-
+```ocaml
+```
 These are the definitions of BOTTOM and CONSTR.
 val ( BOTTOM ) : thm = |- BOTTOM = _mk_rec ZBOT
 val ( CONSTR ) : thm =
   |- !c i r. CONSTR c i r = _mk_rec (ZCONSTR c i (\n. _dest_rec (r n)))
-
+```ocaml
+```
 val ( MK_REC_INJ ) : thm =
   |- !x y. (_mk_rec x = _mk_rec y) ==> ZRECSPACE x /\ ZRECSPACE y ==> (x = y)
 val ( DEST_REC_INJ ) : thm = |- !x y. (_dest_rec x = _dest_rec y) = x = y
@@ -763,27 +495,35 @@ val ( CONSTR_IND ) : thm =
          ==> (!x. P x)
 val ( CONSTR_REC ) : thm =
   |- !Fn. ?f. !c i r. f (CONSTR c i r) = Fn c i r (\n. f (r n))
-
+```ocaml
+```
 This is the definition of FCONS.
 val ( FCONS ) : thm =
   |- (!a f. FCONS a f 0 = a) /\ (!a f n. FCONS a f (SUC n) = f n)
-
+```ocaml
+```
 val ( FCONS_UNDO ) : thm = |- !f. f = FCONS (f 0) (f o SUC)
-
+```ocaml
+```
 This is the definition of FNIL.
 val ( FNIL ) : thm = |- !n. FNIL n = (@x. T)
-
+```ocaml
+```
 sucivate 5 = `SUC (SUC (SUC (SUC (SUC 0))))`
 (for example)
-
+```ocaml
+```
 SCRUB_EQUATION `x = a` `x = a |- P[x]``` gives ```|- P[a]`
-
+```ocaml
+```
 ###### list.ml:
-
+```ocaml
+```
 LIST_INDUCT_TAC takes a goal of the form `!l. P[l]` and creates two
 subgoals: `P[ [] ]` and `P[CONS h t]`.  The latter subgoal has a new
 assumption `P[t]`.
-
+```ocaml
+```
 Definitions of list-related functions:
 val ( HD ) : thm = |- HD (CONS h t) = h
 val ( TL ) : thm = |- TL (CONS h t) = t
@@ -826,7 +566,8 @@ val ( ITLIST2_DEF ) : thm =
 val ( ZIP_DEF ) : thm =
   |- (ZIP [] l2 = []) /\
      (ZIP (CONS h1 t1) l2 = CONS (h1,HD l2) (ZIP t1 (TL l2)))
-
+```ocaml
+```
 More convenient forms of some of the above:
 val ( ALL2 ) : thm =
   |- (ALL2 P [] [] = T) /\
@@ -842,7 +583,8 @@ val ( ITLIST2 ) : thm =
 val ( ZIP ) : thm =
   |- (ZIP [] [] = []) /\
      (ZIP (CONS h1 t1) (CONS h2 t2) = CONS (h1,h2) (ZIP t1 t2))
-
+```ocaml
+```
 val ( NOT_CONS_NIL ) : thm = |- !h t. ~(CONS h t = [])
 val ( LAST_CLAUSES ) : thm =
   |- (LAST [h] = h) /\ (LAST (CONS h (CONS k t)) = LAST (CONS k t))
@@ -915,24 +657,30 @@ val ( AND_ALL2 ) : thm =
 val ( ALL2_ALL ) : thm = |- !P l. ALL2 P l l = ALL (\x. P x x) l
 val ( APPEND_EQ_NIL ) : thm =
   |- !l m. (APPEND l m = []) = (l = []) /\ (m = [])
-
+```ocaml
+```
 val ( MONO_ALL ) : thm = |- (!x. P x ==> Q x) ==> ALL P l ==> ALL Q l
 val ( MONO_ALL2 ) : thm =
   |- (!x y. P x y ==> Q x y) ==> ALL2 P l l' ==> ALL2 Q l l'
 MONO_ALL and MONO_ALL2 will automatically be used by MONO_TAC.
-
+```ocaml
+```
 LIST_CONV conv uses conv to rewrite every member of a (literal) list.
-
+```ocaml
+```
 ###### realax.ml:
 The operators +,-,*,<,<=,>,>= are overloaded; there are versions for
 num, real, int.  If an expression does not make it clear which type is
 used, they default to the current "prioritized" type.
-
+```ocaml
+```
 pioritize_num() sets operator overloading to default to the type num.
-
+```ocaml
+```
 This is the definition of dist.
 val dist : thm = |- !n m. dist (m,n) = m - n + n - m
-
+```ocaml
+```
 val ( DIST_REFL ) : thm = |- !n. dist (n,n) = 0
 val ( DIST_LZERO ) : thm = |- !n. dist (0,n) = n
 val ( DIST_RZERO ) : thm = |- !n. dist (n,0) = n

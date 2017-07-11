@@ -96,7 +96,11 @@ let EQ_ADD_RCANCEL_0 = prove
 (* ------------------------------------------------------------------------- *)
 (* Now define "bitwise" binary representation of numerals.                   *)
 (* ------------------------------------------------------------------------- *)
+```
+The HOL Light parser parses decimal numbers into terms made of `0`, `BIT0`, and
+`BIT1`, surrounded by the tag `NUMERAL`.
 
+```ocaml
 let BIT0 = prove
  (`!n. BIT0 n = n + n`,
   INDUCT_TAC THEN ASM_REWRITE_TAC[BIT0_DEF; ADD_CLAUSES]);;
@@ -663,7 +667,10 @@ let num_MAX = prove
       FIRST_ASSUM(MP_TAC o SPEC `p:num`) THEN REWRITE_TAC[LE] THEN
       ASM_CASES_TAC `p = SUC m` THEN ASM_REWRITE_TAC[]];
     REPEAT STRIP_TAC THEN EXISTS_TAC `m:num` THEN ASM_REWRITE_TAC[]]);;
+```
+One comment on `num_MAX` is how it uses `P` to denote set membership?
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Another variant of induction.                                             *)
 (* ------------------------------------------------------------------------- *)
@@ -805,7 +812,10 @@ let EVEN_ODD_DECOMPOSITION = prove
 (* ------------------------------------------------------------------------- *)
 (* Cutoff subtraction, also defined recursively. (Not the HOL88 defn.)       *)
 (* ------------------------------------------------------------------------- *)
+```
+Note that this is cutoff subtraction, so if `a<b`, then `a-b = 0`.
 
+```ocaml
 let SUB = new_recursive_definition num_RECURSION
  `(!m. m - 0 = m) /\
   (!m n. m - (SUC n) = PRE(m - n))`;;
@@ -1487,7 +1497,10 @@ let NUM_CANCEL_CONV =
     let eth = MK_COMB(AP_TERM eq_tm lth,rth) in
     GEN_REWRITE_RULE (RAND_CONV o REPEATC)
       [EQ_ADD_LCANCEL; EQ_ADD_LCANCEL_0; EQ_ADD_LCANCEL_0'] eth;;
+```
+`NUM_CANCEL_CONV` rewrites `(c+(b+a)) = (b+d)+a` to `c=d`
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* This is handy for easing MATCH_MP on inequalities.                        *)
 (* ------------------------------------------------------------------------- *)
@@ -1495,7 +1508,10 @@ let NUM_CANCEL_CONV =
 let LE_IMP =
   let pth = PURE_ONCE_REWRITE_RULE[IMP_CONJ] LE_TRANS in
   fun th -> GEN_ALL(MATCH_MP pth (SPEC_ALL th));;
+```
+`` LE_IMP `|- a <= b` `` gives `` (GEN_ALL `|- b <= p ==> a <= p`) ``.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Binder for "the minimal n such that".                                     *)
 (* ------------------------------------------------------------------------- *)
