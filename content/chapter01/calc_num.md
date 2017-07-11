@@ -12,7 +12,10 @@ Calculation with naturals.
 (* ------------------------------------------------------------------------- *)
 
 let DENUMERAL = GEN_REWRITE_RULE DEPTH_CONV [NUMERAL];;
+```
+`DENUMERAL` takes a theorem and rewrites its conclusion to elide `NUMERAL`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Big collection of rewrites to do trivial arithmetic.                      *)
 (*                                                                           *)
@@ -144,9 +147,41 @@ let ARITH_LT = prove
   REWRITE_TAC[DENUMERAL LE]);;
 
 let ARITH_GE = REWRITE_RULE[GSYM GE; GSYM GT] ARITH_LE;;
+```
+The resulting theorem is:
+```
+val ( ARITH_GE ) : thm =
+  |- (!m n. NUMERAL n >= NUMERAL m = n >= m) /\
+     _0 >= _0 /\
+     (!n. _0 >= BIT0 n = n = _0) /\
+     (!n. ~(_0 >= BIT1 n)) /\
+     (!n. BIT0 n >= _0) /\
+     (!n. BIT1 n >= _0) /\
+     (!m n. BIT0 n >= BIT0 m = n >= m) /\
+     (!m n. BIT1 n >= BIT0 m = n >= m) /\
+     (!m n. BIT0 n >= BIT1 m = n > m) /\
+     (!m n. BIT1 n >= BIT1 m = n >= m)
+```
 
+```ocaml
 let ARITH_GT = REWRITE_RULE[GSYM GE; GSYM GT] ARITH_LT;;
+```
+The resulting theorem is:
+```
+val ( ARITH_GT ) : thm =
+  |- (!m n. NUMERAL n > NUMERAL m = n > m) /\
+     ~(_0 > _0) /\
+     (!n. ~(_0 > BIT0 n)) /\
+     (!n. ~(_0 > BIT1 n)) /\
+     (!n. BIT0 n > _0 = n > _0) /\
+     (!n. BIT1 n > _0) /\
+     (!m n. BIT0 n > BIT0 m = n > m) /\
+     (!m n. BIT1 n > BIT0 m = n >= m) /\
+     (!m n. BIT0 n > BIT1 m = n > m) /\
+     (!m n. BIT1 n > BIT1 m = n > m)
+```
 
+```ocaml
 let ARITH_EQ = prove
  (`(!m n. (NUMERAL m = NUMERAL n) <=> (m = n)) /\
    ((_0 = _0) <=> T) /\
@@ -188,7 +223,11 @@ let ARITH = end_itlist CONJ
    ARITH_EVEN; ARITH_ODD;
    ARITH_EQ; ARITH_LE; ARITH_LT; ARITH_GE; ARITH_GT;
    ARITH_SUB];;
+```
+This results in a huge theorem (the conjunction of all the theorems in the
+above list) for convenient use in tactics.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Now more delicate conversions for situations where efficiency matters.    *)
 (* ------------------------------------------------------------------------- *)
@@ -200,7 +239,11 @@ let NUM_EVEN_CONV =
 let NUM_ODD_CONV =
   let tth,rths = CONJ_PAIR ARITH_ODD in
   GEN_REWRITE_CONV I [tth] THENC GEN_REWRITE_CONV I [rths];;
+```
+`NUM_EVEN_CONV` and `NUM_ODD_CONV` rewrite terms of the form `EVEN k` and
+`ODD k` respectively, where `k` is a numeral.
 
+```ocaml
 let NUM_SUC_CONV,NUM_ADD_CONV,NUM_MULT_CONV,NUM_EXP_CONV,
     NUM_LT_CONV,NUM_LE_CONV,NUM_EQ_CONV =
   let num_ty = type_of(lhand(concl ZERO_DEF)) in
@@ -1301,11 +1344,31 @@ let NUM_SUC_CONV,NUM_ADD_CONV,NUM_MULT_CONV,NUM_EXP_CONV,
       | _ -> failwith "NUM_EQ_CONV" in
   NUM_SUC_CONV,NUM_ADD_CONV,NUM_MULT_CONV,NUM_EXP_CONV,
   NUM_LT_CONV,NUM_LE_CONV,NUM_EQ_CONV;;
+```
+Wow.
 
+`NUM_SUC_CONV` rewrites a term of the form `SUC k`, where `k` is a numeral.
+`NUM_ADD_CONV` rewrites a term of the form `j + k`, where `j` and `k` are
+numerals.  `NUM_MULT_CONV` rewrites a term of the form `j * k`, where `j` and
+`k` are numerals.  `NUM_EXP_CONV` rewrites a term of the form `j EXP k`, where
+`j` and `k` are numerals.  `NUM_LT_CONV` rewrites a term of the form `j < k`,
+where `j` and `k` are numerals.  `NUM_LE_CONV` rewrites a term of the form
+`j <= k`, where `j` and `k` are numerals.  `NUM_EQ_CONV` rewrites a term of the
+form `j = k`, where `j` and `k` are numerals.
+
+```ocaml
 let NUM_GT_CONV = GEN_REWRITE_CONV I [GT] THENC NUM_LT_CONV;;
+```
+`NUM_GT_CONV` rewrites a term of the form `j < k`, where `j` and `k` are
+numerals.
 
+```ocaml
 let NUM_GE_CONV = GEN_REWRITE_CONV I [GE] THENC NUM_LE_CONV;;
+```
+`NUM_GE_CONV` rewrites a term of the form `j <= k`, where `j` and `k` are
+numerals.
 
+```ocaml
 let NUM_PRE_CONV =
   let tth = prove
    (`PRE 0 = 0`,
@@ -1324,7 +1387,10 @@ let NUM_PRE_CONV =
                 let th1 = NUM_SUC_CONV (mk_comb(suc,tm')) in
                 MP (INST [tm',m; r,n] pth) th1
             with Failure _ -> failwith "NUM_PRE_CONV";;
+```
+`NUM_PRE_CONV` rewrites a term of the form `PRE k`, where `k` is a numeral.
 
+```ocaml
 let NUM_SUB_CONV =
   let pth0 = prove
    (`p <= n ==> (p - n = 0)`,
@@ -1351,7 +1417,11 @@ let NUM_SUB_CONV =
                   and th0 = NUM_ADD_CONV (mk_binop plus k r) in
                   MP pth th0
             with Failure _ -> failwith "NUM_SUB_CONV";;
+```
+`NUM_SUB_CONV` rewrites a term of the form `j - k`, where `j` and `k` are
+numerals.
 
+```ocaml
 let NUM_DIV_CONV,NUM_MOD_CONV =
   let pth = prove
    (`(q * n + r = m) ==> r < n ==> (m DIV n = q) /\ (m MOD n = r)`,
@@ -1374,7 +1444,16 @@ let NUM_DIV_CONV,NUM_MOD_CONV =
   (fun tm -> try let xt,yt = dest_binop mtm tm in
                  CONJUNCT2(NUM_DIVMOD_CONV (dest_numeral xt) (dest_numeral yt))
              with Failure _ -> failwith "NUM_MOD_CONV");;
+```
+`NUM_DIV_CONV` and `NUM_MOD_CONV` rewrite terms of the forms `j DIV k` and
+`j MOD k` respectively, where `j` and `k` are numerals.
+`NUM_DIVMOD_CONV (j:Num.num) (k:Num.num)` produces a theorem
+`|- (J DIV K = JDIVK) /\ (J MOD K = JMODK)`, where `J` and `K` are the numerals
+for `j` and `k`, and `JDIVK` and `JMODK` are the appropriate numerals.
+(Although it's internal, if you need to compute both `DIV` and `MOD`, it's about
+twice as fast to do both together with `NUM_DIVMOD_CONV`.)
 
+```ocaml
 let NUM_FACT_CONV =
   let suc = `SUC`
   and mul = `(*)` in
@@ -1406,7 +1485,10 @@ let NUM_FACT_CONV =
         then NUM_FACT_CONV (dest_numeral r)
         else fail()
     with Failure _ -> failwith "NUM_FACT_CONV";;
+```
+`NUM_FACT_CONV` rewrites terms of the form `FACT k` where `k` is a numeral.
 
+```ocaml
 let NUM_MAX_CONV =
   REWR_CONV MAX THENC
   RATOR_CONV(RATOR_CONV(RAND_CONV NUM_LE_CONV)) THENC
@@ -1430,7 +1512,11 @@ let NUM_REL_CONV =
      `NUMERAL m = NUMERAL n`,NUM_EQ_CONV]
     (basic_net()) in
   REWRITES_CONV gconv_net;;
+```
+`NUM_REL_CONV` rewrites a term of the form `j OP k`, where `j` and `k` are
+numerals and op is `(<)`, `(<=)`, `(>)`, `(>=)`, or `(=)`.
 
+```ocaml
 let NUM_RED_CONV =
   let gconv_net = itlist (uncurry net_of_conv)
     [`SUC(NUMERAL n)`,NUM_SUC_CONV;
@@ -1453,11 +1539,23 @@ let NUM_RED_CONV =
      `MIN (NUMERAL m) (NUMERAL n)`,NUM_MIN_CONV]
     (basic_net()) in
   REWRITES_CONV gconv_net;;
+```
+`NUM_RED_CONV reduces` `SUC j`, `PRE j`, `FACT j`, `j < k`, `j <= k`, `j > k`,
+`j >= k`, `j = k`, `EVEN j`, `ODD j`, `j + k`, `j - k`, `j * k`, `j EXP k`,
+`j DIV k`, or `j MOD k` (where `j` and `k` are numerals).
 
+```ocaml
 let NUM_REDUCE_CONV = DEPTH_CONV NUM_RED_CONV;;
+```
+`NUM_REDUCE_CONV` reduces the above numeral expressions depth-first throughout
+the expression.
 
+```ocaml
 let NUM_REDUCE_TAC = CONV_TAC NUM_REDUCE_CONV;;
+```
+`NUM_REDUCE_TAC` reduces numeral expressions in the goal.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* I do like this after all...                                               *)
 (* ------------------------------------------------------------------------- *)
@@ -1469,7 +1567,10 @@ let num_CONV =
     if n </ Int 0 then failwith "num_CONV" else
     let tm' = mk_numeral n in
     SYM(NUM_SUC_CONV (mk_comb(SUC_tm,tm')));;
+```
+`num_CONV` rewrites `j` to `SUC (J-1)`, where `J-1` is the numeral for `j-1`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Expands "!n. n < numeral-constant ==> P(n)" into all the cases.           *)
 (* ------------------------------------------------------------------------- *)
@@ -1489,6 +1590,8 @@ let EXPAND_CASES_CONV =
     (base_CONV ORELSEC (step_CONV THENC LAND_CONV conv)) tm in
   conv THENC (REWRITE_CONV[GSYM CONJ_ASSOC]);;
 ```
+`EXPAND_CASES_CONV` rewrites `!n. n < 5 ==> P[n]` to
+`P[0] /\ P[1] /\ P[2] /\ P[3] /\ P[4]`.
 
 - Previous: [wf.ml](wf.md)
 - [Index](index.md)

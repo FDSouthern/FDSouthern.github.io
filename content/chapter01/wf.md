@@ -15,7 +15,11 @@ parse_as_infix("<<",(12,"right"));;
 
 let WF = new_definition
   `WF(<<) <=> !P:A->bool. (?x. P(x)) ==> (?x. P(x) /\ !y. y << x ==> ~P(y))`;;
+```
+I hope this definition is read as "A relation << is well-founded iff ...".
+(I should check how this works and put my findings here.)
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Strengthen it to equality.                                                *)
 (* ------------------------------------------------------------------------- *)
@@ -23,7 +27,10 @@ let WF = new_definition
 let WF_EQ = prove
  (`WF(<<) <=> !P:A->bool. (?x. P(x)) <=> (?x. P(x) /\ !y. y << x ==> ~P(y))`,
   REWRITE_TAC[WF] THEN MESON_TAC[]);;
+```
+"Equality" here means "iff".
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Equivalence of wellfounded induction.                                     *)
 (* ------------------------------------------------------------------------- *)
@@ -218,7 +225,10 @@ let WF_REC_num = prove
 
 let MEASURE = new_definition
   `MEASURE m = \x y. m(x) < m(y)`;;
+```
+Is this a useful mathematical definition too?
 
+```ocaml
 let WF_MEASURE = prove
  (`!m:A->num. WF(MEASURE m)`,
   REPEAT GEN_TAC THEN REWRITE_TAC[MEASURE] THEN
@@ -374,6 +384,9 @@ let WF_INDUCT_TAC =
     (MATCH_MP_TAC th2 THEN MAP_EVERY X_GEN_TAC fvs THEN
      CONV_TAC(LAND_CONV qqconvs) THEN DISCH_THEN ASSUME_TAC) gl;;
 ```
+`WF_INDUCT_TAC` performs wellfounded induction over a nominated measure
+function.  Sometimes it avoids an explicit `!n t. size(t) = n ==> ...` goal.
+
 
 - Previous: [arith.ml](arith.md)
 - [Index](index.md)
