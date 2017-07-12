@@ -6,6 +6,10 @@ title: realax.ml
 
 Theory of real numbers.
 
+The operators +,-,*,<,<=,>,>= are overloaded; there are versions for
+num, real, int.  If an expression does not make it clear which type is
+used, they default to the current "prioritized" type.
+
 ```ocaml
 (* ------------------------------------------------------------------------- *)
 (* The main infix overloaded operations                                      *)
@@ -44,7 +48,10 @@ do_list overload_interface
   ">=",`(>=):num->num->bool`];;
 
 let prioritize_num() = prioritize_overload(mk_type("num",[]));;
+```
+`prioritize_num()` sets operator overloading to default to the type `num`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Absolute distance function on the naturals.                               *)
 (* ------------------------------------------------------------------------- *)

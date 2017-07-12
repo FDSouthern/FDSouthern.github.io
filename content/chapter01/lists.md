@@ -17,7 +17,11 @@ let LIST_INDUCT_TAC =
     MATCH_ACCEPT_TAC list_INDUCT) in
   MATCH_MP_TAC list_INDUCT THEN
   CONJ_TAC THENL [ALL_TAC; GEN_TAC THEN GEN_TAC THEN DISCH_TAC];;
+```
+`LIST_INDUCT_TAC` takes a goal of the form `!l. P[l]` and creates two subgoals:
+`P[ [] ]` and `P[CONS h t]`.  The latter subgoal has a new assumption `P[t]`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Basic definitions.                                                        *)
 (* ------------------------------------------------------------------------- *)
@@ -617,7 +621,10 @@ let MONO_ALL2 = prove
   GEN_TAC THEN COND_CASES_TAC THEN REWRITE_TAC[] THEN ASM_MESON_TAC[]);;
 
 monotonicity_theorems := [MONO_ALL; MONO_ALL2] @ !monotonicity_theorems;;
+```
+`MONO_ALL` and `MONO_ALL2` will automatically be used by `MONO_TAC`.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Apply a conversion down a list.                                           *)
 (* ------------------------------------------------------------------------- *)
@@ -627,7 +634,10 @@ let rec LIST_CONV conv tm =
     COMB2_CONV (RAND_CONV conv) (LIST_CONV conv) tm
   else if fst(dest_const tm) = "NIL" then REFL tm
   else failwith "LIST_CONV";;
+```
+`LIST_CONV conv` uses `conv` to rewrite every member of a (literal) list.
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Type of characters, like the HOL88 "ascii" type, with syntax              *)
 (* constructors and equality conversions for chars and strings.              *)

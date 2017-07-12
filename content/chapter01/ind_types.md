@@ -48,7 +48,15 @@ let NUMPAIR_INJ = prove
 let NUMPAIR_DEST = new_specification
   ["NUMFST"; "NUMSND"]
   (MATCH_MP INJ_INVERSE2 NUMPAIR_INJ);;
+```
+This is the simultaneous definition of `NUMFST` and `NUMSND` (using
+`new_specification`).
+```
+val ( NUMPAIR_DEST ) : thm =
+  |- !x y. (NUMFST (NUMPAIR x y) = x) /\ (NUMSND (NUMPAIR x y) = y)
+```
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Also, an injective map bool->num->num (even easier!)                      *)
 (* ------------------------------------------------------------------------- *)
@@ -67,14 +75,25 @@ let NUMSUM_INJ = prove
 let NUMSUM_DEST = new_specification
   ["NUMLEFT"; "NUMRIGHT"]
   (MATCH_MP INJ_INVERSE2 NUMSUM_INJ);;
+```
+This is the simultaneous definition of `NUMLEFT` and `NUMRIGHT` (using
+`new_specification`).
+```
+val ( NUMSUM_DEST ) : thm =
+  |- !x y. (NUMLEFT (NUMSUM x y) = x) /\ (NUMRIGHT (NUMSUM x y) = y)
+```
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Injection num->Z, where Z == num->A->bool.                                *)
 (* ------------------------------------------------------------------------- *)
 
 let INJN = new_definition
  `INJN (m:num) = \(n:num) (a:A). n = m`;;
+```
+Note that in definitions like this, there is an implicit `!m`.
 
+```ocaml
 let INJN_INJ = prove
  (`!n1 n2. (INJN n1 :num->A->bool = INJN n2) <=> (n1 = n2)`,
   REPEAT GEN_TAC THEN EQ_TAC THEN DISCH_TAC THEN ASM_REWRITE_TAC[] THEN
@@ -117,7 +136,10 @@ let INJF_INJ = prove
 let INJP = new_definition
   `INJP f1 f2:num->A->bool =
         \n a. if NUMLEFT n then f1 (NUMRIGHT n) a else f2 (NUMRIGHT n) a`;;
+```
+What is this used for?
 
+```ocaml
 let INJP_INJ = prove
  (`!(f1:num->A->bool) f1' f2 f2'.
         (INJP f1 f2 = INJP f1' f2') <=> (f1 = f1') /\ (f2 = f2')`,
@@ -131,7 +153,10 @@ let INJP_INJ = prove
 (* ------------------------------------------------------------------------- *)
 (* Now, set up "constructor" and "bottom" element.                           *)
 (* ------------------------------------------------------------------------- *)
+```
+For arbitrary inductive types?  Seriously, what are these?
 
+```ocaml
 let ZCONSTR = new_definition
   `ZCONSTR c i r :num->A->bool
      = INJP (INJN (SUC c)) (INJP (INJA i) (INJF r))`;;
@@ -151,11 +176,36 @@ let ZRECSPACE_RULES,ZRECSPACE_INDUCT,ZRECSPACE_CASES =
   new_inductive_definition
    `ZRECSPACE (ZBOT:num->A->bool) /\
     (!c i r. (!n. ZRECSPACE (r n)) ==> ZRECSPACE (ZCONSTR c i r))`;;
+```
+This is the definition of `ZRECSPACE_*` (using `new_inductive_definition`).
 
+```
+val ( ZRECSPACE_RULES ) : thm =
+  |- ZRECSPACE ZBOT /\
+     (!c i r. (!n. ZRECSPACE (r n)) ==> ZRECSPACE (ZCONSTR c i r))
+val ( ZRECSPACE_INDUCT ) : thm =
+  |- !ZRECSPACE'. ZRECSPACE' ZBOT /\
+                  (!c i r.
+                       (!n. ZRECSPACE' (r n)) ==> ZRECSPACE' (ZCONSTR c i r))
+                  ==> (!a. ZRECSPACE a ==> ZRECSPACE' a)
+val ( ZRECSPACE_CASES ) : thm =
+  |- !a. ZRECSPACE a =
+         (a = ZBOT) \/ (?c i r. (a = ZCONSTR c i r) /\ (!n. ZRECSPACE (r n)))
+```
+
+```ocaml
 let recspace_tydef =
   new_basic_type_definition "recspace" ("_mk_rec","_dest_rec")
   (CONJUNCT1 ZRECSPACE_RULES);;
+```
+This is the definition of a new type, `(A)recspace`, and its in and out
+functions:  `_mk_rec` and `_dest_rec`.
+```
+val recspace_tydef : thm * thm =
+  (|- _mk_rec (_dest_rec a) = a, |- ZRECSPACE r = _dest_rec (_mk_rec r) = r)
+```
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Define lifted constructors.                                               *)
 (* ------------------------------------------------------------------------- *)
@@ -189,7 +239,10 @@ let DEST_REC_INJ = prove
 (* ------------------------------------------------------------------------- *)
 (* Show that the set is freely inductively generated.                        *)
 (* ------------------------------------------------------------------------- *)
+```
+Which set?
 
+```ocaml
 let CONSTR_BOT = prove
  (`!c i r. ~(CONSTR c i r :(A)recspace = BOTTOM)`,
   REPEAT GEN_TAC THEN REWRITE_TAC[CONSTR; BOTTOM] THEN
@@ -306,7 +359,10 @@ let define_type_raw =
   let sucivate =
     let zero = `0` and suc = `SUC` in
     fun n -> funpow n (curry mk_comb suc) zero in
+```
+`` sucivate 5 = `SUC (SUC (SUC (SUC (SUC 0))))` ``, for example.
 
+```ocaml
   (* ----------------------------------------------------------------------- *)
   (* Eliminate local "definitions" in hyps.                                  *)
   (* ----------------------------------------------------------------------- *)
@@ -316,7 +372,10 @@ let define_type_raw =
     let eq' = itlist subst (map (fun t -> [t]) insts) eq in
     let l,r = dest_eq eq' in
     (MP (INST [r,l] (DISCH eq' th)) (REFL r),(r,l)::insts) in
+```
+`` SCRUB_EQUATION `x = a` `x = a |- P[x]` `` gives `|- P[a]`.
 
+```ocaml
   (* ----------------------------------------------------------------------- *)
   (* Proves existence of model (inductively); use pseudo-constructors.       *)
   (*                                                                         *)
