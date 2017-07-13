@@ -2,7 +2,7 @@
 title: metis.ml
 ---
 
-[Original file](https://github.com/jrh13/hol-light/blob/master/metis.ml)]
+[Original file](https://github.com/jrh13/hol-light/blob/master/metis.ml)
 
 Metis first-order theorem proving derived rule/tactic for HOL Light.
 

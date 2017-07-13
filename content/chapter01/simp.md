@@ -287,8 +287,8 @@ There's a lot of generality in the simpset data structure which is not
 used; I'm not going to try to understand the general-purpose operation,
 but only the portions of it which are actually used in HOL Light.
 Of the four fields in the simpset data structure, only the first ever
-changes: the second is always basic_prover, the third is always the
-empty list, and the fourth is always (mk_rewrites true).
+changes: the second is always `basic_prover`, the third is always the
+empty list, and the fourth is always `(mk_rewrites true)`.
 The first field is a conversion net.
 
 ```ocaml
