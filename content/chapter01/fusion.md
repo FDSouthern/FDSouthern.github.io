@@ -209,7 +209,10 @@ I think this deserves a comment.
   let bool_ty = Tyapp("bool",[])
 
   let aty = Tyvar "A"
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/aty.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* List of term constants and their types.                                   *)
 (*                                                                           *)
@@ -470,7 +473,10 @@ I think this deserves a comment.
     | _,Comb(_,_) -> 1
 
   let alphaorder = orda []
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/alphaorder.html
 
+```ocaml
   let rec term_union l1 l2 =
     match (l1,l2) with
       ([],l2) -> l2
@@ -580,6 +586,8 @@ In practice, you probably want to use `BETA_CONV` as defined in
     if Pervasives.compare (type_of tm) bool_ty = 0 then Sequent([tm],tm)
     else failwith "ASSUME: not a proposition"
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASSUME.html
+
 `` ASSUME `a` `` gives `a |- a`.
 
 ```ocaml
@@ -630,7 +638,10 @@ instantiated.
   let the_axioms = ref ([]:thm list)
 
   let axioms() = !the_axioms
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/axioms.html
 
+```ocaml
   let new_axiom tm =
     if Pervasives.compare (type_of tm) bool_ty = 0 then
       let th = Sequent([],tm) in

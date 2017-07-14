@@ -519,7 +519,10 @@ let ASSOC_CONV th =
           TRANS th (distrib(rand(concl th)))
     | _ -> REFL tm in
   assoc;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASSOC_CONV.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Eliminate select terms from a goal.                                       *)
 (* ------------------------------------------------------------------------- *)
@@ -747,6 +750,8 @@ used, it is always applied to the same number of arguments.  It does this by
 finding the minimal number of arguments for each constant.  Anywhere it is
 applied to more arguments, the application `f x1 ... xn` is changed to
 `I (f x1 ... x(n-1)) xn` (this process is repeated, if necessary).
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_FOL_TAC.html
 
 `ASM_FOL_TAC` uses the technique of `FOL_CONV`, but applies throughout the
 entire goalstate (goal and assumptions).

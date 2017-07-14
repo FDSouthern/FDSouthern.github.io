@@ -188,6 +188,8 @@ let (NO_TAC: tactic) =
 let (ALL_TAC:tactic) =
   fun g -> null_meta,[g],fun _ [th] -> th;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ALL_TAC.html
+
 `ALL_TAC` is a tactic which does nothing (the identity tactic).
 
 ```ocaml
@@ -251,14 +253,14 @@ A "theorem tactical" is a function from theorem tactics to theorem tactics.
 Equivalently: a theorem tactical is a function from theorem tactics
 and theorems to tactics.
 
-In other words, a theorem tactic takes a theorem and does something
-to the current goal using that theorem.
+In other words, a theorem tactic (`thm -> tactic`) takes a theorem and does
+something to the current goal using that theorem.
 
-A theorem tactical takes a theorem tactic and a theorem and does something
-to the current goal.  Typically, it will preprocess the theorem somehow
-before handing the result to the theorem tactic.  (In fact, the
-tactical may apply the theorem tactic multiple times, sequentially
-or in parallel (in different subgoals).)
+A theorem tactical (`(thm -> tactic) -> thm -> tactic`) takes a theorem tactic
+and a theorem and does something to the current goal.  Typically, it will
+preprocess the theorem somehow before handing the result to the theorem tactic.
+(In fact, the tactical may apply the theorem tactic multiple times,
+sequentially or in parallel (in different subgoals).)
 
 The functions in this section manipulate theorem tacticals.
 I will write out pseudo-definitions of these functions that pretend
@@ -301,6 +303,8 @@ Fortunately, `REPEAT_GTCL` is never used, so it can't be very important :-)
 let (ALL_THEN: thm_tactical) =
   I;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ALL_THEN.html
+
 `ALL_THEN` is equivalent to `I`.
 (`ALL_THEN` is the theorem tactical which does nothing to the theorem
 before handing it to the theorem tactic.)
@@ -342,7 +346,10 @@ let (LABEL_TAC: string -> thm_tactic) =
 
 ```ocaml
 let ASSUME_TAC = LABEL_TAC "";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASSUME_TAC.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Manipulation of assumption list.                                          *)
 (* ------------------------------------------------------------------------- *)
@@ -368,6 +375,8 @@ let (POP_ASSUM: thm_tactic -> tactic) =
 let (ASSUM_LIST: (thm list -> tactic) -> tactic) =
     fun aslfun (asl,w) -> aslfun (map snd asl) (asl,w);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASSUM_LIST.html
+
 `ASSUM_LIST thlt` applies the tactic `(thlt thl)`, where `thl` is the list of
 assumptions.
 
@@ -432,6 +441,8 @@ let (REMOVE_THEN:string->thm_tactic->tactic) =
 let (ASM :(thm list -> tactic)->(thm list -> tactic)) =
   fun tltac ths (asl,w as g) -> tltac (map snd asl @ ths) g;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM.html
+
 `ASM thlt thl` applies tactic `(thlt (asm @ thl))`, where `asm` is the list of
 assumptions.
 
@@ -533,6 +544,8 @@ let (AP_TERM_TAC: tactic) =
   let tac = MK_COMB_TAC THENL [REFL_TAC; ALL_TAC] in
   fun gl -> try tac gl with Failure _ -> failwith "AP_TERM_TAC";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AP_TERM_TAC.html
+
 `AP_TERM_TAC` converts goal `` `f a = f b` `` to `` `a = b` ``.
 
 ```ocaml
@@ -540,6 +553,8 @@ let (AP_THM_TAC: tactic) =
   let tac = MK_COMB_TAC THENL [ALL_TAC; REFL_TAC] in
   fun gl -> try tac gl with Failure _ -> failwith "AP_THM_TAC";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AP_THM_TAC.html
+
 `AP_THM_TAC` converts goal `` `f a = g a` `` to `` `f = g` ``.
 
 ```ocaml
@@ -897,8 +912,11 @@ let (ANTE_RES_THEN: thm_tactical) =
         if tacs = [] then failwith "IMP_RES_THEN"
         else EVERY tacs);;
 ```
-`` ANTE_RES_THEN tht `|- a@` `` applies tactic `` (tht `|- b@`) `` for every
-assumption `` `|- a ==> b` ``.
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ANTE_RES_THEN.html
+
+`ANTE_RES_THEN ttac (A |- t) g` applies the theorem tactic `ttac` to each
+theorem `Ai u A |- vi` derived by modus ponens from the assumptions of the goal
+and the supplied theorem `A |- t`.  This is not easy to visualise...
 
 ```ocaml
 let (IMP_RES_THEN: thm_tactical) =
@@ -1067,6 +1085,8 @@ let ANTS_TAC =
   let th = itlist DISCH [tm1;tm2] (MP th2 (MP(ASSUME tm2) th1)) in
   MATCH_MP_TAC th THEN CONJ_TAC;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ANTS_TAC.html
+
 `ANTS_TAC` converts goal `(p ==> q) ==> r` to `p` and `q ==> r`
 
 ```ocaml

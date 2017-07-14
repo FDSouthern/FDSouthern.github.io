@@ -847,6 +847,8 @@ start (`min`), finish (`max`) and step (`step`) for the iterative deepening.
 
 let ASM_MESON_TAC = GEN_MESON_TAC 0 50 1;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_MESON_TAC.html
+
 `ASM_MESON_TAC ths` tries to prove the goal using Meson, using the assumptions
 and the theorems in `ths`.
 

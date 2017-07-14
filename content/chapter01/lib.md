@@ -337,7 +337,10 @@ let rec assoc a l =
   match l with
     (x,y)::t -> if Pervasives.compare x a = 0 then y else assoc a t
   | [] -> failwith "find";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/assoc.html
 
+```ocaml
 let rec rev_assoc a l =
   match l with
     (x,y)::t -> if Pervasives.compare y a = 0 then x else rev_assoc a t
@@ -492,6 +495,8 @@ let rec allpairs f l1 l2 =
    h1::t1 ->  itlist (fun x a -> f h1 x :: a) l2 (allpairs f t1 l2)
   | [] -> [];;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/allpairs.html
+
 Example!
 
 ```ocaml
@@ -554,7 +559,10 @@ let rec assocd a l d =
   match l with
     [] -> d
   | (x,y)::t -> if Pervasives.compare x a = 0 then y else assocd a t d;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/assocd.html
 
+```ocaml
 let rec rev_assocd a l d =
   match l with
     [] -> d
@@ -721,9 +729,15 @@ let applyd =
                 -> look (if k land b = 0 then l else r)
       | _ -> d x in
     look f;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/applyd.html
 
+```ocaml
 let apply f = applyd f (fun x -> failwith "apply");;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/apply.html
 
+```ocaml
 let tryapplyd f a d = applyd f (fun x -> d) a;;
 
 let defined f x = try apply f x; true with Failure _ -> false;;

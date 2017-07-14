@@ -61,6 +61,8 @@ let AP_TERM tm =
   fun th -> try MK_COMB(rth,th)
             with Failure _ -> failwith "AP_TERM";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AP_TERM.html
+
 `` AP_TERM `f` `ASM1 |- a = b` `` gives `ASM1 |- (f a) = (f b)`.
 
 ```ocaml
@@ -68,6 +70,8 @@ let AP_THM th tm =
   try MK_COMB(th,REFL tm)
   with Failure _ -> failwith "AP_THM";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AP_THM.html
+
 `` AP_THM `ASM1 |- f = g` `a` `` gives `ASM1 |- (f a) = (g a)`.
 
 ```ocaml
@@ -84,6 +88,8 @@ let ALPHA tm1 tm2 =
   try TRANS (REFL tm1) (REFL tm2)
   with Failure _ -> failwith "ALPHA";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ALPHA_UPPERCASE.html
+
 `` ALPHA `(\x.x)` `(\y.y)` `` gives `|- (\x.x) = (\y.y)`.
 
 ```ocaml
@@ -91,6 +97,8 @@ let ALPHA_CONV v tm =
   let res = alpha v tm in
   ALPHA tm res;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ALPHA_CONV.html
+
 `` ALPHA_CONV `y` `(\x.x)` `` gives `|- (\x.x) = (\y.y)`.
 
 ```ocaml
@@ -126,6 +134,8 @@ let (NO_CONV:conv) = fun tm -> failwith "NO_CONV";;
 ```ocaml
 let (ALL_CONV:conv) = REFL;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ALL_CONV.html
+
 `ALL_CONV` is a conversion which always succeeds without changing the term.
 
 ```ocaml

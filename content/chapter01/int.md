@@ -638,7 +638,10 @@ let INT_ARITH_TAC = CONV_TAC(EQT_INTRO o INT_ARITH);;
 let ASM_INT_ARITH_TAC =
   REPEAT(FIRST_X_ASSUM(MP_TAC o check (not o is_forall o concl))) THEN
   INT_ARITH_TAC;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_INT_ARITH_TAC.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Some pseudo-definitions.                                                  *)
 (* ------------------------------------------------------------------------- *)
@@ -1397,13 +1400,22 @@ let ARITH_RULE =
     let th2 = INST (zip nim gvs) (INT_ARITH gbod) in
     let th3 = GENL avs (rev_itlist (C MP) pths th2) in
     EQ_MP (SYM th1) th3;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ARITH_RULE.html
 
+```ocaml
 let ARITH_TAC = CONV_TAC(EQT_INTRO o ARITH_RULE);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ARITH_TAC.html
 
+```ocaml
 let ASM_ARITH_TAC =
   REPEAT(FIRST_X_ASSUM(MP_TAC o check (not o is_forall o concl))) THEN
   ARITH_TAC;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_ARITH_TAC.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Also a similar divisibility procedure for natural numbers.                *)
 (* ------------------------------------------------------------------------- *)

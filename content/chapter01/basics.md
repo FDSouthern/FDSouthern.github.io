@@ -139,7 +139,10 @@ let alpha v tm =
   if type_of v = type_of v0 && not (vfree_in v bod) then
     mk_abs(v,vsubst[v,v0]bod)
   else failwith "alpha: Invalid new variable";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/alpha.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Type matching.                                                            *)
 (* ------------------------------------------------------------------------- *)

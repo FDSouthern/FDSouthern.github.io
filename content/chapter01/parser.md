@@ -87,7 +87,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/a.html
 let rec atleast n prs i =
   (if n <= 0 then many prs
    else prs ++ atleast (n - 1) prs >> (fun (h,t) -> h::t)) i;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/atleast.html
 
+```ocaml
 let finished input =
   if input = [] then 0,input else failwith "Unparsed input";;
 

@@ -187,6 +187,8 @@ let BOOL_CASES_TAC p = STRUCT_CASES_TAC (SPEC p BOOL_CASES_AX);;
 ```ocaml
 let ASM_CASES_TAC t = DISJ_CASES_TAC(SPEC t EXCLUDED_MIDDLE);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_CASES_TAC.html
+
 `` ASM_CASES_TAC `a` `` creates two subgoals.  In the first `a` is added as an
 assumption, and in the second `~a` is added as an assumption.
 

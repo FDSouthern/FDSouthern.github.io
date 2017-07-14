@@ -262,9 +262,15 @@ let mk_prover applicator augmentor =
   mk_prover;;
 
 let augment(Prover(_,aug)) thms = aug thms;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/augment.html
 
+```ocaml
 let apply_prover(Prover(conv,_)) tm = conv tm;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/apply_prover.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Type of simpsets. We have a convnet containing rewrites (implicational    *)
 (* and otherwise), other term-indexed context-free conversions like          *)
@@ -362,6 +368,8 @@ let AUGMENT_SIMPSET cth (Simpset(net,prover,provers,rewmaker)) =
   let net' = itlist (net_of_thm true) cthms net in
   Simpset(net',prover,provers',rewmaker);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AUGMENT_SIMPSET.html
+
 `AUGMENT_SIMPSET th ss` uses the rewrite maker from the simpset
 `(always (mk_rewrites true))` to create a list of rewrite theorems from `th`;
 and uses `(net_of_thm true)` to add these theorems to the conversion net in the
@@ -641,7 +649,10 @@ let PURE_ASM_REWRITE_RULE thl th =
 
 let ASM_REWRITE_RULE thl th =
     REWRITE_RULE ((map ASSUME (hyp th)) @ thl) th;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_REWRITE_RULE.html
 
+```ocaml
 let PURE_ONCE_ASM_REWRITE_RULE thl th =
     PURE_ONCE_REWRITE_RULE ((map ASSUME (hyp th)) @ thl) th;;
 
@@ -673,7 +684,10 @@ let (PURE_ASM_REWRITE_TAC: thm list -> tactic) =
 
 let (ASM_REWRITE_TAC: thm list -> tactic) =
   ASM REWRITE_TAC;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_REWRITE_TAC.html
 
+```ocaml
 let (PURE_ONCE_ASM_REWRITE_TAC: thm list -> tactic) =
   ASM PURE_ONCE_REWRITE_TAC;;
 
@@ -750,7 +764,10 @@ variants, but they call `CONV_TAC`.
 
 ```ocaml
 let ASM_SIMP_TAC = ASM SIMP_TAC;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_SIMP_TAC.html
 
+```ocaml
 let PURE_ASM_SIMP_TAC = ASM PURE_SIMP_TAC;;
 
 let ONCE_ASM_SIMP_TAC = ASM ONCE_SIMP_TAC;;

@@ -267,6 +267,8 @@ let IMP_ANTISYM_RULE =
 ```ocaml
 let ADD_ASSUM tm th = MP (DISCH tm th) (ASSUME tm);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ADD_ASSUM.html
+
 `` ADD_ASSUM `a` `ASM |- b` `` gives `` `ASM,a |- b` ``.
 
 ```ocaml
