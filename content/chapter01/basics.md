@@ -46,11 +46,17 @@ let rec tysubst alist ty =
 let bndvar tm =
   try fst(dest_abs tm)
   with Failure _ -> failwith "bndvar: Not an abstraction";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/bndvar.html
 
+```ocaml
 let body tm =
   try snd(dest_abs tm)
   with Failure _ -> failwith "body: Not an abstraction";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/body.html
 
+```ocaml
 let list_mk_comb(h,t) = rev_itlist (C (curry mk_comb)) t h;;
 
 let list_mk_abs(vs,bod) = itlist (curry mk_abs) vs bod;;
@@ -273,7 +279,10 @@ let mk_binop op tm1 =
 let list_mk_binop op = end_itlist (mk_binop op);;
 
 let binops op = striplist (dest_binop op);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/binops.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Some common special cases                                                 *)
 (* ------------------------------------------------------------------------- *)

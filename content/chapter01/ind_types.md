@@ -1068,6 +1068,10 @@ inductive_type_store :=
 (* ------------------------------------------------------------------------- *)
 
 let basic_rectype_net = ref empty_net;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_rectype_net.html
+
+```ocaml
 let distinctness_store = ref ["bool",TAUT `(T <=> F) <=> F`];;
 let injectivity_store = ref [];;
 

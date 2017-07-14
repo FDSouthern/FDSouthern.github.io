@@ -181,6 +181,8 @@ let BOOL_CASES_AX = prove
 
 let BOOL_CASES_TAC p = STRUCT_CASES_TAC (SPEC p BOOL_CASES_AX);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BOOL_CASES_TAC.html
+
 `` BOOL_CASES_TAC `a` `` creates two subgoals.  In the first `a` is rewritten to
 `T` within the goal, and in the second `a` is rewritten to `F`.
 

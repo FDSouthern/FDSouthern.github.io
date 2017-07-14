@@ -49,6 +49,8 @@ let BETA_CONV tm =
       INST [arg,v] (BETA (mk_comb(f,v)))
   with Failure _ -> failwith "BETA_CONV: Not a beta-redex";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BETA_CONV.html
+
 `` BETA_CONV `(\x. A) y` `` gives `|- (\x. A) y = A[y/x]`
 
 ```ocaml
@@ -263,6 +265,8 @@ let BINDER_CONV conv tm =
   if is_abs tm then ABS_CONV conv tm
   else RAND_CONV(ABS_CONV conv) tm;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BINDER_CONV.html
+
 `BINDER_CONV c` rewrites the body of an abstraction or of a binder/abstraction
 combination.
 
@@ -282,6 +286,8 @@ let BINOP_CONV conv tm =
   let op,l = dest_comb lop in
   MK_COMB(AP_TERM op (conv l),conv r);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BINOP_CONV.html
+
 `BINOP_CONV c` rewrites both arguments of a binary function.
 
 ```ocaml
@@ -507,6 +513,8 @@ rewrites (anywhere in its argument term) any lhs to its corresponding rhs
 
 let BETA_RULE = CONV_RULE(REDEPTH_CONV BETA_CONV);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BETA_RULE.html
+
 `BETA_RULE thm` applies all possible beta reductions to `thm` and returns the
 new theorem.
 

@@ -562,6 +562,8 @@ let (BINOP_TAC: tactic) =
   let tac = MK_COMB_TAC THENL [AP_TERM_TAC; ALL_TAC] in
   fun gl -> try tac gl with Failure _ -> failwith "AP_THM_TAC";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BINOP_TAC.html
+
 `BINOP_TAC` converts goal `` `f a b = f c d` `` to `` `a = c` `` and
 `` `b = d` ``.
 
@@ -581,6 +583,8 @@ assumptions.
 ```ocaml
 let BETA_TAC = CONV_TAC(REDEPTH_CONV BETA_CONV);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BETA_TAC.html
+
 `BETA_TAC` performs all possible beta-reductions in goal.
 
 ```ocaml
@@ -1161,7 +1165,10 @@ let (by:tactic->refinement) =
       let sths = (subjust i cths) :: oths in
       just i' sths in
     (mvs',inst'),gls',just';;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/by.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Rotate the goalstate either way.                                          *)
 (* ------------------------------------------------------------------------- *)
@@ -1248,7 +1255,10 @@ let b() =
   if length l = 1 then failwith "Can't back up any more" else
   current_goalstack := tl l;
   !current_goalstack;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/b.html
 
+```ocaml
 let p() =
   !current_goalstack;;
 

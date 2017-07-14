@@ -75,6 +75,8 @@ let rec BETAS_CONV tm =
   | Comb(Comb(_,_),_) -> (RATOR_CONV BETAS_CONV THENC BETA_CONV) tm
   | _ -> failwith "BETAS_CONV";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BETAS_CONV.html
+
 BETAS_CONV (n:int) is a conversion which rewrites with BETA_CONV n times.
 (so BETAS_CONV 3 rewrites `(\x y z.P[x,y,z]) a b c` to `P[a,b,c]`)
 

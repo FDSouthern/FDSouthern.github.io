@@ -70,7 +70,10 @@ let unparse_as_binder,parse_as_binder,parses_as_binder,binders =
   (fun n  -> binder_list := union (!binder_list) [n]),
   (fun n  -> mem n (!binder_list)),
   (fun () -> !binder_list);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/binders.html
 
+```ocaml
 let unparse_as_prefix,parse_as_prefix,is_prefix,prefixes =
   let prefix_list = ref ([]:string list) in
   (fun n  -> prefix_list := subtract (!prefix_list) [n]),

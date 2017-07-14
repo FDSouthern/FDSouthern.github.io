@@ -207,7 +207,10 @@ I think this deserves a comment.
       | _ -> rev_assocd ty i ty
 
   let bool_ty = Tyapp("bool",[])
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/bool_ty.html
 
+```ocaml
   let aty = Tyvar "A"
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/aty.html
@@ -572,6 +575,8 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ABS.html
         -> Sequent([],safe_mk_eq tm bod)
     | _ -> failwith "BETA: not a trivial beta-redex"
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BETA.html
+
 `` BETA `(\x.x) x` `` gives `|- (\x. x) x = x`.
 
 In practice, you probably want to use `BETA_CONV` as defined in
@@ -714,7 +719,10 @@ include Hol;;
 
 let mk_fun_ty ty1 ty2 = mk_type("fun",[ty1; ty2]);;
 let bty = mk_vartype "B";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/bty.html
 
+```ocaml
 let is_eq tm =
   match tm with
     Comb(Comb(Const("=",_),_),_) -> true

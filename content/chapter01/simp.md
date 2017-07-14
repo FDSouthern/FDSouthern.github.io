@@ -309,6 +309,8 @@ let basic_prover strat (Simpset(net,prover,provers,rewmaker) as ss) lev tm =
     let tth = tryfind (fun pr -> apply_prover pr (rand(concl sth))) provers in
     EQ_MP (SYM sth) tth;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_prover.html
+
 `` basic_prover strat ss lev `a` `` tries to prove `|- a`.
 Succeeds if `a` = `T`, or if `` (strat ss lev `a`) `` proves `|- a = T`.
 
@@ -577,6 +579,12 @@ let set_basic_rewrites,extend_basic_rewrites,basic_rewrites,
   set_basic_rewrites,extend_basic_rewrites,basic_rewrites,
   set_basic_convs,extend_basic_convs,basic_convs,basic_net;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_rewrites.html
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_convs.html
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_net.html
+
 `set_basic_rewrites thl` sets the "basic rewrite" set to `thl`.
 
 `extend_basic_rewrites thl` adds `thl` to the "basic rewrite" set.
@@ -591,8 +599,8 @@ let set_basic_rewrites,extend_basic_rewrites,basic_rewrites,
 (* ------------------------------------------------------------------------- *)
 ```
 There is also a set of basic congruences; since HOL has only two congruence
-rules, I won't bother documenting `set_basic_congs`, `extend_basic_congs`,
-`basic_congs`.
+rules (which are?), I won't bother documenting `set_basic_congs`,
+`extend_basic_congs`, `basic_congs`.
 
 ```ocaml
 let set_basic_congs,extend_basic_congs,basic_congs =
@@ -600,7 +608,10 @@ let set_basic_congs,extend_basic_congs,basic_congs =
   (fun thl -> congs := thl),
   (fun thl -> congs := union' equals_thm thl (!congs)),
   (fun () -> !congs);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_congs.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Main rewriting conversions.                                               *)
 (* ------------------------------------------------------------------------- *)
@@ -732,6 +743,8 @@ let basic_ss =
     let net'' = itlist net_of_cong (basic_congs()) net' in
   Simpset(net'',basic_prover,[],rewmaker);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_ss.html
+
 `basic_ss thl` canonicalises `thl` with `mk_rewrites true`, then adds the
 rewrites to `basic_net()` with `net_of_thm true`.  It also adds the basic
 congruences and it returns the resulting simpset.

@@ -74,7 +74,10 @@ let rec butlast l =
     [_] -> []
   | (h::t) -> h::(butlast t)
   | [] -> failwith "butlast";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/butlast.html
 
+```ocaml
 let rec el n l =
   if n = 0 then hd l else el (n - 1) (tl l);;
 
