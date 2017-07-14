@@ -244,6 +244,8 @@ let (ABS_CONV:conv->conv) =
     let l' = alpha v' l and r' = alpha v' r in
     EQ_MP (ALPHA gtm (mk_eq(l',r'))) gth;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ABS_CONV.html
+
 `ABS_CONV c` rewrites the body of an abstraction with `c`.
 
 ```ocaml

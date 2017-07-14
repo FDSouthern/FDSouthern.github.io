@@ -458,6 +458,8 @@ let (ACCEPT_TAC: thm_tactic) =
       null_meta,[],propagate_thm th
     else failwith "ACCEPT_TAC";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AC.html
+
 `ACCEPT_TAC th` is a tactic which solves the current goal, assuming the
 conclusion of `th` is alpha-equivalent to the goal.
 
@@ -509,6 +511,8 @@ let (ABS_TAC: tactic) =
                       EQ_MP (ALPHA (concl ath) (instantiate i w)) ath
     with Failure _ -> failwith "ABS_TAC";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ABS_TAC.html
+
 `ABS_TAC` converts goal `` `(\x. a) = (\x. b)` `` to `` `a = b` ``.
 
 ```ocaml

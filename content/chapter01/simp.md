@@ -781,6 +781,8 @@ let ABBREV_TAC tm =
                 ASSUME_TAC th)
      th3 gl;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ABBREV_TAC.html
+
 `` ABBREV_TAC `x = a` `` rewrites `a` to `x` in the goal and all assumptions,
 then adds `a = x` as a new assumption.
 

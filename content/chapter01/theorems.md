@@ -39,7 +39,9 @@ let EQ_TRANS = prove
 
 let AC acsuite = EQT_ELIM o PURE_REWRITE_CONV[acsuite; REFL_CLAUSE];;
 ```
-`` AC thl `a = b` `` returns `|- a = b` if ordered rewriting using `thl`
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AC.html
+
+`` AC thm `a = b` `` returns `|- a = b` if ordered rewriting using `thm`
 can rewrite `a = b` to `T` or `c = c`, otherwise it fails.
 
 ```ocaml

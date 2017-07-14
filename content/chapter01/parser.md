@@ -22,12 +22,18 @@ exception Noparse;;
 let (|||) parser1 parser2 input =
   try parser1 input
   with Noparse -> parser2 input;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.orparser.html
 
+```ocaml
 let (++) parser1 parser2 input =
   let result1,rest1 = parser1 input in
   let result2,rest2 = parser2 rest1 in
   (result1,result2),rest2;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.joinparsers.html
 
+```ocaml
 let rec many prs input =
   try let result,next = prs input in
       let results,rest = many prs next in
@@ -37,7 +43,10 @@ let rec many prs input =
 let (>>) prs treatment input =
   let result,rest = prs input in
   treatment(result),rest;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.pipeparser.html
 
+```ocaml
 let fix err prs input =
   try prs input
   with Noparse -> failwith (err ^ " expected");;
@@ -71,7 +80,10 @@ let some p =
     | (h::t) -> if p h then (h,t) else raise Noparse;;
 
 let a tok = some (fun item -> item = tok);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/a.html
 
+```ocaml
 let rec atleast n prs i =
   (if n <= 0 then many prs
    else prs ++ atleast (n - 1) prs >> (fun (h,t) -> h::t)) i;;

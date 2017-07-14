@@ -220,6 +220,8 @@ let rec (--) = fun m n -> if m > n then [] else m::((m + 1) -- n);;
 I don't think these require much comment.  `m -- n` generates the sequence m to
 n inclusive.
 
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.upto.html
+
 ```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Various useful list operations.                                           *)
@@ -862,6 +864,8 @@ let (|->),combine =
             newbranch p1 t1 p2 t2 in
   (|->),combine;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.valmod.html
+
 Bloop.
 
 ```ocaml
@@ -871,8 +875,7 @@ Bloop.
 
 let (|=>) = fun x y -> (x |-> y) undefined;;
 ```
-This worth a comment.
-[?](http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.singlefun.html)
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.singlefun.html
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)

@@ -551,6 +551,8 @@ Okay, below here we've got HOL Light's inference rules:
          -> Sequent(asl,safe_mk_eq (Abs(v,l)) (Abs(v,r)))
     | _ -> failwith "ABS";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ABS.html
+
 `` ABS `x` `ASM1{-x} |- a=b` `` gives `ASM1 |- \x.a = \x.b`.
 
 ```ocaml
@@ -724,7 +726,10 @@ for their equality.
 (* ------------------------------------------------------------------------- *)
 
 let aconv s t = alphaorder s t = 0;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/aconv.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Comparison function on theorems. Currently the same as equality, but      *)
 (* it's useful to separate because in the proof-recording version it isn't.  *)
