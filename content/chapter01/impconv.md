@@ -1426,7 +1426,10 @@ let CASE_REWRITE_CTXIMPCONV =
 
 (* Tactic version of it. *)
 let CASE_REWRITE_TAC = CTXIMPCONV_TAC o CASE_REWRITE_CTXIMPCONV o preprocess
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CASE_REWRITE_TAC.html
 
+```ocaml
 (*****************************************************************************)
 (* IMPLICATIONAL CONVERSIONS WITH MULTIPLE RESULTS                           *)
 (*****************************************************************************)

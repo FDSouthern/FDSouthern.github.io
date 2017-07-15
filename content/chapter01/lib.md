@@ -17,7 +17,10 @@ Saves us a few vital characters.
 (* ------------------------------------------------------------------------- *)
 
 let curry f x y = f(x,y);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/curry.html
 
+```ocaml
 let uncurry f(x,y) = f x y;;
 
 let I x = x;;
@@ -25,7 +28,10 @@ let I x = x;;
 let K x y = x;;
 
 let C f x y = f y x;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/C.html
 
+```ocaml
 let W f x = f x x;;
 ```
 This appears to be a variant of the
@@ -103,11 +109,18 @@ preferable to the standard library versions.
 (* ------------------------------------------------------------------------- *)
 
 let can f x = try (f x; true) with Failure _ -> false;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/can.html
 
+```ocaml
 let check p x = if p x then x else failwith "check";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/check.html
+
 These are quite neat.  I wonder if I can think of anything to say about them.
 `can` makes it very easy to define `is_` functions?
+
+Are these definitions shadowed in `metis.ml`?
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -293,7 +306,10 @@ let rec chop_list n l =
   if n = 0 then [],l else
   try let m,l' = chop_list (n-1) (tl l) in (hd l)::m,l'
   with Failure _ -> failwith "chop_list";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/chop_list.html
 
+```ocaml
 let index x =
   let rec ind n l =
     match l with
@@ -883,6 +899,8 @@ let (|->),combine =
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.valmod.html
 
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/combine.html
+
 Bloop.
 
 ```ocaml
@@ -905,6 +923,8 @@ let rec choose t =
   | Leaf(h,l) -> hd l
   | Branch(b,p,t1,t2) -> choose t1;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/choose.html
+
 Hmm
 
 ```ocaml

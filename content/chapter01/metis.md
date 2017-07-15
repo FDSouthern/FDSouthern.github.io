@@ -188,7 +188,10 @@ let isSome = function
 ;;
 
 let can f x = isSome (total f x);;
+```
+Does this definition differ from the one in `lib.ml`?
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Combinators.                                                              *)
 (* ------------------------------------------------------------------------- *)

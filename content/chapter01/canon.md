@@ -45,7 +45,10 @@ let CONJ_ACI_RULE =
     let th = use_fun (mk_fun (ASSUME p) undefined) p'
     and th' = use_fun (mk_fun (ASSUME p') undefined) p in
     IMP_ANTISYM_RULE (DISCH_ALL th) (DISCH_ALL th');;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJ_ACI_RULE.html
 
+```ocaml
 let DISJ_ACI_RULE =
   let pth_left = UNDISCH(TAUT `~(a \/ b) ==> ~a`)
   and pth_right = UNDISCH(TAUT `~(a \/ b) ==> ~b`)
@@ -85,7 +88,10 @@ let DISJ_ACI_RULE =
 let CONJ_CANON_CONV tm =
   let tm' = list_mk_conj(setify(conjuncts tm)) in
   CONJ_ACI_RULE(mk_eq(tm,tm'));;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJ_CANON_CONV.html
 
+```ocaml
 let DISJ_CANON_CONV tm =
   let tm' = list_mk_disj(setify(disjuncts tm)) in
   DISJ_ACI_RULE(mk_eq(tm,tm'));;
@@ -490,6 +496,8 @@ let WEAK_CNF_CONV,CNF_CONV =
     TRANS th (strengthen(rand(concl th))) in
   weakcnf,strongcnf;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CNF_CONV.html
+
 `CNF_CONV` uses DeMorgan's laws and associativity to move to conjunctive normal
 form.  (What does `WEAK_` mean?)
 
@@ -683,7 +691,12 @@ let CONDS_ELIM_CONV,CONDS_CELIM_CONV =
          BINDER_CONV (CONDS_ELIM_CONV true) tm
     else REFL tm in
   CONDS_ELIM_CONV true,CONDS_ELIM_CONV false;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONDS_ELIM_CONV.html
 
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONDS_CELIM_CONV.html
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Fix up all head arities to be consistent, in "first order logic" style.   *)
 (* Applied to the assumptions (not conclusion) in a goal.                    *)

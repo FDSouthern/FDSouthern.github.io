@@ -90,7 +90,10 @@ let (compose_insts :instantiation->instantiation->instantiation) =
     let tmin' = filter (fun (_,x) -> not (can (rev_assoc x) tmin)) tmin2
     and tyin' = filter (fun (_,a) -> not (can (rev_assoc a) tyin)) tyin2 in
     pats1@pats2,tmin@tmin',tyin@tyin';;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/compose_insts.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Construct A,_FALSITY_ |- p; contortion so falsity is the last element.    *)
 (* ------------------------------------------------------------------------- *)
@@ -237,6 +240,8 @@ let (CHANGED_TAC: tactic -> tactic) =
     if meta = null_meta && length gl = 1 && equals_goal (hd gl) g
     then failwith "CHANGED_TAC" else gstate;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CHANGED_TAC.html
+
 `CHANGED_TAC tac` means apply `tac`; fail if the result is a single subgoal
 which is equal to the original goal (warning: does not use alpha-equivalence!).
 
@@ -493,6 +498,8 @@ let (CONV_TAC: conv -> tactic) =
     let th' = SYM th in
     null_meta,[asl,r],fun i [th] -> EQ_MP (INSTANTIATE_ALL i th') th;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONV_TAC.html
+
 `CONV_TAC c` creates a tactic from a conversion. This allows the conversion to
 return `|- p` rather than `|- p = T` on a term `p`. It also eliminates any goals
 of the form `T` automatically.
@@ -735,6 +742,8 @@ let (CHOOSE_TAC: thm_tactic) =
           X_CHOOSE_TAC x' xth (asl,w)
       with Failure _ -> failwith "CHOOSE_TAC";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CHOOSE_TAC.html
+
 `` CHOOSE_TAC `|- ?x. P[x]` `` adds a new assumption `` `P[x]` ``.
 
 ```ocaml
@@ -744,7 +753,9 @@ let (CONJ_TAC: tactic) =
         null_meta,[asl,l; asl,r],fun _ [th1;th2] -> CONJ th1 th2
     with Failure _ -> failwith "CONJ_TAC";;
 ```
-`CONJ_TAC` converts a goal `` `a /\ b` `` to `` `a` `` and `` `b` ``.
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJ_TAC.html
+
+`CONJ_TAC` converts a goal `a /\ b` to `a` and `b`.
 
 ```ocaml
 let (DISJ1_TAC: tactic) =
@@ -787,6 +798,8 @@ let (CONTR_TAC: thm_tactic) =
         null_meta,[],propagate_thm th
     with Failure _ -> failwith "CONTR_TAC";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONTR_TAC.html
+
 `` CONTR_TAC `|- F` `` accepts the goal.
 
 ```ocaml
@@ -852,6 +865,8 @@ let (CONJUNCTS_THEN2:thm_tactic->thm_tactic->thm_tactic) =
                   PROVE_HYP th1 (PROVE_HYP th2 (jfn i ths)) in
                 ti,gls,jfn';;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJUNCTS_THEN2.html
+
 `` CONJUNCTS_THEN2 tht1 tht2 `|- a /\ b` `` applies tactic
 `` (tht1 `|- a`) THEN (tht2 `|- b`) ``.
 
@@ -859,6 +874,8 @@ let (CONJUNCTS_THEN2:thm_tactic->thm_tactic->thm_tactic) =
 let (CONJUNCTS_THEN: thm_tactical) =
   W CONJUNCTS_THEN2;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJUNCTS_THEN.html
+
 `` CONJUNCTS_THEN tht `|- a /\ b` `` applies tactic
 `` (tht `|- a`) THEN (tht `|- b`) ``.
 
@@ -894,6 +911,8 @@ let (X_CHOOSE_THEN: term -> thm_tactical) =
 let (CHOOSE_THEN: thm_tactical) =
   fun ttac th -> CHOOSE_TAC th THEN POP_ASSUM ttac;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CHOOSE_THEN.html
+
 `` CHOOSE_THEN tht `|- ?x. P[x]` `` applies tactic `` (tht `|- P[x]`) ``.
 
 ```ocaml
@@ -1064,6 +1083,8 @@ metavariable.
 let (CHEAT_TAC:tactic) =
   fun (asl,w) -> ACCEPT_TAC(mk_thm([],w)) (asl,w);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CHEAT_TAC.html
+
 `CHEAT_TAC` introduces the goal as a new axiom, then solves the goal.
 
 ```ocaml
@@ -1219,7 +1240,10 @@ let prove(t,tac) =
 (* ------------------------------------------------------------------------- *)
 
 let current_goalstack = ref ([] :goalstack);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/current_goalstack.html
 
+```ocaml
 let (refine:refinement->goalstack) =
   fun r ->
     let l = !current_goalstack in

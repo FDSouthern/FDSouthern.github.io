@@ -189,6 +189,8 @@ let (CHANGED_CONV:conv->conv) =
     let l,r = dest_eq (concl th) in
     if aconv l r then failwith "CHANGED_CONV" else th;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CHANGED_CONV.html
+
 `CHANGED_CONV c` rewrites with `c`, but fails if the result is alpha-equivalent
 to the original term.
 
@@ -233,12 +235,16 @@ let (COMB2_CONV: conv->conv->conv) =
      Comb(l,r) -> MK_COMB(lconv l,rconv r)
   | _ -> failwith "COMB2_CONV: Not a combination";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/COMB2_CONV.html
+
 `COMB2_CONV c1 c2` uses `c1` to rewrite the operator and `c2` to rewrite the
 operand of a combination.
 
 ```ocaml
 let COMB_CONV = W COMB2_CONV;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/COMB_CONV.html
+
 `COMB_CONV c` rewrites both the operator and operand of a combination with `c`.
 
 ```ocaml
@@ -482,6 +488,8 @@ let SYM_CONV tm =
 let CONV_RULE (conv:conv) th =
   EQ_MP (conv(concl th)) th;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONV_RULE.html
+
 `CONV_RULE c th` uses `c` to rewrite the conclusion of the theorem (and return a
 new theorem).
 
@@ -545,6 +553,8 @@ let CACHE_CONV =
                   let th = conv tm in
                   (net := enter [] (tm,ALPHA_HACK th) (!net); th);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CACHE_CONV.html
+
 `CACHE_CONV c` is equivalent to `c`, except that it caches all conversion
 applications.
 

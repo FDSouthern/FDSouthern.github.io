@@ -1097,7 +1097,10 @@ let injectivity ty = assoc ty (!injectivity_store);;
 let cases ty =
   if ty = "num" then num_CASES else
   let _,ith,_ = assoc ty (!inductive_type_store) in prove_cases_thm ith;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/cases.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Convenient definitions for type isomorphism.                              *)
 (* ------------------------------------------------------------------------- *)

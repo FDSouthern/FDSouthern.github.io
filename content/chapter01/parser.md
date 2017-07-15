@@ -110,7 +110,10 @@ type lexcode = Ident of string
 reserve_words ["//"];;
 
 let comment_token = ref (Resword "//");;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/comment_token.html
 
+```ocaml
 let lex =
   let collect (h,t) = end_itlist (^) (h::t) in
   let reserve =

@@ -290,7 +290,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/binops.html
 let is_conj = is_binary "/\\";;
 let dest_conj = dest_binary "/\\";;
 let conjuncts = striplist dest_conj;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/conjuncts.html
 
+```ocaml
 let is_imp = is_binary "==>";;
 let dest_imp = dest_binary "==>";;
 

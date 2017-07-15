@@ -554,6 +554,7 @@ let DESTRUCT_TAC,FIX_TAC,INTRO_TAC,HYP_TAC =
 
 let CLAIM_TAC s tm = SUBGOAL_THEN tm (DESTRUCT_TAC s);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CLAIM_TAC.html
 
 - Previous: [simp.ml](simp.md)
 - [Index](index.md)

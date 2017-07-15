@@ -137,6 +137,8 @@ let CONJ =
     let th = INST [concl th1,p; concl th2,q] pth in
     EQ_MP (PROVE_HYP th1 th) th2;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJ.html
+
 `` CONJ `ASM1 |- a` `ASM2 |- b` `` gives `` `ASM1+ASM2 |- a /\ b` ``.
 
 ```ocaml
@@ -152,6 +154,8 @@ let CONJUNCT1 =
         PROVE_HYP th (INST [l,P; r,Q] pth)
     with Failure _ -> failwith "CONJUNCT1";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJUNCT1.html
+
 `` CONJUNCT1 `ASM |- a /\ b` `` gives `` `ASM |- a` ``.
 
 ```ocaml
@@ -167,6 +171,8 @@ let CONJUNCT2 =
         PROVE_HYP th (INST [l,P; r,Q] pth)
     with Failure _ -> failwith "CONJUNCT2";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJUNCT2.html
+
 `` CONJUNCT2 `ASM |- a /\ b` `` gives `` `ASM |- b` ``.
 
 ```ocaml
@@ -174,11 +180,15 @@ let CONJ_PAIR th =
   try CONJUNCT1 th,CONJUNCT2 th
   with Failure _ -> failwith "CONJ_PAIR: Not a conjunction";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJ_PAIR.html
+
 `CONJ_PAIR th` is basically `(CONJUNCT1 th, CONJUNCT2 th)`.
 
 ```ocaml
 let CONJUNCTS = striplist CONJ_PAIR;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJUNCTS_UPPERCASE.html
+
 `CONJUNCTS th` gives a list of theorems, one for each conjunct of the conclusion
 of `th` (no matter how they are associated).
 
@@ -454,6 +464,8 @@ let CHOOSE =
         MP (MP th5 th4) th1
     with Failure _ -> failwith "CHOOSE";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CHOOSE_UPPERCASE.html
+
 `` CHOOSE (`x`,`ASM1 |- ?y.P[y]`) `ASM2,P[x] |- a` `` gives
 `` `ASM1+ASM2 |- a` ``.
 
@@ -604,6 +616,8 @@ let CONTR =
     if concl th <> f_tm then failwith "CONTR"
     else PROVE_HYP th (INST [tm,P] pth);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONTR.html
+
 `` CONTR `a` `ASM |- F` `` gives `` `ASM |- a` ``.
 
 ```ocaml

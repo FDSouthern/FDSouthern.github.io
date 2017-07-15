@@ -231,7 +231,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/aty.html
 (* ------------------------------------------------------------------------- *)
 
   let constants() = !the_term_constants
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/constants.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Gets type of constant if it succeeds.                                     *)
 (* ------------------------------------------------------------------------- *)
@@ -514,6 +517,8 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/alphaorder.html
 
   let concl (Sequent(asl,c)) = c
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/concl.html
+
 Okay, below here we've got HOL Light's inference rules:
 
 ```ocaml
