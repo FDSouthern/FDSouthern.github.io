@@ -240,7 +240,10 @@ let install_parser,delete_parser,installed_parsers,try_user_parser =
                   with Failure _ -> ()),
   (fun () -> !parser_list),
   (fun i -> try_parsers (!parser_list) i);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/delete_parser.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Initial preterm parsing. This uses binder and precedence/associativity/   *)
 (* prefix status to guide parsing and preterm construction, but treats all   *)

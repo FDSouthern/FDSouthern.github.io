@@ -80,7 +80,10 @@ let DISJ_ACI_RULE =
     and th' = use_fun (mk_fun (ASSUME(mk_neg p')) undefined) p in
     let th1 = IMP_ANTISYM_RULE (DISCH_ALL th) (DISCH_ALL th') in
     PROVE_HYP th1 (INST [p,a_tm; p',b_tm] pth_neg);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ_ACI_RULE.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Order canonically, right-associate and remove duplicates.                 *)
 (* ------------------------------------------------------------------------- *)
@@ -95,7 +98,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJ_CANON_CONV.html
 let DISJ_CANON_CONV tm =
   let tm' = list_mk_disj(setify(disjuncts tm)) in
   DISJ_ACI_RULE(mk_eq(tm,tm'));;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ_CANON_CONV.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* General NNF conversion. The user supplies some conversion to be applied   *)
 (* to atomic formulas.                                                       *)
@@ -450,6 +456,8 @@ let WEAK_DNF_CONV,DNF_CONV =
     TRANS th (strengthen(rand(concl th))) in
   weakdnf,strongdnf;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DNF_CONV.html
+
 `DNF_CONV` uses DeMorgan's laws and associativity to move to disjunctive normal
 form.  (What does `WEAK_` mean?)
 

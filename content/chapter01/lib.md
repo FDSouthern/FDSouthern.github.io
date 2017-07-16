@@ -407,6 +407,8 @@ let rec do_list f l =
     [] -> ()
   | (h::t) -> (f h; do_list f t);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/do_list.html
+
 Very imperative.
 
 ```ocaml
@@ -494,7 +496,10 @@ let numdom r =
 
 let numerator = fst o numdom
 and denominator = snd o numdom;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/denominator.html
 
+```ocaml
 let gcd_num n1 n2 =
   num_of_big_int(Big_int.gcd_big_int (big_int_of_num n1) (big_int_of_num n2));;
 
@@ -636,7 +641,10 @@ sort in the standard library?!
 let increasing f x y = Pervasives.compare (f x) (f y) < 0;;
 
 let decreasing f x y = Pervasives.compare (f x) (f y) > 0;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/decreasing.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Polymorphic finite partial functions via Patricia trees.                  *)
 (*                                                                           *)
@@ -723,7 +731,10 @@ Looks okay.
 let graph f = setify (foldl (fun a x y -> (x,y)::a) [] f);;
 
 let dom f = setify(foldl (fun a x y -> x::a) [] f);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dom.html
 
+```ocaml
 let ran f = setify(foldl (fun a x y -> y::a) [] f);;
 ```
 Example!
@@ -761,6 +772,8 @@ let tryapplyd f a d = applyd f (fun x -> d) a;;
 
 let defined f x = try apply f x; true with Failure _ -> false;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/defined.html
+
 There are definitely things to say here.
 
 ```ocaml

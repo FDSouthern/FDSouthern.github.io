@@ -28,7 +28,10 @@ let dest_fun_ty ty =
   match ty with
     Tyapp("fun",[ty1;ty2]) -> (ty1,ty2)
   | _ -> failwith "dest_fun_ty";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_fun_ty.html
 
+```ocaml
 let rec occurs_in ty bigty =
   bigty = ty ||
   is_type bigty && exists (occurs_in ty) (snd(dest_type bigty));;
@@ -80,7 +83,10 @@ let dest_binary s tm =
   match tm with
     Comb(Comb(Const(s',_),l),r) when s' = s -> (l,r)
   | _ -> failwith "dest_binary";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_binary.html
 
+```ocaml
 let mk_binary s =
   let c = mk_const(s,[]) in
   fun (l,r) -> try mk_comb(mk_comb(c,l),r)
@@ -253,7 +259,10 @@ let dest_binder s tm =
   match tm with
     Comb(Const(s',_),Abs(x,t)) when s' = s -> (x,t)
   | _ -> failwith "dest_binder";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_binder.html
 
+```ocaml
 let mk_binder op =
   let c = mk_const(op,[]) in
   fun (v,tm) -> mk_comb(inst [type_of v,aty] c,mk_abs(v,tm));;
@@ -271,7 +280,10 @@ let dest_binop op tm =
   match tm with
     Comb(Comb(op',l),r) when op' = op -> (l,r)
   | _ -> failwith "dest_binop";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_binop.html
 
+```ocaml
 let mk_binop op tm1 =
   let f = mk_comb(op,tm1) in
   fun tm2 -> mk_comb(f,tm2);;
@@ -289,6 +301,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/binops.html
 
 let is_conj = is_binary "/\\";;
 let dest_conj = dest_binary "/\\";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_conj.html
+
+```ocaml
 let conjuncts = striplist dest_conj;;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/conjuncts.html
@@ -296,19 +312,37 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/conjuncts.html
 ```ocaml
 let is_imp = is_binary "==>";;
 let dest_imp = dest_binary "==>";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_imp.html
 
+```ocaml
 let is_forall = is_binder "!";;
 let dest_forall = dest_binder "!";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_forall.html
+
+```ocaml
 let strip_forall = splitlist dest_forall;;
 
 let is_exists = is_binder "?";;
 let dest_exists = dest_binder "?";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_exists.html
+
+```ocaml
 let strip_exists = splitlist dest_exists;;
 
 let is_disj = is_binary "\\/";;
 let dest_disj = dest_binary "\\/";;
-let disjuncts = striplist dest_disj;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_disj.html
 
+```ocaml
+let disjuncts = striplist dest_disj;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/disjuncts.html
+
+```ocaml
 let is_neg tm =
   try fst(dest_const(rator tm)) = "~"
   with Failure _ -> false;;
@@ -317,18 +351,31 @@ let dest_neg tm =
   try let n,p = dest_comb tm in
       if fst(dest_const n) = "~" then p else fail()
   with Failure _ -> failwith "dest_neg";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_neg.html
 
+```ocaml
 let is_uexists = is_binder "?!";;
 let dest_uexists = dest_binder "?!";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_uexists.html
 
+```ocaml
 let dest_cons = dest_binary "CONS";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_cons.html
+
+```ocaml
 let is_cons = is_binary "CONS";;
 let dest_list tm =
   try let tms,nil = splitlist dest_cons tm in
       if fst(dest_const nil) = "NIL" then tms else fail()
   with Failure _ -> failwith "dest_list";;
 let is_list = can dest_list;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_list.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Syntax for numerals.                                                      *)
 (* ------------------------------------------------------------------------- *)
@@ -346,6 +393,8 @@ let dest_numeral =
                 if fst(dest_const l) = "NUMERAL" then dest_num r else fail()
             with Failure _ -> failwith "dest_numeral";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_numeral.html
+
 This is definitely worth noting.
 
 ```ocaml
@@ -367,7 +416,10 @@ let dest_gabs =
         let ltm,rtm = dest_geq(snd(strip_forall(body r))) in
         rand ltm,rtm
     with Failure _ -> failwith "dest_gabs: Not a generalized abstraction";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_gabs.html
 
+```ocaml
 let is_gabs = can dest_gabs;;
 
 let mk_gabs =
@@ -402,7 +454,10 @@ let dest_let tm =
       let le,bod = dest_comb lebod in
       if fst(dest_const le) = "LET_END" then eqs,bod else fail()
   with Failure _ -> failwith "dest_let: not a let-term";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_let.html
 
+```ocaml
 let is_let = can dest_let;;
 
 let mk_let(assigs,bod) =

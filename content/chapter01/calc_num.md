@@ -13,6 +13,8 @@ Calculation with naturals.
 
 let DENUMERAL = GEN_REWRITE_RULE DEPTH_CONV [NUMERAL];;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DENUMERAL.html
+
 `DENUMERAL` takes a theorem and rewrites its conclusion to elide `NUMERAL`.
 
 ```ocaml

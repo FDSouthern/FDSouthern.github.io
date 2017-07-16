@@ -52,6 +52,10 @@ parse_as_binder "@";;
 
 let is_select = is_binder "@";;
 let dest_select = dest_binder "@";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_select.html
+
+```ocaml
 let mk_select = mk_binder "@";;
 
 let SELECT_AX = new_axiom
@@ -391,7 +395,10 @@ let dest_cond tm =
       let c,b = dest_comb tm2 in
       if fst(dest_const c) = "COND" then (b,(x,y)) else fail()
   with Failure _ -> failwith "dest_cond";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_cond.html
 
+```ocaml
 extend_basic_rewrites [COND_CLAUSES];;
 
 let COND_EXPAND = prove

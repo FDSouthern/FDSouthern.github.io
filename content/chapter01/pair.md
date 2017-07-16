@@ -146,7 +146,10 @@ let pair_RECURSION = prove
 let is_pair = is_binary ",";;
 
 let dest_pair = dest_binary ",";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_pair.html
 
+```ocaml
 let mk_pair =
   let ptm = mk_const(",",[]) in
   fun (l,r) -> mk_comb(mk_comb(inst [type_of l,aty; type_of r,bty] ptm,l),r);;

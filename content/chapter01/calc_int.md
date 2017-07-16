@@ -26,7 +26,10 @@ let dest_realintconst tm =
         if nn <>/ num_0 then minus_num(dest_numeral n)
         else failwith "dest_realintconst"
   | _ -> failwith "dest_realintconst";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_realintconst.html
 
+```ocaml
 let mk_realintconst =
   let cast_tm = `real_of_num` and neg_tm = `(--)` in
   let mk_numconst n = mk_comb(cast_tm,mk_numeral n) in

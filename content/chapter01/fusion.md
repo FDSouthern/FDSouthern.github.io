@@ -169,12 +169,18 @@ I think this deserves a comment.
     function
         (Tyapp (s,ty)) -> s,ty
       | (Tyvar _) -> failwith "dest_type: type variable not a constructor"
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_type.html
 
+```ocaml
   let dest_vartype =
     function
         (Tyapp(_,_)) -> failwith "dest_vartype: type constructor not a variable"
       | (Tyvar s) -> s
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_vartype.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Basic type discriminators.                                                *)
 (* ------------------------------------------------------------------------- *)
@@ -301,16 +307,29 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/constants.html
 
   let dest_var =
     function (Var(s,ty)) -> s,ty | _ -> failwith "dest_var: not a variable"
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_var.html
 
+```ocaml
   let dest_const =
     function (Const(s,ty)) -> s,ty | _ -> failwith "dest_const: not a constant"
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_const.html
+
+```ocaml
 
   let dest_comb =
     function (Comb(f,x)) -> f,x | _ -> failwith "dest_comb: not a combination"
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_comb.html
 
+```ocaml
   let dest_abs =
     function (Abs(v,b)) -> v,b | _ -> failwith "dest_abs: not an abstraction"
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_abs.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Finds the variables free in a term (list of terms).                       *)
 (* ------------------------------------------------------------------------- *)
@@ -447,7 +466,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/constants.html
     match tm with
       Comb(Comb(Const("=",_),l),r) -> l,r
     | _ -> failwith "dest_eq"
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_eq.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Useful to have term union modulo alpha-conversion for assumption lists.   *)
 (* ------------------------------------------------------------------------- *)
@@ -512,7 +534,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/alphaorder.html
 (* ------------------------------------------------------------------------- *)
 
   let dest_thm (Sequent(asl,c)) = (asl,c)
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_thm.html
 
+```ocaml
   let hyp (Sequent(asl,c)) = asl
 
   let concl (Sequent(asl,c)) = c
@@ -614,6 +639,8 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASSUME.html
     let asl1' = term_remove c2 asl1 and asl2' = term_remove c1 asl2 in
     Sequent(term_union asl1' asl2',safe_mk_eq c1 c2)
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEDUCT_ANTISYM_RULE.html
+
 `` DEDUCT_ANTISYM_RULE `ASM1 |- a` `ASM2 |- b` `` gives
 `(ASM1-{b})+(ASM2-{a}) |- a=b`.
 
@@ -665,7 +692,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/axioms.html
   let the_definitions = ref ([]:thm list)
 
   let definitions() = !the_definitions
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/definitions.html
 
+```ocaml
   let new_basic_definition tm =
     match tm with
       Comb(Comb(Const("=",_),Var(cname,ty)),r) ->

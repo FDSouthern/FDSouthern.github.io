@@ -246,6 +246,8 @@ let derive_nonschematic_inductive_relations =
     and indthm' = CONV_RULE (ONCE_DEPTH_CONV (REWR_CONV canonthm')) indthm in
     CONJ rulethm' (CONJ indthm' casethm);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/derive_nonschematic_inductive_relations.html
+
 `` SIMPLE_DISJ_PAIR `P \/ Q |- R` `` gives `` (`P |- R`, `Q |- R`) ``.
 
 `` HALF_BETA_EXPAND [`x`;`y`] `|- f = \x y. A[x,y]` `` gives
@@ -483,6 +485,7 @@ let derive_strong_induction =
     let th4 = GENL ps (DISCH nasm (weaken_triv(UNDISCH th3))) in
     GENL svs (prove_monotonicity_hyps th4);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/derive_strong_induction.html
 
 - Previous: [theorems.ml](theorems.md)
 - [Index](index.md)

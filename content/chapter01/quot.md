@@ -31,6 +31,8 @@ let define_quotient_type =
     let abs,rep = new_basic_type_definition tyname (absname,repname) th2 in
     abs,CONV_RULE(LAND_CONV BETA_CONV) rep;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/define_quotient_type.html
+
 `` define_quotient_type "newtype" ("newtypeABS","newtypeREP") `\x y. P[x,y]` ``
 defines a new type `newtype` with a bijection to a subset of `oldtype->bool`
 (where `oldtype` is the type of `x`).  This subset is defined by the predicate

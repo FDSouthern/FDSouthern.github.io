@@ -629,8 +629,10 @@ let (DISCH_TAC: tactic) =
         fun i [th] -> NOT_INTRO(DISCH (instantiate i ant) th)
     with Failure _ -> failwith "DISCH_TAC";;
 ```
-`DISCH_TAC` converts goal `` `a ==> b` `` to `` `b` `` and adds `` `a` `` as a
-new assumption. (It treats goal `` `~a` `` as `` `a ==> F` ``.)
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISCH_TAC.html
+
+`DISCH_TAC` converts goal `a ==> b` to `b` and adds `a` as a new assumption.
+(It treats a goal `~a` as `a ==> F`.)
 
 ```ocaml
 let (MP_TAC: thm_tactic) =
@@ -764,7 +766,9 @@ let (DISJ1_TAC: tactic) =
         null_meta,[asl,l],fun i [th] -> DISJ1 th (instantiate i r)
     with Failure _ -> failwith "DISJ1_TAC";;
 ```
-`DISJ1_TAC` converts a goal `` `a \/ b` `` to `` `a` ``.
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ1_TAC.html
+
+`DISJ1_TAC` converts a goal `a \/ b` to `a`.
 
 ```ocaml
 let (DISJ2_TAC: tactic) =
@@ -773,7 +777,9 @@ let (DISJ2_TAC: tactic) =
           null_meta,[asl,r],fun i [th] -> DISJ2 (instantiate i l) th
     with Failure _ -> failwith "DISJ2_TAC";;
 ```
-`DISJ2_TAC` converts a goal `` `a \/ b` `` to `` `b` ``.
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ2_TAC.html
+
+`DISJ2_TAC` converts a goal `a \/ b` to `b`.
 
 ```ocaml
 let (DISJ_CASES_TAC: thm_tactic) =
@@ -787,6 +793,8 @@ let (DISJ_CASES_TAC: thm_tactic) =
           fun i [th1;th2] -> DISJ_CASES (INSTANTIATE_ALL i dth) th1 th2
     with Failure _ -> failwith "DISJ_CASES_TAC";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ_CASES_TAC.html
+
 `` DISJ_CASES_TAC `|- a \/ b` `` creates two subgoals and adds assumption
 `` `a` `` in one subgoal, `` `b` `` in the other.
 
@@ -884,6 +892,8 @@ let (DISJ_CASES_THEN2:thm_tactic->thm_tactic->thm_tactic) =
   fun ttac1 ttac2 cth ->
     DISJ_CASES_TAC cth THENL [POP_ASSUM ttac1; POP_ASSUM ttac2];;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ_CASES_THEN2.html
+
 `` DISJ_CASES_THEN2 tht1 tht2 `|- a \/ b` `` generates two subgoals and applies
 `` (tht1 `|- a`) `` to one subgoal, `` (tht2 `|- b`) `` to the other.
 
@@ -891,6 +901,8 @@ let (DISJ_CASES_THEN2:thm_tactic->thm_tactic->thm_tactic) =
 let (DISJ_CASES_THEN: thm_tactical) =
   W DISJ_CASES_THEN2;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ_CASES_THEN.html
+
 `` DISJ_CASES_THEN tht `|- a \/ b` `` generates two subgoals and applies
 `` (tht `|- a`) `` to one subgoal, `` (tht `|- b`) `` to the other.
 
@@ -898,8 +910,10 @@ let (DISJ_CASES_THEN: thm_tactical) =
 let (DISCH_THEN: thm_tactic -> tactic) =
   fun ttac -> DISCH_TAC THEN POP_ASSUM ttac;;
 ```
-`DISCH_THEN tht` converts a goal `` `a ==> b` `` to `` `b` ``, then applies
-tactic `` (tht `|- a`) ``. (It treats `` `~a` `` as `` `a ==> F` ``.)
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISCH_THEN.html
+
+`DISCH_THEN tht` converts a goal `a ==> b` to `b`, then applies tactic
+`` (tht `|- a`) ``. (It treats `~a` as `a ==> F`.)
 
 ```ocaml
 let (X_CHOOSE_THEN: term -> thm_tactical) =

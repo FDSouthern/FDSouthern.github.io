@@ -308,7 +308,10 @@ let mk_numeral =
 let mk_small_numeral n = mk_numeral(Int n);;
 
 let dest_small_numeral t = Num.int_of_num(dest_numeral t);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_small_numeral.html
 
+```ocaml
 let is_numeral = can dest_numeral;;
 
 (* ------------------------------------------------------------------------- *)

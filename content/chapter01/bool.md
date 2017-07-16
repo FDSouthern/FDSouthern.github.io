@@ -43,7 +43,10 @@ let dest_iff tm =
   match tm with
     Comb(Comb(Const("=",Tyapp("fun",[Tyapp("bool",[]);_])),l),r) -> (l,r)
   | _ -> failwith "dest_iff";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_iff.html
 
+```ocaml
 let mk_iff =
   let eq_tm = `(<=>)` in
   fun (l,r) -> mk_comb(mk_comb(eq_tm,l),r);;
@@ -234,6 +237,8 @@ let DISCH =
     let th4 = INST [a,p; concl th,q] pth in
     EQ_MP th4 th3;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISCH.html
+
 `` DISCH `a` `ASM,a |- b` `` gives `` `ASM |- a ==> b` ``.
 
 ```ocaml
@@ -241,6 +246,8 @@ let rec DISCH_ALL th =
   try DISCH_ALL (DISCH (hd (hyp th)) th)
   with Failure _ -> th;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISCH_ALL.html
+
 `DISCH_ALL` repeats `DISCH` until there are no more hypotheses.
 
 ```ocaml
@@ -499,7 +506,9 @@ let DISJ1 =
     try PROVE_HYP th (INST [concl th,P; tm,Q] pth)
     with Failure _ -> failwith "DISJ1";;
 ```
-`` DISJ1 `ASM |- a` `b` `` gives `` `ASM |- a \/ b` ``.
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ1.html
+
+`` DISJ1 `ASM |- a` `b` `` gives `ASM |- a \/ b`.
 
 ```ocaml
 let DISJ2 =
@@ -514,7 +523,9 @@ let DISJ2 =
     try PROVE_HYP th (INST [tm,P; concl th,Q] pth)
     with Failure _ -> failwith "DISJ2";;
 ```
-`` DISJ2 `a` `ASM |- b` `` gives `` `ASM |- a \/ b`.
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ2.html
+
+`` DISJ2 `a` `ASM |- b` `` gives `ASM |- a \/ b`.
 
 ```ocaml
 let DISJ_CASES =
@@ -532,6 +543,8 @@ let DISJ_CASES =
         PROVE_HYP (DISCH r th2) (PROVE_HYP (DISCH l th1) (PROVE_HYP th0 th))
     with Failure _ -> failwith "DISJ_CASES";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ_CASES.html
+
 `` DISJ_CASES `ASM1 |- a \/ b` `ASM2,a |- c` `ASM3,b |- c` `` gives
 `` `ASM1,ASM2,ASM3 |- c` ``.
 

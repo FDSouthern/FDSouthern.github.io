@@ -498,6 +498,8 @@ let ONCE_DEPTH_SQCONV,DEPTH_SQCONV,REDEPTH_SQCONV,
   ONCE_DEPTH_SQCONV,DEPTH_SQCONV,REDEPTH_SQCONV,
   TOP_DEPTH_SQCONV,TOP_SWEEP_SQCONV;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEPTH_SQCONV.html
+
 `IMP_REWRITES_CONV strat ss lev` tris to find a conversion for `tm` at level < 4
 (i.e., not a congruence rule) which is either unconditional or (if lev > 0) such
 that the condition can be rewritten to `T` by `strat ss (lev-1)`.

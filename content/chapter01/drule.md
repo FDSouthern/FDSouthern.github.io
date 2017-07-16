@@ -379,7 +379,10 @@ let deep_alpha =
         mk_comb(deep_alpha env l,deep_alpha env r)
     with Failure _ -> tm in
   deep_alpha;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/deep_alpha.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Instantiate theorem by matching part of it to a term.                     *)
 (* The GEN_PART_MATCH version renames free vars to avoid clashes.            *)

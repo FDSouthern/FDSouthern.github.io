@@ -406,6 +406,8 @@ until no change
   (fun c -> TRY_CONV (TOP_DEPTH_QCONV c)),
   (fun c -> TRY_CONV (TOP_SWEEP_QCONV c));;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEPTH_CONV.html
+
 `ONCE_DEPTH_CONV`, `DEPTH_CONV`, `REDEPTH_CONV`, `TOP_DEPTH_CONV`,
 `TOP_SWEEP_CONV`:  like the `QCONV` variants, except they never fail.
 
@@ -430,6 +432,8 @@ let rec DEPTH_BINOP_CONV op conv tm =
       MK_COMB(AP_TERM op' lth,rth)
   | _ -> conv tm;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEPTH_BINOP_CONV.html
+
 `DEPTH_BINOP_CONV op c`
 For example, ``DEPTH_BINOP_CONV `+` c`` rewrites `x`,`y`,`z`,`w` in
 `` `(x + ((y + z) + w))` `` (fails if any of these rewrites fail).

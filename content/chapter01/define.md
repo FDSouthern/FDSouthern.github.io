@@ -989,6 +989,7 @@ let define =
       let th3 = PROVE_HYP th2 (INST [g,f] th) in
       the_definitions := th3::(!the_definitions); th3;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/define.html
 
 - Previous: [cart.ml](cart.md)
 - [Index](index.md)

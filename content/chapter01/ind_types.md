@@ -1073,6 +1073,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_rectype_net.html
 
 ```ocaml
 let distinctness_store = ref ["bool",TAUT `(T <=> F) <=> F`];;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/distinctness_store.html
+
+```ocaml
 let injectivity_store = ref [];;
 
 let extend_rectype_net (tyname,(_,_,rth)) =
@@ -1091,7 +1095,10 @@ do_list extend_rectype_net (!inductive_type_store);;
 (* ------------------------------------------------------------------------- *)
 
 let distinctness ty = assoc ty (!distinctness_store);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/distinctness.html
 
+```ocaml
 let injectivity ty = assoc ty (!injectivity_store);;
 
 let cases ty =
@@ -1430,7 +1437,10 @@ let define_type_raw =
     let newentries = map (fun s -> dest_vartype s,retval) newtys in
     (inductive_type_store := newentries @ (!inductive_type_store);
      do_list extend_rectype_net newentries; ith1,rth1);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/define_type_raw.html
 
+```ocaml
 (* ----------------------------------------------------------------------- *)
 (* The overall function, with rather crude string-based benignity.         *)
 (* ----------------------------------------------------------------------- *)
@@ -1460,7 +1470,10 @@ let define_type s =
       else
         let retval = define_type_raw defspec in
         the_inductive_types := (s,retval)::(!the_inductive_types); retval;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/define_type.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Unwinding, and application of patterns. Add easy cases to default net.    *)
 (* ------------------------------------------------------------------------- *)

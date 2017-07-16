@@ -183,7 +183,10 @@ let install_user_printer,delete_user_printer,try_user_printer =
   (fun s -> user_printers := snd(remove (fun (s',_) -> s = s')
                                         (!user_printers))),
   (fun fmt -> fun tm -> tryfind (fun (_,pr) -> pr fmt tm) (!user_printers));;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/delete_user_printer.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Printer for terms.                                                        *)
 (* ------------------------------------------------------------------------- *)

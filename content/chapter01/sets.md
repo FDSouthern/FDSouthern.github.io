@@ -2998,7 +2998,10 @@ let dest_setenum =
   fun tm -> let l,n = fn tm in
             if is_const n && fst(dest_const n) = "EMPTY" then l
             else failwith "dest_setenum: not a finite set enumeration";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_setenum.html
 
+```ocaml
 let is_setenum = can dest_setenum;;
 
 let mk_setenum =

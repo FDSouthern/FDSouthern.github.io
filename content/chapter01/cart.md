@@ -319,7 +319,10 @@ let define_finite_type =
     let th0 = INST [mk_small_numeral n,n_tm] lemma_pre in
     let th1 = MP th0 (EQF_ELIM(NUM_EQ_CONV(rand(lhand(concl th0))))) in
     POST_RULE(new_type_definition ns ("mk_"^ns',"dest_"^ns') th1);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/define_finite_type.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Predefine the cases 2, 3 and 4, which are especially useful for real^N.   *)
 (* ------------------------------------------------------------------------- *)
