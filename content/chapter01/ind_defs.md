@@ -51,6 +51,8 @@ let EXISTS_EQUATION =
     let th4 = GEN l (DISCH tm th3) in
     MP th2 th4;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXISTS_EQUATION.html
+
 `` EXISTS_EQUATION `x = a` `ASM,x = a |- P[x]` `` gives `ASM |- ?x. P[x]`.
 
 ```ocaml

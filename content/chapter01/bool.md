@@ -95,6 +95,8 @@ let EQT_ELIM th =
   try EQ_MP (SYM th) TRUTH
   with Failure _ -> failwith "EQT_ELIM";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQT_ELIM.html
+
 `` EQT_ELIM `ASM |- a = T` ``  gives `` `ASM |- a` ``.
 
 ```ocaml
@@ -106,6 +108,8 @@ let EQT_INTRO =
     DEDUCT_ANTISYM_RULE th2 th1 in
   fun th -> EQ_MP (INST[concl th,t] pth) th;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQT_INTRO.html
+
 `` EQT_INTRO `ASM |- a` `` gives `` `ASM |- a = T` ``.
 
 ```ocaml
@@ -297,6 +301,8 @@ let EQ_IMP_RULE =
   fun th -> let l,r = dest_iff(concl th) in
             MP (INST [l,p; r,q] pth1) th,MP (INST [l,p; r,q] pth2) th;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQ_IMP_RULE.html
+
 `` EQ_IMP_RULE `ASM |- (a:bool) = b` `` gives
 `` (`ASM |- a ==> b`, `ASM |- b ==> a`) ``.
 
@@ -445,7 +451,9 @@ let EXISTS =
         PROVE_HYP (EQ_MP (SYM bth) th) cth
     with Failure _ -> failwith "EXISTS";;
 ```
-`` EXISTS (`?x. P[x]`,`a`) `ASM |- P[a]` `` gives `` `ASM |- ?x. P[x]` ``.
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXISTS_UPPERCASE.html
+
+`` EXISTS (`?x. P[x]`,`a`) `ASM |- P[a]` `` gives `ASM |- ?x. P[x]`.
 
 ```ocaml
 let SIMPLE_EXISTS v th =
@@ -601,6 +609,8 @@ let EQF_INTRO =
     try MP (INST [rand(concl th),P] pth) th
     with Failure _ -> failwith "EQF_INTRO";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQF_INTRO.html
+
 `` EQF_INTRO `ASM |- ~a` `` gives `` `ASM |- a = F` ``.
 
 ```ocaml
@@ -614,6 +624,8 @@ let EQF_ELIM =
     try MP (INST [rand(rator(concl th)),P] pth) th
     with Failure _ -> failwith "EQF_ELIM";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQF_ELIM.html
+
 `` EQF_ELIM `ASM |- a = F` `` gives `` `ASM |- ~a` ``.
 
 
@@ -655,6 +667,8 @@ let EXISTENCE =
         MP (PINST [ty,aty] [abs,P] pth) th
     with Failure _ -> failwith "EXISTENCE";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXISTENCE.html
+
 `` EXISTENCE `ASM |- ?!x. P[x]` `` gives `` `ASM |- ?x. P[x]` ``.
 
 - Previous: [equal.ml](equal.md)

@@ -581,7 +581,11 @@ let set_basic_rewrites,extend_basic_rewrites,basic_rewrites,
   set_basic_rewrites,extend_basic_rewrites,basic_rewrites,
   set_basic_convs,extend_basic_convs,basic_convs,basic_net;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/extend_basic_rewrites.html
+
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_rewrites.html
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/extend_basic_convs.html
 
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_convs.html
 
@@ -611,6 +615,8 @@ let set_basic_congs,extend_basic_congs,basic_congs =
   (fun thl -> congs := union' equals_thm thl (!congs)),
   (fun () -> !congs);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/extend_basic_congs.html
+
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_congs.html
 
 ```ocaml
@@ -734,6 +740,8 @@ let SIMPLIFY_CONV ss = GEN_SIMPLIFY_CONV TOP_DEPTH_SQCONV ss 3;;
 
 let empty_ss = Simpset(empty_net,basic_prover,[],mk_rewrites true);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/empty_ss.html
+
 `empty_ss` is the empty simpset (no conversions in the conversion net).
 
 ```ocaml
@@ -822,8 +830,10 @@ then adds `a = x` as a new assumption.
 let EXPAND_TAC s = FIRST_ASSUM(SUBST1_TAC o SYM o
   check((=) s o fst o dest_var o rhs o concl)) THEN BETA_TAC;;
 ```
-`` EXPAND_TAC `x` `` finds the first assumption of the form `a = x`, rewrites
-`x` to `a` in the goal, and beta-reduces the goal.
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXPAND_TAC.html
+
+`` EXPAND_TAC `x` `` finds the first assumption of the form `t = x`, rewrites
+`x` to `t` in the goal, and beta-reduces the goal.
 
 - Previous: [itab.ml](itab.md)
 - [Index](index.md)

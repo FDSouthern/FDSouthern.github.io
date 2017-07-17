@@ -1592,6 +1592,8 @@ let EXPAND_CASES_CONV =
     (base_CONV ORELSEC (step_CONV THENC LAND_CONV conv)) tm in
   conv THENC (REWRITE_CONV[GSYM CONJ_ASSOC]);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXPAND_CASES_CONV.html
+
 `EXPAND_CASES_CONV` rewrites `!n. n < 5 ==> P[n]` to
 `P[0] /\ P[1] /\ P[2] /\ P[3] /\ P[4]`.
 

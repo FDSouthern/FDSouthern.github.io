@@ -632,6 +632,8 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASSUME.html
         -> Sequent(term_union asl1 asl2,r)
     | _ -> failwith "EQ_MP"
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQ_MP.html
+
 `` EQ_MP `ASM1 |- a = b` `ASM2 |- a` `` gives `ASM1+ASM2 |- b`.
 
 ```ocaml
@@ -791,6 +793,8 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/aconv.html
 
 let equals_thm th th' = dest_thm th = dest_thm th';;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/equals_thm.html
+
 I want to write something about proof-recording.  Even if just to mention it's
 outside the core system.
 

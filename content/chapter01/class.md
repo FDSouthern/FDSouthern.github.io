@@ -25,6 +25,8 @@ let ETA_CONV =
         else fail()
     with Failure _ -> failwith "ETA_CONV";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ETA_CONV.html
+
 `ETA_CONV` rewrites `(\x. f x)` to `f`.
 
 ```ocaml

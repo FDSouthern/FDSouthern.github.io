@@ -1087,7 +1087,10 @@ let extend_rectype_net (tyname,(_,_,rth)) =
   injectivity_store := map (fun th -> tyname,th) ths2 @ (!injectivity_store);
   basic_rectype_net :=
     itlist (net_of_thm true) canon_thl (!basic_rectype_net);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/extend_rectype_net.html
 
+```ocaml
 do_list extend_rectype_net (!inductive_type_store);;
 
 (* ------------------------------------------------------------------------- *)

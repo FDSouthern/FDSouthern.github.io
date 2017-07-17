@@ -23,7 +23,10 @@ type goal = (string * thm) list * term;;
 
 let equals_goal ((a,w):goal) ((a',w'):goal) =
   forall2 (fun (s,th) (s',th') -> s = s' && equals_thm th th') a a' && w = w';;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/equals_goal.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* A justification function for a goalstate [A1 ?- g1; ...; An ?- gn],       *)
 (* starting from an initial goal A ?- g, is a function f such that for any   *)
@@ -212,6 +215,8 @@ it fails.
 let EVERY tacl =
   itlist (fun t1 t2 -> t1 THEN t2) tacl ALL_TAC;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EVERY.html
+
 `EVERY [t1;...;tn]` is equivalent to `t1 THEN ... THEN tn`
 
 ```ocaml
@@ -324,6 +329,8 @@ let (NO_THEN: thm_tactical) =
 let EVERY_TCL ttcll =
   itlist (fun t1 t2 -> t1 THEN_TCL t2) ttcll ALL_THEN;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EVERY_TCL.html
+
 `EVERY_TCL [thtc1;...;thtcn]` is equivalent to
 `thtc1 THEN_TCL ... THEN_TCL thtcn`.
 
@@ -397,6 +404,8 @@ assumptions, where `thl` is the list of assumptions.
 let (EVERY_ASSUM: thm_tactic -> tactic) =
   fun ttac -> ASSUM_LIST (MAP_EVERY ttac);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EVERY_ASSUM.html
+
 `EVERY_ASSUM tht` is `ASSUM_LIST (MAP_EVERY tht)`.
 
 ```ocaml
@@ -650,6 +659,8 @@ let (EQ_TAC: tactic) =
         fun _ [th1; th2] -> IMP_ANTISYM_RULE th1 th2
     with Failure _ -> failwith "EQ_TAC";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQ_TAC.html
+
 `EQ_TAC` converts goal `` `(a:bool) = b` `` to `` `a ==> b` `` and
 `` `b ==> a` ``.
 
@@ -720,7 +731,9 @@ let (X_GEN_TAC: term -> tactic),
 
 `` X_CHOOSE_TAC `x` `|- ?y. P[y]` `` adds a new assumption `` `P[x]` ``.
 
-`` EXISTS_TAC `a` `` converts a goal `` `?x. P[x]` `` to `` `P[a]` ``.
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXISTS_TAC.html
+
+`` EXISTS_TAC `a` `` converts a goal `?x. P[x]` to `P[a]`.
 
 ```ocaml
 let (GEN_TAC: tactic) =
@@ -1272,7 +1285,10 @@ let flush_goalstack() =
   current_goalstack := [hd l];;
 
 let e tac = refine(by(VALID tac));;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/e.html
 
+```ocaml
 let r n = refine(rotate n);;
 
 let set_goal(asl,w) =

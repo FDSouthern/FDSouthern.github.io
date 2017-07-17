@@ -58,7 +58,10 @@ let nothing input = [],input;;
 
 let elistof prs sep err =
   listof prs sep err ||| nothing;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/elistof.html
 
+```ocaml
 let leftbin prs sep cons err =
   prs ++ many (sep ++ fix err prs) >>
   (fun (x,opxs) -> let ops,xs = unzip opxs in

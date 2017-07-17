@@ -69,7 +69,10 @@ let enter =
           let new_child = net_update lconsts (elem,ntms@rtms,child) in
           Netnode ((label,new_child)::others,tips) in
   fun lconsts (tm,elem) net -> net_update lconsts (elem,[tm],net);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/enter.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Look up a term in a net and return possible matches.                      *)
 (* ------------------------------------------------------------------------- *)

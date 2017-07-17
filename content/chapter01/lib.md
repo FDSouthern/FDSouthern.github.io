@@ -86,7 +86,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/butlast.html
 ```ocaml
 let rec el n l =
   if n = 0 then hd l else el (n - 1) (tl l);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/el.html
 
+```ocaml
 let rev =
   let rec rev_append acc l =
     match l with
@@ -166,7 +169,10 @@ let rec end_itlist f l =
         []     -> failwith "end_itlist"
       | [x]    -> x
       | (h::t) -> f h (end_itlist f t);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/end_itlist.html
 
+```ocaml
 let rec itlist2 f l1 l2 b =
   match (l1,l2) with
     ([],[]) -> b
@@ -258,7 +264,10 @@ let rec exists p l =
   match l with
     [] -> false
   | h::t -> p(h) || exists p t;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/exists.html
 
+```ocaml
 let length =
   let rec len k l =
     if l = [] then k else len (k + 1) (tl l) in
@@ -461,6 +470,8 @@ let explode s =
       exap (n - 1) ((String.sub s n 1)::l) in
   exap (String.length s - 1) [];;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/explode.html
+
 Maybe something from `Str`?
 
 ```ocaml

@@ -170,6 +170,8 @@ list.
 let (EVERY_CONV:conv list -> conv) =
   fun l -> itlist (fun c1 c2 -> c1 THENC c2) l ALL_CONV;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EVERY_CONV.html
+
 `EVERY_CONV [c1;...;cn]` rewrites with the first conversion, then the second,
 so on until the last.
 

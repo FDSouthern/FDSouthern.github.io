@@ -402,7 +402,10 @@ let module Fo_nets =
     type 'a t = Netnode of (term_label * 'a t) list * 'a list
 
     let empty_net = Netnode([],[])
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/empty_net.html
 
+```ocaml
     let enter =
       let label_to_store lcs t =
         let op,args = strip_comb t in
