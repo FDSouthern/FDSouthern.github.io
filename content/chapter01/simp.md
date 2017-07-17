@@ -629,14 +629,19 @@ let GENERAL_REWRITE_CONV rep (cnvl:conv->conv) (builtin_net:gconv net) thl =
   let final_net = itlist (net_of_thm rep) thl_canon builtin_net in
   cnvl (REWRITES_CONV final_net);;
 ```
-`GENERAL_REWRITE_CONV rep cnvl net thl` Canonicalises `thl` with
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GENERAL_REWRITE_CONV.html
+
+`GENERAL_REWRITE_CONV rep cnvl net thl` canonicalises `thl` with
 `mk_rewrites false`, adds these conversions to `net` with `net_of_thm rep`
 (giving `final_net`), and then rewrites with `cnvl (REWRITES_CONV final_net)`.
 
 ```ocaml
 let GEN_REWRITE_CONV (cnvl:conv->conv) thl =
   GENERAL_REWRITE_CONV false cnvl empty_net thl;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_REWRITE_CONV.html
 
+```ocaml
 let PURE_REWRITE_CONV thl =
   GENERAL_REWRITE_CONV true TOP_DEPTH_CONV empty_net thl;;
 
@@ -654,7 +659,10 @@ let ONCE_REWRITE_CONV thl =
 (* ------------------------------------------------------------------------- *)
 
 let GEN_REWRITE_RULE cnvl thl = CONV_RULE(GEN_REWRITE_CONV cnvl thl);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_REWRITE_RULE.html
 
+```ocaml
 let PURE_REWRITE_RULE thl = CONV_RULE(PURE_REWRITE_CONV thl);;
 
 let REWRITE_RULE thl = CONV_RULE(REWRITE_CONV thl);;
@@ -684,7 +692,10 @@ non-`ASM_` versions, but they add the theorem hypotheses to the rewrite list.
 
 ```ocaml
 let GEN_REWRITE_TAC cnvl thl = CONV_TAC(GEN_REWRITE_CONV cnvl thl);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_REWRITE_TAC.html
 
+```ocaml
 let PURE_REWRITE_TAC thl = CONV_TAC(PURE_REWRITE_CONV thl);;
 
 let REWRITE_TAC thl = CONV_TAC(REWRITE_CONV thl);;
@@ -726,6 +737,8 @@ let GEN_SIMPLIFY_CONV (strat:strategy) ss lev thl =
   let ss' = itlist AUGMENT_SIMPSET thl ss in
   TRY_CONV (strat ss' lev);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_SIMPLIFY_CONV.html
+
 `GEN_SIMPLIFY_CONV strat ss lev thl` uses `AUGMENT_SIMPSET` to add `thl` to `ss`
 (giving `ss'`); then does `TRY_CONV (strat ss' lev)`.
 

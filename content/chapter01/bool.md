@@ -408,12 +408,16 @@ let GEN =
         let rth = INST[phi,ptm] qth in
         EQ_MP rth th';;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN.html
+
 `` GEN `x` `ASM |- P[x]` `` gives `` `ASM |- !x. P[x]` ``
 (if x is not free in `ASM`).
 
 ```ocaml
 let GENL = itlist GEN;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GENL.html
+
 `` GENL [`x`;`y`;`z`] `ASM |- P[x,y,z]` `` gives
 `` `ASM |- !x y z. P[x,y,z]` ``.
 
@@ -423,6 +427,8 @@ let GEN_ALL th =
   let vars = subtract (frees c) (freesl asl) in
   GENL vars th;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_ALL.html
+
 `GEN_ALL` generalises over all variables free in the conclusion but not in the
 assumptions.
 

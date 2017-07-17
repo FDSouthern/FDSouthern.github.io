@@ -90,7 +90,10 @@ let unparse_as_infix,parse_as_infix,get_infix_status,infixes =
      ((n,d)::(filter (((<>) n) o fst) (!infix_list)))),
   (fun n     -> assoc n (!infix_list)),
   (fun ()    -> !infix_list);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/get_infix_status.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Interface mapping.                                                        *)
 (* ------------------------------------------------------------------------- *)

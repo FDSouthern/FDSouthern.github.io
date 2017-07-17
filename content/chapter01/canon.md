@@ -355,7 +355,10 @@ let (GEN_NNF_CONV:bool->conv*(term->thm*thm)->conv) =
           TRANS (INST [t,p_tm] pth_not_not) th1
     | _ -> let tm' = mk_neg tm in try base1 tm' with Failure _ -> REFL tm' in
   NNF_CONV;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_NNF_CONV.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Some common special cases.                                                *)
 (* ------------------------------------------------------------------------- *)

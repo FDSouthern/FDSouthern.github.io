@@ -416,11 +416,6 @@ let PART_MATCH,GEN_PART_MATCH =
       if Pervasives.compare tm' tm = 0 then fth else
       try SUBS[ALPHA tm' tm] fth
       with Failure _ -> failwith "PART_MATCH: Sanity check failure"
-```
-`PART_MATCH partfn th tm` matches `(partfn (concl (SPEC_ALL th)))` against `tm`
-and instantiates the theorem appropriately.
-
-```ocaml
   and GEN_PART_MATCH partfn th =
     let sth = SPEC_ALL th in
     let bod = concl sth in
@@ -440,7 +435,13 @@ and instantiates the theorem appropriately.
       try SUBS[ALPHA tm' tm] fth
       with Failure _ -> failwith "PART_MATCH: Sanity check failure" in
   PART_MATCH,GEN_PART_MATCH;;
+```
+`PART_MATCH partfn th tm` matches `(partfn (concl (SPEC_ALL th)))` against `tm`
+and instantiates the theorem appropriately.
 
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_PART_MATCH.html
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Matching modus ponens.                                                    *)
 (* ------------------------------------------------------------------------- *)

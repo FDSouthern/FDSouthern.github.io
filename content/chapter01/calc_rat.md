@@ -514,7 +514,12 @@ let GEN_REAL_ARITH PROVER =
     REAL_RAT_EQ_CONV,REAL_RAT_GE_CONV,REAL_RAT_GT_CONV,
     REAL_POLY_CONV,REAL_POLY_NEG_CONV,REAL_POLY_ADD_CONV,REAL_POLY_MUL_CONV,
     PROVER);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_REAL_ARITH.html
 
+These functions shadow earlier definitions from `realarith.ml`.
+
+```ocaml
 let REAL_ARITH =
   let init = GEN_REWRITE_CONV ONCE_DEPTH_CONV [DECIMAL]
   and pure = GEN_REAL_ARITH REAL_LINEAR_PROVER in

@@ -135,7 +135,10 @@ Types and vartypes?  Type variables.
 (* ------------------------------------------------------------------------- *)
 
   let get_type_arity s = assoc s (!the_type_constants)
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/get_type_arity.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Declare a new type.                                                       *)
 (* ------------------------------------------------------------------------- *)
@@ -246,7 +249,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/constants.html
 (* ------------------------------------------------------------------------- *)
 
   let get_const_type s = assoc s (!the_term_constants)
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/get_const_type.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Declare a new constant.                                                   *)
 (* ------------------------------------------------------------------------- *)

@@ -246,7 +246,10 @@ let GABS_CONV conv tm =
   let f,qtm = dest_abs bod in
   let xs,bod = strip_forall qtm in
   AP_TERM gabs (ABS f (itlist MK_FORALL xs (RAND_CONV conv bod)));;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GABS_CONV.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* General beta-conversion over linear pattern of nested constructors.       *)
 (* ------------------------------------------------------------------------- *)
@@ -322,6 +325,8 @@ let GEN_BETA_CONV =
     INSTANTIATE instn (DEGEQ_RULE (SPEC_ALL th6)) in
   GEN_BETA_CONV;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_BETA_CONV.html
+
 `GEN_BETA_CONV` reduces generalised beta-redexes such as
 `(\(x,y). x + y) (1,2)`.
 

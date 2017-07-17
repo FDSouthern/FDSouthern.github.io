@@ -754,6 +754,8 @@ let (GEN_TAC: tactic) =
         X_GEN_TAC x' (asl,w)
     with Failure _ -> failwith "GEN_TAC";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_TAC.html
+
 ``GEN_TAC`` converts a goal `` `!x. P[x]` `` to `` `P[x]` ``.
 
 ```ocaml
@@ -1320,7 +1322,10 @@ let g t =
      warn true ("Free variables in goal: "^errmsg)
    else ());
    set_goal([],t);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/g.html
 
+```ocaml
 let b() =
   let l = !current_goalstack in
   if length l = 1 then failwith "Can't back up any more" else

@@ -17,6 +17,8 @@ let genvar =
              (gcounter := count + 1;
               mk_var("_"^(string_of_int count),ty));;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/genvar.html
+
 This seems suspicious.  Is it really the case that this can't cause problems?
 
 ```ocaml

@@ -511,7 +511,7 @@ let gcd =
   fun x y -> let x' = abs x and y' = abs y in
               if x' < y' then gxd y' x' else gxd x' y';;
 ```
-Nothing to see here.
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/gcd.html
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -539,7 +539,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/denominator.html
 ```ocaml
 let gcd_num n1 n2 =
   num_of_big_int(Big_int.gcd_big_int (big_int_of_num n1) (big_int_of_num n2));;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/gcd_num.html
 
+```ocaml
 let lcm_num x y =
   if x =/ num_0 && y =/ num_0 then num_0
   else abs_num((x */ y) // gcd_num x y);;
@@ -771,7 +774,10 @@ Looks okay.
 (* ------------------------------------------------------------------------- *)
 
 let graph f = setify (foldl (fun a x y -> (x,y)::a) [] f);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/graph.html
 
+```ocaml
 let dom f = setify(foldl (fun a x y -> x::a) [] f);;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dom.html

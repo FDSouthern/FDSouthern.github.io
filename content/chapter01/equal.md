@@ -109,6 +109,8 @@ let GEN_ALPHA_CONV v tm =
   let b,abs = dest_comb tm in
   AP_TERM b (ALPHA_CONV v abs);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_ALPHA_CONV.html
+
 `` GEN_ALPHA_CONV `y` `!x. P[x]` `` gives `|- (!x. P[x]) = (!y. P[y])`
 (it looks inside one level of application).
 
@@ -537,8 +539,10 @@ new theorem.
 ```ocaml
 let GSYM = CONV_RULE(ONCE_DEPTH_CONV SYM_CONV);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GSYM.html
+
 `GSYM thm` applies symmetry on all outermost equalities in the conclusion of
-`thm`.
+`thm`.  Why the G?
 
 ```ocaml
 let SUBS ths = CONV_RULE (SUBS_CONV ths);;
