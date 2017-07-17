@@ -50,7 +50,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.pipeparser.html
 let fix err prs input =
   try prs input
   with Noparse -> failwith (err ^ " expected");;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/fix.html
 
+```ocaml
 let rec listof prs sep err =
   prs ++ many (sep ++ fix err prs >> snd) >> (fun (h,t) -> h::t);;
 
@@ -96,7 +99,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/atleast.html
 ```ocaml
 let finished input =
   if input = [] then 0,input else failwith "Unparsed input";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/finished.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* The basic lexical classes: identifiers, strings and reserved words.       *)
 (* ------------------------------------------------------------------------- *)

@@ -340,9 +340,15 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_abs.html
     | Const(_,_) -> []
     | Abs(bv,bod) -> subtract (frees bod) [bv]
     | Comb(s,t) -> union (frees s) (frees t)
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/frees.html
 
+```ocaml
   let freesl tml = itlist (union o frees) tml []
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/freesl.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Whether all free variables in a term appear in a list.                    *)
 (* ------------------------------------------------------------------------- *)
@@ -353,7 +359,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_abs.html
     | Const(_,_) -> true
     | Abs(bv,bod) -> freesin (bv::acc) bod
     | Comb(s,t) -> freesin acc s && freesin acc t
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/freesin.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Whether a variable (or constant in fact) is free in a term.               *)
 (* ------------------------------------------------------------------------- *)

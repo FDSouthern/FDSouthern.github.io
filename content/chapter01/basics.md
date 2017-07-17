@@ -217,7 +217,10 @@ let rec free_in tm1 tm2 =
     let bv,bod = dest_abs tm2 in
     not (vfree_in bv tm1) && free_in tm1 bod
   else false;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/free_in.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Searching for terms.                                                      *)
 (* ------------------------------------------------------------------------- *)
@@ -229,7 +232,10 @@ let rec find_term p tm =
     let l,r = dest_comb tm in
     try find_term p l with Failure _ -> find_term p r
   else failwith "find_term";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/find_term.html
 
+```ocaml
 let find_terms =
   let rec accum tl p tm =
     let tl' = if p tm then insert tm tl else tl in
@@ -239,7 +245,10 @@ let find_terms =
        accum (accum tl' p (rator tm)) p (rand tm)
     else tl' in
   accum [];;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/find_terms.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* General syntax for binders.                                               *)
 (*                                                                           *)
@@ -494,7 +503,10 @@ let find_path =
     try "r"::(find_path p (rand tm))
     with Failure _ -> "l"::(find_path p (rator tm)) in
   fun p tm -> implode(find_path p tm);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/find_path.html
 
+```ocaml
 let follow_path =
   let rec follow_path s tm =
     match s with
@@ -504,6 +516,7 @@ let follow_path =
     | _::t -> follow_path t (body tm) in
   fun s tm -> follow_path (explode s) tm;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/follow_path.html
 
 - Previous: [fusion.ml](fusion.md)
 - [Index](index.md)

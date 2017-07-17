@@ -163,6 +163,8 @@ let ((ORELSEC):conv -> conv -> conv) =
 ```ocaml
 let (FIRST_CONV:conv list -> conv) = end_itlist (fun c1 c2 -> c1 ORELSEC c2);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/FIRST_CONV.html
+
 `FIRST_CONV [c1;...;cn]` rewrites with the first non-failing conversion in the
 list.
 

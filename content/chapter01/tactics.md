@@ -182,7 +182,9 @@ let ((ORELSE): tactic -> tactic -> tactic) =
 let (FAIL_TAC: string -> tactic) =
   fun tok g -> failwith tok;;
 ```
-`FAIL_TAC s` is a tactic which always fails (with error message `s`).
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/FAIL_TAC.html
+
+`FAIL_TAC "s"` is a tactic which always fails (with error message `s`).
 
 ```ocaml
 let (NO_TAC: tactic) =
@@ -223,6 +225,8 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EVERY.html
 let (FIRST: tactic list -> tactic) =
   fun tacl g -> end_itlist (fun t1 t2 -> t1 ORELSE t2) tacl g;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/FIRST.html
+
 `FIRST [t1;...;tn]` is equivalent to `t1 ORELSE ... ORELSE tn`.
 
 ```ocaml
@@ -338,6 +342,8 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EVERY_TCL.html
 let FIRST_TCL ttcll =
   end_itlist (fun t1 t2 -> t1 ORELSE_TCL t2) ttcll;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/FIRST_TCL.html
+
 `FIRST_TCL [thtc1;...;thtcn]` is equivalent to
 `thtc1 ORELSE_TCL ... ORELSE_TCL thtcn`.
 
@@ -370,9 +376,11 @@ let (FIND_ASSUM: thm_tactic -> term -> tactic) =
   fun ttac t ((asl,w) as g) ->
     ttac(snd(find (fun (_,th) -> concl th = t) asl)) g;;
 ```
-`FIND_ASSUM tht tm` finds the first assumption whose conclusion is equal (not
-alpha-equivalent!) to `tm` (call this assumption `th`) and applies tactic
-`(tht th)`.
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/FIND_ASSUM.html
+
+`` FIND_ASSUM ttac `t` `` finds the first assumption whose conclusion is equal
+(not alpha-equivalent!) to `t` (call this assumption `th`) and applies tactic
+`(ttac th)`.
 
 ```ocaml
 let (POP_ASSUM: thm_tactic -> tactic) =
@@ -412,6 +420,8 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EVERY_ASSUM.html
 let (FIRST_ASSUM: thm_tactic -> tactic) =
   fun ttac (asl,w as g) -> tryfind (fun (_,th) -> ttac th g) asl;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/FIRST_ASSUM.html
+
 `FIRST_ASSUM tht` is equivalent to `ASSUM_LIST (MAP_FIRST tht)`.
 
 ```ocaml
@@ -1034,6 +1044,8 @@ and applies the tactic `` (tht `|- a`) ``.
 let FIRST_X_ASSUM ttac =
     FIRST_ASSUM(fun th -> UNDISCH_THEN (concl th) ttac);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/FIRST_X_ASSUM.html
+
 `FIRST_X_ASSUM tht` is like `FIRST_ASSUM`, but it removes the assumption
 successfully used by the tactic.
 
@@ -1062,6 +1074,8 @@ let (FREEZE_THEN :thm_tactical) =
     let meta,gl,just = ttac (ASSUME(concl th)) (asl,w) in
     meta,gl,fun i l -> PROVE_HYP th (just i l);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/FREEZE_THEN.html
+
 `` FREEZE_THEN tht `|- a` `` applies the tactic `` (tht `|- a`) ``
 (while "freezing variables"?  Does this have something to do with metavariables?
 I don't understand this...).
@@ -1283,7 +1297,10 @@ let (refine:refinement->goalstack) =
 let flush_goalstack() =
   let l = !current_goalstack in
   current_goalstack := [hd l];;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/flush_goalstack.html
 
+```ocaml
 let e tac = refine(by(VALID tac));;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/e.html

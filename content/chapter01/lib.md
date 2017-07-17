@@ -9,6 +9,8 @@ This is where the actual OCaml gets started.
 ```ocaml
 let fail() = failwith "";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/fail.html
+
 Saves us a few vital characters.
 
 ```ocaml
@@ -44,8 +46,14 @@ let (o) = fun f g x -> f(g x);;
 
 let (F_F) = fun f g (x,y) -> (f x,g y);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/F_F.html
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/f_f_.html
+
 Composition and 'apply over pairs' (I wonder if this has a name?
 I've seen it mentioned in a paper from Mark Adams comparing HOL systems).
+
+The second version `f_f_` is defined by camlp5 magic in `pa_j.ml`.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -132,7 +140,10 @@ Are these definitions shadowed in `metis.ml`?
 
 let rec funpow n f x =
   if n < 1 then x else funpow (n-1) f (f x);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/funpow.html
 
+```ocaml
 let rec repeat f x =
   try let y = f x in repeat f y with Failure _ -> x;;
 ```
@@ -253,13 +264,19 @@ let rec forall p l =
   match l with
     [] -> true
   | h::t -> p(h) && forall p t;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/forall.html
 
+```ocaml
 let rec forall2 p l1 l2 =
   match (l1,l2) with
     [],[] -> true
   | (h1::t1,h2::t2) -> p h1 h2 && forall2 p t1 t2
   | _ -> false;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/forall2.html
 
+```ocaml
 let rec exists p l =
   match l with
     [] -> false
@@ -279,7 +296,10 @@ let rec filter p l =
   | h::t -> let t' = filter p t in
             if p(h) then if t'==t then l else h::t'
             else t';;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/filter.html
 
+```ocaml
 let rec partition p l =
   match l with
     [] -> [],l
@@ -297,14 +317,20 @@ let rec find p l =
   match l with
       [] -> failwith "find"
     | (h::t) -> if p(h) then h else find p t;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/find.html
 
+```ocaml
 let rec tryfind f l =
   match l with
       [] -> failwith "tryfind"
     | (h::t) -> try f h with Failure _ -> tryfind f t;;
 
 let flat l = itlist (@) l [];;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/flat.html
 
+```ocaml
 let rec remove p l =
   match l with
     [] -> failwith "remove"
@@ -719,7 +745,10 @@ let foldl =
     | Leaf(h,l) -> foldl_list f a l
     | Branch(p,b,l,r) -> foldl f (foldl f a l) r in
   foldl;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/foldl.html
 
+```ocaml
 let foldr =
   let rec foldr_list f l a =
     match l with
@@ -732,6 +761,8 @@ let foldr =
     | Branch(p,b,l,r) -> foldr f l (foldr f r a) in
   foldr;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/foldr.html
+
 Looks okay.
 
 ```ocaml
@@ -1040,6 +1071,8 @@ let file_of_string filename s =
   let fd = Pervasives.open_out filename in
   output_string fd s; close_out fd;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/file_of_string.html
+
 These file interactions always drive me crazy in OCaml.
 
 - Previous: [system.ml](system.md)

@@ -82,7 +82,10 @@ let file_on_path p s =
   let p' = List.map hol_expand_directory p in
   let d = List.find (fun d -> Sys.file_exists(Filename.concat d s)) p' in
   Filename.concat (if d = "." then Sys.getcwd() else d) s;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/file_on_path.html
 
+```ocaml
 let load_on_path p s =
   let s' = file_on_path p s in
   let fileid = (Filename.basename s',Digest.file s') in
