@@ -2060,7 +2060,10 @@ let HAS_SIZE_CONV =
     if evs = [] then th else
     let th' = funpow (length evs) BINDER_CONV NOT_IN_INSERT_CONV tm' in
     TRANS th th';;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/HAS_SIZE_CONV.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Various useful lemmas about cardinalities of unions etc.                  *)
 (* ------------------------------------------------------------------------- *)

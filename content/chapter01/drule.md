@@ -516,10 +516,11 @@ let HIGHER_REWRITE_CONV =
       let _,tmin0,tyin0 = term_match [] pred abs in
       CONV_RULE beta_fn (INST tmin (INST tmin0 (INST_TYPE tyin0 th)));;
 ```
-`HIGHER_REWRITE_CONV ths top`:
-A conversion which finds the first largest (if `top` = true) or smallest
-(if `top` == false) subterm which matches (using higher-order matching) a lhs of
-a conclusion in `ths`, and rewrites it.
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/HIGHER_REWRITE_CONV.html
+
+`HIGHER_REWRITE_CONV ths top` is a conversion which finds the first largest (if
+`top` = true) or smallest (if `top` == false) subterm which matches (using
+higher-order matching) a lhs of a conclusion in `ths`, and rewrites it.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)

@@ -481,7 +481,10 @@ let HYP =
   fun tac s ->
     let l,rest = (fix "Using pattern" parse_using o lex o explode) s in
     if rest=[] then HYP_LIST tac l else failwith "Invalid using pattern";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/HYP_UPPERCASE.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Basic tactic to use a theorem equal to the goal. Does *no* matching.      *)
 (* ------------------------------------------------------------------------- *)

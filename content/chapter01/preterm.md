@@ -95,7 +95,10 @@ let hide_constant,unhide_constant,is_hidden =
   and unhide_constant c = hcs := subtract (!hcs) [c]
   and is_hidden c = mem c (!hcs) in
   hide_constant,unhide_constant,is_hidden;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hide_constant.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* The type of pretypes.                                                     *)
 (* ------------------------------------------------------------------------- *)

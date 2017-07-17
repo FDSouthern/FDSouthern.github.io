@@ -12,7 +12,10 @@ Simple online help system, based on old HOL88 one.
 (* ------------------------------------------------------------------------- *)
 
 let help_path = ref ["$/Help"];;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/help_path.html
 
+```ocaml
 let help s =
   let funny_filenames =
    ["++", ".joinparsers";
@@ -84,7 +87,10 @@ let help s =
   Format.print_string
    "--------------------------------------------------------------------\n";
   Format.print_flush();;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/help.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Set up a theorem database, but leave contents clear for now.              *)
 (* ------------------------------------------------------------------------- *)

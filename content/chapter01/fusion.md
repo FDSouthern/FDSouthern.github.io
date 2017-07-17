@@ -554,7 +554,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_thm.html
 
 ```ocaml
   let hyp (Sequent(asl,c)) = asl
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hyp.html
 
+```ocaml
   let concl (Sequent(asl,c)) = c
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/concl.html

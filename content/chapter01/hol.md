@@ -11,6 +11,8 @@ for the sake of completeness.
 ```ocaml
 let hol_version = "2.20++";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hol_version.html
+
 This variable is used in the generation of the help files.
 
 ```ocaml
@@ -23,7 +25,10 @@ library, described in the OCaml manual
 ```ocaml
 let hol_dir = ref
   (try Sys.getenv "HOLLIGHT_DIR" with Not_found -> Sys.getcwd());;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hol_dir.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Should eventually change to "ref(Filename.temp_dir_name)".                *)
 (* However that's not available in 3.08, which is still the default          *)
@@ -72,7 +77,10 @@ let hol_expand_directory s =
   else if String.sub s 0 2 = "$/"
   then Filename.concat (!hol_dir) (String.sub s 2 (String.length s - 2))
   else s;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hol_expand_directory.html
 
+```ocaml
 let load_path = ref ["."; "$"];;
 
 let loaded_files = ref [];;

@@ -64,7 +64,10 @@ let hd l =
   match l with
    h::t -> h
   | _ -> failwith "hd";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hd.html
 
+```ocaml
 let tl l =
   match l with
    h::t -> t
