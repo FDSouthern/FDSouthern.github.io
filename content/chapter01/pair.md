@@ -465,7 +465,9 @@ let let_CONV =
     if length vs <> n then failwith "let_CONV" else
     (EXPAND_BETAS_CONV THENC lete_CONV) tm;;
 ```
-let_CONV reduces a "let" expression.  (Again, it handles extended definitions,
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/let_CONV.html
+
+`let_CONV` reduces a let expression.  (Again, it handles extended definitions,
 if they only use pairs.)
 
 ```ocaml
@@ -510,6 +512,8 @@ let (LET_TAC:tactic) =
         let tm' = follow_path path w' in
         CONV_TAC(PATH_CONV path (K(let_CONV tm'))))) gl;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/LET_TAC.html
+
 `LET_TAC` replaces `let x = t in p[x]` in goal with `p[x]` given a new
 hypothesis `t = x`.
 

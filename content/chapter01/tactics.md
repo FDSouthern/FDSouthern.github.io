@@ -362,7 +362,9 @@ let (LABEL_TAC: string -> thm_tactic) =
     null_meta,[(s,thm)::asl,w],
     fun i [th] -> PROVE_HYP (INSTANTIATE_ALL i thm) th;;
 ```
-`LABEL_TAC s th` adds `th` as a new assumption, with label `s`.
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/LABEL_TAC.html
+
+`LABEL_TAC "s" th` adds `th` as a new assumption, with label `"s"`.
 (Assumes that any hypotheses of `th` are also hypotheses of the goal.)
 
 ```ocaml

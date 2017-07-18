@@ -31,7 +31,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/I.html
 
 ```ocaml
 let K x y = x;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/K.html
 
+```ocaml
 let C f x y = f y x;;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/C.html
@@ -88,7 +91,10 @@ let rec last l =
     [x] -> x
   | (h::t) -> last t
   | [] -> failwith "last";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/last.html
 
+```ocaml
 let rec butlast l =
   match l with
     [_] -> []
@@ -301,7 +307,10 @@ let length =
   let rec len k l =
     if l = [] then k else len (k + 1) (tl l) in
   fun l -> len 0 l;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/length.html
 
+```ocaml
 let rec filter p l =
   match l with
     [] -> l
@@ -571,6 +580,8 @@ let lcm_num x y =
   if x =/ num_0 && y =/ num_0 then num_0
   else abs_num((x */ y) // gcd_num x y);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lcm_num.html
+
 Not many surprises here.
 
 ```ocaml

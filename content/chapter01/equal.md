@@ -19,9 +19,15 @@ type conv = term->thm;;
 (* ------------------------------------------------------------------------- *)
 
 let lhand = rand o rator;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lhand.html
 
+```ocaml
 let lhs = fst o dest_eq;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lhs.html
 
+```ocaml
 let rhs = snd o dest_eq;;
 
 (* ------------------------------------------------------------------------- *)
@@ -231,8 +237,10 @@ let (RAND_CONV:conv->conv) =
 ```ocaml
 let LAND_CONV = RATOR_CONV o RAND_CONV;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/LAND_CONV.html
+
 `LAND_CONV c` uses the conversion to rewrite the first argument of a binary
-function.
+operator.
 
 ```ocaml
 let (COMB2_CONV: conv->conv->conv) =

@@ -86,9 +86,15 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hol_expand_directory.html
 
 ```ocaml
 let load_path = ref ["."; "$"];;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/load_path.html
 
+```ocaml
 let loaded_files = ref [];;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/loaded_files.html
 
+```ocaml
 let file_on_path p s =
   if not (Filename.is_relative s) then s else
   let p' = List.map hol_expand_directory p in
@@ -102,11 +108,20 @@ let load_on_path p s =
   let s' = file_on_path p s in
   let fileid = (Filename.basename s',Digest.file s') in
   (use_file s'; loaded_files := fileid::(!loaded_files));;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/load_on_path.html
 
+```ocaml
 let loads s = load_on_path ["$"] s;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/loads.html
 
+```ocaml
 let loadt s = load_on_path (!load_path) s;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/loadt.html
 
+```ocaml
 let needs s =
   let s' = file_on_path (!load_path) s in
   let fileid = (Filename.basename s',Digest.file s') in

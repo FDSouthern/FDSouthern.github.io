@@ -18,6 +18,8 @@ let LIST_INDUCT_TAC =
   MATCH_MP_TAC list_INDUCT THEN
   CONJ_TAC THENL [ALL_TAC; GEN_TAC THEN GEN_TAC THEN DISCH_TAC];;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/LIST_INDUCT_TAC.html
+
 `LIST_INDUCT_TAC` takes a goal of the form `!l. P[l]` and creates two subgoals:
 `P[ [] ]` and `P[CONS h t]`.  The latter subgoal has a new assumption `P[t]`.
 
@@ -635,6 +637,8 @@ let rec LIST_CONV conv tm =
   else if fst(dest_const tm) = "NIL" then REFL tm
   else failwith "LIST_CONV";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/LIST_CONV.html
+
 `LIST_CONV conv` uses `conv` to rewrite every member of a (literal) list.
 
 ```ocaml

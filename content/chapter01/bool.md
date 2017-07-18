@@ -125,7 +125,10 @@ let AND_DEF = new_basic_definition
 
 let mk_conj = mk_binary "/\\";;
 let list_mk_conj = end_itlist (curry mk_conj);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_conj.html
 
+```ocaml
 let CONJ =
   let f = `f:bool->bool->bool`
   and p = `p:bool`
@@ -339,7 +342,10 @@ let FORALL_DEF = new_basic_definition
 
 let mk_forall = mk_binder "!";;
 let list_mk_forall(vs,bod) = itlist (curry mk_forall) vs bod;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_forall.html
 
+```ocaml
 let SPEC =
   let P = `P:A->bool`
   and x = `x:A` in
@@ -453,7 +459,10 @@ let EXISTS_DEF = new_basic_definition
 
 let mk_exists =  mk_binder "?";;
 let list_mk_exists(vs,bod) =  itlist (curry mk_exists) vs bod;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_exists.html
 
+```ocaml
 let EXISTS =
   let P = `P:A->bool` and x = `x:A` in
   let pth =
@@ -518,7 +527,10 @@ let OR_DEF = new_basic_definition
 
 let mk_disj = mk_binary "\\/";;
 let list_mk_disj = end_itlist (curry mk_disj);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_disj.html
 
+```ocaml
 let DISJ1 =
   let P = `P:bool` and Q = `Q:bool` in
   let pth =

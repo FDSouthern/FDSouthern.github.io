@@ -63,9 +63,15 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/body.html
 
 ```ocaml
 let list_mk_comb(h,t) = rev_itlist (C (curry mk_comb)) t h;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_comb.html
 
+```ocaml
 let list_mk_abs(vs,bod) = itlist (curry mk_abs) vs bod;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_abs.html
 
+```ocaml
 let strip_comb = rev_splitlist dest_comb;;
 
 let strip_abs = splitlist dest_abs;;
@@ -201,7 +207,10 @@ let list_mk_icomb cname args =
   let atys,_ = nsplit dest_fun_ty args (get_const_type cname) in
   let tyin = itlist2 (fun g a -> type_match g (type_of a)) atys args [] in
   list_mk_comb(mk_const(cname,tyin),args);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_icomb.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Free variables in assumption list and conclusion of a theorem.            *)
 (* ------------------------------------------------------------------------- *)
@@ -309,7 +318,10 @@ let mk_binop op tm1 =
   fun tm2 -> mk_comb(f,tm2);;
 
 let list_mk_binop op = end_itlist (mk_binop op);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_binop.html
 
+```ocaml
 let binops op = striplist (dest_binop op);;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/binops.html
@@ -497,7 +509,10 @@ let mk_gabs =
     mk_comb(mk_const("GABS",[fty,aty]),bod);;
 
 let list_mk_gabs(vs,bod) = itlist (curry mk_gabs) vs bod;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_gabs.html
 
+```ocaml
 let strip_gabs = splitlist dest_gabs;;
 
 (* ------------------------------------------------------------------------- *)

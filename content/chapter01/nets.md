@@ -96,7 +96,10 @@ let lookup =
           try collection @ follow(rtms,assoc Vnet edges)
           with Failure _ -> collection in
   fun tm net -> follow([tm],net);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lookup.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Function to merge two nets (code from Don Syme's hol-lite).               *)
 (* ------------------------------------------------------------------------- *)

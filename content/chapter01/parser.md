@@ -56,7 +56,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/fix.html
 ```ocaml
 let rec listof prs sep err =
   prs ++ many (sep ++ fix err prs >> snd) >> (fun (h,t) -> h::t);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/listof.html
 
+```ocaml
 let nothing input = [],input;;
 
 let elistof prs sep err =
@@ -69,7 +72,10 @@ let leftbin prs sep cons err =
   prs ++ many (sep ++ fix err prs) >>
   (fun (x,opxs) -> let ops,xs = unzip opxs in
                    itlist2 (fun op y x -> cons op x y) (rev ops) (rev xs) x);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/leftbin.html
 
+```ocaml
 let rightbin prs sep cons err =
   prs ++ many (sep ++ fix err prs) >>
   (fun (x,opxs) -> if opxs = [] then x else
@@ -167,7 +173,10 @@ let lex =
           let toks,rst1 = tokens rst in t::toks,rst1
     with Noparse -> [],i in
   fst o (tokens ++ many (some isspace) ++ finished >> (fst o fst));;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lex.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Parser for pretypes. Concrete syntax:                                     *)
 (*                                                                           *)

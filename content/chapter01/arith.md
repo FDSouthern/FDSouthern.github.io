@@ -1509,6 +1509,8 @@ let LE_IMP =
   let pth = PURE_ONCE_REWRITE_RULE[IMP_CONJ] LE_TRANS in
   fun th -> GEN_ALL(MATCH_MP pth (SPEC_ALL th));;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/LE_IMP.html
+
 `` LE_IMP `|- a <= b` `` gives `` (GEN_ALL `|- b <= p ==> a <= p`) ``.
 
 ```ocaml

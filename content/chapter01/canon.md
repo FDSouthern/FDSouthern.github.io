@@ -643,7 +643,10 @@ let LAMBDA_ELIM_CONV =
   let rec conv tm =
     try (LAMB1_CONV THENC conv) tm with Failure _ -> REFL tm in
   conv;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/LAMBDA_ELIM_CONV.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Eliminate conditionals; CONDS_ELIM_CONV aims for disjunctive splitting,   *)
 (* for refutation procedures, and CONDS_CELIM_CONV for conjunctive.          *)

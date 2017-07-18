@@ -131,7 +131,10 @@ let lift_function =
                   else RAND_CONV ETA_CONV in
       let th9 = CONV_RULE (RAND_CONV fconv) th8 in
       eth,GSYM th9;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lift_function.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Lifts a theorem. This can be done by higher order rewriting alone.        *)
 (*                                                                           *)
@@ -173,6 +176,7 @@ let lift_theorem =
     fun trths ->
       REWRITE_RULE (ith::trths);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lift_theorem.html
 
 - Previous: [metis.ml](metis.md)
 - [Index](index.md)
