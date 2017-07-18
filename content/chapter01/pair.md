@@ -144,7 +144,10 @@ let pair_RECURSION = prove
 (* ------------------------------------------------------------------------- *)
 
 let is_pair = is_binary ",";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_pair.html
 
+```ocaml
 let dest_pair = dest_binary ",";;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_pair.html

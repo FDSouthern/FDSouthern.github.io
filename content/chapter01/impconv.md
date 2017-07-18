@@ -9,9 +9,15 @@ Implicational conversions, implicational rewriting and target rewriting.
 ```ocaml
 let IMP_REWRITE_TAC,TARGET_REWRITE_TAC,HINT_EXISTS_TAC,
     SEQ_IMP_REWRITE_TAC,CASE_REWRITE_TAC =
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_REWRITE_TAC.html
 
+```ocaml
 let I = fun x -> x in
+```
+Isn't this the usual definition of `I`?
 
+```ocaml
 (* Same as [UNDISCH] but also returns the undischarged term *)
 let UNDISCH_TERM th =
   let p = (fst o dest_imp o concl) th in
@@ -1387,7 +1393,10 @@ let preprocess = CONJUNCTS o IMPLY_AND
 (* Tactic for implicational rewrite. *)
 let IMP_REWRITE_TAC ths =
   CTXIMPCONV_TAC (REWRITE_CTXIMPCONV (flat (map preprocess ths)))
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_REWRITE_TAC.html
 
+```ocaml
 let SEQ_IMP_REWRITE_TAC ths =
   let cnv =
     match ths with

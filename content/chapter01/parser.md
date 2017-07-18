@@ -250,7 +250,11 @@ let install_parser,delete_parser,installed_parsers,try_user_parser =
   (fun () -> !parser_list),
   (fun i -> try_parsers (!parser_list) i);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/install_parser.html
+
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/delete_parser.html
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/installed_parsers.html
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)

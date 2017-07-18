@@ -189,9 +189,15 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_vartype.html
 (* ------------------------------------------------------------------------- *)
 
   let is_type = can dest_type
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_type.html
 
+```ocaml
   let is_vartype = can dest_vartype
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_vartype.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Return the type variables in a type and in a list of types.               *)
 (* ------------------------------------------------------------------------- *)
@@ -278,13 +284,25 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/get_const_type.html
 (* ------------------------------------------------------------------------- *)
 
   let is_var = function (Var(_,_)) -> true | _ -> false
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_var.html
 
+```ocaml
   let is_const = function (Const(_,_)) -> true | _ -> false
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_const.html
 
+```ocaml
   let is_abs = function (Abs(_,_)) -> true | _ -> false
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_abs.html
 
+```ocaml
   let is_comb = function (Comb(_,_)) -> true | _ -> false
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_comb.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Primitive constructors.                                                   *)
 (* ------------------------------------------------------------------------- *)
@@ -454,7 +472,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/freesin.html
                        let z = Var(fst(dest_var y''),snd(dest_var y)) in
                        inst env tyin (Abs(z,vsubst[z,y] t)) in
     fun tyin -> if tyin = [] then fun tm -> tm else inst [] tyin
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/inst.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* A few bits of general derived syntax.                                     *)
 (* ------------------------------------------------------------------------- *)
@@ -677,6 +698,8 @@ case (if from `p` you can derive `q` and from `q` you can derive `p`, then
     let inst_fn = inst theta in
     Sequent(term_image inst_fn asl,inst_fn c)
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INST_TYPE.html
+
 `INST_TYPE instantiation theorem` gives a new theorem with type variables
 instantiated.
 
@@ -685,6 +708,8 @@ instantiated.
     let inst_fun = vsubst theta in
     Sequent(term_image inst_fun asl,inst_fun c)
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INST_UPPERCASE.html
+
 `INST instantiation theorem` gives a new theorem with variables instantiated.
 
 ```ocaml
@@ -782,7 +807,10 @@ let is_eq tm =
   match tm with
     Comb(Comb(Const("=",_),_),_) -> true
   | _ -> false;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_eq.html
 
+```ocaml
 let mk_eq =
   let eq = mk_const("=",[]) in
   fun (l,r) ->

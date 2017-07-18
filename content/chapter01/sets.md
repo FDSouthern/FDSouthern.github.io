@@ -3006,7 +3006,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_setenum.html
 
 ```ocaml
 let is_setenum = can dest_setenum;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_setenum.html
 
+```ocaml
 let mk_setenum =
   let insert_atm = `(INSERT):A->(A->bool)->(A->bool)`
   and nil_atm = `(EMPTY):A->bool` in

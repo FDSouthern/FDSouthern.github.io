@@ -226,7 +226,10 @@ let is_intconst tm =
   | Comb(Const("int_neg",_),Comb(Const("int_of_num",_),n)) ->
       is_numeral n && not(dest_numeral n = num_0)
   | _ -> false;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_intconst.html
 
+```ocaml
 let dest_intconst tm =
   match tm with
     Comb(Const("int_of_num",_),n) -> dest_numeral n
@@ -281,7 +284,10 @@ let INT_OF_REAL_THM =
                                    (INT_OF_REAL_THM (CONJUNCT2 th))
     else INT_OF_REAL_THM1 th in
   INT_OF_REAL_THM;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_OF_REAL_THM.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Collect together all the theorems derived automatically.                  *)
 (* ------------------------------------------------------------------------- *)
@@ -635,9 +641,15 @@ let INT_ARITH =
     and th1 = init_CONV (mk_neg tm) in
     let th2 = REAL_ARITH(mk_neg(rand(concl th1))) in
     EQ_MP th0 (EQ_MP (AP_TERM not_tm (SYM th1)) th2);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_ARITH.html
 
+```ocaml
 let INT_ARITH_TAC = CONV_TAC(EQT_INTRO o INT_ARITH);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_ARITH_TAC.html
 
+```ocaml
 let ASM_INT_ARITH_TAC =
   REPEAT(FIRST_X_ASSUM(MP_TAC o check (not o is_forall o concl))) THEN
   INT_ARITH_TAC;;
@@ -809,14 +821,28 @@ let INT_LE_CONV,INT_LT_CONV,INT_GE_CONV,INT_GT_CONV,INT_EQ_CONV =
     GEN_REWRITE_CONV I [pth_eq2a; pth_eq2b] THENC NUM2_EQ_CONV] in
   INT_LE_CONV,INT_LT_CONV,
   INT_GE_CONV,INT_GT_CONV,INT_EQ_CONV;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_LE_CONV.html
 
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_LT_CONV.html
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_GE_CONV.html
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_GT_CONV.html
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_EQ_CONV.html
+
+```ocaml
 let INT_NEG_CONV =
   let pth = prove
    (`(--(&0) = &0) /\
      (--(--(&x)) = &x)`,
     REWRITE_TAC[INT_NEG_NEG; INT_NEG_0]) in
   GEN_REWRITE_CONV I [pth];;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_NEG_CONV.html
 
+```ocaml
 let INT_MUL_CONV =
   let pth0 = prove
    (`(&0 * &x = &0) /\
@@ -835,7 +861,10 @@ let INT_MUL_CONV =
    [GEN_REWRITE_CONV I [pth0];
     GEN_REWRITE_CONV I [pth1] THENC RAND_CONV NUM_MULT_CONV;
     GEN_REWRITE_CONV I [pth2] THENC RAND_CONV(RAND_CONV NUM_MULT_CONV)];;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_MUL_CONV.html
 
+```ocaml
 let INT_ADD_CONV =
   let neg_tm = `(--)` in
   let amp_tm = `&` in
@@ -908,12 +937,18 @@ let INT_ADD_CONV =
             let th2 = AP_TERM amp_tm (NUM_ADD_CONV tm1) in
             TRANS th1 th2
     with Failure _ -> failwith "INT_ADD_CONV");;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_ADD_CONV.html
 
+```ocaml
 let INT_SUB_CONV =
   GEN_REWRITE_CONV I [INT_SUB] THENC
   TRY_CONV(RAND_CONV INT_NEG_CONV) THENC
   INT_ADD_CONV;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_SUB_CONV.html
 
+```ocaml
 let INT_POW_CONV =
   let pth1,pth2 = (CONJ_PAIR o prove)
    (`(&x pow n = &(x EXP n)) /\
@@ -929,24 +964,36 @@ let INT_POW_CONV =
    GEN_REWRITE_CONV I [tth] THENC
    (fun tm -> if rator tm = neg_tm then RAND_CONV(RAND_CONV NUM_EXP_CONV) tm
               else RAND_CONV NUM_EXP_CONV  tm));;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_POW_CONV.html
 
+```ocaml
 let INT_ABS_CONV =
   let pth = prove
    (`(abs(--(&x)) = &x) /\
      (abs(&x) = &x)`,
     REWRITE_TAC[INT_ABS_NEG; INT_ABS_NUM]) in
   GEN_REWRITE_CONV I [pth];;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_ABS_CONV.html
 
+```ocaml
 let INT_MAX_CONV =
   REWR_CONV INT_MAX THENC
   RATOR_CONV(RATOR_CONV(RAND_CONV INT_LE_CONV)) THENC
   GEN_REWRITE_CONV I [COND_CLAUSES];;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_MAX_CONV.html
 
+```ocaml
 let INT_MIN_CONV =
   REWR_CONV INT_MIN THENC
   RATOR_CONV(RATOR_CONV(RAND_CONV INT_LE_CONV)) THENC
   GEN_REWRITE_CONV I [COND_CLAUSES];;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_MIN_CONV.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Instantiate the normalizer.                                               *)
 (* ------------------------------------------------------------------------- *)
@@ -978,7 +1025,10 @@ let INT_POLY_CONV =
       SEMIRING_ADD_CONV,SEMIRING_MUL_CONV,SEMIRING_POW_CONV)
      (<) in
   INT_POLY_CONV;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_POLY_CONV.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Instantiate the ring and ideal procedures.                                *)
 (* ------------------------------------------------------------------------- *)
@@ -1006,7 +1056,12 @@ let INT_RING,int_ideal_cofactors =
                  then ideal tms tm
                  else failwith
                   "int_ideal_cofactors: not all terms have type :int");;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_RING.html
 
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/int_ideal_cofactors.html
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Arithmetic operations also on div and rem, hence the whole lot.           *)
 (* ------------------------------------------------------------------------- *)
@@ -1077,9 +1132,15 @@ let INT_RED_CONV =
      `min x y`,INT_MIN_CONV]
     (basic_net()) in
   REWRITES_CONV gconv_net;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_RED_CONV.html
 
+```ocaml
 let INT_REDUCE_CONV = DEPTH_CONV INT_RED_CONV;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_REDUCE_CONV.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Set up overloading so we can use same symbols for N, Z and even R.        *)
 (* ------------------------------------------------------------------------- *)
@@ -1309,9 +1370,15 @@ let INTEGER_TAC =
           MAP_EVERY MP_TAC ths THEN
           MAP_EVERY SPEC_TAC (zip gts (map (genvar o type_of) gts))) in
   REPEAT(GEN_TAC ORELSE CONJ_TAC) THEN GCD_ELIM_TAC THEN INTEGER_TAC;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INTEGER_TAC.html
 
+```ocaml
 let INTEGER_RULE tm = prove(tm,INTEGER_TAC);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INTEGER_RULE.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Mapping from nonnegative integers back to natural numbers.                *)
 (* ------------------------------------------------------------------------- *)

@@ -577,7 +577,10 @@ let RING_AND_IDEAL_CONV =
 let RING parms = fst(RING_AND_IDEAL_CONV parms);;
 
 let ideal_cofactors parms = snd(RING_AND_IDEAL_CONV parms);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ideal_cofactors.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Simplify a natural number assertion to eliminate conditionals, DIV, MOD,  *)
 (* PRE, cutoff subtraction, EVEN and ODD. Try to do it in a way that makes   *)

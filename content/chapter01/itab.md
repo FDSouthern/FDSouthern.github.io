@@ -64,14 +64,12 @@ let ITAUT_TAC =
     ((ITAUT_TAC [] n THEN NO_TAC) ORELSE ITAUT_ITERDEEP_TAC (n + 1)) gl in
   ITAUT_ITERDEEP_TAC 0;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ITAUT_TAC.html
+
 `ITAUT_TAC` understands `AND`, `FORALL`, `IMPLIES`, `NOT`, `IFF`
 (boolean equality), `OR`, `EXISTS`, `T`, and `F`.  It applies a long list of
 rules dealing with the above types of terms until it runs out of rules to apply
 or proves the theorem.  It either succeeds or leaves the goal state unchanged.
-
-`` ITAUT `a` `` gives `` `|- a` `` if `ITAUT` can prove it.
-
-`` CONTRAPOS `|- a ==> b` `` gives `` `|- ~b ==> ~a` ``.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -80,6 +78,10 @@ or proves the theorem.  It either succeeds or leaves the goal state unchanged.
 
 let ITAUT tm = prove(tm,ITAUT_TAC);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ITAUT.html
+
+`` ITAUT `a` `` gives `|- a` if `ITAUT` can prove it.
+
 
 - Previous: [tactics.ml](tactics.md)
 - [Index](index.md)

@@ -556,7 +556,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DESTRUCT_TAC.html
 
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/FIX_TAC.html
 
-
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INTRO_TAC.html
 
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/HYP_TAC.html
 

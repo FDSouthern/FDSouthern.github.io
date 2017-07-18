@@ -26,7 +26,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/curry.html
 let uncurry f(x,y) = f x y;;
 
 let I x = x;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/I.html
 
+```ocaml
 let K x y = x;;
 
 let C f x y = f y x;;
@@ -172,7 +175,10 @@ let rec itlist f l b =
   match l with
     [] -> b
   | (h::t) -> f h (itlist f t b);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/itlist.html
 
+```ocaml
 let rec rev_itlist f l b =
   match l with
     [] -> b
@@ -192,7 +198,10 @@ let rec itlist2 f l1 l2 b =
     ([],[]) -> b
   | (h1::t1,h2::t2) -> f h1 h2 (itlist2 f t1 t2 b)
   | _ -> failwith "itlist2";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/itlist2.html
 
+```ocaml
 let rec rev_itlist2 f l1 l2 b =
    match (l1,l2) with
      ([],[]) -> b
@@ -355,8 +364,11 @@ let index x =
     | (h::t) -> if Pervasives.compare x h = 0 then n else ind (n + 1) t in
   ind 0;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/index.html
+
 Again, a few of these exist in the standard library.  I wonder if these are
 from a time before they were included, or if John's just a control freak!
+Maybe he wants to standardise the use of exceptions.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -370,13 +382,19 @@ let rec mem x lis =
 
 let insert x l =
   if mem x l then l else x::l;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/insert.html
 
+```ocaml
 let union l1 l2 = itlist insert l1 l2;;
 
 let unions l = itlist union l [];;
 
 let intersect l1 l2 = filter (fun x -> mem x l2) l1;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/intersect.html
 
+```ocaml
 let subtract l1 l2 = filter (fun x -> not (mem x l2)) l1;;
 
 let subset l1 l2 = forall (fun t -> mem t l2) l1;;
@@ -492,7 +510,10 @@ Why isn't this with the set functions above?!
 (* ------------------------------------------------------------------------- *)
 
 let implode l = itlist (^) l "";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/implode.html
 
+```ocaml
 let explode s =
   let rec exap n l =
       if n < 0 then l else
@@ -682,7 +703,10 @@ sort in the standard library?!
 (* ------------------------------------------------------------------------- *)
 
 let increasing f x y = Pervasives.compare (f x) (f y) < 0;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/increasing.html
 
+```ocaml
 let decreasing f x y = Pervasives.compare (f x) (f y) > 0;;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/decreasing.html
@@ -719,7 +743,10 @@ let is_undefined f =
   match f with
     Empty -> true
   | _ -> false;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_undefined.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Operation analagous to "map" for lists.                                   *)
 (* ------------------------------------------------------------------------- *)
@@ -1016,7 +1043,10 @@ let rec mem' eq =
 
 let insert' eq x l =
   if mem' eq x l then l else x::l;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/insert_prime.html
 
+```ocaml
 let union' eq l1 l2 = itlist (insert' eq) l1 l2;;
 
 let unions' eq l = itlist (union' eq) l [];;

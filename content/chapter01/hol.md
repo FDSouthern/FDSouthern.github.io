@@ -57,6 +57,10 @@ This section is a little bit hairy, but I'm going to skip over it for now.
 I may at some future time add a section to this guide on the syntax extensions
 used by HOL Light.  Or I may not.
 
+Here are some things handled at the Camlp5 level:
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/it.html
+
 ```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Load files from system and/or user-settable directories.                  *)

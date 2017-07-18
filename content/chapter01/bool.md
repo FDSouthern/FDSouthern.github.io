@@ -38,7 +38,10 @@ let is_iff tm =
   match tm with
     Comb(Comb(Const("=",Tyapp("fun",[Tyapp("bool",[]);_])),l),r) -> true
   | _ -> false;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_iff.html
 
+```ocaml
 let dest_iff tm =
   match tm with
     Comb(Comb(Const("=",Tyapp("fun",[Tyapp("bool",[]);_])),l),r) -> (l,r)
@@ -282,8 +285,10 @@ let IMP_ANTISYM_RULE =
     let p1,q1 = dest_imp(concl th1) and p2,q2 = dest_imp(concl th2) in
     EQ_MP (INST [p1,p; q1,q] pth) (CONJ th1 th2);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_ANTISYM_RULE.html
+
 `` IMP_ANTISYM_RULE `ASM1 |- a ==> b` `ASM2 |- b ==> a` `` gives
-`` `ASM1+ASM2 |- a = b` ``.
+`ASM1+ASM2 |- a = b`.
 
 ```ocaml
 let ADD_ASSUM tm th = MP (DISCH tm th) (ASSUME tm);;
@@ -319,6 +324,8 @@ let IMP_TRANS =
         if y <> y' then failwith "IMP_TRANS" else
         MP (MP (INST [x,p; y,q; z,r] pth) th1) th2;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_TRANS.html
+
 `` IMP_TRANS `ASM1 |- a ==> b` `ASM2 |- b ==> c` `` gives
 `` `ASM1+ASM2 |- a ==> c` ``.
 
@@ -380,6 +387,8 @@ let ISPEC t th =
   try SPEC t (INST_TYPE tyins th)
   with Failure _ -> failwith "ISPEC: type variable(s) free in assumptions";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ISPEC.html
+
 `ISPEC` is like `SPEC`, except that the specialised term may be an instance of
 the type of the quantified variable (in which case the theorem is
 type-instantiated first), rather than matching exactly.
@@ -393,6 +402,8 @@ let ISPECL tms th =
       SPECL tms (INST_TYPE tyins th)
   with Failure _ -> failwith "ISPECL";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ISPECL.html
+
 `ISPECL` is like `SPECL` with type instantiations.
 
 ```ocaml

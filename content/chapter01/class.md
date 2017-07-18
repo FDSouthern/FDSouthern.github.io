@@ -53,6 +53,10 @@ new_constant("@",`:(A->bool)->A`);;
 parse_as_binder "@";;
 
 let is_select = is_binder "@";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_select.html
+
+```ocaml
 let dest_select = dest_binder "@";;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_select.html
@@ -385,7 +389,10 @@ let COND_CLAUSES = prove
 let is_cond tm =
   try fst(dest_const(rator(rator (rator tm)))) = "COND"
   with Failure _ -> false;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_cond.html
 
+```ocaml
 let mk_cond (b,x,y) =
   try let c = mk_const("COND",[type_of x,aty]) in
       mk_comb(mk_comb(mk_comb(c,b),x),y)
@@ -571,6 +578,7 @@ let bool_RECURSION = prove
 let inductive_type_store = ref
  ["bool",(2,bool_INDUCT,bool_RECURSION)];;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/inductive_type_store.html
 
 - Previous: [ind_defs.ml](ind_defs.md)
 - [Index](index.md)

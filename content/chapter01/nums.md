@@ -221,6 +221,8 @@ let (INDUCT_TAC:tactic) =
   MATCH_MP_TAC num_INDUCTION THEN
   CONJ_TAC THENL [ALL_TAC; GEN_TAC THEN DISCH_TAC];;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INDUCT_TAC.html
+
 `INDUCT_TAC` takes a goal `!x. P[x]` and creates subgoals `P[0]` and `P[SUC n]`
 (the latter with an assumption `P[n]`).
 
@@ -313,7 +315,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_small_numeral.html
 
 ```ocaml
 let is_numeral = can dest_numeral;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_numeral.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Derived principles of definition based on existence.                      *)
 (*                                                                           *)

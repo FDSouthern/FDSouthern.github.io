@@ -36,7 +36,22 @@ let isspace,issep,isbra,issymb,isalpha,isnum,isalnum =
   and isnum c = Array.get ctable (charcode c) = 32
   and isalnum c = Array.get ctable (charcode c) >= 16 in
   isspace,issep,isbra,issymb,isalpha,isnum,isalnum;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/isspace.html
 
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/issep.html
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/isbra.html
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/issymb.html
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/isalpha.html
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/isnum.html
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/isalnum.html
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Reserved words.                                                           *)
 (* ------------------------------------------------------------------------- *)
@@ -50,7 +65,10 @@ let reserve_words,unreserve_words,is_reserved_word,reserved_words =
   (fun ns  -> reswords := subtract (!reswords) ns),
   (fun n  -> mem n (!reswords)),
   (fun () -> !reswords);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_reserved_word.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Functions to access the global tables controlling special parse status.   *)
 (*                                                                           *)
@@ -80,7 +98,10 @@ let unparse_as_prefix,parse_as_prefix,is_prefix,prefixes =
   (fun n  -> prefix_list := union (!prefix_list) [n]),
   (fun n  -> mem n (!prefix_list)),
   (fun () -> !prefix_list);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_prefix.html
 
+```ocaml
 let unparse_as_infix,parse_as_infix,get_infix_status,infixes =
   let cmp (s,(x,a)) (t,(y,b)) =
      x < y || x = y && a > b || x = y && a = b && s < t in
@@ -92,6 +113,8 @@ let unparse_as_infix,parse_as_infix,get_infix_status,infixes =
   (fun ()    -> !infix_list);;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/get_infix_status.html
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/infixes.html
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -187,6 +210,8 @@ let install_user_printer,delete_user_printer,try_user_printer =
                                         (!user_printers))),
   (fun fmt -> fun tm -> tryfind (fun (_,pr) -> pr fmt tm) (!user_printers));;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/install_user_printer.html
+
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/delete_user_printer.html
 
 ```ocaml

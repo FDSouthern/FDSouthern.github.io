@@ -80,7 +80,10 @@ let is_binary s tm =
   match tm with
     Comb(Comb(Const(s',_),_),_) -> s' = s
   | _ -> false;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_binary.html
 
+```ocaml
 let dest_binary s tm =
   match tm with
     Comb(Comb(Const(s',_),l),r) when s' = s -> (l,r)
@@ -265,7 +268,10 @@ let is_binder s tm =
   match tm with
     Comb(Const(s',_),Abs(_,_)) -> s' = s
   | _ -> false;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_binder.html
 
+```ocaml
 let dest_binder s tm =
   match tm with
     Comb(Const(s',_),Abs(x,t)) when s' = s -> (x,t)
@@ -286,7 +292,10 @@ let is_binop op tm =
   match tm with
     Comb(Comb(op',_),_) -> op' = op
   | _ -> false;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_binop.html
 
+```ocaml
 let dest_binop op tm =
   match tm with
     Comb(Comb(op',l),r) when op' = op -> (l,r)
@@ -311,6 +320,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/binops.html
 (* ------------------------------------------------------------------------- *)
 
 let is_conj = is_binary "/\\";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_conj.html
+
+```ocaml
 let dest_conj = dest_binary "/\\";;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_conj.html
@@ -322,12 +335,20 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/conjuncts.html
 
 ```ocaml
 let is_imp = is_binary "==>";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_imp.html
+
+```ocaml
 let dest_imp = dest_binary "==>";;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_imp.html
 
 ```ocaml
 let is_forall = is_binder "!";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_forall.html
+
+```ocaml
 let dest_forall = dest_binder "!";;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_forall.html
@@ -336,6 +357,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_forall.html
 let strip_forall = splitlist dest_forall;;
 
 let is_exists = is_binder "?";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_exists.html
+
+```ocaml
 let dest_exists = dest_binder "?";;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_exists.html
@@ -344,6 +369,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_exists.html
 let strip_exists = splitlist dest_exists;;
 
 let is_disj = is_binary "\\/";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_disj.html
+
+```ocaml
 let dest_disj = dest_binary "\\/";;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_disj.html
@@ -357,7 +386,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/disjuncts.html
 let is_neg tm =
   try fst(dest_const(rator tm)) = "~"
   with Failure _ -> false;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_neg.html
 
+```ocaml
 let dest_neg tm =
   try let n,p = dest_comb tm in
       if fst(dest_const n) = "~" then p else fail()
@@ -367,6 +399,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_neg.html
 
 ```ocaml
 let is_uexists = is_binder "?!";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_uexists.html
+
+```ocaml
 let dest_uexists = dest_binder "?!";;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_uexists.html
@@ -378,13 +414,21 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_cons.html
 
 ```ocaml
 let is_cons = is_binary "CONS";;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_cons.html
+
+```ocaml
 let dest_list tm =
   try let tms,nil = splitlist dest_cons tm in
       if fst(dest_const nil) = "NIL" then tms else fail()
   with Failure _ -> failwith "dest_list";;
-let is_list = can dest_list;;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_list.html
+
+```ocaml
+let is_list = can dest_list;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_list.html
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -432,7 +476,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_gabs.html
 
 ```ocaml
 let is_gabs = can dest_gabs;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_gabs.html
 
+```ocaml
 let mk_gabs =
   let mk_forall(v,t) =
     let cop = mk_const("!",[type_of v,aty]) in
@@ -470,7 +517,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_let.html
 
 ```ocaml
 let is_let = can dest_let;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_let.html
 
+```ocaml
 let mk_let(assigs,bod) =
   let lefts,rights = unzip assigs in
   let lend = mk_comb(mk_const("LET_END",[type_of bod,aty]),bod) in

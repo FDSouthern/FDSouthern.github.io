@@ -807,7 +807,10 @@ let instantiate_casewise_recursion,
       let dtm = hd(hyp eth) in
       let dth = pinstantiate_casewise_recursion dtm in
       PROVE_HYP dth eth in
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/instantiate_casewise_recursion.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Justify existence assertion and try to simplify/remove side-conditions.   *)
 (* ------------------------------------------------------------------------- *)

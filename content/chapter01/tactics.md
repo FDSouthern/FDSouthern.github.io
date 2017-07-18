@@ -81,7 +81,10 @@ type thm_tactical = thm_tactic -> thm_tactic;;
 let (inst_goal:instantiation->goal->goal) =
   fun p (thms,w) ->
     map (I F_F INSTANTIATE_ALL p) thms,instantiate p w;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/inst_goal.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Perform a sequential composition (left first) of instantiations.          *)
 (* ------------------------------------------------------------------------- *)
@@ -992,6 +995,8 @@ let (IMP_RES_THEN: thm_tactical) =
         if tacs = [] then failwith "IMP_RES_THEN"
         else EVERY tacs);;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_RES_THEN.html
+
 `` IMP_RES_THEN tht `|- a ==> b` `` applies tactic `` (tht `|- b@`) `` for every
 assumption `` `|- a@` ``.
 

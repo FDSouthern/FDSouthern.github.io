@@ -1078,7 +1078,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/distinctness_store.html
 
 ```ocaml
 let injectivity_store = ref [];;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/injectivity_store.html
 
+```ocaml
 let extend_rectype_net (tyname,(_,_,rth)) =
   let ths1 = try [prove_constructors_distinct rth] with Failure _ -> []
   and ths2 = try [prove_constructors_injective rth] with Failure _ -> [] in
@@ -1103,7 +1106,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/distinctness.html
 
 ```ocaml
 let injectivity ty = assoc ty (!injectivity_store);;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/injectivity.html
 
+```ocaml
 let cases ty =
   if ty = "num" then num_CASES else
   let _,ith,_ = assoc ty (!inductive_type_store) in prove_cases_thm ith;;

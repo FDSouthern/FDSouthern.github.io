@@ -114,7 +114,10 @@ let (instantiate :instantiation->term->term) =
     let ttm = vsubst tmin itm in
     if bcs = [] then ttm else
     try ho_betas bcs itm ttm with Failure _ -> ttm;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/instantiate.html
 
+```ocaml
 let (INSTANTIATE : instantiation->thm->thm) =
   let rec BETAS_CONV n tm =
     if n = 1 then TRY_CONV BETA_CONV tm else
@@ -150,6 +153,8 @@ let (INSTANTIATE : instantiation->thm->thm) =
       with Failure _ -> tth
     else failwith "INSTANTIATE: term || type var free in assumptions";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INSTANTIATE_UPPERCASE.html
+
 `INSTANTIATE` takes an "instantiation" and a theorem and instantiates the
 theorem.  (I haven't figured out yet what an "instantiation" is.)
 
@@ -174,6 +179,8 @@ let (INSTANTIATE_ALL : instantiation->thm->thm) =
     let th2 = INSTANTIATE i th1 in
     funpow (length rhyps) UNDISCH th2;;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INSTANTIATE_ALL.html
+
 `INSTANTIATE_ALL` has the same type as `INSTANTIATE`.
 
 ```ocaml

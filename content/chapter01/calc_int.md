@@ -35,7 +35,10 @@ let mk_realintconst =
   let mk_numconst n = mk_comb(cast_tm,mk_numeral n) in
   fun x -> if x </ num_0 then mk_comb(neg_tm,mk_numconst(minus_num x))
            else mk_numconst x;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_realintconst.html
 
+```ocaml
 let is_ratconst tm =
   match tm with
     Comb(Comb(Const("real_div",_),p),q) ->
@@ -43,7 +46,10 @@ let is_ratconst tm =
         (let m = dest_realintconst p and n = dest_realintconst q in
          n >/ num_1 && gcd_num m n =/ num_1)
   | _ -> is_realintconst tm;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_ratconst.html
 
+```ocaml
 let rat_of_term tm =
   match tm with
     Comb(Comb(Const("real_div",_),p),q) ->

@@ -12,7 +12,10 @@ Preterms and pretypes; typechecking; translation to types and terms.
 (* ------------------------------------------------------------------------- *)
 
 let ignore_constant_varstruct = ref true;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ignore_constant_varstruct.html
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Flags controlling the treatment of invented type variables in quotations. *)
 (* It can be treated as an error, result in a warning, or neither of those.  *)
@@ -97,6 +100,10 @@ let hide_constant,unhide_constant,is_hidden =
   hide_constant,unhide_constant,is_hidden;;
 ```
 http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hide_constant.html
+
+
+
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_hidden.html
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)

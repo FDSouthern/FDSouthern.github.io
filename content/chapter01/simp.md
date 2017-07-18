@@ -31,8 +31,10 @@ let REWR_CONV = PART_MATCH lhs;;
 let IMP_REWR_CONV = PART_MATCH (lhs o snd o dest_imp);;
 
 ```
-`` IMP_REWR_CONV `|- P ==> (a = b)` `` is a conversion which rewrites `a@` to
-`b@` under the condition `P@`.
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_REWR_CONV.html
+
+`` IMP_REWR_CONV `A |- p ==> (s = t)` `` returns a conversion which matches
+a term `s'` to `s` and returns the theorem `A |- p ==> (s' = t')`.
 
 ```ocaml
 
