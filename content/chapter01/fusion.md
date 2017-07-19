@@ -158,9 +158,14 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/get_type_arity.html
     if arity = length args then
       Tyapp(tyop,args)
     else failwith ("mk_type: wrong number of arguments to "^tyop)
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_type.html>
 
+```ocaml
   let mk_vartype v = Tyvar(v)
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_vartype.html>
+
 I think this deserves a comment.
 
 ```ocaml
@@ -308,23 +313,35 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_comb.html
 (* ------------------------------------------------------------------------- *)
 
   let mk_var(v,ty) = Var(v,ty)
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_var.html>
 
+```ocaml
   let mk_const(name,theta) =
     let uty = try get_const_type name with Failure _ ->
       failwith "mk_const: not a constant name" in
     Const(name,type_subst theta uty)
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_const.html>
 
+```ocaml
   let mk_abs(bvar,bod) =
     match bvar with
       Var(_,_) -> Abs(bvar,bod)
     | _ -> failwith "mk_abs: not a variable"
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_abs.html>
 
+```ocaml
   let mk_comb(f,a) =
     match type_of f with
       Tyapp("fun",[ty;_]) when Pervasives.compare ty (type_of a) = 0
         -> Comb(f,a)
     | _ -> failwith "mk_comb: types do not agree"
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_comb.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Primitive destructors.                                                    *)
 (* ------------------------------------------------------------------------- *)
@@ -619,6 +636,8 @@ Okay, below here we've got HOL Light's inference rules:
          | _ -> failwith "MK_COMB: types do not agree")
      | _ -> failwith "MK_COMB: not both equations"
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MK_COMB_UPPERCASE.html>
+
 `` MK_COMB (`ASM1 |- f = g`, `ASM2 |- a = b`) `` gives
 `ASM1+ASM2 |- (f a) = (g b)`.
 
@@ -798,9 +817,13 @@ include Hol;;
 (* ------------------------------------------------------------------------- *)
 
 let mk_fun_ty ty1 ty2 = mk_type("fun",[ty1; ty2]);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_fun_ty.html>
+
+```ocaml
 let bty = mk_vartype "B";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/bty.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/bty.html>
 
 ```ocaml
 let is_eq tm =
@@ -808,7 +831,7 @@ let is_eq tm =
     Comb(Comb(Const("=",_),_),_) -> true
   | _ -> false;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_eq.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_eq.html>
 
 ```ocaml
 let mk_eq =
@@ -819,6 +842,8 @@ let mk_eq =
         mk_comb(mk_comb(eq_tm,l),r)
     with Failure _ -> failwith "mk_eq";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_eq.html>
+
 Checks whether two terms are the same type, and if they are, forms a new term
 for their equality.
 

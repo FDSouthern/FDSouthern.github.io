@@ -54,7 +54,10 @@ let _FUNCTION = new_definition
 
 let mk_pair_def = new_definition
   `mk_pair (x:A) (y:B) = \a b. (a = x) /\ (b = y)`;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_pair.html>
 
+```ocaml
 let PAIR_EXISTS_THM = prove
  (`?x. ?(a:A) (b:B). x = mk_pair a b`,
   MESON_TAC[]);;

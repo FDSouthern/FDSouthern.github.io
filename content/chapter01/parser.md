@@ -39,7 +39,10 @@ let rec many prs input =
       let results,rest = many prs next in
       (result::results),rest
   with Noparse -> [],input;;
+```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/many.html
 
+```ocaml
 let (>>) prs treatment input =
   let result,rest = prs input in
   treatment(result),rest;;

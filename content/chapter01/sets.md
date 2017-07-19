@@ -3002,12 +3002,12 @@ let dest_setenum =
             if is_const n && fst(dest_const n) = "EMPTY" then l
             else failwith "dest_setenum: not a finite set enumeration";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_setenum.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_setenum.html>
 
 ```ocaml
 let is_setenum = can dest_setenum;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_setenum.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_setenum.html>
 
 ```ocaml
 let mk_setenum =
@@ -3017,9 +3017,15 @@ let mk_setenum =
     let insert_tm = inst [ty,aty] insert_atm
     and nil_tm = inst [ty,aty] nil_atm in
     itlist (mk_binop insert_tm) l nil_tm;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_setenum.html>
 
+```ocaml
 let mk_fset l = mk_setenum(l,type_of(hd l));;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_fset.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Pairwise property over sets and lists.                                    *)
 (* ------------------------------------------------------------------------- *)

@@ -20,12 +20,12 @@ type conv = term->thm;;
 
 let lhand = rand o rator;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lhand.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lhand.html>
 
 ```ocaml
 let lhs = fst o dest_eq;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lhs.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lhs.html>
 
 ```ocaml
 let rhs = snd o dest_eq;;
@@ -43,7 +43,10 @@ let mk_primed_var =
     let s,ty = dest_var v in
     let s' = svariant (mapfilter (fst o dest_var) avoid) s in
     mk_var(s',ty);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_primed_var.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* General case of beta-conversion.                                          *)
 (* ------------------------------------------------------------------------- *)
@@ -125,6 +128,8 @@ let MK_BINOP op =
   let afn = AP_TERM op in
   fun (lth,rth) -> MK_COMB(afn lth,rth);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MK_BINOP_UPPERCASE.html>
+
 `` MK_BINOP `(+)` (`ASM1 |- a = b`, `ASM2 |- c = d`) `` gives
 `ASM1+ASM2 |- a + c = b + d`.
 

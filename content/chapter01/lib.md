@@ -85,7 +85,10 @@ let map f =
       [] -> []
     | (x::t) -> let y = f x in y::(mapf t) in
   mapf;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/map.html>
 
+```ocaml
 let rec last l =
   match l with
     [x] -> x
@@ -123,6 +126,8 @@ let rec map2 f l1 l2 =
   | (h1::t1),(h2::t2) -> let h = f h1 h2 in h::(map2 f t1 t2)
   | _ -> failwith "map2: length mismatch";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/map.html>
+
 These are pretty standard functional goodies.  I'm not really sure why they are
 preferable to the standard library versions.
 
@@ -333,7 +338,10 @@ let rec mapfilter f l =
     [] -> []
   | (h::t) -> let rest = mapfilter f t in
               try (f h)::rest with Failure _ -> rest;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mapfilter.html>
 
+```ocaml
 let rec find p l =
   match l with
       [] -> failwith "find"
@@ -388,11 +396,14 @@ let rec mem x lis =
   match lis with
     [] -> false
   | (h::t) -> Pervasives.compare x h = 0 || mem x t;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mem.html>
 
+```ocaml
 let insert x l =
   if mem x l then l else x::l;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/insert.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/insert.html>
 
 ```ocaml
 let union l1 l2 = itlist insert l1 l2;;
@@ -694,7 +705,10 @@ let rec merge ord l1 l2 =
                 [] -> l1
               | h2::t2 -> if ord h1 h2 then h1::(merge ord t1 l2)
                           else h2::(merge ord l1 t2);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/merge.html>
 
+```ocaml
 let mergesort ord =
   let rec mergepairs l1 l2 =
     match (l1,l2) with
@@ -704,9 +718,11 @@ let mergesort ord =
       | (l,(s1::s2::ss)) -> mergepairs ((merge ord s1 s2)::l) ss in
   fun l -> if l = [] then [] else mergepairs [] (map (fun x -> [x]) l);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mergesort.html>
+
 Again, is this better than `sort` above?  Why have both?  Are either of them
 better than the generic sort in the standard library?  Is there a generic
-sort in the standard library?!
+sort in the standard library?!  See link above for some answers.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -773,7 +789,10 @@ let mapf =
     | Leaf(h,l) -> Leaf(h,map_list f l)
     | Branch(p,b,l,r) -> Branch(p,b,mapf f l,mapf f r) in
   mapf;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mapf.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Operations analogous to "fold" for lists.                                 *)
 (* ------------------------------------------------------------------------- *)
@@ -1051,11 +1070,14 @@ let rec mem' eq =
       [] -> false
     | (h::t) -> eq x h || mem x t
   in mem;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mem.html>
 
+```ocaml
 let insert' eq x l =
   if mem' eq x l then l else x::l;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/insert_prime.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/insert_prime.html>
 
 ```ocaml
 let union' eq l1 l2 = itlist (insert' eq) l1 l2;;

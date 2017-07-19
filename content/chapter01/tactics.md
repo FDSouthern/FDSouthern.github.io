@@ -82,7 +82,7 @@ let (inst_goal:instantiation->goal->goal) =
   fun p (thms,w) ->
     map (I F_F INSTANTIATE_ALL p) thms,instantiate p w;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/inst_goal.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/inst_goal.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -97,7 +97,7 @@ let (compose_insts :instantiation->instantiation->instantiation) =
     and tyin' = filter (fun (_,a) -> not (can (rev_assoc a) tyin)) tyin2 in
     pats1@pats2,tmin@tmin',tyin@tyin';;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/compose_insts.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/compose_insts.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -110,7 +110,10 @@ let mk_fthm =
   let pth = UNDISCH(fst(EQ_IMP_RULE _FALSITY_))
   and qth = ASSUME `_FALSITY_` in
   fun (asl,c) -> PROVE_HYP qth (itlist ADD_ASSUM (rev asl) (CONTR c pth));;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_fthm.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Validity checking of tactics. This cannot be 100% accurate without making *)
 (* arbitrary theorems, but "mk_fthm" brings us quite close.                  *)
@@ -236,12 +239,16 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/FIRST.html
 let MAP_EVERY tacf lst =
   EVERY (map tacf lst);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MAP_EVERY.html>
+
 `MAP_EVERY tacf [x1;...;xn]` is equivalent to `tacf x1 THEN ... THEN tacf xn`.
 
 ```ocaml
 let MAP_FIRST tacf lst =
   FIRST (map tacf lst);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MAP_FIRST.html>
+
 `MAP_FIRST tacf [x1;...;xn]` is equivalent to
 `tacf x1 ORELSE ... ORELSE tacf xn`.
 
@@ -556,7 +563,7 @@ let (ABS_TAC: tactic) =
                       EQ_MP (ALPHA (concl ath) (instantiate i w)) ath
     with Failure _ -> failwith "ABS_TAC";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ABS_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ABS_TAC.html>
 
 `ABS_TAC` converts goal `` `(\x. a) = (\x. b)` `` to `` `a = b` ``.
 
@@ -570,15 +577,16 @@ let (MK_COMB_TAC: tactic) =
         fun _ [th1;th2] -> MK_COMB(th1,th2)
     with Failure _ -> failwith "MK_COMB_TAC";;
 ```
-`MK_COMB_TAC` converts goal `` `f a = g b` `` to `` `f = g` `` and
-`` `a = b` `` .
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MK_COMB_TAC.html>
+
+`MK_COMB_TAC` converts goal `f a = g b` to `f = g` and `a = b`.
 
 ```ocaml
 let (AP_TERM_TAC: tactic) =
   let tac = MK_COMB_TAC THENL [REFL_TAC; ALL_TAC] in
   fun gl -> try tac gl with Failure _ -> failwith "AP_TERM_TAC";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AP_TERM_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AP_TERM_TAC.html>
 
 `AP_TERM_TAC` converts goal `` `f a = f b` `` to `` `a = b` ``.
 
@@ -587,7 +595,7 @@ let (AP_THM_TAC: tactic) =
   let tac = MK_COMB_TAC THENL [ALL_TAC; REFL_TAC] in
   fun gl -> try tac gl with Failure _ -> failwith "AP_THM_TAC";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AP_THM_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AP_THM_TAC.html>
 
 `AP_THM_TAC` converts goal `` `f a = g a` `` to `` `f = g` ``.
 
@@ -596,7 +604,7 @@ let (BINOP_TAC: tactic) =
   let tac = MK_COMB_TAC THENL [AP_TERM_TAC; ALL_TAC] in
   fun gl -> try tac gl with Failure _ -> failwith "AP_THM_TAC";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BINOP_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BINOP_TAC.html>
 
 `BINOP_TAC` converts goal `` `f a b = f c d` `` to `` `a = c` `` and
 `` `b = d` ``.
@@ -656,7 +664,7 @@ let (DISCH_TAC: tactic) =
         fun i [th] -> NOT_INTRO(DISCH (instantiate i ant) th)
     with Failure _ -> failwith "DISCH_TAC";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISCH_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISCH_TAC.html>
 
 `DISCH_TAC` converts goal `a ==> b` to `b` and adds `a` as a new assumption.
 (It treats a goal `~a` as `a ==> F`.)
@@ -667,6 +675,8 @@ let (MP_TAC: thm_tactic) =
     null_meta,[asl,mk_imp(concl thm,w)],
     fun i [th] -> MP th (INSTANTIATE_ALL i thm);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MP_TAC.html>
+
 `` MP_TAC `|- a` `` converts goal `` `b` `` to `` `a ==> b` ``.
 
 ```ocaml
@@ -677,7 +687,7 @@ let (EQ_TAC: tactic) =
         fun _ [th1; th2] -> IMP_ANTISYM_RULE th1 th2
     with Failure _ -> failwith "EQ_TAC";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQ_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQ_TAC.html>
 
 `EQ_TAC` converts goal `` `(a:bool) = b` `` to `` `a ==> b` `` and
 `` `b ==> a` ``.
@@ -852,6 +862,8 @@ let (MATCH_ACCEPT_TAC:thm_tactic) =
     with Failure _ -> failwith "ACCEPT_TAC" in
   fun th -> REPEAT GEN_TAC THEN rawtac th;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MATCH_ACCEPT_TAC.html>
+
 `` MATCH_ACCEPT_TAC `|- a` `` first applies `(REPEAT GEN_TAC)`, then accepts if
 the conclusion is an instance of `` `a` ``.
 
@@ -877,7 +889,9 @@ let (MATCH_MP_TAC :thm_tactic) =
                        fun i [th] -> MP (INSTANTIATE_ALL i xth) th
                    with Failure _ -> failwith "MATCH_MP_TAC: No match";;
 ```
-`` MATCH_MP_TAC `|- a ==> b` `` converts a goal `` `b@` `` into `` `a@` ``.
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MATCH_MP_TAC.html>
+
+`` MATCH_MP_TAC `|- s ==> t` `` converts a goal `t'` into `s`.
 
 ```ocaml
 let (TRANS_TAC:thm->term->tactic) =
@@ -1115,6 +1129,8 @@ let META_EXISTS_TAC ((asl,w) as gl) =
   let v' = mk_primed_var avoids v in
   X_META_EXISTS_TAC v' gl;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/META_EXISTS_TAC.html>
+
 `META_EXISTS_TAC` converts goal `?x. P[x]` to `P[x]`, where `x` is a
 metavariable.
 
@@ -1125,6 +1141,8 @@ let (META_SPEC_TAC: term -> thm -> tactic) =
     ([t],null_inst),[(("",sth)::asl),w],
     fun i [th] -> PROVE_HYP (SPEC (instantiate i t) thm) th;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/META_SPEC_TAC.html>
+
 `` META_SPEC_TAC `x` `!y. P[y]` `` adds a new assumption `P[x]`, where `x` is a
 metavariable.
 
@@ -1273,7 +1291,10 @@ let (mk_goalstate:goal->goalstate) =
       null_meta,[asl,w],
       (fun inst [th] -> INSTANTIATE_ALL inst th)
     else failwith "mk_goalstate: Non-boolean goal";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_goalstate.html>
 
+```ocaml
 let (TAC_PROOF : goal * tactic -> thm) =
   fun (g,tac) ->
     let gstate = mk_goalstate g in

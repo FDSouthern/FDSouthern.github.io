@@ -40,7 +40,10 @@ let make_overloadable s gty =
   then if assoc s (!the_overload_skeletons) = gty then ()
        else failwith "make_overloadable: differs from existing skeleton"
   else the_overload_skeletons := (s,gty)::(!the_overload_skeletons);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/make_overloadable.html>
 
+```ocaml
 let remove_interface sym =
   let interface = filter ((<>)sym o fst) (!the_interface) in
   the_interface := interface;;

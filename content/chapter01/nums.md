@@ -306,17 +306,23 @@ let mk_numeral =
   let mk_raw_numeral n = numeral_of_list zero_tm (raw_list_of_num [] n) in
   fun n -> if n </ num_0 then failwith "mk_numeral: negative argument" else
            mk_comb(NUMERAL_tm,mk_raw_numeral n);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_numeral.html>
 
+```ocaml
 let mk_small_numeral n = mk_numeral(Int n);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_small_numeral.html>
 
+```ocaml
 let dest_small_numeral t = Num.int_of_num(dest_numeral t);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_small_numeral.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_small_numeral.html>
 
 ```ocaml
 let is_numeral = can dest_numeral;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_numeral.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_numeral.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)

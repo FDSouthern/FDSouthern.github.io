@@ -39,7 +39,7 @@ let is_iff tm =
     Comb(Comb(Const("=",Tyapp("fun",[Tyapp("bool",[]);_])),l),r) -> true
   | _ -> false;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_iff.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_iff.html>
 
 ```ocaml
 let dest_iff tm =
@@ -47,13 +47,16 @@ let dest_iff tm =
     Comb(Comb(Const("=",Tyapp("fun",[Tyapp("bool",[]);_])),l),r) -> (l,r)
   | _ -> failwith "dest_iff";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_iff.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_iff.html>
 
 ```ocaml
 let mk_iff =
   let eq_tm = `(<=>)` in
   fun (l,r) -> mk_comb(mk_comb(eq_tm,l),r);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_iff.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Rule allowing easy instantiation of polymorphic proformas.                *)
 (* ------------------------------------------------------------------------- *)
@@ -124,9 +127,13 @@ let AND_DEF = new_basic_definition
  `(/\) = \p q. (\f:bool->bool->bool. f p q) = (\f. f T T)`;;
 
 let mk_conj = mk_binary "/\\";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_conj.html>
+
+```ocaml
 let list_mk_conj = end_itlist (curry mk_conj);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_conj.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_conj.html>
 
 ```ocaml
 let CONJ =
@@ -214,7 +221,10 @@ let IMP_DEF = new_basic_definition
   `(==>) = \p q. p /\ q <=> p`;;
 
 let mk_imp = mk_binary "==>";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_imp.html>
 
+```ocaml
 let MP =
   let p = `p:bool` and q = `q:bool` in
   let pth =
@@ -233,6 +243,8 @@ let MP =
       EQ_MP (PROVE_HYP th (INST [ant,p; con,q] rth)) ith
     else failwith "MP: theorems do not agree";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MP.html>
+
 `` MP `ASM1 |- a ==> b` `ASM2 |- a` `` gives `` `ASM1+ASM2 |- b` ``.
 
 ```ocaml
@@ -341,9 +353,13 @@ let FORALL_DEF = new_basic_definition
  `(!) = \P:A->bool. P = \x. T`;;
 
 let mk_forall = mk_binder "!";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_forall.html>
+
+```ocaml
 let list_mk_forall(vs,bod) = itlist (curry mk_forall) vs bod;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_forall.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_forall.html>
 
 ```ocaml
 let SPEC =
@@ -458,9 +474,13 @@ let EXISTS_DEF = new_basic_definition
  `(?) = \P:A->bool. !q. (!x. P x ==> q) ==> q`;;
 
 let mk_exists =  mk_binder "?";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_exists.html>
+
+```ocaml
 let list_mk_exists(vs,bod) =  itlist (curry mk_exists) vs bod;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_exists.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_exists.html>
 
 ```ocaml
 let EXISTS =
@@ -526,9 +546,13 @@ let OR_DEF = new_basic_definition
  `(\/) = \p q. !r. (p ==> r) ==> (q ==> r) ==> r`;;
 
 let mk_disj = mk_binary "\\/";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_disj.html>
+
+```ocaml
 let list_mk_disj = end_itlist (curry mk_disj);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_disj.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_disj.html>
 
 ```ocaml
 let DISJ1 =
@@ -607,7 +631,10 @@ let mk_neg =
   let neg_tm = `(~)` in
   fun tm -> try mk_comb(neg_tm,tm)
             with Failure _ -> failwith "mk_neg";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_neg.html>
 
+```ocaml
 let NOT_ELIM =
   let P = `P:bool` in
   let pth = CONV_RULE(RAND_CONV BETA_CONV) (AP_THM NOT_DEF P) in
@@ -683,7 +710,10 @@ let EXISTS_UNIQUE_DEF = new_basic_definition
  `(?!) = \P:A->bool. ((?) P) /\ (!x y. P x /\ P y ==> x = y)`;;
 
 let mk_uexists = mk_binder "?!";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_uexists.html>
 
+```ocaml
 let EXISTENCE =
   let P = `P:A->bool` in
   let pth =

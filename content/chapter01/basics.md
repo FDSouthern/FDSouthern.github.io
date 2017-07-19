@@ -102,7 +102,10 @@ let mk_binary s =
   let c = mk_const(s,[]) in
   fun (l,r) -> try mk_comb(mk_comb(c,l),r)
                with Failure _ -> failwith "mk_binary";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_binary.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Produces a sequence of variants, considering previous inventions.         *)
 (* ------------------------------------------------------------------------- *)
@@ -189,7 +192,10 @@ let mk_mconst(c,ty) =
       let con = mk_const(c,mat) in
       if type_of con = ty then con else fail()
   with Failure _ -> failwith "mk_const: generic type cannot be instantiated";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_mconst.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Like mk_comb, but instantiates type variables in rator if necessary.      *)
 (* ------------------------------------------------------------------------- *)
@@ -198,7 +204,10 @@ let mk_icomb(tm1,tm2) =
   let "fun",[ty;_] = dest_type (type_of tm1) in
   let tyins = type_match ty (type_of tm2) [] in
   mk_comb(inst tyins tm1,tm2);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_icomb.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Instantiates types for constant c and iteratively makes combination.      *)
 (* ------------------------------------------------------------------------- *)
@@ -208,7 +217,7 @@ let list_mk_icomb cname args =
   let tyin = itlist2 (fun g a -> type_match g (type_of a)) atys args [] in
   list_mk_comb(mk_const(cname,tyin),args);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_icomb.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_icomb.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -278,7 +287,7 @@ let is_binder s tm =
     Comb(Const(s',_),Abs(_,_)) -> s' = s
   | _ -> false;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_binder.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_binder.html>
 
 ```ocaml
 let dest_binder s tm =
@@ -286,13 +295,16 @@ let dest_binder s tm =
     Comb(Const(s',_),Abs(x,t)) when s' = s -> (x,t)
   | _ -> failwith "dest_binder";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_binder.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_binder.html>
 
 ```ocaml
 let mk_binder op =
   let c = mk_const(op,[]) in
   fun (v,tm) -> mk_comb(inst [type_of v,aty] c,mk_abs(v,tm));;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_binder.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Syntax for binary operators.                                              *)
 (* ------------------------------------------------------------------------- *)
@@ -302,7 +314,7 @@ let is_binop op tm =
     Comb(Comb(op',_),_) -> op' = op
   | _ -> false;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_binop.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_binop.html>
 
 ```ocaml
 let dest_binop op tm =
@@ -310,21 +322,24 @@ let dest_binop op tm =
     Comb(Comb(op',l),r) when op' = op -> (l,r)
   | _ -> failwith "dest_binop";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_binop.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_binop.html>
 
 ```ocaml
 let mk_binop op tm1 =
   let f = mk_comb(op,tm1) in
   fun tm2 -> mk_comb(f,tm2);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_binop.html>
 
+```ocaml
 let list_mk_binop op = end_itlist (mk_binop op);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_binop.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_binop.html>
 
 ```ocaml
 let binops op = striplist (dest_binop op);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/binops.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/binops.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -484,12 +499,12 @@ let dest_gabs =
         rand ltm,rtm
     with Failure _ -> failwith "dest_gabs: Not a generalized abstraction";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_gabs.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_gabs.html>
 
 ```ocaml
 let is_gabs = can dest_gabs;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_gabs.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_gabs.html>
 
 ```ocaml
 let mk_gabs =
@@ -507,10 +522,13 @@ let mk_gabs =
     let f = variant (frees tm1 @ frees tm2) (mk_var("f",fty)) in
     let bod = mk_abs(f,list_mk_forall(fvs,mk_geq(mk_comb(f,tm1),tm2))) in
     mk_comb(mk_const("GABS",[fty,aty]),bod);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_gabs.html>
 
+```ocaml
 let list_mk_gabs(vs,bod) = itlist (curry mk_gabs) vs bod;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_gabs.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_gabs.html>
 
 ```ocaml
 let strip_gabs = splitlist dest_gabs;;
@@ -528,12 +546,12 @@ let dest_let tm =
       if fst(dest_const le) = "LET_END" then eqs,bod else fail()
   with Failure _ -> failwith "dest_let: not a let-term";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_let.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_let.html>
 
 ```ocaml
 let is_let = can dest_let;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_let.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_let.html>
 
 ```ocaml
 let mk_let(assigs,bod) =
@@ -543,7 +561,10 @@ let mk_let(assigs,bod) =
   let ty1,ty2 = dest_fun_ty(type_of lbod) in
   let ltm = mk_const("LET",[ty1,aty; ty2,bty]) in
   list_mk_comb(ltm,lbod::rights);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_let.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Useful function to create stylized arguments using numbers.               *)
 (* ------------------------------------------------------------------------- *)
@@ -558,7 +579,10 @@ let make_args =
       [variant avoid (mk_var(s,hd tys))]
     else
       margs 0 s avoid tys;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/make_args.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Director strings down a term.                                             *)
 (* ------------------------------------------------------------------------- *)

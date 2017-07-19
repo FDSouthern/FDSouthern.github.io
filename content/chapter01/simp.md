@@ -220,8 +220,11 @@ let mk_rewrites =
       split_rewrites oldhyps cf (EQT_INTRO th) sofar in
   fun cf th sofar -> split_rewrites (hyp th) cf th sofar;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_rewrites.html>
+
 `mk_rewrites cf th rew_list` prepends rewrites for `th` to `new_list`.
 I will describe the action in terms of a notional `add_rew` function:
+
 ```
 (add_rew l `|- !x. P[x]`) --> (add_rew l `|- P[x]`)
 (add_rew l `|- P1 /\ P2`) --> (add_rew l `|- P1`), (add_rew l `|- P2`)
@@ -262,15 +265,18 @@ let mk_prover applicator augmentor =
     and augment thms = mk_prover (augmentor state thms) in
     Prover(apply,augment) in
   mk_prover;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_prover.html>
 
+```ocaml
 let augment(Prover(_,aug)) thms = aug thms;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/augment.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/augment.html>
 
 ```ocaml
 let apply_prover(Prover(conv,_)) tm = conv tm;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/apply_prover.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/apply_prover.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)

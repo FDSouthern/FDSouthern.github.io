@@ -21,7 +21,10 @@ type instantiation =
 let mk_thm(asl,c) =
   let ax = new_axiom(itlist (curry mk_imp) (rev asl) c) in
   rev_itlist (fun t th -> MP th (ASSUME t)) (rev asl) ax;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_thm.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Derived congruence rules; very useful things!                             *)
 (* ------------------------------------------------------------------------- *)
@@ -30,6 +33,8 @@ let MK_CONJ =
   let andtm = `(/\)` in
   fun eq1 eq2 -> MK_COMB(AP_TERM andtm eq1,eq2);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MK_CONJ_UPPERCASE.html>
+
 `` MK_CONJ `ASM1 |- a = b` `ASM2 |- c = d` `` gives
 `` `ASM1+ASM2 |- a /\ c = b /\ d` ``.
 
@@ -38,6 +43,8 @@ let MK_DISJ =
   let ortm = `(\/)` in
   fun eq1 eq2 -> MK_COMB(AP_TERM ortm eq1,eq2);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MK_DISJ_UPPERCASE.html>
+
 `` MK_DISJ `ASM1 |- a = b` `ASM2 |- c = d` `` gives
 `` `ASM1+ASM2 |- a \/ c = b \/ d` ``.
 
@@ -46,6 +53,8 @@ let MK_FORALL =
   let atm = mk_const("!",[]) in
   fun v th -> AP_TERM (inst [type_of v,aty] atm) (ABS v th);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MK_FORALL_UPPERCASE.html>
+
 `` MK_FORALL `x` `ASM |- a = b` `` gives `` `ASM |- (!x.a) = (!x.b)` ``.
 
 ```ocaml
@@ -53,6 +62,8 @@ let MK_EXISTS =
   let atm = mk_const("?",[]) in
   fun v th -> AP_TERM (inst [type_of v,aty] atm) (ABS v th);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MK_EXISTS_UPPERCASE.html>
+
 `` MK_EXISTS `x` `ASM |- a = b` `` gives `` `ASM |- (?x.a) = (?x.b)` ``.
 
 ```ocaml
@@ -64,7 +75,10 @@ let MP_CONV (cnv:conv) th =
   let l,r = dest_imp(concl th) in
   let ath = cnv l in
   try MP th (EQT_ELIM ath) with Failure _ -> MP th ath;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MP_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Multiple beta-reduction (we use a slight variant below).                  *)
 (* ------------------------------------------------------------------------- *)
@@ -75,7 +89,7 @@ let rec BETAS_CONV tm =
   | Comb(Comb(_,_),_) -> (RATOR_CONV BETAS_CONV THENC BETA_CONV) tm
   | _ -> failwith "BETAS_CONV";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BETAS_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BETAS_CONV.html>
 
 BETAS_CONV (n:int) is a conversion which rewrites with BETA_CONV n times.
 (so BETAS_CONV 3 rewrites `(\x y z.P[x,y,z]) a b c` to `P[a,b,c]`)
@@ -468,6 +482,8 @@ let MATCH_MP ith =
   fun th -> try MP (match_fun (concl th)) th
             with Failure _ -> failwith "MATCH_MP: No match";;
 ```
+http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MATCH_MP.html
+
 `MATCH_MP ith th` is like MP, except it uses matching instead of requiring an
 exact match.
 

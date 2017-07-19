@@ -227,7 +227,7 @@ let is_intconst tm =
       is_numeral n && not(dest_numeral n = num_0)
   | _ -> false;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_intconst.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_intconst.html>
 
 ```ocaml
 let dest_intconst tm =
@@ -239,7 +239,7 @@ let dest_intconst tm =
         else failwith "dest_intconst"
   | _ -> failwith "dest_intconst";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_intconst.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_intconst.html>
 
 ```ocaml
 let mk_intconst =
@@ -247,7 +247,10 @@ let mk_intconst =
   let mk_numconst n = mk_comb(cast_tm,mk_numeral n) in
   fun x -> if x </ num_0 then mk_comb(neg_tm,mk_numconst(minus_num x))
            else mk_numconst x;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_intconst.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* A simple procedure to lift most universal real theorems to integers.      *)
 (* For a more complete procedure, give required term to INT_ARITH (below).   *)

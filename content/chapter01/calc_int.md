@@ -17,7 +17,10 @@ let is_realintconst tm =
   | Comb(Const("real_neg",_),Comb(Const("real_of_num",_),n)) ->
       is_numeral n && not(dest_numeral n = num_0)
   | _ -> false;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_realintconst.html>
 
+```ocaml
 let dest_realintconst tm =
   match tm with
     Comb(Const("real_of_num",_),n) -> dest_numeral n
@@ -27,7 +30,7 @@ let dest_realintconst tm =
         else failwith "dest_realintconst"
   | _ -> failwith "dest_realintconst";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_realintconst.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_realintconst.html>
 
 ```ocaml
 let mk_realintconst =
@@ -36,7 +39,7 @@ let mk_realintconst =
   fun x -> if x </ num_0 then mk_comb(neg_tm,mk_numconst(minus_num x))
            else mk_numconst x;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_realintconst.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_realintconst.html>
 
 ```ocaml
 let is_ratconst tm =

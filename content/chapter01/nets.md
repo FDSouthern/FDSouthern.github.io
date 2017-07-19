@@ -97,7 +97,7 @@ let lookup =
           with Failure _ -> collection in
   fun tm net -> follow([tm],net);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lookup.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lookup.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -126,6 +126,7 @@ let merge_nets =
             set_merge data1 data2) in
   merge_nets;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/merge_nets.html>
 
 - Previous: [basics.ml](basics.md)
 - [Index](index.md)

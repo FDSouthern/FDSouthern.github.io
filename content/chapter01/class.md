@@ -54,16 +54,19 @@ parse_as_binder "@";;
 
 let is_select = is_binder "@";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_select.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_select.html>
 
 ```ocaml
 let dest_select = dest_binder "@";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_select.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_select.html>
 
 ```ocaml
 let mk_select = mk_binder "@";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_select.html>
 
+```ocaml
 let SELECT_AX = new_axiom
  `!P (x:A). P x ==> P((@) P)`;;
 
@@ -390,14 +393,17 @@ let is_cond tm =
   try fst(dest_const(rator(rator (rator tm)))) = "COND"
   with Failure _ -> false;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_cond.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_cond.html>
 
 ```ocaml
 let mk_cond (b,x,y) =
   try let c = mk_const("COND",[type_of x,aty]) in
       mk_comb(mk_comb(mk_comb(c,b),x),y)
   with Failure _ -> failwith "mk_cond";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/mk_cond.html>
 
+```ocaml
 let dest_cond tm =
   try let tm1,y = dest_comb tm in
       let tm2,x = dest_comb tm1 in
@@ -405,7 +411,7 @@ let dest_cond tm =
       if fst(dest_const c) = "COND" then (b,(x,y)) else fail()
   with Failure _ -> failwith "dest_cond";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_cond.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_cond.html>
 
 ```ocaml
 extend_basic_rewrites [COND_CLAUSES];;

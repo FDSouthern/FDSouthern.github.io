@@ -10163,9 +10163,13 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_METIS_TAC.html
 
 ```ocaml
 let METIS_TAC ths = POP_ASSUM_LIST(K ALL_TAC) THEN ASM_METIS_TAC ths;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/METIS_TAC.html>
 
+```ocaml
 let METIS ths tm = prove(tm,METIS_TAC ths);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/METIS.html>
 
 - Previous: [meson.ml](meson.md)
 - [Index](index.md)

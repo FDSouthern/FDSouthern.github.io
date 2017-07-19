@@ -13,19 +13,40 @@ Version of the MESON procedure a la PTTP. Various search options.
 (* ------------------------------------------------------------------------- *)
 
 let meson_depth = ref false;;   (* Use depth not inference bound.            *)
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/meson_depth.html>
 
+```ocaml
 let meson_prefine = ref true;;  (* Use Plaisted's positive refinement.       *)
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/meson_prefine.html>
 
+```ocaml
 let meson_dcutin = ref 1;;      (* Min size for d-and-c optimization cut-in. *)
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/meson_dcutin.html>
 
+```ocaml
 let meson_skew = ref 3;;        (* Skew proof bias (one side is <= n / skew) *)
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/meson_skew.html>
 
+```ocaml
 let meson_brand = ref false;;   (* Use Brand transformation                  *)
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/meson_brand.html>
 
+```ocaml
 let meson_split_limit = ref 8;; (* Limit of case splits before MESON proper  *)
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/meson_split_limit.html>
 
+```ocaml
 let meson_chatty = ref false;;  (* Old-style verbose MESON output            *)
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/meson_chatty.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Prolog exception.                                                         *)
 (* ------------------------------------------------------------------------- *)
@@ -857,6 +878,8 @@ and the theorems in `ths`.
 ```ocaml
 let MESON_TAC ths = POP_ASSUM_LIST(K ALL_TAC) THEN ASM_MESON_TAC ths;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MESON_TAC.html>
+
 `MESON_TAC ths` tries to prove the goal using Meson, ignoring assumptions.
 
 ```ocaml
@@ -866,6 +889,7 @@ let MESON_TAC ths = POP_ASSUM_LIST(K ALL_TAC) THEN ASM_MESON_TAC ths;;
 
 let MESON ths tm = prove(tm,MESON_TAC ths);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MESON.html>
 
 - Previous: [canon.ml](canon.md)
 - [Index](index.md)

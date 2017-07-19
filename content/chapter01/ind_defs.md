@@ -269,6 +269,8 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/derive_nonschematic_inductive_rela
 let monotonicity_theorems = ref
  [MONO_AND; MONO_OR; MONO_IMP; MONO_NOT; MONO_EXISTS; MONO_FORALL];;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/monotonicity_theorems.html>
+
 `val ( MONO_AND ) : thm = |- (A ==> B) /\ (C ==> D) ==> A /\ C ==> B /\ D`
 
 `val ( MONO_OR ) : thm = |- (A ==> B) /\ (C ==> D) ==> A \/ C ==> B \/ D`
@@ -318,6 +320,8 @@ let MONO_TAC =
     let MONO_STEP_TAC = REPEAT GEN_TAC THEN APPLY_MONOTAC tacs in
     (REPEAT MONO_STEP_TAC THEN ASM_REWRITE_TAC[]) gl;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MONO_TAC.html>
+
 `MONO_TAC` is the same as `REPEAT MONO_STEP_TAC THEN ASM_REWRITE_TAC[]`.
 
 `BACKCHAIN_TAC:` is a simplified version of MATCH_MP_TAC to "avoid quantifier
