@@ -13,7 +13,7 @@ Preterms and pretypes; typechecking; translation to types and terms.
 
 let ignore_constant_varstruct = ref true;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ignore_constant_varstruct.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ignore_constant_varstruct.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -90,7 +90,10 @@ let new_type_abbrev,remove_type_abbrev,type_abbrevs =
      the_type_abbreviations := merge(<) [s,ty] (!the_type_abbreviations)) in
   let type_abbrevs() = !the_type_abbreviations in
   new_type_abbrev,remove_type_abbrev,type_abbrevs;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/new_type_abbrev.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Handle constant hiding.                                                   *)
 (* ------------------------------------------------------------------------- *)
@@ -102,11 +105,11 @@ let hide_constant,unhide_constant,is_hidden =
   and is_hidden c = mem c (!hcs) in
   hide_constant,unhide_constant,is_hidden;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hide_constant.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hide_constant.html>
 
 
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_hidden.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_hidden.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -123,7 +126,7 @@ type pretype = Utv of string                   (* User type variable         *)
 
 let dpty = Ptycon("",[]);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dpty.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dpty.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)

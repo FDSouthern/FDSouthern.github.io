@@ -9,7 +9,7 @@ This is where the actual OCaml gets started.
 ```ocaml
 let fail() = failwith "";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/fail.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/fail.html>
 
 Saves us a few vital characters.
 
@@ -20,24 +20,24 @@ Saves us a few vital characters.
 
 let curry f x y = f(x,y);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/curry.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/curry.html>
 
 ```ocaml
 let uncurry f(x,y) = f x y;;
 
 let I x = x;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/I.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/I.html>
 
 ```ocaml
 let K x y = x;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/K.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/K.html>
 
 ```ocaml
 let C f x y = f y x;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/C.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/C.html>
 
 ```ocaml
 let W f x = f x x;;
@@ -52,9 +52,9 @@ let (o) = fun f g x -> f(g x);;
 
 let (F_F) = fun f g (x,y) -> (f x,g y);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/F_F.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/F_F.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/f_f_.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/f_f_.html>
 
 Composition and 'apply over pairs' (I wonder if this has a name?
 I've seen it mentioned in a paper from Mark Adams comparing HOL systems).
@@ -71,7 +71,7 @@ let hd l =
    h::t -> h
   | _ -> failwith "hd";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hd.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hd.html>
 
 ```ocaml
 let tl l =
@@ -95,7 +95,7 @@ let rec last l =
   | (h::t) -> last t
   | [] -> failwith "last";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/last.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/last.html>
 
 ```ocaml
 let rec butlast l =
@@ -104,13 +104,13 @@ let rec butlast l =
   | (h::t) -> h::(butlast t)
   | [] -> failwith "butlast";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/butlast.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/butlast.html>
 
 ```ocaml
 let rec el n l =
   if n = 0 then hd l else el (n - 1) (tl l);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/el.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/el.html>
 
 ```ocaml
 let rev =
@@ -138,12 +138,12 @@ preferable to the standard library versions.
 
 let can f x = try (f x; true) with Failure _ -> false;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/can.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/can.html>
 
 ```ocaml
 let check p x = if p x then x else failwith "check";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/check.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/check.html>
 
 These are quite neat.  I wonder if I can think of anything to say about them.
 `can` makes it very easy to define `is_` functions?
@@ -158,7 +158,7 @@ Are these definitions shadowed in `metis.ml`?
 let rec funpow n f x =
   if n < 1 then x else funpow (n-1) f (f x);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/funpow.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/funpow.html>
 
 ```ocaml
 let rec repeat f x =
@@ -187,7 +187,7 @@ let rec itlist f l b =
     [] -> b
   | (h::t) -> f h (itlist f t b);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/itlist.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/itlist.html>
 
 ```ocaml
 let rec rev_itlist f l b =
@@ -201,7 +201,7 @@ let rec end_itlist f l =
       | [x]    -> x
       | (h::t) -> f h (end_itlist f t);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/end_itlist.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/end_itlist.html>
 
 ```ocaml
 let rec itlist2 f l1 l2 b =
@@ -210,7 +210,7 @@ let rec itlist2 f l1 l2 b =
   | (h1::t1,h2::t2) -> f h1 h2 (itlist2 f t1 t2 b)
   | _ -> failwith "itlist2";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/itlist2.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/itlist2.html>
 
 ```ocaml
 let rec rev_itlist2 f l1 l2 b =
@@ -260,6 +260,8 @@ let rec nsplit dest clist x =
   let ll,y = nsplit dest (tl clist) r in
   l::ll,y;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/nsplit.html>
+
 For this one too...
 
 ```ocaml
@@ -276,7 +278,7 @@ let rec (--) = fun m n -> if m > n then [] else m::((m + 1) -- n);;
 I don't think these require much comment.  `m -- n` generates the sequence m to
 n inclusive.
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.upto.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.upto.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -288,7 +290,7 @@ let rec forall p l =
     [] -> true
   | h::t -> p(h) && forall p t;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/forall.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/forall.html>
 
 ```ocaml
 let rec forall2 p l1 l2 =
@@ -297,7 +299,7 @@ let rec forall2 p l1 l2 =
   | (h1::t1,h2::t2) -> p h1 h2 && forall2 p t1 t2
   | _ -> false;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/forall2.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/forall2.html>
 
 ```ocaml
 let rec exists p l =
@@ -305,7 +307,7 @@ let rec exists p l =
     [] -> false
   | h::t -> p(h) || exists p t;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/exists.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/exists.html>
 
 ```ocaml
 let length =
@@ -313,7 +315,7 @@ let length =
     if l = [] then k else len (k + 1) (tl l) in
   fun l -> len 0 l;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/length.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/length.html>
 
 ```ocaml
 let rec filter p l =
@@ -323,7 +325,7 @@ let rec filter p l =
             if p(h) then if t'==t then l else h::t'
             else t';;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/filter.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/filter.html>
 
 ```ocaml
 let rec partition p l =
@@ -347,7 +349,7 @@ let rec find p l =
       [] -> failwith "find"
     | (h::t) -> if p(h) then h else find p t;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/find.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/find.html>
 
 ```ocaml
 let rec tryfind f l =
@@ -357,7 +359,7 @@ let rec tryfind f l =
 
 let flat l = itlist (@) l [];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/flat.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/flat.html>
 
 ```ocaml
 let rec remove p l =
@@ -371,7 +373,7 @@ let rec chop_list n l =
   try let m,l' = chop_list (n-1) (tl l) in (hd l)::m,l'
   with Failure _ -> failwith "chop_list";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/chop_list.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/chop_list.html>
 
 ```ocaml
 let index x =
@@ -381,7 +383,7 @@ let index x =
     | (h::t) -> if Pervasives.compare x h = 0 then n else ind (n + 1) t in
   ind 0;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/index.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/index.html>
 
 Again, a few of these exist in the standard library.  I wonder if these are
 from a time before they were included, or if John's just a control freak!
@@ -412,7 +414,7 @@ let unions l = itlist union l [];;
 
 let intersect l1 l2 = filter (fun x -> mem x l2) l1;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/intersect.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/intersect.html>
 
 ```ocaml
 let subtract l1 l2 = filter (fun x -> not (mem x l2)) l1;;
@@ -433,7 +435,7 @@ let rec assoc a l =
     (x,y)::t -> if Pervasives.compare x a = 0 then y else assoc a t
   | [] -> failwith "find";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/assoc.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/assoc.html>
 
 ```ocaml
 let rec rev_assoc a l =
@@ -483,7 +485,7 @@ let rec do_list f l =
     [] -> ()
   | (h::t) -> (f h; do_list f t);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/do_list.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/do_list.html>
 
 Very imperative.
 
@@ -531,7 +533,7 @@ Why isn't this with the set functions above?!
 
 let implode l = itlist (^) l "";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/implode.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/implode.html>
 
 ```ocaml
 let explode s =
@@ -540,7 +542,7 @@ let explode s =
       exap (n - 1) ((String.sub s n 1)::l) in
   exap (String.length s - 1) [];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/explode.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/explode.html>
 
 Maybe something from `Str`?
 
@@ -555,7 +557,7 @@ let gcd =
   fun x y -> let x' = abs x and y' = abs y in
               if x' < y' then gxd y' x' else gxd x' y';;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/gcd.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/gcd.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -566,7 +568,16 @@ let num_0 = Int 0
 and num_1 = Int 1
 and num_2 = Int 2
 and num_10 = Int 10;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/num_0.html>
 
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/num_1.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/num_2.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/num_10.html>
+
+```ocaml
 let pow2 n = power_num num_2 (Int n);;
 let pow10 n = power_num num_10 (Int n);;
 
@@ -574,24 +585,29 @@ let numdom r =
   let r' = Ratio.normalize_ratio (ratio_of_num r) in
   num_of_big_int(Ratio.numerator_ratio r'),
   num_of_big_int(Ratio.denominator_ratio r');;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/numdom.html>
 
+```ocaml
 let numerator = fst o numdom
 and denominator = snd o numdom;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/denominator.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/numerator.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/denominator.html>
 
 ```ocaml
 let gcd_num n1 n2 =
   num_of_big_int(Big_int.gcd_big_int (big_int_of_num n1) (big_int_of_num n2));;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/gcd_num.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/gcd_num.html>
 
 ```ocaml
 let lcm_num x y =
   if x =/ num_0 && y =/ num_0 then num_0
   else abs_num((x */ y) // gcd_num x y);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lcm_num.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lcm_num.html>
 
 Not many surprises here.
 
@@ -605,7 +621,7 @@ let rec allpairs f l1 l2 =
    h1::t1 ->  itlist (fun x a -> f h1 x :: a) l2 (allpairs f t1 l2)
   | [] -> [];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/allpairs.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/allpairs.html>
 
 Example!
 
@@ -670,7 +686,7 @@ let rec assocd a l d =
     [] -> d
   | (x,y)::t -> if Pervasives.compare x a = 0 then y else assocd a t d;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/assocd.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/assocd.html>
 
 ```ocaml
 let rec rev_assocd a l d =
@@ -731,12 +747,12 @@ sort in the standard library?!  See link above for some answers.
 
 let increasing f x y = Pervasives.compare (f x) (f y) < 0;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/increasing.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/increasing.html>
 
 ```ocaml
 let decreasing f x y = Pervasives.compare (f x) (f y) > 0;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/decreasing.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/decreasing.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -771,7 +787,7 @@ let is_undefined f =
     Empty -> true
   | _ -> false;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_undefined.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_undefined.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -809,7 +825,7 @@ let foldl =
     | Branch(p,b,l,r) -> foldl f (foldl f a l) r in
   foldl;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/foldl.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/foldl.html>
 
 ```ocaml
 let foldr =
@@ -824,7 +840,7 @@ let foldr =
     | Branch(p,b,l,r) -> foldr f l (foldr f r a) in
   foldr;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/foldr.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/foldr.html>
 
 Looks okay.
 
@@ -835,12 +851,12 @@ Looks okay.
 
 let graph f = setify (foldl (fun a x y -> (x,y)::a) [] f);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/graph.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/graph.html>
 
 ```ocaml
 let dom f = setify(foldl (fun a x y -> x::a) [] f);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dom.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dom.html>
 
 ```ocaml
 let ran f = setify(foldl (fun a x y -> y::a) [] f);;
@@ -868,19 +884,19 @@ let applyd =
       | _ -> d x in
     look f;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/applyd.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/applyd.html>
 
 ```ocaml
 let apply f = applyd f (fun x -> failwith "apply");;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/apply.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/apply.html>
 
 ```ocaml
 let tryapplyd f a d = applyd f (fun x -> d) a;;
 
 let defined f x = try apply f x; true with Failure _ -> false;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/defined.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/defined.html>
 
 There are definitely things to say here.
 
@@ -1018,9 +1034,9 @@ let (|->),combine =
             newbranch p1 t1 p2 t2 in
   (|->),combine;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.valmod.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.valmod.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/combine.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/combine.html>
 
 Bloop.
 
@@ -1031,7 +1047,7 @@ Bloop.
 
 let (|=>) = fun x y -> (x |-> y) undefined;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.singlefun.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.singlefun.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -1044,7 +1060,7 @@ let rec choose t =
   | Leaf(h,l) -> hd l
   | Branch(b,p,t1,t2) -> choose t1;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/choose.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/choose.html>
 
 Hmm
 
@@ -1118,6 +1134,8 @@ let num_of_string =
       | "0"::"b"::bindigits -> num_of_stringlist two (rev bindigits)
       | decdigits -> num_of_stringlist ten (rev decdigits);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/num_of_string.html>
+
 I don't think there's much of interest here.
 
 ```ocaml
@@ -1143,7 +1161,7 @@ let file_of_string filename s =
   let fd = Pervasives.open_out filename in
   output_string fd s; close_out fd;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/file_of_string.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/file_of_string.html>
 
 These file interactions always drive me crazy in OCaml.
 

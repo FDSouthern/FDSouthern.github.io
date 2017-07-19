@@ -11,7 +11,7 @@ for the sake of completeness.
 ```ocaml
 let hol_version = "2.20++";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hol_version.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hol_version.html>
 
 This variable is used in the generation of the help files.
 
@@ -26,7 +26,7 @@ library, described in the OCaml manual
 let hol_dir = ref
   (try Sys.getenv "HOLLIGHT_DIR" with Not_found -> Sys.getcwd());;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hol_dir.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hol_dir.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -59,7 +59,7 @@ used by HOL Light.  Or I may not.
 
 Here are some things handled at the Camlp5 level:
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/it.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/it.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -82,17 +82,17 @@ let hol_expand_directory s =
   then Filename.concat (!hol_dir) (String.sub s 2 (String.length s - 2))
   else s;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hol_expand_directory.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hol_expand_directory.html>
 
 ```ocaml
 let load_path = ref ["."; "$"];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/load_path.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/load_path.html>
 
 ```ocaml
 let loaded_files = ref [];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/loaded_files.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/loaded_files.html>
 
 ```ocaml
 let file_on_path p s =
@@ -101,7 +101,7 @@ let file_on_path p s =
   let d = List.find (fun d -> Sys.file_exists(Filename.concat d s)) p' in
   Filename.concat (if d = "." then Sys.getcwd() else d) s;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/file_on_path.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/file_on_path.html>
 
 ```ocaml
 let load_on_path p s =
@@ -109,17 +109,17 @@ let load_on_path p s =
   let fileid = (Filename.basename s',Digest.file s') in
   (use_file s'; loaded_files := fileid::(!loaded_files));;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/load_on_path.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/load_on_path.html>
 
 ```ocaml
 let loads s = load_on_path ["$"] s;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/loads.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/loads.html>
 
 ```ocaml
 let loadt s = load_on_path (!load_path) s;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/loadt.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/loadt.html>
 
 ```ocaml
 let needs s =
@@ -128,6 +128,8 @@ let needs s =
   if List.mem fileid (!loaded_files)
   then Format.print_string("File \""^s^"\" already loaded\n") else loadt s;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/needs.html>
+
 And these functions are not terribly exciting, but necessary for loading the
 HOL system into the toplevel.  In the rest of this guide, I'll skip over this
 kind of loading code.

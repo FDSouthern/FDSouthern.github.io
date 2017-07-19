@@ -17,7 +17,7 @@ let genvar =
              (gcounter := count + 1;
               mk_var("_"^(string_of_int count),ty));;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/genvar.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/genvar.html>
 
 This seems suspicious.  Is it really the case that this can't cause problems?
 
@@ -31,7 +31,7 @@ let dest_fun_ty ty =
     Tyapp("fun",[ty1;ty2]) -> (ty1,ty2)
   | _ -> failwith "dest_fun_ty";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_fun_ty.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_fun_ty.html>
 
 ```ocaml
 let rec occurs_in ty bigty =
@@ -52,24 +52,24 @@ let bndvar tm =
   try fst(dest_abs tm)
   with Failure _ -> failwith "bndvar: Not an abstraction";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/bndvar.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/bndvar.html>
 
 ```ocaml
 let body tm =
   try snd(dest_abs tm)
   with Failure _ -> failwith "body: Not an abstraction";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/body.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/body.html>
 
 ```ocaml
 let list_mk_comb(h,t) = rev_itlist (C (curry mk_comb)) t h;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_comb.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_comb.html>
 
 ```ocaml
 let list_mk_abs(vs,bod) = itlist (curry mk_abs) vs bod;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_abs.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/list_mk_abs.html>
 
 ```ocaml
 let strip_comb = rev_splitlist dest_comb;;
@@ -87,7 +87,7 @@ let is_binary s tm =
     Comb(Comb(Const(s',_),_),_) -> s' = s
   | _ -> false;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_binary.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_binary.html>
 
 ```ocaml
 let dest_binary s tm =
@@ -95,7 +95,7 @@ let dest_binary s tm =
     Comb(Comb(Const(s',_),l),r) when s' = s -> (l,r)
   | _ -> failwith "dest_binary";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_binary.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_binary.html>
 
 ```ocaml
 let mk_binary s =
@@ -166,7 +166,7 @@ let alpha v tm =
     mk_abs(v,vsubst[v,v0]bod)
   else failwith "alpha: Invalid new variable";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/alpha.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/alpha.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -241,7 +241,7 @@ let rec free_in tm1 tm2 =
     not (vfree_in bv tm1) && free_in tm1 bod
   else false;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/free_in.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/free_in.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -256,7 +256,7 @@ let rec find_term p tm =
     try find_term p l with Failure _ -> find_term p r
   else failwith "find_term";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/find_term.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/find_term.html>
 
 ```ocaml
 let find_terms =
@@ -269,7 +269,7 @@ let find_terms =
     else tl' in
   accum [];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/find_terms.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/find_terms.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -348,73 +348,73 @@ let binops op = striplist (dest_binop op);;
 
 let is_conj = is_binary "/\\";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_conj.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_conj.html>
 
 ```ocaml
 let dest_conj = dest_binary "/\\";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_conj.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_conj.html>
 
 ```ocaml
 let conjuncts = striplist dest_conj;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/conjuncts.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/conjuncts.html>
 
 ```ocaml
 let is_imp = is_binary "==>";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_imp.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_imp.html>
 
 ```ocaml
 let dest_imp = dest_binary "==>";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_imp.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_imp.html>
 
 ```ocaml
 let is_forall = is_binder "!";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_forall.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_forall.html>
 
 ```ocaml
 let dest_forall = dest_binder "!";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_forall.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_forall.html>
 
 ```ocaml
 let strip_forall = splitlist dest_forall;;
 
 let is_exists = is_binder "?";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_exists.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_exists.html>
 
 ```ocaml
 let dest_exists = dest_binder "?";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_exists.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_exists.html>
 
 ```ocaml
 let strip_exists = splitlist dest_exists;;
 
 let is_disj = is_binary "\\/";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_disj.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_disj.html>
 
 ```ocaml
 let dest_disj = dest_binary "\\/";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_disj.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_disj.html>
 
 ```ocaml
 let disjuncts = striplist dest_disj;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/disjuncts.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/disjuncts.html>
 
 ```ocaml
 let is_neg tm =
   try fst(dest_const(rator tm)) = "~"
   with Failure _ -> false;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_neg.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_neg.html>
 
 ```ocaml
 let dest_neg tm =
@@ -422,27 +422,27 @@ let dest_neg tm =
       if fst(dest_const n) = "~" then p else fail()
   with Failure _ -> failwith "dest_neg";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_neg.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_neg.html>
 
 ```ocaml
 let is_uexists = is_binder "?!";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_uexists.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_uexists.html>
 
 ```ocaml
 let dest_uexists = dest_binder "?!";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_uexists.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_uexists.html>
 
 ```ocaml
 let dest_cons = dest_binary "CONS";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_cons.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_cons.html>
 
 ```ocaml
 let is_cons = is_binary "CONS";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_cons.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_cons.html>
 
 ```ocaml
 let dest_list tm =
@@ -450,12 +450,12 @@ let dest_list tm =
       if fst(dest_const nil) = "NIL" then tms else fail()
   with Failure _ -> failwith "dest_list";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_list.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_list.html>
 
 ```ocaml
 let is_list = can dest_list;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_list.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_list.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -475,7 +475,7 @@ let dest_numeral =
                 if fst(dest_const l) = "NUMERAL" then dest_num r else fail()
             with Failure _ -> failwith "dest_numeral";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_numeral.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_numeral.html>
 
 This is definitely worth noting.
 
@@ -595,7 +595,7 @@ let find_path =
     with Failure _ -> "l"::(find_path p (rator tm)) in
   fun p tm -> implode(find_path p tm);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/find_path.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/find_path.html>
 
 ```ocaml
 let follow_path =
@@ -607,7 +607,7 @@ let follow_path =
     | _::t -> follow_path t (body tm) in
   fun s tm -> follow_path (explode s) tm;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/follow_path.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/follow_path.html>
 
 - Previous: [fusion.ml](fusion.md)
 - [Index](index.md)

@@ -192,7 +192,10 @@ let NUMSEG_CONV =
          CONV_RULE(funpow 2 RAND_CONV
           (LAND_CONV NUM_SUC_CONV THENC NUMSEG_CONV)) th in
   NUMSEG_CONV;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUMSEG_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Topological sorting of a finite set.                                      *)
 (* ------------------------------------------------------------------------- *)

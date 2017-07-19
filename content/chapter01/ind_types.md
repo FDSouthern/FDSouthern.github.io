@@ -1069,17 +1069,17 @@ inductive_type_store :=
 
 let basic_rectype_net = ref empty_net;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_rectype_net.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_rectype_net.html>
 
 ```ocaml
 let distinctness_store = ref ["bool",TAUT `(T <=> F) <=> F`];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/distinctness_store.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/distinctness_store.html>
 
 ```ocaml
 let injectivity_store = ref [];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/injectivity_store.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/injectivity_store.html>
 
 ```ocaml
 let extend_rectype_net (tyname,(_,_,rth)) =
@@ -1091,7 +1091,7 @@ let extend_rectype_net (tyname,(_,_,rth)) =
   basic_rectype_net :=
     itlist (net_of_thm true) canon_thl (!basic_rectype_net);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/extend_rectype_net.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/extend_rectype_net.html>
 
 ```ocaml
 do_list extend_rectype_net (!inductive_type_store);;
@@ -1102,19 +1102,19 @@ do_list extend_rectype_net (!inductive_type_store);;
 
 let distinctness ty = assoc ty (!distinctness_store);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/distinctness.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/distinctness.html>
 
 ```ocaml
 let injectivity ty = assoc ty (!injectivity_store);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/injectivity.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/injectivity.html>
 
 ```ocaml
 let cases ty =
   if ty = "num" then num_CASES else
   let _,ith,_ = assoc ty (!inductive_type_store) in prove_cases_thm ith;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/cases.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/cases.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -1447,7 +1447,7 @@ let define_type_raw =
     (inductive_type_store := newentries @ (!inductive_type_store);
      do_list extend_rectype_net newentries; ith1,rth1);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/define_type_raw.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/define_type_raw.html>
 
 ```ocaml
 (* ----------------------------------------------------------------------- *)
@@ -1480,7 +1480,7 @@ let define_type s =
         let retval = define_type_raw defspec in
         the_inductive_types := (s,retval)::(!the_inductive_types); retval;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/define_type.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/define_type.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -1608,7 +1608,7 @@ let UNWIND_CONV,MATCH_CONV =
 ```
 
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MATCH_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MATCH_CONV.html>
 
 ```ocaml
 let FORALL_UNWIND_CONV =
@@ -1645,7 +1645,7 @@ let FORALL_UNWIND_CONV =
     with Failure _ -> REFL tm in
   FORALL_UNWIND_CONV;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/FORALL_UNWIND_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/FORALL_UNWIND_CONV.html>
 
 - Previous: [grobner.ml](grobner.md)
 - [Index](index.md)

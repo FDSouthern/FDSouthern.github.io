@@ -288,7 +288,7 @@ let INT_OF_REAL_THM =
     else INT_OF_REAL_THM1 th in
   INT_OF_REAL_THM;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_OF_REAL_THM.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_OF_REAL_THM.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -645,19 +645,19 @@ let INT_ARITH =
     let th2 = REAL_ARITH(mk_neg(rand(concl th1))) in
     EQ_MP th0 (EQ_MP (AP_TERM not_tm (SYM th1)) th2);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_ARITH.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_ARITH.html>
 
 ```ocaml
 let INT_ARITH_TAC = CONV_TAC(EQT_INTRO o INT_ARITH);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_ARITH_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_ARITH_TAC.html>
 
 ```ocaml
 let ASM_INT_ARITH_TAC =
   REPEAT(FIRST_X_ASSUM(MP_TAC o check (not o is_forall o concl))) THEN
   INT_ARITH_TAC;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_INT_ARITH_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_INT_ARITH_TAC.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -825,15 +825,15 @@ let INT_LE_CONV,INT_LT_CONV,INT_GE_CONV,INT_GT_CONV,INT_EQ_CONV =
   INT_LE_CONV,INT_LT_CONV,
   INT_GE_CONV,INT_GT_CONV,INT_EQ_CONV;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_LE_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_LE_CONV.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_LT_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_LT_CONV.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_GE_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_GE_CONV.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_GT_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_GT_CONV.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_EQ_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_EQ_CONV.html>
 
 ```ocaml
 let INT_NEG_CONV =
@@ -843,7 +843,7 @@ let INT_NEG_CONV =
     REWRITE_TAC[INT_NEG_NEG; INT_NEG_0]) in
   GEN_REWRITE_CONV I [pth];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_NEG_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_NEG_CONV.html>
 
 ```ocaml
 let INT_MUL_CONV =
@@ -865,7 +865,7 @@ let INT_MUL_CONV =
     GEN_REWRITE_CONV I [pth1] THENC RAND_CONV NUM_MULT_CONV;
     GEN_REWRITE_CONV I [pth2] THENC RAND_CONV(RAND_CONV NUM_MULT_CONV)];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_MUL_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_MUL_CONV.html>
 
 ```ocaml
 let INT_ADD_CONV =
@@ -941,7 +941,7 @@ let INT_ADD_CONV =
             TRANS th1 th2
     with Failure _ -> failwith "INT_ADD_CONV");;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_ADD_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_ADD_CONV.html>
 
 ```ocaml
 let INT_SUB_CONV =
@@ -949,7 +949,7 @@ let INT_SUB_CONV =
   TRY_CONV(RAND_CONV INT_NEG_CONV) THENC
   INT_ADD_CONV;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_SUB_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_SUB_CONV.html>
 
 ```ocaml
 let INT_POW_CONV =
@@ -968,7 +968,7 @@ let INT_POW_CONV =
    (fun tm -> if rator tm = neg_tm then RAND_CONV(RAND_CONV NUM_EXP_CONV) tm
               else RAND_CONV NUM_EXP_CONV  tm));;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_POW_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_POW_CONV.html>
 
 ```ocaml
 let INT_ABS_CONV =
@@ -978,7 +978,7 @@ let INT_ABS_CONV =
     REWRITE_TAC[INT_ABS_NEG; INT_ABS_NUM]) in
   GEN_REWRITE_CONV I [pth];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_ABS_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_ABS_CONV.html>
 
 ```ocaml
 let INT_MAX_CONV =
@@ -986,7 +986,7 @@ let INT_MAX_CONV =
   RATOR_CONV(RATOR_CONV(RAND_CONV INT_LE_CONV)) THENC
   GEN_REWRITE_CONV I [COND_CLAUSES];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_MAX_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_MAX_CONV.html>
 
 ```ocaml
 let INT_MIN_CONV =
@@ -994,7 +994,7 @@ let INT_MIN_CONV =
   RATOR_CONV(RATOR_CONV(RAND_CONV INT_LE_CONV)) THENC
   GEN_REWRITE_CONV I [COND_CLAUSES];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_MIN_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_MIN_CONV.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -1029,7 +1029,7 @@ let INT_POLY_CONV =
      (<) in
   INT_POLY_CONV;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_POLY_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_POLY_CONV.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -1060,9 +1060,9 @@ let INT_RING,int_ideal_cofactors =
                  else failwith
                   "int_ideal_cofactors: not all terms have type :int");;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_RING.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_RING.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/int_ideal_cofactors.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/int_ideal_cofactors.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -1136,12 +1136,12 @@ let INT_RED_CONV =
     (basic_net()) in
   REWRITES_CONV gconv_net;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_RED_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_RED_CONV.html>
 
 ```ocaml
 let INT_REDUCE_CONV = DEPTH_CONV INT_RED_CONV;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_REDUCE_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INT_REDUCE_CONV.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -1374,12 +1374,12 @@ let INTEGER_TAC =
           MAP_EVERY SPEC_TAC (zip gts (map (genvar o type_of) gts))) in
   REPEAT(GEN_TAC ORELSE CONJ_TAC) THEN GCD_ELIM_TAC THEN INTEGER_TAC;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INTEGER_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INTEGER_TAC.html>
 
 ```ocaml
 let INTEGER_RULE tm = prove(tm,INTEGER_TAC);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INTEGER_RULE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INTEGER_RULE.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -1442,7 +1442,10 @@ let NUM_TO_INT_CONV =
     INT_OF_NUM_SUC; INT_OF_NUM_ADD; INT_OF_NUM_MUL; INT_OF_NUM_POW]
   and quantifier_conv = GEN_REWRITE_CONV DEPTH_CONV [pth_relativize] in
   NUM_SIMPLIFY_CONV THENC relation_conv THENC quantifier_conv;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_TO_INT_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Linear decision procedure for the naturals at last!                       *)
 (* ------------------------------------------------------------------------- *)
@@ -1474,19 +1477,19 @@ let ARITH_RULE =
     let th3 = GENL avs (rev_itlist (C MP) pths th2) in
     EQ_MP (SYM th1) th3;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ARITH_RULE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ARITH_RULE.html>
 
 ```ocaml
 let ARITH_TAC = CONV_TAC(EQT_INTRO o ARITH_RULE);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ARITH_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ARITH_TAC.html>
 
 ```ocaml
 let ASM_ARITH_TAC =
   REPEAT(FIRST_X_ASSUM(MP_TAC o check (not o is_forall o concl))) THEN
   ARITH_TAC;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_ARITH_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_ARITH_TAC.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -1513,9 +1516,15 @@ let NUMBER_TAC =
   CONV_TAC(relation_conv THENC quantifier_conv) THEN
   REWRITE_TAC[RIGHT_IMP_FORALL_THM] THEN REPEAT GEN_TAC THEN
   INTEGER_TAC;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUMBER_TAC.html>
 
+```ocaml
 let NUMBER_RULE tm = prove(tm,NUMBER_TAC);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUMBER_RULE.html>
 
+```ocaml
 let divides = prove
  (`a divides b <=> ?x. b = a * x`,
   EQ_TAC THENL [REWRITE_TAC[num_divides; int_divides]; NUMBER_TAC] THEN

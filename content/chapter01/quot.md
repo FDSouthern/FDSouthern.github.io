@@ -31,7 +31,7 @@ let define_quotient_type =
     let abs,rep = new_basic_type_definition tyname (absname,repname) th2 in
     abs,CONV_RULE(LAND_CONV BETA_CONV) rep;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/define_quotient_type.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/define_quotient_type.html>
 
 `` define_quotient_type "newtype" ("newtypeABS","newtypeREP") `\x y. P[x,y]` ``
 defines a new type `newtype` with a bijection to a subset of `oldtype->bool`
@@ -132,7 +132,7 @@ let lift_function =
       let th9 = CONV_RULE (RAND_CONV fconv) th8 in
       eth,GSYM th9;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lift_function.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lift_function.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -176,7 +176,7 @@ let lift_theorem =
     fun trths ->
       REWRITE_RULE (ith::trths);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lift_theorem.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lift_theorem.html>
 
 - Previous: [metis.ml](metis.md)
 - [Index](index.md)

@@ -10,7 +10,7 @@ Implicational conversions, implicational rewriting and target rewriting.
 let IMP_REWRITE_TAC,TARGET_REWRITE_TAC,HINT_EXISTS_TAC,
     SEQ_IMP_REWRITE_TAC,CASE_REWRITE_TAC =
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_REWRITE_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_REWRITE_TAC.html>
 
 ```ocaml
 let I = fun x -> x in
@@ -409,7 +409,7 @@ let module Fo_nets =
 
     let empty_net = Netnode([],[])
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/empty_net.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/empty_net.html>
 
 ```ocaml
     let enter =
@@ -1394,7 +1394,7 @@ let preprocess = CONJUNCTS o IMPLY_AND
 let IMP_REWRITE_TAC ths =
   CTXIMPCONV_TAC (REWRITE_CTXIMPCONV (flat (map preprocess ths)))
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_REWRITE_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_REWRITE_TAC.html>
 
 ```ocaml
 let SEQ_IMP_REWRITE_TAC ths =
@@ -1439,7 +1439,7 @@ let CASE_REWRITE_CTXIMPCONV =
 (* Tactic version of it. *)
 let CASE_REWRITE_TAC = CTXIMPCONV_TAC o CASE_REWRITE_CTXIMPCONV o preprocess
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CASE_REWRITE_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CASE_REWRITE_TAC.html>
 
 ```ocaml
 (*****************************************************************************)
@@ -1859,7 +1859,7 @@ let TARGET_REWRITE_TAC sths th =
 
 let HINT_EXISTS_TAC = CTXIMPCONV_TAC (TOP_DEPTH_CTXIMPCONV EXISTS_CTXIMPCONV)
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/HINT_EXISTS_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/HINT_EXISTS_TAC.html>
 
 ```ocaml
 end in

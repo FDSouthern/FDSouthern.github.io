@@ -858,7 +858,7 @@ let GEN_MESON_TAC min max step ths =
   REPEAT (FIRST_X_ASSUM SUBST_VAR_TAC) THEN
   Meson.PURE_MESON_TAC min max step;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_MESON_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_MESON_TAC.html>
 
 `GEN_MESON_TAC min max step ths` is like `MESON_TAC` below, but with explicit
 start (`min`), finish (`max`) and step (`step`) for the iterative deepening.
@@ -870,7 +870,7 @@ start (`min`), finish (`max`) and step (`step`) for the iterative deepening.
 
 let ASM_MESON_TAC = GEN_MESON_TAC 0 50 1;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_MESON_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_MESON_TAC.html>
 
 `ASM_MESON_TAC ths` tries to prove the goal using Meson, using the assumptions
 and the theorems in `ths`.

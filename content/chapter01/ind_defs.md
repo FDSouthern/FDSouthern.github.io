@@ -51,7 +51,7 @@ let EXISTS_EQUATION =
     let th4 = GEN l (DISCH tm th3) in
     MP th2 th4;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXISTS_EQUATION.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXISTS_EQUATION.html>
 
 `` EXISTS_EQUATION `x = a` `ASM,x = a |- P[x]` `` gives `ASM |- ?x. P[x]`.
 
@@ -248,7 +248,7 @@ let derive_nonschematic_inductive_relations =
     and indthm' = CONV_RULE (ONCE_DEPTH_CONV (REWR_CONV canonthm')) indthm in
     CONJ rulethm' (CONJ indthm' casethm);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/derive_nonschematic_inductive_relations.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/derive_nonschematic_inductive_relations.html>
 
 `` SIMPLE_DISJ_PAIR `P \/ Q |- R` `` gives `` (`P |- R`, `Q |- R`) ``.
 
@@ -426,7 +426,10 @@ let prove_inductive_relations_exist,new_inductive_definition =
     the_inductive_definitions := thtr::(!the_inductive_definitions);
     thtr in
   prove_inductive_relations_exist,new_inductive_definition;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/new_inductive_definition.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Derivation of "strong induction".                                         *)
 (* ------------------------------------------------------------------------- *)
@@ -491,7 +494,7 @@ let derive_strong_induction =
     let th4 = GENL ps (DISCH nasm (weaken_triv(UNDISCH th3))) in
     GENL svs (prove_monotonicity_hyps th4);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/derive_strong_induction.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/derive_strong_induction.html>
 
 - Previous: [theorems.ml](theorems.md)
 - [Index](index.md)

@@ -515,7 +515,7 @@ let GEN_REAL_ARITH PROVER =
     REAL_POLY_CONV,REAL_POLY_NEG_CONV,REAL_POLY_ADD_CONV,REAL_POLY_MUL_CONV,
     PROVER);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_REAL_ARITH.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_REAL_ARITH.html>
 
 These functions shadow earlier definitions from `realarith.ml`.
 
@@ -531,7 +531,7 @@ let ASM_REAL_ARITH_TAC =
   REPEAT(FIRST_X_ASSUM(MP_TAC o check (not o is_forall o concl))) THEN
   REAL_ARITH_TAC;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_REAL_ARITH_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_REAL_ARITH_TAC.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)

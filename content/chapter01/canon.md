@@ -46,7 +46,7 @@ let CONJ_ACI_RULE =
     and th' = use_fun (mk_fun (ASSUME p') undefined) p in
     IMP_ANTISYM_RULE (DISCH_ALL th) (DISCH_ALL th');;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJ_ACI_RULE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJ_ACI_RULE.html>
 
 ```ocaml
 let DISJ_ACI_RULE =
@@ -81,7 +81,7 @@ let DISJ_ACI_RULE =
     let th1 = IMP_ANTISYM_RULE (DISCH_ALL th) (DISCH_ALL th') in
     PROVE_HYP th1 (INST [p,a_tm; p',b_tm] pth_neg);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ_ACI_RULE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ_ACI_RULE.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -92,14 +92,14 @@ let CONJ_CANON_CONV tm =
   let tm' = list_mk_conj(setify(conjuncts tm)) in
   CONJ_ACI_RULE(mk_eq(tm,tm'));;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJ_CANON_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJ_CANON_CONV.html>
 
 ```ocaml
 let DISJ_CANON_CONV tm =
   let tm' = list_mk_disj(setify(disjuncts tm)) in
   DISJ_ACI_RULE(mk_eq(tm,tm'));;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ_CANON_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ_CANON_CONV.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -356,7 +356,7 @@ let (GEN_NNF_CONV:bool->conv*(term->thm*thm)->conv) =
     | _ -> let tm' = mk_neg tm in try base1 tm' with Failure _ -> REFL tm' in
   NNF_CONV;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_NNF_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_NNF_CONV.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -365,10 +365,15 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_NNF_CONV.html
 
 let NNF_CONV =
   (GEN_NNF_CONV false (ALL_CONV,fun t -> REFL t,REFL(mk_neg t)) :conv);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NNF_CONV.html>
 
+```ocaml
 let NNFC_CONV =
   (GEN_NNF_CONV true (ALL_CONV,fun t -> REFL t,REFL(mk_neg t)) :conv);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NNFC_CONV.html>
+
 `NNF_CONV` and `NNFC_CONV` move negations inward past and,or,implies,forall,
 exists,exists_unique,iff.  These conversions also eliminate iff and implication.
 (There are two possible ways to eliminate iff; `NNF_CONV` uses the method which
@@ -459,7 +464,7 @@ let WEAK_DNF_CONV,DNF_CONV =
     TRANS th (strengthen(rand(concl th))) in
   weakdnf,strongdnf;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DNF_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DNF_CONV.html>
 
 `DNF_CONV` uses DeMorgan's laws and associativity to move to disjunctive normal
 form.  (What does `WEAK_` mean?)
@@ -507,7 +512,7 @@ let WEAK_CNF_CONV,CNF_CONV =
     TRANS th (strengthen(rand(concl th))) in
   weakcnf,strongcnf;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CNF_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CNF_CONV.html>
 
 `CNF_CONV` uses DeMorgan's laws and associativity to move to conjunctive normal
 form.  (What does `WEAK_` mean?)
@@ -539,7 +544,7 @@ let ASSOC_CONV th =
     | _ -> REFL tm in
   assoc;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASSOC_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASSOC_CONV.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -644,7 +649,7 @@ let LAMBDA_ELIM_CONV =
     try (LAMB1_CONV THENC conv) tm with Failure _ -> REFL tm in
   conv;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/LAMBDA_ELIM_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/LAMBDA_ELIM_CONV.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -706,9 +711,9 @@ let CONDS_ELIM_CONV,CONDS_CELIM_CONV =
     else REFL tm in
   CONDS_ELIM_CONV true,CONDS_ELIM_CONV false;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONDS_ELIM_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONDS_ELIM_CONV.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONDS_CELIM_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONDS_CELIM_CONV.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -778,7 +783,7 @@ finding the minimal number of arguments for each constant.  Anywhere it is
 applied to more arguments, the application `f x1 ... xn` is changed to
 `I (f x1 ... x(n-1)) xn` (this process is repeated, if necessary).
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_FOL_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_FOL_TAC.html>
 
 `ASM_FOL_TAC` uses the technique of `FOL_CONV`, but applies throughout the
 entire goalstate (goal and assumptions).

@@ -114,6 +114,7 @@ let new_recursive_definition =
     let th = end_itlist CONJ dths in
     the_recursive_definitions := th::(!the_recursive_definitions); th;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/new_recursive_definition.html>
 
 - Previous: [nums.ml](nums.md)
 - [Index](index.md)

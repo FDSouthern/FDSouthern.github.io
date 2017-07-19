@@ -320,7 +320,7 @@ let define_finite_type =
     let th1 = MP th0 (EQF_ELIM(NUM_EQ_CONV(rand(lhand(concl th0))))) in
     POST_RULE(new_type_definition ns ("mk_"^ns',"dest_"^ns') th1);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/define_finite_type.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/define_finite_type.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)

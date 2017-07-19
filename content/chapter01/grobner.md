@@ -578,7 +578,7 @@ let RING parms = fst(RING_AND_IDEAL_CONV parms);;
 
 let ideal_cofactors parms = snd(RING_AND_IDEAL_CONV parms);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ideal_cofactors.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ideal_cofactors.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -664,7 +664,10 @@ let NUM_SIMPLIFY_CONV =
   NUM_MULTIPLY_CONV true THENC
   NUM_REDUCE_CONV THENC
   GEN_REWRITE_CONV ONCE_DEPTH_CONV [pth_evenodd];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_SIMPLIFY_CONV.html>
 
+```ocaml
 (* ----------------------------------------------------------------------- *)
 (* Natural number version of ring procedure with this normalization.       *)
 (* ----------------------------------------------------------------------- *)
@@ -701,6 +704,7 @@ let NUM_RING =
             if rand(concl th) = t_tm then th
             else EQ_MP (SYM th) (rawring(rand(concl th)));;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_RING.html>
 
 - Previous: [normalizer.ml](normalizer.md)
 - [Index](index.md)

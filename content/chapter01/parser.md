@@ -23,7 +23,7 @@ let (|||) parser1 parser2 input =
   try parser1 input
   with Noparse -> parser2 input;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.orparser.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.orparser.html>
 
 ```ocaml
 let (++) parser1 parser2 input =
@@ -31,7 +31,7 @@ let (++) parser1 parser2 input =
   let result2,rest2 = parser2 rest1 in
   (result1,result2),rest2;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.joinparsers.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.joinparsers.html>
 
 ```ocaml
 let rec many prs input =
@@ -40,35 +40,38 @@ let rec many prs input =
       (result::results),rest
   with Noparse -> [],input;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/many.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/many.html>
 
 ```ocaml
 let (>>) prs treatment input =
   let result,rest = prs input in
   treatment(result),rest;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.pipeparser.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/.pipeparser.html>
 
 ```ocaml
 let fix err prs input =
   try prs input
   with Noparse -> failwith (err ^ " expected");;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/fix.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/fix.html>
 
 ```ocaml
 let rec listof prs sep err =
   prs ++ many (sep ++ fix err prs >> snd) >> (fun (h,t) -> h::t);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/listof.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/listof.html>
 
 ```ocaml
 let nothing input = [],input;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/nothing.html>
 
+```ocaml
 let elistof prs sep err =
   listof prs sep err ||| nothing;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/elistof.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/elistof.html>
 
 ```ocaml
 let leftbin prs sep cons err =
@@ -76,7 +79,7 @@ let leftbin prs sep cons err =
   (fun (x,opxs) -> let ops,xs = unzip opxs in
                    itlist2 (fun op y x -> cons op x y) (rev ops) (rev xs) x);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/leftbin.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/leftbin.html>
 
 ```ocaml
 let rightbin prs sep cons err =
@@ -96,20 +99,20 @@ let some p =
 
 let a tok = some (fun item -> item = tok);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/a.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/a.html>
 
 ```ocaml
 let rec atleast n prs i =
   (if n <= 0 then many prs
    else prs ++ atleast (n - 1) prs >> (fun (h,t) -> h::t)) i;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/atleast.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/atleast.html>
 
 ```ocaml
 let finished input =
   if input = [] then 0,input else failwith "Unparsed input";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/finished.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/finished.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -129,7 +132,7 @@ reserve_words ["//"];;
 
 let comment_token = ref (Resword "//");;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/comment_token.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/comment_token.html>
 
 ```ocaml
 let lex =
@@ -177,7 +180,7 @@ let lex =
     with Noparse -> [],i in
   fst o (tokens ++ many (some isspace) ++ finished >> (fst o fst));;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lex.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/lex.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -262,11 +265,11 @@ let install_parser,delete_parser,installed_parsers,try_user_parser =
   (fun () -> !parser_list),
   (fun i -> try_parsers (!parser_list) i);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/install_parser.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/install_parser.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/delete_parser.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/delete_parser.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/installed_parsers.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/installed_parsers.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)

@@ -37,19 +37,19 @@ let isspace,issep,isbra,issymb,isalpha,isnum,isalnum =
   and isalnum c = Array.get ctable (charcode c) >= 16 in
   isspace,issep,isbra,issymb,isalpha,isnum,isalnum;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/isspace.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/isspace.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/issep.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/issep.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/isbra.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/isbra.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/issymb.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/issymb.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/isalpha.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/isalpha.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/isnum.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/isnum.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/isalnum.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/isalnum.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -66,7 +66,7 @@ let reserve_words,unreserve_words,is_reserved_word,reserved_words =
   (fun n  -> mem n (!reswords)),
   (fun () -> !reswords);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_reserved_word.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_reserved_word.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -89,7 +89,7 @@ let unparse_as_binder,parse_as_binder,parses_as_binder,binders =
   (fun n  -> mem n (!binder_list)),
   (fun () -> !binder_list);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/binders.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/binders.html>
 
 ```ocaml
 let unparse_as_prefix,parse_as_prefix,is_prefix,prefixes =
@@ -99,7 +99,7 @@ let unparse_as_prefix,parse_as_prefix,is_prefix,prefixes =
   (fun n  -> mem n (!prefix_list)),
   (fun () -> !prefix_list);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_prefix.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_prefix.html>
 
 ```ocaml
 let unparse_as_infix,parse_as_infix,get_infix_status,infixes =
@@ -112,9 +112,9 @@ let unparse_as_infix,parse_as_infix,get_infix_status,infixes =
   (fun n     -> assoc n (!infix_list)),
   (fun ()    -> !infix_list);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/get_infix_status.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/get_infix_status.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/infixes.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/infixes.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -177,7 +177,10 @@ let name_of tm =
   match tm with
     Var(x,ty) | Const(x,ty) -> x
   | _ -> "";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/name_of.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Printer for types.                                                        *)
 (* ------------------------------------------------------------------------- *)
@@ -210,9 +213,9 @@ let install_user_printer,delete_user_printer,try_user_printer =
                                         (!user_printers))),
   (fun fmt -> fun tm -> tryfind (fun (_,pr) -> pr fmt tm) (!user_printers));;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/install_user_printer.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/install_user_printer.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/delete_user_printer.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/delete_user_printer.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)

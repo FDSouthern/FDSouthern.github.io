@@ -70,7 +70,7 @@ let enter =
           Netnode ((label,new_child)::others,tips) in
   fun lconsts (tm,elem) net -> net_update lconsts (elem,[tm],net);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/enter.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/enter.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)

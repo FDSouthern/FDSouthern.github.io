@@ -808,7 +808,7 @@ let instantiate_casewise_recursion,
       let dth = pinstantiate_casewise_recursion dtm in
       PROVE_HYP dth eth in
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/instantiate_casewise_recursion.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/instantiate_casewise_recursion.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -992,7 +992,7 @@ let define =
       let th3 = PROVE_HYP th2 (INST [g,f] th) in
       the_definitions := th3::(!the_definitions); th3;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/define.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/define.html>
 
 - Previous: [cart.ml](cart.md)
 - [Index](index.md)

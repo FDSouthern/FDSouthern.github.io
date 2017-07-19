@@ -221,7 +221,7 @@ let (INDUCT_TAC:tactic) =
   MATCH_MP_TAC num_INDUCTION THEN
   CONJ_TAC THENL [ALL_TAC; GEN_TAC THEN DISCH_TAC];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INDUCT_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INDUCT_TAC.html>
 
 `INDUCT_TAC` takes a goal `!x. P[x]` and creates subgoals `P[0]` and `P[SUC n]`
 (the latter with an assumption `P[n]`).
@@ -382,6 +382,8 @@ let new_specification =
           the_specifications := ((names,th),sth)::(!the_specifications);
           sth;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/new_specification.html>
+
 `` new_specification ["foo";"bar";"baz"] `?x y z.P[x,y,z]` `` defines `"foo"`,
 `"bar"`, and `"baz"` as new constants and returns a theorem `|- P[foo,bar,baz]`.
 

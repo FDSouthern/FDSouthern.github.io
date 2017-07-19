@@ -1498,6 +1498,8 @@ let NUM_CANCEL_CONV =
     GEN_REWRITE_RULE (RAND_CONV o REPEATC)
       [EQ_ADD_LCANCEL; EQ_ADD_LCANCEL_0; EQ_ADD_LCANCEL_0'] eth;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_CANCEL_CONV.html>
+
 `NUM_CANCEL_CONV` rewrites `(c+(b+a)) = (b+d)+a` to `c=d`
 
 ```ocaml
@@ -1509,7 +1511,7 @@ let LE_IMP =
   let pth = PURE_ONCE_REWRITE_RULE[IMP_CONJ] LE_TRANS in
   fun th -> GEN_ALL(MATCH_MP pth (SPEC_ALL th));;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/LE_IMP.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/LE_IMP.html>
 
 `` LE_IMP `|- a <= b` `` gives `` (GEN_ALL `|- b <= p ==> a <= p`) ``.
 

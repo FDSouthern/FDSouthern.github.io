@@ -31,7 +31,7 @@ let REWR_CONV = PART_MATCH lhs;;
 let IMP_REWR_CONV = PART_MATCH (lhs o snd o dest_imp);;
 
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_REWR_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_REWR_CONV.html>
 
 `` IMP_REWR_CONV `A |- p ==> (s = t)` `` returns a conversion which matches
 a term `s'` to `s` and returns the theorem `A |- p ==> (s' = t')`.
@@ -143,6 +143,8 @@ let net_of_thm rep th =
           enter lconsts (l,(3,ORDERED_IMP_REWR_CONV term_order th))
         else enter lconsts(l,(3,IMP_REWR_CONV th));;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/net_of_thm.html>
+
 `` net_of_thm rep `|- P ==> (a = b)` (or `|- a = b`) net `` adds a component to
 `net` which matches a term and returns a conversion rewriting that term.
 If rep is true and `a` appears in `b`, then it rewrites `(a = b)` to `T`.
@@ -159,6 +161,8 @@ Conditional rewrites are entered as level 3; unconditional as level 1.
 let net_of_conv tm conv sofar =
   enter [] (tm,(2,conv)) sofar;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/net_of_conv.html>
+
 `net_of_conv tm conv net` adds a component to `net` which matches `tm` and
 returns `conv`.  Entered as level 2.
 
@@ -174,6 +178,8 @@ let net_of_cong th sofar =
   let conv = GEN_PART_MATCH (lhand o funpow n rand) th in
   enter [] (pat,(4,conv)) sofar;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/net_of_cong.html>
+
 `net_of_cong th net` adds a component to `net` for a congruence rule (a rule of
 the form `` `P1 ==> (P2 ==> (...(Pn ==> (a = b))))` ``).  Entered at level 4.
 
@@ -317,7 +323,7 @@ let basic_prover strat (Simpset(net,prover,provers,rewmaker) as ss) lev tm =
     let tth = tryfind (fun pr -> apply_prover pr (rand(concl sth))) provers in
     EQ_MP (SYM sth) tth;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_prover.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_prover.html>
 
 `` basic_prover strat ss lev `a` `` tries to prove `|- a`.
 Succeeds if `a` = `T`, or if `` (strat ss lev `a`) `` proves `|- a = T`.
@@ -378,7 +384,7 @@ let AUGMENT_SIMPSET cth (Simpset(net,prover,provers,rewmaker)) =
   let net' = itlist (net_of_thm true) cthms net in
   Simpset(net',prover,provers',rewmaker);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AUGMENT_SIMPSET.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AUGMENT_SIMPSET.html>
 
 `AUGMENT_SIMPSET th ss` uses the rewrite maker from the simpset
 `(always (mk_rewrites true))` to create a list of rewrite theorems from `th`;
@@ -506,7 +512,7 @@ let ONCE_DEPTH_SQCONV,DEPTH_SQCONV,REDEPTH_SQCONV,
   ONCE_DEPTH_SQCONV,DEPTH_SQCONV,REDEPTH_SQCONV,
   TOP_DEPTH_SQCONV,TOP_SWEEP_SQCONV;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEPTH_SQCONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEPTH_SQCONV.html>
 
 `IMP_REWRITES_CONV strat ss lev` tris to find a conversion for `tm` at level < 4
 (i.e., not a congruence rule) which is either unconditional or (if lev > 0) such
@@ -589,15 +595,15 @@ let set_basic_rewrites,extend_basic_rewrites,basic_rewrites,
   set_basic_rewrites,extend_basic_rewrites,basic_rewrites,
   set_basic_convs,extend_basic_convs,basic_convs,basic_net;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/extend_basic_rewrites.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/extend_basic_rewrites.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_rewrites.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_rewrites.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/extend_basic_convs.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/extend_basic_convs.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_convs.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_convs.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_net.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_net.html>
 
 `set_basic_rewrites thl` sets the "basic rewrite" set to `thl`.
 
@@ -623,9 +629,9 @@ let set_basic_congs,extend_basic_congs,basic_congs =
   (fun thl -> congs := union' equals_thm thl (!congs)),
   (fun () -> !congs);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/extend_basic_congs.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/extend_basic_congs.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_congs.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_congs.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -637,7 +643,7 @@ let GENERAL_REWRITE_CONV rep (cnvl:conv->conv) (builtin_net:gconv net) thl =
   let final_net = itlist (net_of_thm rep) thl_canon builtin_net in
   cnvl (REWRITES_CONV final_net);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GENERAL_REWRITE_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GENERAL_REWRITE_CONV.html>
 
 `GENERAL_REWRITE_CONV rep cnvl net thl` canonicalises `thl` with
 `mk_rewrites false`, adds these conversions to `net` with `net_of_thm rep`
@@ -647,7 +653,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GENERAL_REWRITE_CONV.html
 let GEN_REWRITE_CONV (cnvl:conv->conv) thl =
   GENERAL_REWRITE_CONV false cnvl empty_net thl;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_REWRITE_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_REWRITE_CONV.html>
 
 ```ocaml
 let PURE_REWRITE_CONV thl =
@@ -668,7 +674,7 @@ let ONCE_REWRITE_CONV thl =
 
 let GEN_REWRITE_RULE cnvl thl = CONV_RULE(GEN_REWRITE_CONV cnvl thl);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_REWRITE_RULE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_REWRITE_RULE.html>
 
 ```ocaml
 let PURE_REWRITE_RULE thl = CONV_RULE(PURE_REWRITE_CONV thl);;
@@ -685,7 +691,7 @@ let PURE_ASM_REWRITE_RULE thl th =
 let ASM_REWRITE_RULE thl th =
     REWRITE_RULE ((map ASSUME (hyp th)) @ thl) th;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_REWRITE_RULE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_REWRITE_RULE.html>
 
 ```ocaml
 let PURE_ONCE_ASM_REWRITE_RULE thl th =
@@ -701,7 +707,7 @@ non-`ASM_` versions, but they add the theorem hypotheses to the rewrite list.
 ```ocaml
 let GEN_REWRITE_TAC cnvl thl = CONV_TAC(GEN_REWRITE_CONV cnvl thl);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_REWRITE_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_REWRITE_TAC.html>
 
 ```ocaml
 let PURE_REWRITE_TAC thl = CONV_TAC(PURE_REWRITE_CONV thl);;
@@ -723,7 +729,7 @@ let (PURE_ASM_REWRITE_TAC: thm list -> tactic) =
 let (ASM_REWRITE_TAC: thm list -> tactic) =
   ASM REWRITE_TAC;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_REWRITE_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_REWRITE_TAC.html>
 
 ```ocaml
 let (PURE_ONCE_ASM_REWRITE_TAC: thm list -> tactic) =
@@ -745,7 +751,7 @@ let GEN_SIMPLIFY_CONV (strat:strategy) ss lev thl =
   let ss' = itlist AUGMENT_SIMPSET thl ss in
   TRY_CONV (strat ss' lev);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_SIMPLIFY_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_SIMPLIFY_CONV.html>
 
 `GEN_SIMPLIFY_CONV strat ss lev thl` uses `AUGMENT_SIMPSET` to add `thl` to `ss`
 (giving `ss'`); then does `TRY_CONV (strat ss' lev)`.
@@ -761,7 +767,7 @@ let SIMPLIFY_CONV ss = GEN_SIMPLIFY_CONV TOP_DEPTH_SQCONV ss 3;;
 
 let empty_ss = Simpset(empty_net,basic_prover,[],mk_rewrites true);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/empty_ss.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/empty_ss.html>
 
 `empty_ss` is the empty simpset (no conversions in the conversion net).
 
@@ -774,7 +780,7 @@ let basic_ss =
     let net'' = itlist net_of_cong (basic_congs()) net' in
   Simpset(net'',basic_prover,[],rewmaker);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_ss.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_ss.html>
 
 `basic_ss thl` canonicalises `thl` with `mk_rewrites true`, then adds the
 rewrites to `basic_net()` with `net_of_thm true`.  It also adds the basic
@@ -809,7 +815,7 @@ variants, but they call `CONV_TAC`.
 ```ocaml
 let ASM_SIMP_TAC = ASM SIMP_TAC;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_SIMP_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_SIMP_TAC.html>
 
 ```ocaml
 let PURE_ASM_SIMP_TAC = ASM PURE_SIMP_TAC;;
@@ -842,7 +848,7 @@ let ABBREV_TAC tm =
                 ASSUME_TAC th)
      th3 gl;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ABBREV_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ABBREV_TAC.html>
 
 `` ABBREV_TAC `x = a` `` rewrites `a` to `x` in the goal and all assumptions,
 then adds `a = x` as a new assumption.
@@ -851,7 +857,7 @@ then adds `a = x` as a new assumption.
 let EXPAND_TAC s = FIRST_ASSUM(SUBST1_TAC o SYM o
   check((=) s o fst o dest_var o rhs o concl)) THEN BETA_TAC;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXPAND_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXPAND_TAC.html>
 
 `` EXPAND_TAC `x` `` finds the first assumption of the form `t = x`, rewrites
 `x` to `t` in the goal, and beta-reduces the goal.

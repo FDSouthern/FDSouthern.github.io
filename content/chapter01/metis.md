@@ -8,7 +8,7 @@ Metis first-order theorem proving derived rule/tactic for HOL Light.
 
 The original Metis was written by Joe Hurd, and it has been widely used
 for first-order proofs in HOL4 and Isabelle; see:
-http://www.gilith.com/research/metis/
+<http://www.gilith.com/research/metis/>
 
 This is a port from SML to OCaml and proof-reconstructing integration
 with HOL Light, written by Michael Färber and Cezary Kaliszyk.
@@ -10159,7 +10159,7 @@ end
 
 let ASM_METIS_TAC = Metis.GEN_METIS_TAC;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_METIS_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_METIS_TAC.html>
 
 ```ocaml
 let METIS_TAC ths = POP_ASSUM_LIST(K ALL_TAC) THEN ASM_METIS_TAC ths;;

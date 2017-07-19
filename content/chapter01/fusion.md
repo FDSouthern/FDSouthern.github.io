@@ -136,7 +136,7 @@ Types and vartypes?  Type variables.
 
   let get_type_arity s = assoc s (!the_type_constants)
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/get_type_arity.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/get_type_arity.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -147,7 +147,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/get_type_arity.html
     if can get_type_arity name then
       failwith ("new_type: type "^name^" has already been declared")
     else the_type_constants := (name,arity)::(!the_type_constants)
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/new_type.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Basic type constructors.                                                  *)
 (* ------------------------------------------------------------------------- *)
@@ -178,7 +181,7 @@ I think this deserves a comment.
         (Tyapp (s,ty)) -> s,ty
       | (Tyvar _) -> failwith "dest_type: type variable not a constructor"
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_type.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_type.html>
 
 ```ocaml
   let dest_vartype =
@@ -186,7 +189,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_type.html
         (Tyapp(_,_)) -> failwith "dest_vartype: type constructor not a variable"
       | (Tyvar s) -> s
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_vartype.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_vartype.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -195,12 +198,12 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_vartype.html
 
   let is_type = can dest_type
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_type.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_type.html>
 
 ```ocaml
   let is_vartype = can dest_vartype
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_vartype.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_vartype.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -228,12 +231,12 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_vartype.html
 
   let bool_ty = Tyapp("bool",[])
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/bool_ty.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/bool_ty.html>
 
 ```ocaml
   let aty = Tyvar "A"
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/aty.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/aty.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -252,7 +255,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/aty.html
 
   let constants() = !the_term_constants
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/constants.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/constants.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -261,7 +264,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/constants.html
 
   let get_const_type s = assoc s (!the_term_constants)
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/get_const_type.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/get_const_type.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -272,7 +275,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/get_const_type.html
     if can get_const_type name then
       failwith ("new_constant: constant "^name^" has already been declared")
     else the_term_constants := (name,ty)::(!the_term_constants)
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/new_constant.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Finds the type of a term (assumes it is well-typed).                      *)
 (* ------------------------------------------------------------------------- *)
@@ -290,22 +296,22 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/get_const_type.html
 
   let is_var = function (Var(_,_)) -> true | _ -> false
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_var.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_var.html>
 
 ```ocaml
   let is_const = function (Const(_,_)) -> true | _ -> false
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_const.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_const.html>
 
 ```ocaml
   let is_abs = function (Abs(_,_)) -> true | _ -> false
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_abs.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_abs.html>
 
 ```ocaml
   let is_comb = function (Comb(_,_)) -> true | _ -> false
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_comb.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_comb.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -349,26 +355,26 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_comb.html
   let dest_var =
     function (Var(s,ty)) -> s,ty | _ -> failwith "dest_var: not a variable"
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_var.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_var.html>
 
 ```ocaml
   let dest_const =
     function (Const(s,ty)) -> s,ty | _ -> failwith "dest_const: not a constant"
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_const.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_const.html>
 
 ```ocaml
 
   let dest_comb =
     function (Comb(f,x)) -> f,x | _ -> failwith "dest_comb: not a combination"
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_comb.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_comb.html>
 
 ```ocaml
   let dest_abs =
     function (Abs(v,b)) -> v,b | _ -> failwith "dest_abs: not an abstraction"
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_abs.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_abs.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -382,12 +388,12 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_abs.html
     | Abs(bv,bod) -> subtract (frees bod) [bv]
     | Comb(s,t) -> union (frees s) (frees t)
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/frees.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/frees.html>
 
 ```ocaml
   let freesl tml = itlist (union o frees) tml []
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/freesl.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/freesl.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -401,7 +407,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/freesl.html
     | Abs(bv,bod) -> freesin (bv::acc) bod
     | Comb(s,t) -> freesin acc s && freesin acc t
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/freesin.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/freesin.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -490,7 +496,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/freesin.html
                        inst env tyin (Abs(z,vsubst[z,y] t)) in
     fun tyin -> if tyin = [] then fun tm -> tm else inst [] tyin
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/inst.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/inst.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -520,7 +526,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/inst.html
       Comb(Comb(Const("=",_),l),r) -> l,r
     | _ -> failwith "dest_eq"
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_eq.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_eq.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -555,7 +561,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_eq.html
 
   let alphaorder = orda []
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/alphaorder.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/alphaorder.html>
 
 ```ocaml
   let rec term_union l1 l2 =
@@ -588,17 +594,17 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/alphaorder.html
 
   let dest_thm (Sequent(asl,c)) = (asl,c)
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_thm.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_thm.html>
 
 ```ocaml
   let hyp (Sequent(asl,c)) = asl
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hyp.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hyp.html>
 
 ```ocaml
   let concl (Sequent(asl,c)) = c
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/concl.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/concl.html>
 
 Okay, below here we've got HOL Light's inference rules:
 
@@ -648,7 +654,7 @@ Okay, below here we've got HOL Light's inference rules:
          -> Sequent(asl,safe_mk_eq (Abs(v,l)) (Abs(v,r)))
     | _ -> failwith "ABS";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ABS.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ABS.html>
 
 `` ABS `x` `ASM1{-x} |- a=b` `` gives `ASM1 |- \x.a = \x.b`.
 
@@ -663,7 +669,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ABS.html
         -> Sequent([],safe_mk_eq tm bod)
     | _ -> failwith "BETA: not a trivial beta-redex"
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BETA.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BETA.html>
 
 `` BETA `(\x.x) x` `` gives `|- (\x. x) x = x`.
 
@@ -679,7 +685,7 @@ In practice, you probably want to use `BETA_CONV` as defined in
     if Pervasives.compare (type_of tm) bool_ty = 0 then Sequent([tm],tm)
     else failwith "ASSUME: not a proposition"
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASSUME.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASSUME.html>
 
 `` ASSUME `a` `` gives `a |- a`.
 
@@ -690,7 +696,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASSUME.html
         -> Sequent(term_union asl1 asl2,r)
     | _ -> failwith "EQ_MP"
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQ_MP.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQ_MP.html>
 
 `` EQ_MP `ASM1 |- a = b` `ASM2 |- a` `` gives `ASM1+ASM2 |- b`.
 
@@ -699,7 +705,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQ_MP.html
     let asl1' = term_remove c2 asl1 and asl2' = term_remove c1 asl2 in
     Sequent(term_union asl1' asl2',safe_mk_eq c1 c2)
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEDUCT_ANTISYM_RULE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEDUCT_ANTISYM_RULE.html>
 
 `` DEDUCT_ANTISYM_RULE `ASM1 |- a` `ASM2 |- b` `` gives
 `(ASM1-{b})+(ASM2-{a}) |- a=b`.
@@ -717,7 +723,7 @@ case (if from `p` you can derive `q` and from `q` you can derive `p`, then
     let inst_fn = inst theta in
     Sequent(term_image inst_fn asl,inst_fn c)
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INST_TYPE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INST_TYPE.html>
 
 `INST_TYPE instantiation theorem` gives a new theorem with type variables
 instantiated.
@@ -727,7 +733,7 @@ instantiated.
     let inst_fun = vsubst theta in
     Sequent(term_image inst_fun asl,inst_fun c)
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INST_UPPERCASE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INST_UPPERCASE.html>
 
 `INST instantiation theorem` gives a new theorem with variables instantiated.
 
@@ -740,7 +746,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INST_UPPERCASE.html
 
   let axioms() = !the_axioms
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/axioms.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/axioms.html>
 
 ```ocaml
   let new_axiom tm =
@@ -748,7 +754,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/axioms.html
       let th = Sequent([],tm) in
        (the_axioms := th::(!the_axioms); th)
     else failwith "new_axiom: Not a proposition"
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/new_axiom.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Handling of (term) definitions.                                           *)
 (* ------------------------------------------------------------------------- *)
@@ -757,7 +766,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/axioms.html
 
   let definitions() = !the_definitions
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/definitions.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/definitions.html>
 
 ```ocaml
   let new_basic_definition tm =
@@ -770,7 +779,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/definitions.html
              let dth = Sequent([],safe_mk_eq c r) in
              the_definitions := dth::(!the_definitions); dth
     | _ -> failwith "new_basic_definition"
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/new_basic_definition.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Handling of type definitions.                                             *)
 (*                                                                           *)
@@ -807,7 +819,10 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/definitions.html
     Sequent([],safe_mk_eq (Comb(abs,mk_comb(rep,a))) a),
     Sequent([],safe_mk_eq (Comb(P,r))
                           (safe_mk_eq (mk_comb(rep,mk_comb(abs,r))) r))
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/new_basic_type_definition.html>
 
+```ocaml
 end;;
 
 include Hol;;
@@ -854,7 +869,7 @@ for their equality.
 
 let aconv s t = alphaorder s t = 0;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/aconv.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/aconv.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -864,7 +879,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/aconv.html
 
 let equals_thm th th' = dest_thm th = dest_thm th';;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/equals_thm.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/equals_thm.html>
 
 I want to write something about proof-recording.  Even if just to mention it's
 outside the core system.

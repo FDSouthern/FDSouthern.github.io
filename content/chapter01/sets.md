@@ -2061,7 +2061,7 @@ let HAS_SIZE_CONV =
     let th' = funpow (length evs) BINDER_CONV NOT_IN_INSERT_CONV tm' in
     TRANS th th';;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/HAS_SIZE_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/HAS_SIZE_CONV.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -3791,6 +3791,7 @@ let new_inductive_set =
     insert_in_rule th_induct,
     insert_in_rule th_cases;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/new_inductive_set.html>
 
 - Previous: [int.ml](int.md)
 - [Index](index.md)

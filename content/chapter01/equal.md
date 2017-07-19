@@ -58,7 +58,7 @@ let BETA_CONV tm =
       INST [arg,v] (BETA (mk_comb(f,v)))
   with Failure _ -> failwith "BETA_CONV: Not a beta-redex";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BETA_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BETA_CONV.html>
 
 `` BETA_CONV `(\x. A) y` `` gives `|- (\x. A) y = A[y/x]`
 
@@ -72,7 +72,7 @@ let AP_TERM tm =
   fun th -> try MK_COMB(rth,th)
             with Failure _ -> failwith "AP_TERM";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AP_TERM.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AP_TERM.html>
 
 `` AP_TERM `f` `ASM1 |- a = b` `` gives `ASM1 |- (f a) = (f b)`.
 
@@ -81,7 +81,7 @@ let AP_THM th tm =
   try MK_COMB(th,REFL tm)
   with Failure _ -> failwith "AP_THM";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AP_THM.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AP_THM.html>
 
 `` AP_THM `ASM1 |- f = g` `a` `` gives `ASM1 |- (f a) = (g a)`.
 
@@ -99,7 +99,7 @@ let ALPHA tm1 tm2 =
   try TRANS (REFL tm1) (REFL tm2)
   with Failure _ -> failwith "ALPHA";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ALPHA_UPPERCASE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ALPHA_UPPERCASE.html>
 
 `` ALPHA `(\x.x)` `(\y.y)` `` gives `|- (\x.x) = (\y.y)`.
 
@@ -108,7 +108,7 @@ let ALPHA_CONV v tm =
   let res = alpha v tm in
   ALPHA tm res;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ALPHA_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ALPHA_CONV.html>
 
 `` ALPHA_CONV `y` `(\x.x)` `` gives `|- (\x.x) = (\y.y)`.
 
@@ -118,7 +118,7 @@ let GEN_ALPHA_CONV v tm =
   let b,abs = dest_comb tm in
   AP_TERM b (ALPHA_CONV v abs);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_ALPHA_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_ALPHA_CONV.html>
 
 `` GEN_ALPHA_CONV `y` `!x. P[x]` `` gives `|- (!x. P[x]) = (!y. P[y])`
 (it looks inside one level of application).
@@ -144,12 +144,14 @@ the LHS (or it fails).
 ```ocaml
 let (NO_CONV:conv) = fun tm -> failwith "NO_CONV";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NO_CONV.html>
+
 `NO_CONV` is a conversion which always fails.
 
 ```ocaml
 let (ALL_CONV:conv) = REFL;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ALL_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ALL_CONV.html>
 
 `ALL_CONV` is a conversion which always succeeds without changing the term.
 
@@ -176,7 +178,7 @@ let ((ORELSEC):conv -> conv -> conv) =
 ```ocaml
 let (FIRST_CONV:conv list -> conv) = end_itlist (fun c1 c2 -> c1 ORELSEC c2);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/FIRST_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/FIRST_CONV.html>
 
 `FIRST_CONV [c1;...;cn]` rewrites with the first non-failing conversion in the
 list.
@@ -185,7 +187,7 @@ list.
 let (EVERY_CONV:conv list -> conv) =
   fun l -> itlist (fun c1 c2 -> c1 THENC c2) l ALL_CONV;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EVERY_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EVERY_CONV.html>
 
 `EVERY_CONV [c1;...;cn]` rewrites with the first conversion, then the second,
 so on until the last.
@@ -206,7 +208,7 @@ let (CHANGED_CONV:conv->conv) =
     let l,r = dest_eq (concl th) in
     if aconv l r then failwith "CHANGED_CONV" else th;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CHANGED_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CHANGED_CONV.html>
 
 `CHANGED_CONV c` rewrites with `c`, but fails if the result is alpha-equivalent
 to the original term.
@@ -242,7 +244,7 @@ let (RAND_CONV:conv->conv) =
 ```ocaml
 let LAND_CONV = RATOR_CONV o RAND_CONV;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/LAND_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/LAND_CONV.html>
 
 `LAND_CONV c` uses the conversion to rewrite the first argument of a binary
 operator.
@@ -254,7 +256,7 @@ let (COMB2_CONV: conv->conv->conv) =
      Comb(l,r) -> MK_COMB(lconv l,rconv r)
   | _ -> failwith "COMB2_CONV: Not a combination";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/COMB2_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/COMB2_CONV.html>
 
 `COMB2_CONV c1 c2` uses `c1` to rewrite the operator and `c2` to rewrite the
 operand of a combination.
@@ -262,7 +264,7 @@ operand of a combination.
 ```ocaml
 let COMB_CONV = W COMB2_CONV;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/COMB_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/COMB_CONV.html>
 
 `COMB_CONV c` rewrites both the operator and operand of a combination with `c`.
 
@@ -281,7 +283,7 @@ let (ABS_CONV:conv->conv) =
     let l' = alpha v' l and r' = alpha v' r in
     EQ_MP (ALPHA gtm (mk_eq(l',r'))) gth;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ABS_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ABS_CONV.html>
 
 `ABS_CONV c` rewrites the body of an abstraction with `c`.
 
@@ -290,7 +292,7 @@ let BINDER_CONV conv tm =
   if is_abs tm then ABS_CONV conv tm
   else RAND_CONV(ABS_CONV conv) tm;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BINDER_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BINDER_CONV.html>
 
 `BINDER_CONV c` rewrites the body of an abstraction or of a binder/abstraction
 combination.
@@ -311,7 +313,7 @@ let BINOP_CONV conv tm =
   let op,l = dest_comb lop in
   MK_COMB(AP_TERM op (conv l),conv r);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BINOP_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BINOP_CONV.html>
 
 `BINOP_CONV c` rewrites both arguments of a binary function.
 
@@ -425,7 +427,7 @@ until no change
   (fun c -> TRY_CONV (TOP_DEPTH_QCONV c)),
   (fun c -> TRY_CONV (TOP_SWEEP_QCONV c));;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEPTH_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEPTH_CONV.html>
 
 `ONCE_DEPTH_CONV`, `DEPTH_CONV`, `REDEPTH_CONV`, `TOP_DEPTH_CONV`,
 `TOP_SWEEP_CONV`:  like the `QCONV` variants, except they never fail.
@@ -451,7 +453,7 @@ let rec DEPTH_BINOP_CONV op conv tm =
       MK_COMB(AP_TERM op' lth,rth)
   | _ -> conv tm;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEPTH_BINOP_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEPTH_BINOP_CONV.html>
 
 `DEPTH_BINOP_CONV op c`
 For example, ``DEPTH_BINOP_CONV `+` c`` rewrites `x`,`y`,`z`,`w` in
@@ -511,7 +513,7 @@ let SYM_CONV tm =
 let CONV_RULE (conv:conv) th =
   EQ_MP (conv(concl th)) th;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONV_RULE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONV_RULE.html>
 
 `CONV_RULE c th` uses `c` to rewrite the conclusion of the theorem (and return a
 new theorem).
@@ -544,7 +546,7 @@ rewrites (anywhere in its argument term) any lhs to its corresponding rhs
 
 let BETA_RULE = CONV_RULE(REDEPTH_CONV BETA_CONV);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BETA_RULE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BETA_RULE.html>
 
 `BETA_RULE thm` applies all possible beta reductions to `thm` and returns the
 new theorem.
@@ -552,7 +554,7 @@ new theorem.
 ```ocaml
 let GSYM = CONV_RULE(ONCE_DEPTH_CONV SYM_CONV);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GSYM.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GSYM.html>
 
 `GSYM thm` applies symmetry on all outermost equalities in the conclusion of
 `thm`.  Why the G?
@@ -578,7 +580,7 @@ let CACHE_CONV =
                   let th = conv tm in
                   (net := enter [] (tm,ALPHA_HACK th) (!net); th);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CACHE_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CACHE_CONV.html>
 
 `CACHE_CONV c` is equivalent to `c`, except that it caches all conversion
 applications.

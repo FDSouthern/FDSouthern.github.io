@@ -129,7 +129,7 @@ let (instantiate :instantiation->term->term) =
     if bcs = [] then ttm else
     try ho_betas bcs itm ttm with Failure _ -> ttm;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/instantiate.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/instantiate.html>
 
 ```ocaml
 let (INSTANTIATE : instantiation->thm->thm) =
@@ -167,7 +167,7 @@ let (INSTANTIATE : instantiation->thm->thm) =
       with Failure _ -> tth
     else failwith "INSTANTIATE: term || type var free in assumptions";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INSTANTIATE_UPPERCASE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INSTANTIATE_UPPERCASE.html>
 
 `INSTANTIATE` takes an "instantiation" and a theorem and instantiates the
 theorem.  (I haven't figured out yet what an "instantiation" is.)
@@ -193,7 +193,7 @@ let (INSTANTIATE_ALL : instantiation->thm->thm) =
     let th2 = INSTANTIATE i th1 in
     funpow (length rhyps) UNDISCH th2;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INSTANTIATE_ALL.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INSTANTIATE_ALL.html>
 
 `INSTANTIATE_ALL` has the same type as `INSTANTIATE`.
 
@@ -401,7 +401,7 @@ let deep_alpha =
     with Failure _ -> tm in
   deep_alpha;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/deep_alpha.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/deep_alpha.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -460,7 +460,7 @@ let PART_MATCH,GEN_PART_MATCH =
 `PART_MATCH partfn th tm` matches `(partfn (concl (SPEC_ALL th)))` against `tm`
 and instantiates the theorem appropriately.
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_PART_MATCH.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_PART_MATCH.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -482,7 +482,7 @@ let MATCH_MP ith =
   fun th -> try MP (match_fun (concl th)) th
             with Failure _ -> failwith "MATCH_MP: No match";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MATCH_MP.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MATCH_MP.html>
 
 `MATCH_MP ith th` is like MP, except it uses matching instead of requiring an
 exact match.
@@ -539,7 +539,7 @@ let HIGHER_REWRITE_CONV =
       let _,tmin0,tyin0 = term_match [] pred abs in
       CONV_RULE beta_fn (INST tmin (INST tmin0 (INST_TYPE tyin0 th)));;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/HIGHER_REWRITE_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/HIGHER_REWRITE_CONV.html>
 
 `HIGHER_REWRITE_CONV ths top` is a conversion which finds the first largest (if
 `top` = true) or smallest (if `top` == false) subterm which matches (using
@@ -565,6 +565,7 @@ let new_definition tm =
   let rvs = filter (not o C mem avs) largs in
   itlist GEN rvs (itlist GEN avs th2);;
 ```
+This definition of `new_definition` is shadowed in [pair.ml](pair.md).
 
 - Previous: [bool.ml](bool.md)
 - [Index](index.md)

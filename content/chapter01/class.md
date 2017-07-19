@@ -25,7 +25,7 @@ let ETA_CONV =
         else fail()
     with Failure _ -> failwith "ETA_CONV";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ETA_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ETA_CONV.html>
 
 `ETA_CONV` rewrites `(\x. f x)` to `f`.
 
@@ -155,6 +155,8 @@ let new_type_definition tyname (absname,repname) th =
                             (!the_type_definitions);
     tth;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/new_type_definition.html>
+
 `` new_type_definition "newtype" ("newtypeABS","newtypeREP") `|- ?x. P[x]` ``
 creates a new type `"newtype"`, which is isomorphic to a subset of the type of
 the bound variable `x` (`"oldtype"`).  It also creates new constants
@@ -194,7 +196,7 @@ let BOOL_CASES_AX = prove
 
 let BOOL_CASES_TAC p = STRUCT_CASES_TAC (SPEC p BOOL_CASES_AX);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BOOL_CASES_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BOOL_CASES_TAC.html>
 
 `` BOOL_CASES_TAC `a` `` creates two subgoals.  In the first `a` is rewritten to
 `T` within the goal, and in the second `a` is rewritten to `F`.
@@ -202,7 +204,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BOOL_CASES_TAC.html
 ```ocaml
 let ASM_CASES_TAC t = DISJ_CASES_TAC(SPEC t EXCLUDED_MIDDLE);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_CASES_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ASM_CASES_TAC.html>
 
 `` ASM_CASES_TAC `a` `` creates two subgoals.  In the first `a` is added as an
 assumption, and in the second `~a` is added as an assumption.
@@ -255,7 +257,7 @@ let CCONTR =
         MP (INST [tm,P] pth) (DISCH tm' th)
     with Failure _ -> failwith "CCONTR";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CCONTR.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CCONTR.html>
 
 `` CCONTR `t` `A |- F` `` gives `A - {-t} |- t`.
 
@@ -268,7 +270,7 @@ let CONTRAPOS_CONV =
         INST [P,a; Q,b] pth
     with Failure _ -> failwith "CONTRAPOS_CONV";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONTRAPOS_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONTRAPOS_CONV.html>
 
 `CONTRAPOS_CONV` rewrites `a ==> b` to `~b ==> ~a`.
 
@@ -480,7 +482,7 @@ let COND_ELIM_THM = prove
 
 let COND_ELIM_CONV = HIGHER_REWRITE_CONV[COND_ELIM_THM] true;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/COND_ELIM_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/COND_ELIM_CONV.html>
 
 `COND_ELIM_CONV` rewrites `P[if c then x else y]` to
 `(c ==> P[x]) /\ (~c ==> P[y])`.
@@ -495,7 +497,7 @@ let (COND_CASES_TAC :tactic) =
                           with Failure _ ->
                               ASSUME_TAC th THEN SUBST1_TAC(EQF_INTRO th))];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/COND_CASES_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/COND_CASES_TAC.html>
 
 `COND_CASES_TAC` does a case split on a `COND` expression in the goal.
 If the goal is `P[if c then x else y]`, then in one subgoal,
@@ -584,7 +586,7 @@ let bool_RECURSION = prove
 let inductive_type_store = ref
  ["bool",(2,bool_INDUCT,bool_RECURSION)];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/inductive_type_store.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/inductive_type_store.html>
 
 - Previous: [ind_defs.ml](ind_defs.md)
 - [Index](index.md)

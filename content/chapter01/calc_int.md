@@ -50,7 +50,7 @@ let is_ratconst tm =
          n >/ num_1 && gcd_num m n =/ num_1)
   | _ -> is_realintconst tm;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_ratconst.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_ratconst.html>
 
 ```ocaml
 let rat_of_term tm =

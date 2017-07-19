@@ -13,7 +13,7 @@ Simple online help system, based on old HOL88 one.
 
 let help_path = ref ["$/Help"];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/help_path.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/help_path.html>
 
 ```ocaml
 let help s =
@@ -88,7 +88,7 @@ let help s =
    "--------------------------------------------------------------------\n";
   Format.print_flush();;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/help.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/help.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -105,12 +105,15 @@ let omit t = mk_comb(mk_var("<omit this pattern>",W mk_fun_ty (type_of t)),t);;
 
 let exactly t = mk_comb(mk_var("<match aconv>",W mk_fun_ty (type_of t)),t);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/exactly.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/exactly.html>
 
 ```ocaml
 let name s = mk_comb(mk_var("<match theorem name>",W mk_fun_ty aty),
                      mk_var(s,aty));;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/name.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* The main search function.                                                 *)
 (* ------------------------------------------------------------------------- *)

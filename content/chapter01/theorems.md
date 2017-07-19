@@ -39,7 +39,7 @@ let EQ_TRANS = prove
 
 let AC acsuite = EQT_ELIM o PURE_REWRITE_CONV[acsuite; REFL_CLAUSE];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AC.html>
 
 `` AC thm `a = b` `` returns `|- a = b` if ordered rewriting using `thm`
 can rewrite `a = b` to `T` or `c = c`, otherwise it fails.
@@ -552,18 +552,18 @@ let DESTRUCT_TAC,FIX_TAC,INTRO_TAC,HYP_TAC =
     if rest=[] then tac else failwith "HYP_TAC: invalid pattern" in
   DESTRUCT_TAC,FIX_TAC,INTRO_TAC,HYP_TAC;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DESTRUCT_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DESTRUCT_TAC.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/FIX_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/FIX_TAC.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INTRO_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/INTRO_TAC.html>
 
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/HYP_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/HYP_TAC.html>
 
 ```ocaml
 let CLAIM_TAC s tm = SUBGOAL_THEN tm (DESTRUCT_TAC s);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CLAIM_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CLAIM_TAC.html>
 
 - Previous: [simp.ml](simp.md)
 - [Index](index.md)

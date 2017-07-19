@@ -148,12 +148,12 @@ let pair_RECURSION = prove
 
 let is_pair = is_binary ",";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_pair.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_pair.html>
 
 ```ocaml
 let dest_pair = dest_binary ",";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_pair.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/dest_pair.html>
 
 ```ocaml
 let mk_pair =
@@ -204,7 +204,10 @@ let new_definition =
         let th3 = TRANS th2 (SYM(SUBS_CONV threps r)) in
         let th4 = GEN_ALL (GENL avs th3) in
         the_definitions := th4::(!the_definitions); th4;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/new_definition.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* A few more useful definitions.                                            *)
 (* ------------------------------------------------------------------------- *)
@@ -253,7 +256,7 @@ let GABS_CONV conv tm =
   let xs,bod = strip_forall qtm in
   AP_TERM gabs (ABS f (itlist MK_FORALL xs (RAND_CONV conv bod)));;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GABS_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GABS_CONV.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -331,7 +334,7 @@ let GEN_BETA_CONV =
     INSTANTIATE instn (DEGEQ_RULE (SPEC_ALL th6)) in
   GEN_BETA_CONV;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_BETA_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_BETA_CONV.html>
 
 `GEN_BETA_CONV` reduces generalised beta-redexes such as
 `(\(x,y). x + y) (1,2)`.
@@ -468,7 +471,7 @@ let let_CONV =
     if length vs <> n then failwith "let_CONV" else
     (EXPAND_BETAS_CONV THENC lete_CONV) tm;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/let_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/let_CONV.html>
 
 `let_CONV` reduces a let expression.  (Again, it handles extended definitions,
 if they only use pairs.)
@@ -515,7 +518,7 @@ let (LET_TAC:tactic) =
         let tm' = follow_path path w' in
         CONV_TAC(PATH_CONV path (K(let_CONV tm'))))) gl;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/LET_TAC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/LET_TAC.html>
 
 `LET_TAC` replaces `let x = t in p[x]` in goal with `p[x]` given a new
 hypothesis `t = x`.

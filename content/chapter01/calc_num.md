@@ -13,7 +13,7 @@ Calculation with naturals.
 
 let DENUMERAL = GEN_REWRITE_RULE DEPTH_CONV [NUMERAL];;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DENUMERAL.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DENUMERAL.html>
 
 `DENUMERAL` takes a theorem and rewrites its conclusion to elide `NUMERAL`.
 
@@ -237,11 +237,16 @@ above list) for convenient use in tactics.
 let NUM_EVEN_CONV =
   let tth,rths = CONJ_PAIR ARITH_EVEN in
   GEN_REWRITE_CONV I [tth] THENC GEN_REWRITE_CONV I [rths];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_EVEN_CONV.html>
 
+```ocaml
 let NUM_ODD_CONV =
   let tth,rths = CONJ_PAIR ARITH_ODD in
   GEN_REWRITE_CONV I [tth] THENC GEN_REWRITE_CONV I [rths];;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_ODD_CONV.html>
+
 `NUM_EVEN_CONV` and `NUM_ODD_CONV` rewrite terms of the form `EVEN k` and
 `ODD k` respectively, where `k` is a numeral.
 
@@ -1349,6 +1354,20 @@ let NUM_SUC_CONV,NUM_ADD_CONV,NUM_MULT_CONV,NUM_EXP_CONV,
 ```
 Wow.
 
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_SUC_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_ADD_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_MULT_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_EXP_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_LT_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_LE_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_EQ_CONV.html>
+
 `NUM_SUC_CONV` rewrites a term of the form `SUC k`, where `k` is a numeral.
 `NUM_ADD_CONV` rewrites a term of the form `j + k`, where `j` and `k` are
 numerals.  `NUM_MULT_CONV` rewrites a term of the form `j * k`, where `j` and
@@ -1361,12 +1380,16 @@ form `j = k`, where `j` and `k` are numerals.
 ```ocaml
 let NUM_GT_CONV = GEN_REWRITE_CONV I [GT] THENC NUM_LT_CONV;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_GT_CONV.html>
+
 `NUM_GT_CONV` rewrites a term of the form `j < k`, where `j` and `k` are
 numerals.
 
 ```ocaml
 let NUM_GE_CONV = GEN_REWRITE_CONV I [GE] THENC NUM_LE_CONV;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_GE_CONV.html>
+
 `NUM_GE_CONV` rewrites a term of the form `j <= k`, where `j` and `k` are
 numerals.
 
@@ -1390,6 +1413,8 @@ let NUM_PRE_CONV =
                 MP (INST [tm',m; r,n] pth) th1
             with Failure _ -> failwith "NUM_PRE_CONV";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_PRE_CONV.html>
+
 `NUM_PRE_CONV` rewrites a term of the form `PRE k`, where `k` is a numeral.
 
 ```ocaml
@@ -1420,6 +1445,8 @@ let NUM_SUB_CONV =
                   MP pth th0
             with Failure _ -> failwith "NUM_SUB_CONV";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_SUB_CONV.html>
+
 `NUM_SUB_CONV` rewrites a term of the form `j - k`, where `j` and `k` are
 numerals.
 
@@ -1447,6 +1474,10 @@ let NUM_DIV_CONV,NUM_MOD_CONV =
                  CONJUNCT2(NUM_DIVMOD_CONV (dest_numeral xt) (dest_numeral yt))
              with Failure _ -> failwith "NUM_MOD_CONV");;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_DIV_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_MOD_CONV.html>
+
 `NUM_DIV_CONV` and `NUM_MOD_CONV` rewrite terms of the forms `j DIV k` and
 `j MOD k` respectively, where `j` and `k` are numerals.
 `NUM_DIVMOD_CONV (j:Num.num) (k:Num.num)` produces a theorem
@@ -1488,6 +1519,8 @@ let NUM_FACT_CONV =
         else fail()
     with Failure _ -> failwith "NUM_FACT_CONV";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_FACT_CONV.html>
+
 `NUM_FACT_CONV` rewrites terms of the form `FACT k` where `k` is a numeral.
 
 ```ocaml
@@ -1495,12 +1528,18 @@ let NUM_MAX_CONV =
   REWR_CONV MAX THENC
   RATOR_CONV(RATOR_CONV(RAND_CONV NUM_LE_CONV)) THENC
   GEN_REWRITE_CONV I [COND_CLAUSES];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_MAX_CONV.html>
 
+```ocaml
 let NUM_MIN_CONV =
   REWR_CONV MIN THENC
   RATOR_CONV(RATOR_CONV(RAND_CONV NUM_LE_CONV)) THENC
   GEN_REWRITE_CONV I [COND_CLAUSES];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_MIN_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Final hack-together.                                                      *)
 (* ------------------------------------------------------------------------- *)
@@ -1515,6 +1554,8 @@ let NUM_REL_CONV =
     (basic_net()) in
   REWRITES_CONV gconv_net;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_REL_CONV.html>
+
 `NUM_REL_CONV` rewrites a term of the form `j OP k`, where `j` and `k` are
 numerals and op is `(<)`, `(<=)`, `(>)`, `(>=)`, or `(=)`.
 
@@ -1542,6 +1583,8 @@ let NUM_RED_CONV =
     (basic_net()) in
   REWRITES_CONV gconv_net;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_RED_CONV.html>
+
 `NUM_RED_CONV reduces` `SUC j`, `PRE j`, `FACT j`, `j < k`, `j <= k`, `j > k`,
 `j >= k`, `j = k`, `EVEN j`, `ODD j`, `j + k`, `j - k`, `j * k`, `j EXP k`,
 `j DIV k`, or `j MOD k` (where `j` and `k` are numerals).
@@ -1549,12 +1592,16 @@ let NUM_RED_CONV =
 ```ocaml
 let NUM_REDUCE_CONV = DEPTH_CONV NUM_RED_CONV;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_REDUCE_CONV.html>
+
 `NUM_REDUCE_CONV` reduces the above numeral expressions depth-first throughout
 the expression.
 
 ```ocaml
 let NUM_REDUCE_TAC = CONV_TAC NUM_REDUCE_CONV;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NUM_REDUCE_TAC.html>
+
 `NUM_REDUCE_TAC` reduces numeral expressions in the goal.
 
 ```ocaml
@@ -1570,6 +1617,8 @@ let num_CONV =
     let tm' = mk_numeral n in
     SYM(NUM_SUC_CONV (mk_comb(SUC_tm,tm')));;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/num_CONV.html>
+
 `num_CONV` rewrites `j` to `SUC (J-1)`, where `J-1` is the numeral for `j-1`.
 
 ```ocaml
@@ -1592,7 +1641,7 @@ let EXPAND_CASES_CONV =
     (base_CONV ORELSEC (step_CONV THENC LAND_CONV conv)) tm in
   conv THENC (REWRITE_CONV[GSYM CONJ_ASSOC]);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXPAND_CASES_CONV.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXPAND_CASES_CONV.html>
 
 `EXPAND_CASES_CONV` rewrites `!n. n < 5 ==> P[n]` to
 `P[0] /\ P[1] /\ P[2] /\ P[3] /\ P[4]`.

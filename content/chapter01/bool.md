@@ -101,9 +101,9 @@ let EQT_ELIM th =
   try EQ_MP (SYM th) TRUTH
   with Failure _ -> failwith "EQT_ELIM";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQT_ELIM.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQT_ELIM.html>
 
-`` EQT_ELIM `ASM |- a = T` ``  gives `` `ASM |- a` ``.
+`` EQT_ELIM `ASM |- a = T` ``  gives `ASM |- a`.
 
 ```ocaml
 let EQT_INTRO =
@@ -114,9 +114,9 @@ let EQT_INTRO =
     DEDUCT_ANTISYM_RULE th2 th1 in
   fun th -> EQ_MP (INST[concl th,t] pth) th;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQT_INTRO.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQT_INTRO.html>
 
-`` EQT_INTRO `ASM |- a` `` gives `` `ASM |- a = T` ``.
+`` EQT_INTRO `ASM |- a` `` gives `ASM |- a = T`.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -157,9 +157,9 @@ let CONJ =
     let th = INST [concl th1,p; concl th2,q] pth in
     EQ_MP (PROVE_HYP th1 th) th2;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJ.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJ.html>
 
-`` CONJ `ASM1 |- a` `ASM2 |- b` `` gives `` `ASM1+ASM2 |- a /\ b` ``.
+`` CONJ `ASM1 |- a` `ASM2 |- b` `` gives `ASM1+ASM2 |- a /\ b`.
 
 ```ocaml
 let CONJUNCT1 =
@@ -174,9 +174,9 @@ let CONJUNCT1 =
         PROVE_HYP th (INST [l,P; r,Q] pth)
     with Failure _ -> failwith "CONJUNCT1";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJUNCT1.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJUNCT1.html>
 
-`` CONJUNCT1 `ASM |- a /\ b` `` gives `` `ASM |- a` ``.
+`` CONJUNCT1 `ASM |- a /\ b` `` gives `ASM |- a`.
 
 ```ocaml
 let CONJUNCT2 =
@@ -191,23 +191,23 @@ let CONJUNCT2 =
         PROVE_HYP th (INST [l,P; r,Q] pth)
     with Failure _ -> failwith "CONJUNCT2";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJUNCT2.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJUNCT2.html>
 
-`` CONJUNCT2 `ASM |- a /\ b` `` gives `` `ASM |- b` ``.
+`` CONJUNCT2 `ASM |- a /\ b` `` gives `ASM |- b`.
 
 ```ocaml
 let CONJ_PAIR th =
   try CONJUNCT1 th,CONJUNCT2 th
   with Failure _ -> failwith "CONJ_PAIR: Not a conjunction";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJ_PAIR.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJ_PAIR.html>
 
 `CONJ_PAIR th` is basically `(CONJUNCT1 th, CONJUNCT2 th)`.
 
 ```ocaml
 let CONJUNCTS = striplist CONJ_PAIR;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJUNCTS_UPPERCASE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONJUNCTS_UPPERCASE.html>
 
 `CONJUNCTS th` gives a list of theorems, one for each conjunct of the conclusion
 of `th` (no matter how they are associated).
@@ -245,7 +245,7 @@ let MP =
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/MP.html>
 
-`` MP `ASM1 |- a ==> b` `ASM2 |- a` `` gives `` `ASM1+ASM2 |- b` ``.
+`` MP `ASM1 |- a ==> b` `ASM2 |- a` `` gives `ASM1+ASM2 |- b`.
 
 ```ocaml
 let DISCH =
@@ -259,16 +259,16 @@ let DISCH =
     let th4 = INST [a,p; concl th,q] pth in
     EQ_MP th4 th3;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISCH.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISCH.html>
 
-`` DISCH `a` `ASM,a |- b` `` gives `` `ASM |- a ==> b` ``.
+`` DISCH `a` `ASM,a |- b` `` gives `ASM |- a ==> b`.
 
 ```ocaml
 let rec DISCH_ALL th =
   try DISCH_ALL (DISCH (hd (hyp th)) th)
   with Failure _ -> th;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISCH_ALL.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISCH_ALL.html>
 
 `DISCH_ALL` repeats `DISCH` until there are no more hypotheses.
 
@@ -277,7 +277,7 @@ let UNDISCH th =
   try MP th (ASSUME(rand(rator(concl th))))
   with Failure _ -> failwith "UNDISCH";;
 ```
-`` UNDISCH `ASM |- a ==> b` `` gives `` `ASM,a |- b` ``.
+`` UNDISCH `ASM |- a ==> b` `` gives `ASM,a |- b`.
 
 ```ocaml
 let rec UNDISCH_ALL th =
@@ -300,7 +300,7 @@ let IMP_ANTISYM_RULE =
     let p1,q1 = dest_imp(concl th1) and p2,q2 = dest_imp(concl th2) in
     EQ_MP (INST [p1,p; q1,q] pth) (CONJ th1 th2);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_ANTISYM_RULE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_ANTISYM_RULE.html>
 
 `` IMP_ANTISYM_RULE `ASM1 |- a ==> b` `ASM2 |- b ==> a` `` gives
 `ASM1+ASM2 |- a = b`.
@@ -308,9 +308,9 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_ANTISYM_RULE.html
 ```ocaml
 let ADD_ASSUM tm th = MP (DISCH tm th) (ASSUME tm);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ADD_ASSUM.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ADD_ASSUM.html>
 
-`` ADD_ASSUM `a` `ASM |- b` `` gives `` `ASM,a |- b` ``.
+`` ADD_ASSUM `a` `ASM |- b` `` gives `ASM,a |- b`.
 
 ```ocaml
 let EQ_IMP_RULE =
@@ -321,7 +321,7 @@ let EQ_IMP_RULE =
   fun th -> let l,r = dest_iff(concl th) in
             MP (INST [l,p; r,q] pth1) th,MP (INST [l,p; r,q] pth2) th;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQ_IMP_RULE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQ_IMP_RULE.html>
 
 `` EQ_IMP_RULE `ASM |- (a:bool) = b` `` gives
 `` (`ASM |- a ==> b`, `ASM |- b ==> a`) ``.
@@ -339,10 +339,10 @@ let IMP_TRANS =
         if y <> y' then failwith "IMP_TRANS" else
         MP (MP (INST [x,p; y,q; z,r] pth) th1) th2;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_TRANS.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_TRANS.html>
 
 `` IMP_TRANS `ASM1 |- a ==> b` `ASM2 |- b ==> c` `` gives
-`` `ASM1+ASM2 |- a ==> c` ``.
+`ASM1+ASM2 |- a ==> c`.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -376,7 +376,7 @@ let SPEC =
          (MP (PINST [snd(dest_var(bndvar abs)),aty] [abs,P; tm,x] pth) th)
     with Failure _ -> failwith "SPEC";;
 ```
-`` SPEC `a` `ASM |- !x.P[x]` `` gives `` `ASM |- P[a]` ``.
+`` SPEC `a` `ASM |- !x.P[x]` `` gives `ASM |- P[a]`.
 
 ```ocaml
 let SPECL tms th =
@@ -384,7 +384,7 @@ let SPECL tms th =
   with Failure _ -> failwith "SPECL";;
 ```
 `` SPECL [`a`;`b`;`c`] `ASM |- !x y z.P[x,y,z]` `` gives
-`` `ASM |- P[a,b,c]` ``.
+`ASM |- P[a,b,c]`.
 
 ```ocaml
 let SPEC_VAR th =
@@ -409,7 +409,7 @@ let ISPEC t th =
   try SPEC t (INST_TYPE tyins th)
   with Failure _ -> failwith "ISPEC: type variable(s) free in assumptions";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ISPEC.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ISPEC.html>
 
 `ISPEC` is like `SPEC`, except that the specialised term may be an instance of
 the type of the quantified variable (in which case the theorem is
@@ -424,7 +424,7 @@ let ISPECL tms th =
       SPECL tms (INST_TYPE tyins th)
   with Failure _ -> failwith "ISPECL";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ISPECL.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ISPECL.html>
 
 `ISPECL` is like `SPECL` with type instantiations.
 
@@ -441,18 +441,18 @@ let GEN =
         let rth = INST[phi,ptm] qth in
         EQ_MP rth th';;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN.html>
 
-`` GEN `x` `ASM |- P[x]` `` gives `` `ASM |- !x. P[x]` ``
-(if x is not free in `ASM`).
+`` GEN `x` `ASM |- P[x]` `` gives `ASM |- !x. P[x]` (if `x` is not free in
+`ASM`).
 
 ```ocaml
 let GENL = itlist GEN;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GENL.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GENL.html>
 
 `` GENL [`x`;`y`;`z`] `ASM |- P[x,y,z]` `` gives
-`` `ASM |- !x y z. P[x,y,z]` ``.
+`ASM |- !x y z. P[x,y,z]`.
 
 ```ocaml
 let GEN_ALL th =
@@ -460,7 +460,7 @@ let GEN_ALL th =
   let vars = subtract (frees c) (freesl asl) in
   GENL vars th;;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_ALL.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/GEN_ALL.html>
 
 `GEN_ALL` generalises over all variables free in the conclusion but not in the
 assumptions.
@@ -497,7 +497,7 @@ let EXISTS =
         PROVE_HYP (EQ_MP (SYM bth) th) cth
     with Failure _ -> failwith "EXISTS";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXISTS_UPPERCASE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXISTS_UPPERCASE.html>
 
 `` EXISTS (`?x. P[x]`,`a`) `ASM |- P[a]` `` gives `ASM |- ?x. P[x]`.
 
@@ -505,7 +505,7 @@ http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXISTS_UPPERCASE.html
 let SIMPLE_EXISTS v th =
   EXISTS (mk_exists(v,concl th),v) th;;
 ```
-`` SIMPLE_EXISTS `x` `ASM |- P[x]` `` gives `` `ASM |- ?x. P[x]` ``.
+`` SIMPLE_EXISTS `x` `ASM |- P[x]` `` gives `ASM |- ?x. P[x]`.
 
 ```ocaml
 let CHOOSE =
@@ -525,16 +525,16 @@ let CHOOSE =
         MP (MP th5 th4) th1
     with Failure _ -> failwith "CHOOSE";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CHOOSE_UPPERCASE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CHOOSE_UPPERCASE.html>
 
 `` CHOOSE (`x`,`ASM1 |- ?y.P[y]`) `ASM2,P[x] |- a` `` gives
-`` `ASM1+ASM2 |- a` ``.
+`ASM1+ASM2 |- a`.
 
 ```ocaml
 let SIMPLE_CHOOSE v th =
   CHOOSE(v,ASSUME (mk_exists(v,hd(hyp th)))) th;;
 ```
-`` SIMPLE_CHOOSE `x` `ASM,P[x] |- a` `` gives `` `ASM,?x.P[x] |- a` ``
+`` SIMPLE_CHOOSE `x` `ASM,P[x] |- a` `` gives `ASM,?x.P[x] |- a`
 (`P[x]` must be the first hypothesis).
 
 ```ocaml
@@ -567,7 +567,7 @@ let DISJ1 =
     try PROVE_HYP th (INST [concl th,P; tm,Q] pth)
     with Failure _ -> failwith "DISJ1";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ1.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ1.html>
 
 `` DISJ1 `ASM |- a` `b` `` gives `ASM |- a \/ b`.
 
@@ -584,7 +584,7 @@ let DISJ2 =
     try PROVE_HYP th (INST [tm,P; concl th,Q] pth)
     with Failure _ -> failwith "DISJ2";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ2.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ2.html>
 
 `` DISJ2 `a` `ASM |- b` `` gives `ASM |- a \/ b`.
 
@@ -604,17 +604,17 @@ let DISJ_CASES =
         PROVE_HYP (DISCH r th2) (PROVE_HYP (DISCH l th1) (PROVE_HYP th0 th))
     with Failure _ -> failwith "DISJ_CASES";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ_CASES.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DISJ_CASES.html>
 
 `` DISJ_CASES `ASM1 |- a \/ b` `ASM2,a |- c` `ASM3,b |- c` `` gives
-`` `ASM1,ASM2,ASM3 |- c` ``.
+`ASM1,ASM2,ASM3 |- c`.
 
 ```ocaml
 let SIMPLE_DISJ_CASES th1 th2 =
   DISJ_CASES (ASSUME(mk_disj(hd(hyp th1),hd(hyp th2)))) th1 th2;;
 ```
 `` SIMPLE_DISJ_CASES `ASM1,a |- c` `ASM2,b |- c` `` gives
-`` `ASM1,ASM2,a \/ b |- c` `` (`a` and `b` must be the first hypotheses).
+`ASM1,ASM2,a \/ b |- c` (`a` and `b` must be the first hypotheses).
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -642,7 +642,9 @@ let NOT_ELIM =
     try EQ_MP (INST [rand(concl th),P] pth) th
     with Failure _ -> failwith "NOT_ELIM";;
 ```
-`` NOT_ELIM `ASM |- ~a` `` gives `` `ASM |- a ==> F` ``.
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NOT_ELIM.html>
+
+`` NOT_ELIM `ASM |- ~a` `` gives `ASM |- a ==> F`.
 
 ```ocaml
 let NOT_INTRO =
@@ -652,7 +654,9 @@ let NOT_INTRO =
     try EQ_MP (INST [rand(rator(concl th)),P] pth) th
     with Failure _ -> failwith "NOT_INTRO";;
 ```
-`` NOT_INTRO `ASM |- a ==> F` `` gives `` `ASM |- ~a` ``.
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/NOT_INTRO.html>
+
+`` NOT_INTRO `ASM |- a ==> F` `` gives `ASM |- ~a`.
 
 ```ocaml
 let EQF_INTRO =
@@ -665,9 +669,9 @@ let EQF_INTRO =
     try MP (INST [rand(concl th),P] pth) th
     with Failure _ -> failwith "EQF_INTRO";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQF_INTRO.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQF_INTRO.html>
 
-`` EQF_INTRO `ASM |- ~a` `` gives `` `ASM |- a = F` ``.
+`` EQF_INTRO `ASM |- ~a` `` gives `ASM |- a = F`.
 
 ```ocaml
 let EQF_ELIM =
@@ -680,14 +684,14 @@ let EQF_ELIM =
     try MP (INST [rand(rator(concl th)),P] pth) th
     with Failure _ -> failwith "EQF_ELIM";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQF_ELIM.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQF_ELIM.html>
 
-`` EQF_ELIM `ASM |- a = F` `` gives `` `ASM |- ~a` ``.
+`` EQF_ELIM `ASM |- a = F` `` gives `ASM |- ~a`.
 
 
 Removed (but still in (Examples/hol88.ml):
-`` NEG_DISCH `a` `ASM,a |- F` `` gives ` ``ASM |- ~a` `` (if the conclusion of
-the initial theorem is not `F`, then `NEG_DISCH` acts like `DISCH`).
+`` NEG_DISCH `a` `ASM,a |- F` `` gives `ASM |- ~a` (if the conclusion of the
+initial theorem is not `F`, then `NEG_DISCH` acts like `DISCH`).
 
 ```ocaml
 let CONTR =
@@ -697,9 +701,9 @@ let CONTR =
     if concl th <> f_tm then failwith "CONTR"
     else PROVE_HYP th (INST [tm,P] pth);;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONTR.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CONTR.html>
 
-`` CONTR `a` `ASM |- F` `` gives `` `ASM |- a` ``.
+`` CONTR `a` `ASM |- F` `` gives `ASM |- a`.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -726,9 +730,9 @@ let EXISTENCE =
         MP (PINST [ty,aty] [abs,P] pth) th
     with Failure _ -> failwith "EXISTENCE";;
 ```
-http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXISTENCE.html
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EXISTENCE.html>
 
-`` EXISTENCE `ASM |- ?!x. P[x]` `` gives `` `ASM |- ?x. P[x]` ``.
+`` EXISTENCE `ASM |- ?!x. P[x]` `` gives `ASM |- ?x. P[x]`.
 
 - Previous: [equal.ml](equal.md)
 - [Index](index.md)
