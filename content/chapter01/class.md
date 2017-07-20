@@ -97,7 +97,9 @@ let SELECT_RULE =
         CONV_RULE BETA_CONV (MP (PINST [ty,aty] [abs,P] pth) th)
     with Failure _ -> failwith "SELECT_RULE";;
 ```
-`` SELECT_RULE `|- ?x. P[x]` `` gives `` `|- P[ @x. P[x] ]` ``.
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SELECT_RULE.html>
+
+`` SELECT_RULE `|- ?x. P[x]` `` gives `|- P[ @x. P[x] ]`.
 
 ```ocaml
 let SELECT_CONV =
@@ -115,6 +117,8 @@ let SELECT_CONV =
          CONV_RULE (LAND_CONV BETA_CONV) (PINST [ty,aty] [abs,P] pth)
      with Failure _ -> failwith "SELECT_CONV";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SELECT_CONV.html>
+
 `SELECT_CONV` rewrites `P[ @x. P[x] ]` to `?x. P[x]`.
 
 ```ocaml

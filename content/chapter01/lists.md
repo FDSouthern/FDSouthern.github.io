@@ -784,6 +784,8 @@ let dest_char,mk_char,dest_string,mk_string,CHAR_EQ_CONV,STRING_EQ_CONV =
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CHAR_EQ_CONV.html>
 
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/STRING_EQ_CONV.html>
+
 - Previous: [ind_types.ml](ind_types.md)
 - [Index](index.md)
 - Next: [realax.ml](realax.md)

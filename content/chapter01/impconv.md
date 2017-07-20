@@ -9,10 +9,7 @@ Implicational conversions, implicational rewriting and target rewriting.
 ```ocaml
 let IMP_REWRITE_TAC,TARGET_REWRITE_TAC,HINT_EXISTS_TAC,
     SEQ_IMP_REWRITE_TAC,CASE_REWRITE_TAC =
-```
-<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/IMP_REWRITE_TAC.html>
 
-```ocaml
 let I = fun x -> x in
 ```
 Isn't this the usual definition of `I`?
@@ -1407,7 +1404,10 @@ let SEQ_IMP_REWRITE_TAC ths =
         REPEAT_UNCHANGED_CTXIMPCONV (map fcnv ths)
   in
   CTXIMPCONV_TAC cnv
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SEQ_IMP_REWRITE_TAC.html>
 
+```ocaml
 (* Tactic for implicational rewrite with assumptions. *)
 let ASM_IMP_REWRITE_TAC = ASM IMP_REWRITE_TAC
 

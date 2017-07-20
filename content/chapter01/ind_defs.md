@@ -17,7 +17,10 @@ let strip_ncomb =
     let l,r = dest_comb tm in
     strip(n - 1,l,r::acc) in
   fun n tm -> strip(n,tm,[]);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/strip_ncomb.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Expand lambda-term function definition with its arguments.                *)
 (* ------------------------------------------------------------------------- *)

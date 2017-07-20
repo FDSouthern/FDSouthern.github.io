@@ -534,7 +534,10 @@ let SEMIRING_NORMALIZERS_CONV =
            else REFL tm in
     POLYNOMIAL_NEG_CONV,POLYNOMIAL_ADD_CONV,POLYNOMIAL_SUB_CONV,
     POLYNOMIAL_MUL_CONV,POLYNOMIAL_POW_CONV,POLYNOMIAL_CONV;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SEMIRING_NORMALIZERS_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Instantiate it to the natural numbers.                                    *)
 (* ------------------------------------------------------------------------- *)

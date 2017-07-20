@@ -380,6 +380,8 @@ let SPEC =
          (MP (PINST [snd(dest_var(bndvar abs)),aty] [abs,P; tm,x] pth) th)
     with Failure _ -> failwith "SPEC";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SPEC.html>
+
 `` SPEC `a` `ASM |- !x.P[x]` `` gives `ASM |- P[a]`.
 
 ```ocaml
@@ -387,6 +389,8 @@ let SPECL tms th =
   try rev_itlist SPEC tms th
   with Failure _ -> failwith "SPECL";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SPECL.html>
+
 `` SPECL [`a`;`b`;`c`] `ASM |- !x y z.P[x,y,z]` `` gives
 `ASM |- P[a,b,c]`.
 
@@ -395,12 +399,16 @@ let SPEC_VAR th =
   let bv = variant (thm_frees th) (bndvar(rand(concl th))) in
   bv,SPEC bv th;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SPEC_VAR.html>
+
 `` SPEC_VAR `ASM |- !x.P[x]` `` gives `` (`x17`, `ASM |- P[x17]`) ``.
 
 ```ocaml
 let rec SPEC_ALL th =
   if is_forall(concl th) then SPEC_ALL(snd(SPEC_VAR th)) else th;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SPEC_ALL.html>
+
 `SPEC_ALL` repeats `SPEC_VAR` until the conclusion is not a "forall", and
 returns the final theorem.
 
@@ -509,6 +517,8 @@ let EXISTS =
 let SIMPLE_EXISTS v th =
   EXISTS (mk_exists(v,concl th),v) th;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SIMPLE_EXISTS.html>
+
 `` SIMPLE_EXISTS `x` `ASM |- P[x]` `` gives `ASM |- ?x. P[x]`.
 
 ```ocaml
@@ -538,6 +548,8 @@ let CHOOSE =
 let SIMPLE_CHOOSE v th =
   CHOOSE(v,ASSUME (mk_exists(v,hd(hyp th)))) th;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SIMPLE_CHOOSE.html>
+
 `` SIMPLE_CHOOSE `x` `ASM,P[x] |- a` `` gives `ASM,?x.P[x] |- a`
 (`P[x]` must be the first hypothesis).
 
@@ -617,6 +629,8 @@ let DISJ_CASES =
 let SIMPLE_DISJ_CASES th1 th2 =
   DISJ_CASES (ASSUME(mk_disj(hd(hyp th1),hd(hyp th2)))) th1 th2;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SIMPLE_DISJ_CASES.html>
+
 `` SIMPLE_DISJ_CASES `ASM1,a |- c` `ASM2,b |- c` `` gives
 `ASM1,ASM2,a \/ b |- c` (`a` and `b` must be the first hypotheses).
 

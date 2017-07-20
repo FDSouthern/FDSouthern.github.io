@@ -247,7 +247,10 @@ let rec splitlist dest x =
       let ls,res = splitlist dest r in
       (l::ls,res)
   with Failure _ -> ([],x);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/splitlist.html>
 
+```ocaml
 let rev_splitlist dest =
   let rec rsplist ls x =
     try let l,r = dest x in
@@ -265,6 +268,8 @@ let striplist dest =
     with Failure _ -> x::acc in
   fun x -> strip x [];;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/striplist.html>
+
 Again, I should look up some examples from other parts of the code.
 
 ```ocaml
@@ -445,11 +450,19 @@ let intersect l1 l2 = filter (fun x -> mem x l2) l1;;
 
 ```ocaml
 let subtract l1 l2 = filter (fun x -> not (mem x l2)) l1;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/subtract.html>
 
+```ocaml
 let subset l1 l2 = forall (fun t -> mem t l2) l1;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/subset.html>
 
+```ocaml
 let set_eq l1 l2 = subset l1 l2 && subset l2 l1;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/set_eq.html>
+
 These don't seem too troublesome.
 
 ```ocaml
@@ -502,6 +515,8 @@ let rec shareout pat all =
   let l,r = chop_list (length (hd pat)) all in
   l::(shareout (tl pat) r);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/shareout.html>
+
 This definitely deserves some examples!!
 
 ```ocaml
@@ -530,6 +545,8 @@ let rec sort cmp lis =
       let r,l = partition (cmp piv) rest in
       (sort cmp l) @ (piv::(sort cmp r));;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/sort.html>
+
 There's also `mergesort` below.  Do they behave identically?
 
 ```ocaml
@@ -553,6 +570,8 @@ I'm sure I learnt this as `destutter`.
 
 let setify s = uniq (sort (fun x y -> Pervasives.compare x y <= 0) s);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/setify.html>
+
 Why isn't this with the set functions above?!
 
 ```ocaml
@@ -1154,6 +1173,8 @@ let unions' eq l = itlist (union' eq) l [];;
 
 let subtract' eq l1 l2 = filter (fun x -> not (mem' eq x l2)) l1;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/subtract_prime.html>
+
 These should be with the others in a *Sets* section!  But not much to comment
 on.
 
@@ -1205,10 +1226,16 @@ let strings_of_file filename =
     with End_of_file -> rev acc in
   let data = suck_lines [] in
   (Pervasives.close_in fd; data);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/strings_of_file.html>
 
+```ocaml
 let string_of_file filename =
   end_itlist (fun s t -> s^"\n"^t) (strings_of_file filename);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/string_of_file.html>
 
+```ocaml
 let file_of_string filename s =
   let fd = Pervasives.open_out filename in
   output_string fd s; close_out fd;;

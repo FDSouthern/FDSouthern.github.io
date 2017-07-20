@@ -95,6 +95,8 @@ let SYM th =
   let lth = REFL l in
   EQ_MP (MK_COMB(AP_TERM (rator (rator tm)) th,lth)) lth;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SYM.html>
+
 `` SYM `ASM1 |- a = b` `` gives `ASM1 |- b = a`.
 
 ```ocaml
@@ -317,6 +319,8 @@ let SUB_CONV conv tm =
   | Abs(_,_) -> ABS_CONV conv tm
   | _ -> REFL tm;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SUB_CONV.html>
+
 `SUB_CONV c` either rewrites both parts of a combination, or the body of an
 abstraction, or does nothing (it never fails).
 
@@ -524,6 +528,8 @@ let SYM_CONV tm =
       DEDUCT_ANTISYM_RULE th2 th1
   with Failure _ -> failwith "SYM_CONV";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SYM_CONV.html>
+
 `SYM_CONV` rewrites `` `a = b` `` to `` `b = a` ``.
 
 ```ocaml
@@ -556,6 +562,8 @@ let SUBS_CONV ths tm =
       if rand(concl th) = tm then REFL tm else th
   with Failure _ -> failwith "SUBS_CONV";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SUBS_CONV.html>
+
 `SUBS_CONV ths` is a conversion.  It takes its list of equality theorems and
 rewrites (anywhere in its argument term) any lhs to its corresponding rhs
 (matching with alpha-equivalence).
@@ -583,6 +591,8 @@ let GSYM = CONV_RULE(ONCE_DEPTH_CONV SYM_CONV);;
 ```ocaml
 let SUBS ths = CONV_RULE (SUBS_CONV ths);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SUBS.html>
+
 `SUBS thm` applies `SUBS_CONV` to the conclusion `thm`.
 
 ```ocaml

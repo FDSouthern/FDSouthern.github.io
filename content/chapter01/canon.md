@@ -399,9 +399,11 @@ let SKOLEM_CONV =
     LEFT_OR_EXISTS_THM;
     SKOLEM_THM];;
 ```
-`SKOLEM_CONV` moves existential quantifiers outward past or,and,forall
-(Skolemizing when an existential moves past a universal).  Does not handle
-existentials inside negations.
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SKOLEM_CONV.html>
+
+`SKOLEM_CONV` moves existential quantifiers outward past `or`, `and`, and
+`forall` (Skolemizing when an existential moves past a universal).  Does not
+handle existentials inside negations.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -603,7 +605,10 @@ let SELECT_ELIM_TAC =
       with Failure _ -> DISCH tm (ASSUME tm) in
     SELECT_ELIMS_ICONV in
   CONV_TAC SELECT_ELIM_CONV THEN W(MATCH_MP_TAC o SELECT_ELIM_ICONV o snd);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SELECT_ELIM_TAC.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Eliminate all lambda-terms except those part of quantifiers.              *)
 (* ------------------------------------------------------------------------- *)

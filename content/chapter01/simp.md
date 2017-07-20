@@ -346,6 +346,8 @@ let ss_of_thms thms (Simpset(net,prover,provers,rewmaker)) =
   let net' = itlist (net_of_thm true) cthms net in
   Simpset(net',prover,provers,rewmaker);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ss_of_thms.html>
+
 `ss_of_thms thms ss` augments a simpset with a list of theorems using the
 rewrite maker from the simpset to add the theorems to the conversion net.
 
@@ -354,6 +356,8 @@ let ss_of_conv keytm conv (Simpset(net,prover,provers,rewmaker)) =
   let net' = net_of_conv keytm conv net in
   Simpset(net',prover,provers,rewmaker);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ss_of_conv.html>
+
 `ss_of_conv keytm conv ss` augments a simpset with a conversion using
 `(net_of_conv keytm conv)` to add the conversion to the conversion net.
 
@@ -361,16 +365,23 @@ let ss_of_conv keytm conv (Simpset(net,prover,provers,rewmaker)) =
 let ss_of_congs thms (Simpset(net,prover,provers,rewmaker)) =
   let net' = itlist net_of_cong thms net in
   Simpset(net',prover,provers,rewmaker);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ss_of_congs.html>
 
+```ocaml
 let ss_of_prover newprover (Simpset(net,_,provers,rewmaker)) =
   Simpset(net,newprover,provers,rewmaker);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ss_of_prover.html>
+
 `ss_of_prover newprover ss` replaces the prover in the simpset with `newprover`.
 
 ```ocaml
 let ss_of_provers newprovers (Simpset(net,prover,provers,rewmaker)) =
   Simpset(net,prover,newprovers@provers,rewmaker);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ss_of_provers.html>
+
 `ss_of_provers newprovers ss` prepends `newprovers` to the list of subprovers in
 the simpset.
 
@@ -378,6 +389,8 @@ the simpset.
 let ss_of_maker newmaker (Simpset(net,prover,provers,_)) =
   Simpset(net,prover,provers,newmaker);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ss_of_maker.html>
+
 `ss_of_maker newmaker ss` replaces the rewrite maker in the simpset with
 `newmaker`.
 
@@ -607,9 +620,13 @@ let set_basic_rewrites,extend_basic_rewrites,basic_rewrites,
   set_basic_rewrites,extend_basic_rewrites,basic_rewrites,
   set_basic_convs,extend_basic_convs,basic_convs,basic_net;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/set_basic_rewrites.html>
+
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/extend_basic_rewrites.html>
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_rewrites.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/set_basic_convs.html>
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/extend_basic_convs.html>
 
@@ -641,6 +658,8 @@ let set_basic_congs,extend_basic_congs,basic_congs =
   (fun thl -> congs := union' equals_thm thl (!congs)),
   (fun () -> !congs);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/set_basic_congs.html>
+
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/extend_basic_congs.html>
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/basic_congs.html>
@@ -826,7 +845,10 @@ let ONCE_SIMPLIFY_CONV ss = GEN_SIMPLIFY_CONV ONCE_DEPTH_SQCONV ss 1;;
 
 ```ocaml
 let SIMPLIFY_CONV ss = GEN_SIMPLIFY_CONV TOP_DEPTH_SQCONV ss 3;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SIMPLIFY_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Simple but useful default version.                                        *)
 (* ------------------------------------------------------------------------- *)
@@ -854,7 +876,10 @@ congruences and it returns the resulting simpset.
 
 ```ocaml
 let SIMP_CONV thl = SIMPLIFY_CONV (basic_ss []) thl;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SIMP_CONV.html>
 
+```ocaml
 let PURE_SIMP_CONV thl = SIMPLIFY_CONV empty_ss thl;;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_SIMP_CONV.html>
@@ -866,7 +891,10 @@ let ONCE_SIMP_CONV thl = ONCE_SIMPLIFY_CONV (basic_ss []) thl;;
 
 ```ocaml
 let SIMP_RULE thl = CONV_RULE(SIMP_CONV thl);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SIMP_RULE.html>
 
+```ocaml
 let PURE_SIMP_RULE thl = CONV_RULE(PURE_SIMP_CONV thl);;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_SIMP_RULE.html>
@@ -881,7 +909,10 @@ variants, but they call `CONV_RULE`.
 
 ```ocaml
 let SIMP_TAC thl = CONV_TAC(SIMP_CONV thl);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SIMP_TAC.html>
 
+```ocaml
 let PURE_SIMP_TAC thl = CONV_TAC(PURE_SIMP_CONV thl);;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_SIMP_TAC.html>

@@ -258,9 +258,15 @@ let SET_TAC =
     (if ths = [] then ALL_TAC else MP_TAC(end_itlist CONJ ths)) THEN
     PRESET_TAC THEN
     MESON_TAC[];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SET_TAC.html>
 
+```ocaml
 let SET_RULE tm = prove(tm,SET_TAC[]);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SET_RULE.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Misc. theorems.                                                           *)
 (* ------------------------------------------------------------------------- *)

@@ -634,7 +634,7 @@ let (AP_THM_TAC: tactic) =
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/AP_THM_TAC.html>
 
-`AP_THM_TAC` converts goal `` `f a = g a` `` to `` `f = g` ``.
+`AP_THM_TAC` converts goal `f a = g a` to `f = g`.
 
 ```ocaml
 let (BINOP_TAC: tactic) =
@@ -643,20 +643,24 @@ let (BINOP_TAC: tactic) =
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/BINOP_TAC.html>
 
-`BINOP_TAC` converts goal `` `f a b = f c d` `` to `` `a = c` `` and
+`BINOP_TAC` converts goal `f a b = f c d` to `a = c` and
 `` `b = d` ``.
 
 ```ocaml
 let (SUBST1_TAC: thm_tactic) =
   fun th -> CONV_TAC(SUBS_CONV [th]);;
 ```
-`` SUBST1_TAC `|- a = b` `` converts goal `` `P[a]` `` to `` `P[b]` ``.
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SUBST1_TAC.html>
+
+`` SUBST1_TAC `|- a = b` `` converts goal `P[a]` to `P[b]`.
 
 ```ocaml
 let SUBST_ALL_TAC rth =
   SUBST1_TAC rth THEN RULE_ASSUM_TAC (SUBS [rth]);;
 ```
-`` SUBST_ALL_TAC `|- a = b` ` rewrites `` `a` `` to `` `b` `` in goal and all
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SUBST_ALL_TAC.html>
+
+`` SUBST_ALL_TAC `|- a = b` ` rewrites `a` to `b` in goal and all
 assumptions.
 
 ```ocaml
@@ -682,7 +686,10 @@ let SUBST_VAR_TAC th =
            then SUBST_ALL_TAC(SYM th)
       else fail()
   with Failure _ -> failwith "SUBST_VAR_TAC";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SUBST_VAR_TAC.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Basic logical tactics.                                                    *)
 (* ------------------------------------------------------------------------- *)
@@ -749,7 +756,9 @@ let (SPEC_TAC: term * term -> tactic) =
         fun i [th] -> SPEC (instantiate i t) th
     with Failure _ -> failwith "SPEC_TAC";;
 ```
-`` SPEC_TAC (`x`,`a`) `` converts goal `` `P[a]` `` to `` `!x. P[x]` ``.
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SPEC_TAC.html>
+
+`` SPEC_TAC (`x`,`a`) `` converts goal `P[a]` to `!x. P[x]`.
 
 ```ocaml
 let (X_GEN_TAC: term -> tactic),
@@ -1021,6 +1030,8 @@ let (CHOOSE_THEN: thm_tactical) =
 let STRIP_THM_THEN =
   FIRST_TCL [CONJUNCTS_THEN; DISJ_CASES_THEN; CHOOSE_THEN];;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/STRIP_THM_THEN.html>
+
 `STRIP_THM_THEN` acts like `CONJUNCTS_THEN`, `DISJ_CASES_THEN`, or `CHOOSE_THEN`
 depending on whether the theorem is a conjunction, disjunction, or existial.
 
@@ -1064,6 +1075,8 @@ let STRIP_ASSUME_TAC =
   (fun gth -> FIRST [CONTR_TAC gth; ACCEPT_TAC gth;
                      DISCARD_TAC gth; ASSUME_TAC gth]);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/STRIP_ASSUME_TAC.html>
+
 `STRIP_ASSUME_TAC th` starts with `(REPEAT_TCL STRIP_THM_THEN)` applied to `th`
 (call the resulting theorem(s) `gth`), then if `gth` is `` `F` ``, or equal to
 the goal, then solve the goal; if `gth` is already an assumption, do nothing;
@@ -1071,10 +1084,15 @@ otherwise, add `gth` as an assumption.
 
 ```ocaml
 let STRUCT_CASES_THEN ttac = REPEAT_TCL STRIP_THM_THEN ttac;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/STRUCT_CASES_THEN.html>
 
+```ocaml
 let STRUCT_CASES_TAC = STRUCT_CASES_THEN
      (fun th -> SUBST1_TAC th ORELSE ASSUME_TAC th);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/STRUCT_CASES_TAC.html>
+
 `STRUCT_CASES_TAC th` starts with `(REPEAT_TCL STRIP_THM_THEN)` applied to `th`
 (call the resulting theorem(s) `gth`), then if `gth` is an equality, use it to
 rewrite the goal; otherwise, add `gth` as an assumption.
@@ -1082,6 +1100,8 @@ rewrite the goal; otherwise, add `gth` as an assumption.
 ```ocaml
 let STRIP_GOAL_THEN ttac =  FIRST [GEN_TAC; CONJ_TAC; DISCH_THEN ttac];;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/STRIP_GOAL_THEN.html>
+
 `STRIP_GOAL_THEN tht`:  If the current goal is a universal, then generalise;
 if it is a conjunction, prove the two cases separately; if it is an implication
 `` `a ==> b` `` then convert to `` `b` `` and apply `` (tht `a`) ``.
@@ -1092,6 +1112,8 @@ let (STRIP_TAC: tactic) =
     try STRIP_GOAL_THEN STRIP_ASSUME_TAC g
     with Failure _ -> failwith "STRIP_TAC";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/STRIP_TAC.html>
+
 `STRIP_TAC` is equivalent to `STRIP_GOAL_THEN STRIP_ASSUME_TAC`.
 
 ```ocaml
@@ -1122,6 +1144,8 @@ let (SUBGOAL_THEN: term -> thm_tactic -> tactic) =
     let meta,gl,just = ttac (ASSUME wa) (asl,w) in
     meta,(asl,wa)::gl,fun i l -> PROVE_HYP (hd l) (just i (tl l));;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SUBGOAL_THEN.html>
+
 `` SUBGOAL_THEN `a` tht `` creates two subgoals:  In the first, changes the goal
 to `a`, and in the second, applies the tactic `` (tht `|- a`) ``.
 
@@ -1131,7 +1155,10 @@ let SUBGOAL_TAC s tm prfs =
    p::ps -> (warn (ps <> []) "SUBGOAL_TAC: additional subproofs ignored";
              SUBGOAL_THEN tm (LABEL_TAC s) THENL [p; ALL_TAC])
   | [] -> failwith "SUBGOAL_TAC: no subproof given";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/SUBGOAL_TAC.html>
 
+```ocaml
 let (FREEZE_THEN :thm_tactical) =
   fun ttac th (asl,w) ->
     let meta,gl,just = ttac (ASSUME(concl th)) (asl,w) in
@@ -1402,7 +1429,10 @@ let set_goal(asl,w) =
   current_goalstack :=
     [mk_goalstate(map (fun t -> "",ASSUME t) asl,w)];
   !current_goalstack;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/set_goal.html>
 
+```ocaml
 let g t =
   let fvs = sort (<) (map (fst o dest_var) (frees t)) in
   (if fvs <> [] then

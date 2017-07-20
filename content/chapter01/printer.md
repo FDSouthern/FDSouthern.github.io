@@ -645,9 +645,18 @@ let print_to_string printer =
 
 ```ocaml
 let string_of_type = print_to_string pp_print_type;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/string_of_type.html>
+
+```ocaml
 let string_of_term = print_to_string pp_print_term;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/string_of_term.html>
+
+```ocaml
 let string_of_thm = print_to_string pp_print_thm;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/string_of_thm.html>
 
 - Previous: [nets.ml](nets.md)
 - [Index](index.md)

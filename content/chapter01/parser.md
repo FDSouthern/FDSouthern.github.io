@@ -102,7 +102,10 @@ let some p =
   function
       [] -> raise Noparse
     | (h::t) -> if p h then (h,t) else raise Noparse;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/some.html>
 
+```ocaml
 let a tok = some (fun item -> item = tok);;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/a.html>

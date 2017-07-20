@@ -150,6 +150,7 @@ let search =
     (if nontriv = [] && triv <> [] then []
      else itlist (filter o filterpred) pats (!theorems));;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/search.html>
 
 - Previous: [define.ml](define.md)
 - [Index](index.md)

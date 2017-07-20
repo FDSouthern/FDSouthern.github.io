@@ -76,9 +76,15 @@ let list_mk_abs(vs,bod) = itlist (curry mk_abs) vs bod;;
 
 ```ocaml
 let strip_comb = rev_splitlist dest_comb;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/strip_comb.html>
 
+```ocaml
 let strip_abs = splitlist dest_abs;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/strip_abs.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Generic syntax to deal with some binary operators.                        *)
 (*                                                                           *)
@@ -156,7 +162,10 @@ let subst =
       let gs = variants (variables tm) (map (genvar o type_of) xs) in
       let tm' = ssubst (zip gs xs) tm in
       if tm' == tm then tm else vsubst (zip ts gs) tm';;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/subst.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Alpha conversion term operation.                                          *)
 (* ------------------------------------------------------------------------- *)
@@ -385,7 +394,10 @@ let dest_forall = dest_binder "!";;
 
 ```ocaml
 let strip_forall = splitlist dest_forall;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/strip_forall.html>
 
+```ocaml
 let is_exists = is_binder "?";;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_exists.html>
@@ -397,7 +409,10 @@ let dest_exists = dest_binder "?";;
 
 ```ocaml
 let strip_exists = splitlist dest_exists;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/strip_exists.html>
 
+```ocaml
 let is_disj = is_binary "\\/";;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_disj.html>
@@ -535,7 +550,10 @@ let list_mk_gabs(vs,bod) = itlist (curry mk_gabs) vs bod;;
 
 ```ocaml
 let strip_gabs = splitlist dest_gabs;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/strip_gabs.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Syntax for let terms.                                                     *)
 (* ------------------------------------------------------------------------- *)
