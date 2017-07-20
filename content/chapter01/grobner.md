@@ -569,13 +569,19 @@ let RING_AND_IDEAL_CONV =
     map (fun n -> let p = assocd n cert [] in holify_polynomial vars p)
         (0--(length pols-1)) in
   RING,ideal;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/RING_AND_IDEAL_CONV.html>
 
+```ocaml
 (* ----------------------------------------------------------------------- *)
 (* Separate out the cases.                                                 *)
 (* ----------------------------------------------------------------------- *)
 
 let RING parms = fst(RING_AND_IDEAL_CONV parms);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/RING.html>
 
+```ocaml
 let ideal_cofactors parms = snd(RING_AND_IDEAL_CONV parms);;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ideal_cofactors.html>

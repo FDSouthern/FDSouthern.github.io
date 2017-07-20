@@ -88,7 +88,10 @@ let REAL_INT_RAT_CONV =
     REWRITE_TAC[REAL_DIV_1; DECIMAL] THEN
     REWRITE_TAC[real_div; REAL_MUL_LNEG]) in
   TRY_CONV(GEN_REWRITE_CONV I [pth]);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_INT_RAT_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Relational operations.                                                    *)
 (* ------------------------------------------------------------------------- *)
@@ -111,7 +114,10 @@ let REAL_RAT_LE_CONV =
               (rand(concl th1)) in
     TRANS th1 th2 in
    BINOP_CONV REAL_INT_RAT_CONV THENC RAW_REAL_RAT_LE_CONV;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_LE_CONV.html>
 
+```ocaml
 let REAL_RAT_LT_CONV =
   let pth = prove
    (`&0 < y1 ==> &0 < y2 ==> (x1 / y1 < x2 / y2 <=> x1 * y2 < x2 * y1)`,
@@ -132,13 +138,22 @@ let REAL_RAT_LT_CONV =
               (rand(concl th1)) in
     TRANS th1 th2 in
    BINOP_CONV REAL_INT_RAT_CONV THENC RAW_REAL_RAT_LT_CONV;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_LT_CONV.html>
 
+```ocaml
 let REAL_RAT_GE_CONV =
   GEN_REWRITE_CONV I [real_ge] THENC REAL_RAT_LE_CONV;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_GE_CONV.html>
 
+```ocaml
 let REAL_RAT_GT_CONV =
   GEN_REWRITE_CONV I [real_gt] THENC REAL_RAT_LT_CONV;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_GT_CONV.html>
 
+```ocaml
 let REAL_RAT_EQ_CONV =
   let pth = prove
    (`&0 < y1 ==> &0 < y2 ==> ((x1 / y1 = x2 / y2) <=> (x1 * y2 = x2 * y1))`,
@@ -157,7 +172,10 @@ let REAL_RAT_EQ_CONV =
               (rand(concl th1)) in
     TRANS th1 th2 in
    BINOP_CONV REAL_INT_RAT_CONV THENC RAW_REAL_RAT_EQ_CONV;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_GT_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* The unary operations; all easy.                                           *)
 (* ------------------------------------------------------------------------- *)
@@ -180,7 +198,10 @@ let REAL_RAT_NEG_CONV =
                 then REFL tm
                 else fail()
             with Failure _ -> failwith "REAL_RAT_NEG_CONV";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_NEG_CONV.html>
 
+```ocaml
 let REAL_RAT_ABS_CONV =
   let pth = prove
    (`(abs(&n) = &n) /\
@@ -191,7 +212,10 @@ let REAL_RAT_ABS_CONV =
      (abs(--(DECIMAL m n)) = &m / &n)`,
     REWRITE_TAC[DECIMAL; REAL_ABS_DIV; REAL_ABS_NEG; REAL_ABS_NUM]) in
   GEN_REWRITE_CONV I [pth];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_ABS_CONV.html>
 
+```ocaml
 let REAL_RAT_INV_CONV =
   let pth1 = prove
    (`(inv(&0) = &0) /\
@@ -215,7 +239,10 @@ let REAL_RAT_INV_CONV =
       REAL_MUL_LID; REAL_MUL_LNEG; REAL_INV_MUL; REAL_INV_INV]) in
   GEN_REWRITE_CONV I [pth1] ORELSEC
   GEN_REWRITE_CONV I [pth2];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_INV_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Addition.                                                                 *)
 (* ------------------------------------------------------------------------- *)
@@ -261,7 +288,10 @@ let REAL_RAT_ADD_CONV =
     MP th1 (TRANS th2 (SYM th3)) in
    BINOP_CONV REAL_INT_RAT_CONV THENC
    RAW_REAL_RAT_ADD_CONV THENC TRY_CONV(GEN_REWRITE_CONV I [REAL_DIV_1]);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_ADD_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Subtraction.                                                              *)
 (* ------------------------------------------------------------------------- *)
@@ -272,7 +302,10 @@ let REAL_RAT_SUB_CONV =
     REWRITE_TAC[real_sub]) in
   GEN_REWRITE_CONV I [pth] THENC
   RAND_CONV REAL_RAT_NEG_CONV THENC REAL_RAT_ADD_CONV;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_SUB_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Multiplication.                                                           *)
 (* ------------------------------------------------------------------------- *)
@@ -333,7 +366,10 @@ let REAL_RAT_MUL_CONV =
       TRANS th2 th3 in
    BINOP_CONV REAL_INT_RAT_CONV THENC
    RAW_REAL_RAT_MUL_CONV THENC TRY_CONV(GEN_REWRITE_CONV I [REAL_DIV_1]);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_MUL_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Division.                                                                 *)
 (* ------------------------------------------------------------------------- *)
@@ -344,7 +380,10 @@ let REAL_RAT_DIV_CONV =
     REWRITE_TAC[real_div]) in
   GEN_REWRITE_CONV I [pth] THENC
   RAND_CONV REAL_RAT_INV_CONV THENC REAL_RAT_MUL_CONV;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_DIV_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Powers.                                                                   *)
 (* ------------------------------------------------------------------------- *)
@@ -357,7 +396,10 @@ let REAL_RAT_POW_CONV =
   (LAND_CONV REAL_INT_RAT_CONV THENC
    GEN_REWRITE_CONV I [pth] THENC
    BINOP_CONV REAL_INT_POW_CONV);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_POW_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Max and min.                                                              *)
 (* ------------------------------------------------------------------------- *)
@@ -366,12 +408,18 @@ let REAL_RAT_MAX_CONV =
   REWR_CONV real_max THENC
   RATOR_CONV(RATOR_CONV(RAND_CONV REAL_RAT_LE_CONV)) THENC
   GEN_REWRITE_CONV I [COND_CLAUSES];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_MAX_CONV.html>
 
+```ocaml
 let REAL_RAT_MIN_CONV =
   REWR_CONV real_min THENC
   RATOR_CONV(RATOR_CONV(RAND_CONV REAL_RAT_LE_CONV)) THENC
   GEN_REWRITE_CONV I [COND_CLAUSES];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_MIN_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Everything.                                                               *)
 (* ------------------------------------------------------------------------- *)
@@ -395,9 +443,15 @@ let REAL_RAT_RED_CONV =
      `min x y`,REAL_RAT_MIN_CONV]
     (basic_net()) in
   REWRITES_CONV gconv_net;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_RED_CONV.html>
 
+```ocaml
 let REAL_RAT_REDUCE_CONV = DEPTH_CONV REAL_RAT_RED_CONV;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RAT_REDUCE_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Real normalizer dealing with rational constants.                          *)
 (* ------------------------------------------------------------------------- *)
@@ -408,7 +462,20 @@ let REAL_POLY_NEG_CONV,REAL_POLY_ADD_CONV,REAL_POLY_SUB_CONV,
    (is_ratconst,
     REAL_RAT_ADD_CONV,REAL_RAT_MUL_CONV,REAL_RAT_POW_CONV)
    (<);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_POLY_NEG_CONV.html>
 
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_POLY_ADD_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_POLY_SUB_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_POLY_MUL_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_POLY_POW_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_POLY_CONV.html>
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Extend normalizer to handle "inv" and division by rational constants, and *)
 (* normalize inside nested "max", "min" and "abs" terms.                     *)
@@ -490,7 +557,12 @@ let REAL_RING,real_ideal_cofactors =
                  then ideal tms tm
                  else failwith
                    "real_ideal_cofactors: not all terms have type :real");;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_RING.html>
 
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/real_ideal_cofactors.html>
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Conversion for ideal membership.                                          *)
 (* ------------------------------------------------------------------------- *)
@@ -503,7 +575,10 @@ let REAL_IDEAL_CONV =
     let tm' = end_itlist mk_add (map2 mk_mul cfs tms) in
     let th = REAL_POLY_CONV tm and th' = REAL_POLY_CONV tm' in
     TRANS th (SYM th');;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_IDEAL_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Further specialize GEN_REAL_ARITH and REAL_ARITH (final versions).        *)
 (* ------------------------------------------------------------------------- *)
@@ -589,6 +664,7 @@ let REAL_FIELD =
     let ths = map BASIC_REAL_FIELD (conjuncts(rand(concl th1))) in
     EQ_MP (SYM th0) (GENL avs (EQ_MP (SYM th1) (end_itlist CONJ ths)));;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_FIELD.html>
 
 - Previous: [real.ml](real.md)
 - [Index](index.md)

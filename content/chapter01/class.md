@@ -287,6 +287,8 @@ let REFUTE_THEN =
     else if is_neg w then DISCH_THEN ttac gl
     else (CONV_TAC conv THEN DISCH_THEN ttac) gl;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REFUTE_THEN.html>
+
 `REFUTE_THEN tht` changes the goal from `p` to `F` and runs the theorem tactic
 `tht` on the assumption `|- ~p`.
 

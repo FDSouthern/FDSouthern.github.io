@@ -507,12 +507,18 @@ I think this deserves a comment.
     match tm with
       Comb(l,r) -> l
     | _ -> failwith "rator: Not a combination"
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/rator.html>
 
+```ocaml
   let rand tm =
     match tm with
       Comb(l,r) -> r
     | _ -> failwith "rand: Not a combination"
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/rand.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Syntax operations for equations.                                          *)
 (* ------------------------------------------------------------------------- *)
@@ -616,6 +622,8 @@ Okay, below here we've got HOL Light's inference rules:
   let REFL tm =
     Sequent([],safe_mk_eq tm tm)
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REFL.html>
+
 `` REFL `x` `` gives `|- x = x`.
 
 ```ocaml

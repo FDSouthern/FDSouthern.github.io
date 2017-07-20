@@ -29,7 +29,10 @@ let lhs = fst o dest_eq;;
 
 ```ocaml
 let rhs = snd o dest_eq;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/rhs.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Similar to variant, but even avoids constants, and ignores types.         *)
 (* ------------------------------------------------------------------------- *)
@@ -202,6 +205,8 @@ let REPEATC =
     ((conv THENC (REPEATC conv)) ORELSEC ALL_CONV) t in
   (REPEATC:conv->conv);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REPEATC.html>
+
 `REPEATC c` rewrites with c until it fails (and returns the result of the last
 successful rewrite).
 
@@ -234,6 +239,8 @@ let (RATOR_CONV:conv->conv) =
       Comb(l,r) -> AP_THM (conv l) r
     | _ -> failwith "RATOR_CONV: Not a combination";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/RATOR_CONV.html>
+
 `RATOR_CONV c` uses the conversion to rewrite the operator of a combination.
 
 ```ocaml
@@ -243,6 +250,8 @@ let (RAND_CONV:conv->conv) =
      Comb(l,r) -> MK_COMB(REFL l,conv r)
    |  _ -> failwith "RAND_CONV: Not a combination";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/RAND_CONV.html>
+
 `RAND_CONV c` uses the conversion to rewrite the operand of a combination.
 
 ```ocaml
@@ -338,8 +347,6 @@ let (ONCE_DEPTH_CONV: conv->conv),
         with Failure _ -> th1
     with Failure _ -> conv2 tm
 ```
-<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_DEPTH_CONV.html>
-
 `THENQC c1 c2` is like `(c1 THENC c2) ORELSEC c1 ORELSEC c2`.
 
 ```ocaml
@@ -433,7 +440,11 @@ until no change
   (fun c -> TRY_CONV (TOP_DEPTH_QCONV c)),
   (fun c -> TRY_CONV (TOP_SWEEP_QCONV c));;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_DEPTH_CONV.html>
+
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEPTH_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REDEPTH_CONV.html>
 
 `ONCE_DEPTH_CONV`, `DEPTH_CONV`, `REDEPTH_CONV`, `TOP_DEPTH_CONV`,
 `TOP_SWEEP_CONV`:  like the `QCONV` variants, except they never fail.

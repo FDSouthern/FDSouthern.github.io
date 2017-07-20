@@ -25,6 +25,8 @@ let strip_ncomb =
 let RIGHT_BETAS =
   rev_itlist (fun a -> CONV_RULE (RAND_CONV BETA_CONV) o C AP_THM a);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/RIGHT_BETAS.html>
+
 ``RIGHT_BETAS [`x`;`y`] `|- f = \x y. A[x,y]` `` gives
 `` `|- f x y = A[x,y]` ``.
 

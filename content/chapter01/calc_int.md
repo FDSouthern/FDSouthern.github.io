@@ -60,7 +60,10 @@ let rat_of_term tm =
         if n >/ num_1 && gcd_num m n =/ num_1 then m // n
         else failwith "rat_of_term"
   | _ -> dest_realintconst tm;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/rat_of_term.html>
 
+```ocaml
 let term_of_rat =
   let div_tm = `(/)` in
   fun x ->
@@ -254,14 +257,28 @@ let REAL_INT_LE_CONV,REAL_INT_LT_CONV,
     GEN_REWRITE_CONV I [pth_eq2a; pth_eq2b] THENC NUM2_EQ_CONV] in
   REAL_INT_LE_CONV,REAL_INT_LT_CONV,
   REAL_INT_GE_CONV,REAL_INT_GT_CONV,REAL_INT_EQ_CONV;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_INT_LE_CONV.html>
 
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_INT_LT_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_INT_GE_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_INT_GT_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_INT_EQ_CONV.html>
+
+```ocaml
 let REAL_INT_NEG_CONV =
   let pth = prove
    (`(--(&0) = &0) /\
      (--(--(&x)) = &x)`,
     REWRITE_TAC[REAL_NEG_NEG; REAL_NEG_0]) in
   GEN_REWRITE_CONV I [pth];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_INT_NEG_CONV.html>
 
+```ocaml
 let REAL_INT_MUL_CONV =
   let pth0 = prove
    (`(&0 * &x = &0) /\
@@ -280,7 +297,10 @@ let REAL_INT_MUL_CONV =
    [GEN_REWRITE_CONV I [pth0];
     GEN_REWRITE_CONV I [pth1] THENC RAND_CONV NUM_MULT_CONV;
     GEN_REWRITE_CONV I [pth2] THENC RAND_CONV(RAND_CONV NUM_MULT_CONV)];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_INT_MUL_CONV.html>
 
+```ocaml
 let REAL_INT_ADD_CONV =
   let neg_tm = `(--)` in
   let amp_tm = `&` in
@@ -353,12 +373,18 @@ let REAL_INT_ADD_CONV =
             let th2 = AP_TERM amp_tm (NUM_ADD_CONV tm1) in
             TRANS th1 th2
     with Failure _ -> failwith "REAL_INT_ADD_CONV");;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_INT_ADD_CONV.html>
 
+```ocaml
 let REAL_INT_SUB_CONV =
   GEN_REWRITE_CONV I [real_sub] THENC
   TRY_CONV(RAND_CONV REAL_INT_NEG_CONV) THENC
   REAL_INT_ADD_CONV;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_INT_SUB_CONV.html>
 
+```ocaml
 let REAL_INT_POW_CONV =
   let pth1,pth2 = (CONJ_PAIR o prove)
    (`(&x pow n = &(x EXP n)) /\
@@ -374,14 +400,20 @@ let REAL_INT_POW_CONV =
    GEN_REWRITE_CONV I [tth] THENC
    (fun tm -> if rator tm = neg_tm then RAND_CONV(RAND_CONV NUM_EXP_CONV) tm
               else RAND_CONV NUM_EXP_CONV  tm));;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_INT_POW_CONV.html>
 
+```ocaml
 let REAL_INT_ABS_CONV =
   let pth = prove
    (`(abs(--(&x)) = &x) /\
      (abs(&x) = &x)`,
     REWRITE_TAC[REAL_ABS_NEG; REAL_ABS_NUM]) in
   GEN_REWRITE_CONV I [pth];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_INT_ABS_CONV.html>
 
+```ocaml
 let REAL_INT_RED_CONV =
   let gconv_net = itlist (uncurry net_of_conv)
     [`x <= y`,REAL_INT_LE_CONV;
@@ -397,9 +429,13 @@ let REAL_INT_RED_CONV =
      `x pow n`,REAL_INT_POW_CONV]
     (basic_net()) in
   REWRITES_CONV gconv_net;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_INT_RED_CONV.html>
 
+```ocaml
 let REAL_INT_REDUCE_CONV = DEPTH_CONV REAL_INT_RED_CONV;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_INT_REDUCE_CONV.html>
 
 - Previous: [realax.ml](realax.md)
 - [Index](index.md)

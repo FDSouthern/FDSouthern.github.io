@@ -42,6 +42,8 @@ let quotexpander s =
 
 Quotation.add "tot" (Quotation.ExStr (fun x -> quotexpander));;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/quotexpander.html>
+
 Some important code for handling Camlp4 quotations that I just want to skip
 over.
 

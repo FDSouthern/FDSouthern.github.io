@@ -85,7 +85,10 @@ let REAL_LT_MUL = prove
 (* ------------------------------------------------------------------------- *)
 
 let REAL_ARITH_TAC = CONV_TAC REAL_ARITH;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_ARITH_TAC.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Prove all the linear theorems we can blow away automatically.             *)
 (* ------------------------------------------------------------------------- *)
@@ -591,11 +594,17 @@ let REAL_MIN_ACI = prove
 let REAL_LE_IMP =
   let pth = PURE_ONCE_REWRITE_RULE[IMP_CONJ] REAL_LE_TRANS in
   fun th -> GEN_ALL(MATCH_MP pth (SPEC_ALL th));;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_LE_IMP.html>
 
+```ocaml
 let REAL_LET_IMP =
   let pth = PURE_ONCE_REWRITE_RULE[IMP_CONJ] REAL_LET_TRANS in
   fun th -> GEN_ALL(MATCH_MP pth (SPEC_ALL th));;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_LET_IMP.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Now a bit of nonlinear stuff.                                             *)
 (* ------------------------------------------------------------------------- *)

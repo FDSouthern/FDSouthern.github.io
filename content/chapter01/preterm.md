@@ -47,11 +47,17 @@ let make_overloadable s gty =
 let remove_interface sym =
   let interface = filter ((<>)sym o fst) (!the_interface) in
   the_interface := interface;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/remove_interface.html>
 
+```ocaml
 let reduce_interface (sym,tm) =
   let namty = try dest_const tm with Failure _ -> dest_var tm in
   the_interface := filter ((<>) (sym,namty)) (!the_interface);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/reduce_interface.html>
 
+```ocaml
 let override_interface (sym,tm) =
   let namty = try dest_const tm with Failure _ -> dest_var tm in
   let interface = filter ((<>)sym o fst) (!the_interface) in
@@ -101,6 +107,8 @@ let new_type_abbrev,remove_type_abbrev,type_abbrevs =
   new_type_abbrev,remove_type_abbrev,type_abbrevs;;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/new_type_abbrev.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/remove_type_abbrev.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -476,7 +484,10 @@ let type_of_pretype,term_of_preterm,retypecheck =
       with Failure _ -> failwith "typechecking error (overload resolution)" in
     let ptm'' = solve_preterm env' ptm' in
     ptm'' in
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/retypecheck.html>
 
+```ocaml
   type_of_pretype,term_of_preterm,retypecheck;;
 ```
 

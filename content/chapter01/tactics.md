@@ -228,6 +228,8 @@ let TRY tac =
 let rec REPEAT tac g =
   ((tac THEN REPEAT tac) ORELSE ALL_TAC) g;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REPEAT_UPPERCASE.html>
+
 `REPEAT tac` means apply `t`, then apply it again to all subgoals, etc.; until
 it fails.
 
@@ -279,7 +281,10 @@ which is equal to the original goal (warning: does not use alpha-equivalence!).
 ```ocaml
 let rec REPLICATE_TAC n tac =
   if n <= 0 then ALL_TAC else tac THEN (REPLICATE_TAC (n - 1) tac);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REPLICATE_TAC.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Combinators for theorem continuations / "theorem tacticals".              *)
 (* ------------------------------------------------------------------------- *)
@@ -326,6 +331,8 @@ let ((ORELSE_TCL): thm_tactical -> thm_tactical -> thm_tactical) =
 let rec REPEAT_TCL ttcl ttac th =
   ((ttcl THEN_TCL (REPEAT_TCL ttcl)) ORELSE_TCL I) ttac th;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REPEAT_TCL.html>
+
 `REPEAT_TCL thtc` is equivalent to
 `(thtc THEN_TCL (REPEAT_TCL thtc)) ORELSE_TCL ALL_THEN`.
 
@@ -335,6 +342,8 @@ let (REPEAT_GTCL: thm_tactical -> thm_tactical) =
     try ttcl (REPEAT_GTCL ttcl ttac) th g with Failure _ -> ttac th g in
   REPEAT_GTCL;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REPEAT_GTCL.html>
+
 `REPEAT_GTCL` ???
 I don't understand how `REPEAT_GTCL` is different from `REPEAT_TCL`.
 Fortunately, `REPEAT_GTCL` is never used, so it can't be very important :-)
@@ -463,6 +472,8 @@ let (RULE_ASSUM_TAC :(thm->thm)->tactic) =
                        MAP_EVERY (fun (s,th) -> LABEL_TAC s (rule th))
                                  (rev asl)) (asl,w);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/RULE_ASSUM_TAC.html>
+
 `RULE_ASSUM_TAC thth` replaces every assumption with `thth` applied to that
 assumption.
 
@@ -488,7 +499,10 @@ let (REMOVE_THEN:string->thm_tactic->tactic) =
     let asl1,asl2 = chop_list(index s (map fst asl)) asl in
     let asl' = asl1 @ tl asl2 in
     ttac th (asl',w);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REMOVE_THEN.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* General tools to augment a required set of theorems with assumptions.     *)
 (* Here ASM uses all current hypotheses of the goal, while HYP uses only     *)
@@ -569,6 +583,8 @@ let (REFL_TAC: tactic) =
     try ACCEPT_TAC(REFL(rand w)) g
     with Failure _ -> failwith "REFL_TAC";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REFL_TAC.html>
+
 `REFL_TAC` accepts if the current goal is of the form `` `a = a` ``.
 
 ```ocaml
@@ -1186,6 +1202,8 @@ let (CHEAT_TAC:tactic) =
 
 let RECALL_ACCEPT_TAC r a g = ACCEPT_TAC(time r a) g;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/RECALL_ACCEPT_TAC.html>
+
 `RECALL_ACCEPT_TAC f x` is equivalent to `ACCEPT_TAC (f x)`.
 As a side-effect, it prints out the time taken to compute `(f x)` and delays
 this computation until it is required.
@@ -1307,7 +1325,10 @@ let (rotate:int->refinement) =
     (meta,sgs',just') in
   fun n -> if n > 0 then funpow n rotate_p
            else funpow (-n) rotate_n;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/rotate.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Perform refinement proof, tactic proof etc.                               *)
 (* ------------------------------------------------------------------------- *)
@@ -1356,7 +1377,10 @@ let (refine:refinement->goalstack) =
     let res = r h :: l in
     current_goalstack := res;
     !current_goalstack;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/refine.html>
 
+```ocaml
 let flush_goalstack() =
   let l = !current_goalstack in
   current_goalstack := [hd l];;
@@ -1370,7 +1394,10 @@ let e tac = refine(by(VALID tac));;
 
 ```ocaml
 let r n = refine(rotate n);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/r.html>
 
+```ocaml
 let set_goal(asl,w) =
   current_goalstack :=
     [mk_goalstate(map (fun t -> "",ASSUME t) asl,w)];

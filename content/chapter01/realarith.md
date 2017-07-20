@@ -459,7 +459,10 @@ let REAL_LINEAR_PROVER =
     let _,proof = linear_prover(eq_pols,le_pols',lt_pols) in
     let le' = le @ map (fun a -> INST [rand a,n_tm] pth) aliens in
     translator (eq,le',lt) proof;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_LINEAR_PROVER.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Bootstrapping REAL_ARITH: trivial abs-elim and only integer constants.    *)
 (* ------------------------------------------------------------------------- *)
@@ -481,7 +484,10 @@ let REAL_ARITH =
   fun tm ->
     let th1 = deabs_conv tm in
     EQ_MP (SYM th1) (rule(rand(concl th1)));;
+```
+The final versions of these `_CONV`s are in [calc_rat.ml](calc_rat.md).
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Slightly less parametrized GEN_REAL_ARITH with more intelligent           *)
 (* elimination of abs, max and min hardwired in.                             *)
@@ -634,6 +640,7 @@ let REAL_ARITH =
     REAL_POLY_CONV,REAL_POLY_NEG_CONV,REAL_POLY_ADD_CONV,REAL_POLY_MUL_CONV,
     REAL_LINEAR_PROVER);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REAL_ARITH.html>
 
 - Previous: [calc_int.ml](calc_int.md)
 - [Index](index.md)

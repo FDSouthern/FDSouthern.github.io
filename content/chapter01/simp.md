@@ -25,7 +25,9 @@ rewrites.
 ```ocaml
 let REWR_CONV = PART_MATCH lhs;;
 ```
-`` REWR_CONV `|- a = b` `` is a conversion which rewrites `a@` to `b@`.
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REWR_CONV.html>
+
+`` REWR_CONV `|- a = b` `` is a conversion which rewrites `a'` to `b'`.
 
 ```ocaml
 let IMP_REWR_CONV = PART_MATCH (lhs o snd o dest_imp);;
@@ -257,6 +259,8 @@ let REWRITES_CONV net tm =
   try tryfind (fun (_,cnv) -> cnv tm) pconvs
   with Failure _ -> failwith "REWRITES_CONV";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REWRITES_CONV.html>
+
 `` REWRITES_CONV net `a` `` looks up `a` in the net, and applies the resulting
 conversion to `a`.
 
@@ -520,6 +524,8 @@ let ONCE_DEPTH_SQCONV,DEPTH_SQCONV,REDEPTH_SQCONV,
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEPTH_SQCONV.html>
 
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REDEPTH_SQCONV.html>
+
 `IMP_REWRITES_CONV strat ss lev` tris to find a conversion for `tm` at level < 4
 (i.e., not a congruence rule) which is either unconditional or (if lev > 0) such
 that the condition can be rewritten to `T` by `strat ss (lev-1)`.
@@ -670,7 +676,10 @@ let PURE_REWRITE_CONV thl =
 ```ocaml
 let REWRITE_CONV thl =
   GENERAL_REWRITE_CONV true TOP_DEPTH_CONV (basic_net()) thl;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REWRITE_CONV.html>
 
+```ocaml
 let PURE_ONCE_REWRITE_CONV thl =
   GENERAL_REWRITE_CONV false ONCE_DEPTH_CONV empty_net thl;;
 ```
@@ -698,7 +707,10 @@ let PURE_REWRITE_RULE thl = CONV_RULE(PURE_REWRITE_CONV thl);;
 
 ```ocaml
 let REWRITE_RULE thl = CONV_RULE(REWRITE_CONV thl);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REWRITE_RULE.html>
 
+```ocaml
 let PURE_ONCE_REWRITE_RULE thl = CONV_RULE(PURE_ONCE_REWRITE_CONV thl);;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_ONCE_REWRITE_RULE.html>
@@ -748,7 +760,10 @@ let PURE_REWRITE_TAC thl = CONV_TAC(PURE_REWRITE_CONV thl);;
 
 ```ocaml
 let REWRITE_TAC thl = CONV_TAC(REWRITE_CONV thl);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REWRITE_TAC.html>
 
+```ocaml
 let PURE_ONCE_REWRITE_TAC thl = CONV_TAC(PURE_ONCE_REWRITE_CONV thl);;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_ONCE_REWRITE_TAC.html>

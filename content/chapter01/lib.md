@@ -124,7 +124,10 @@ let rev =
       [] -> acc
     | h::t -> rev_append (h::acc) t in
   fun l -> rev_append [] l;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/rev.html>
 
+```ocaml
 let rec map2 f l1 l2 =
   match (l1,l2) with
     [],[] -> []
@@ -169,6 +172,8 @@ let rec funpow n f x =
 let rec repeat f x =
   try let y = f x in repeat f y with Failure _ -> x;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/repeat.html>
+
 Pretty standard again.
 
 ```ocaml
@@ -199,7 +204,10 @@ let rec rev_itlist f l b =
   match l with
     [] -> b
   | (h::t) -> rev_itlist f t (f h b);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/rev_itlist.html>
 
+```ocaml
 let rec end_itlist f l =
   match l with
         []     -> failwith "end_itlist"
@@ -224,6 +232,8 @@ let rec rev_itlist2 f l1 l2 b =
    | (h1::t1,h2::t2) -> rev_itlist2 f t1 t2 (f h1 h2 b)
       | _ -> failwith "rev_itlist2";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/rev_itlist2.html>
+
 A whole bouquet.  It strikes me as odd that `end_itlist` doesn't apply `f` to
 the final `x`.  Let's look up some uses of it.
 
@@ -244,7 +254,10 @@ let rev_splitlist dest =
         rsplist (r::ls) l
     with Failure _ -> (x,ls) in
   fun x -> rsplist [] x;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/rev_splitlist.html>
 
+```ocaml
 let striplist dest =
   let rec strip x acc =
     try let l,r = dest x in
@@ -277,7 +290,10 @@ For this one too...
 let rec replicate x n =
     if n < 1 then []
     else x::(replicate x (n - 1));;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/replicate.html>
 
+```ocaml
 let rec (--) = fun m n -> if m > n then [] else m::((m + 1) -- n);;
 ```
 I don't think these require much comment.  `m -- n` generates the sequence m to
@@ -375,7 +391,10 @@ let rec remove p l =
     [] -> failwith "remove"
   | (h::t) -> if p(h) then h,t else
               let y,n = remove p t in y,h::n;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/remove.html>
 
+```ocaml
 let rec chop_list n l =
   if n = 0 then [],l else
   try let m,l' = chop_list (n-1) (tl l) in (hd l)::m,l'
@@ -451,6 +470,8 @@ let rec rev_assoc a l =
     (x,y)::t -> if Pervasives.compare y a = 0 then x else rev_assoc a t
   | [] -> failwith "find";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/rev_assoc.html>
+
 Nice and simple.
 
 ```ocaml
@@ -647,7 +668,10 @@ Example!
 
 let report s =
   Format.print_string s; Format.print_newline();;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/report.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Convenient function for issuing a warning.                                *)
 (* ------------------------------------------------------------------------- *)
@@ -661,7 +685,10 @@ let warn cond s =
 
 let verbose = ref true;;
 let report_timing = ref true;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/report_timing.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Switchable version of "report".                                           *)
 (* ------------------------------------------------------------------------- *)
@@ -669,6 +696,8 @@ let report_timing = ref true;;
 let remark s =
   if !verbose then report s else ();;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/remark.html>
+
 I don't think there's much of interest here.
 
 ```ocaml
@@ -709,6 +738,8 @@ let rec rev_assocd a l d =
     [] -> d
   | (x,y)::t -> if Pervasives.compare y a = 0 then x else rev_assocd a t d;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/rev_assocd.html>
+
 I'd put these with the other versions above too.
 
 ```ocaml
@@ -722,6 +753,8 @@ let rec qmap f l =
             if h' == h && t' == t then l else h'::t'
   | _ -> l;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/qmap.html>
+
 This looks potentially interesting.
 
 ```ocaml
@@ -876,6 +909,8 @@ let dom f = setify(foldl (fun a x y -> x::a) [] f);;
 ```ocaml
 let ran f = setify(foldl (fun a x y -> y::a) [] f);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ran.html>
+
 Example!
 
 ```ocaml

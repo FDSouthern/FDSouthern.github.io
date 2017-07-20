@@ -87,7 +87,10 @@ let rightbin prs sep cons err =
   (fun (x,opxs) -> if opxs = [] then x else
                    let ops,xs = unzip opxs in
                    itlist2 cons ops (x::butlast xs) (last xs));;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/rightbin.html>
 
+```ocaml
 let possibly prs input =
   try let x,rest = prs input in [x],rest
   with Noparse -> [],input;;

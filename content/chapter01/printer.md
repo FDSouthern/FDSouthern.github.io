@@ -66,7 +66,13 @@ let reserve_words,unreserve_words,is_reserved_word,reserved_words =
   (fun n  -> mem n (!reswords)),
   (fun () -> !reswords);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/reserve_words.html>
+
+<>
+
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_reserved_word.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/reserved_words.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -154,7 +160,10 @@ set_max_boxes 100;;
 (* ------------------------------------------------------------------------- *)
 
 let reverse_interface_mapping = ref true;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/reverse_interface_mapping.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Determine binary operators that print without surrounding spaces.         *)
 (* ------------------------------------------------------------------------- *)
