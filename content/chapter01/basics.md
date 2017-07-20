@@ -37,7 +37,10 @@ let dest_fun_ty ty =
 let rec occurs_in ty bigty =
   bigty = ty ||
   is_type bigty && exists (occurs_in ty) (snd(dest_type bigty));;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/occurs_in.html>
 
+```ocaml
 let rec tysubst alist ty =
   try rev_assoc ty alist with Failure _ ->
   if is_vartype ty then ty else

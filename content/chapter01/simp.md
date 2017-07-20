@@ -51,8 +51,10 @@ let ORDERED_REWR_CONV ord th =
     if ord l r then thm
     else failwith "ORDERED_REWR_CONV: wrong orientation";;
 ```
-`` ORDERED_REWR_CONV ord `|- a = b` `` is a conversion which rewrites `a@` to
-`b@` if `` (ord `a@` `b@`) ``, otherwise it fails.
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ORDERED_REWR_CONV.html>
+
+`` ORDERED_REWR_CONV ord `|- a = b` `` is a conversion which rewrites `a'` to
+`b'` if `` (ord `a'` `b'`) ``, otherwise it fails.
 
 ```ocaml
 let ORDERED_IMP_REWR_CONV ord th =
@@ -63,6 +65,8 @@ let ORDERED_IMP_REWR_CONV ord th =
     if ord l r then thm
     else failwith "ORDERED_IMP_REWR_CONV: wrong orientation";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ORDERED_IMP_REWR_CONV.html>
+
 `` ORDERED_IMP_REWR_CONV ord `|- P ==> (a = b)` `` is a conversion which
 rewrites `a@` to `b@` under the condition `P@` if `` (ord `a@` `b@`) ``.
 
@@ -512,6 +516,8 @@ let ONCE_DEPTH_SQCONV,DEPTH_SQCONV,REDEPTH_SQCONV,
   ONCE_DEPTH_SQCONV,DEPTH_SQCONV,REDEPTH_SQCONV,
   TOP_DEPTH_SQCONV,TOP_SWEEP_SQCONV;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_DEPTH_SQCONV.html>
+
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEPTH_SQCONV.html>
 
 `IMP_REWRITES_CONV strat ss lev` tris to find a conversion for `tm` at level < 4
@@ -667,7 +673,10 @@ let PURE_ONCE_REWRITE_CONV thl =
 
 let ONCE_REWRITE_CONV thl =
   GENERAL_REWRITE_CONV false ONCE_DEPTH_CONV (basic_net()) thl;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_REWRITE_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Rewriting rules and tactics.                                              *)
 (* ------------------------------------------------------------------------- *)
@@ -684,7 +693,10 @@ let REWRITE_RULE thl = CONV_RULE(REWRITE_CONV thl);;
 let PURE_ONCE_REWRITE_RULE thl = CONV_RULE(PURE_ONCE_REWRITE_CONV thl);;
 
 let ONCE_REWRITE_RULE thl = CONV_RULE(ONCE_REWRITE_CONV thl);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_REWRITE_RULE.html>
 
+```ocaml
 let PURE_ASM_REWRITE_RULE thl th =
     PURE_REWRITE_RULE ((map ASSUME (hyp th)) @ thl) th;;
 
@@ -700,6 +712,8 @@ let PURE_ONCE_ASM_REWRITE_RULE thl th =
 let ONCE_ASM_REWRITE_RULE thl th =
     ONCE_REWRITE_RULE ((map ASSUME (hyp th)) @ thl) th;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_ASM_REWRITE_RULE.html>
+
 `PURE_ASM_REWRITE_RULE`, `ASM_REWRITE_RULE`,
 `PURE_ONCE_ASM_REWRITE_RULE`, `ONCE_ASM_REWRITE_RULE` are the same as the
 non-`ASM_` versions, but they add the theorem hypotheses to the rewrite list.
@@ -718,6 +732,8 @@ let PURE_ONCE_REWRITE_TAC thl = CONV_TAC(PURE_ONCE_REWRITE_CONV thl);;
 
 let ONCE_REWRITE_TAC thl = CONV_TAC(ONCE_REWRITE_CONV thl);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_REWRITE_TAC.html>
+
 `GEN_REWRITE_TAC`, `PURE_REWRITE_TAC`, `REWRITE_TAC`, `PURE_ONCE_REWRITE_TAC`,
 `ONCE_REWRITE_TAC` are the same as the `_RULE` variants, but use `CONV_TAC`
 instead of `CONV_RULE`.
@@ -738,6 +754,8 @@ let (PURE_ONCE_ASM_REWRITE_TAC: thm list -> tactic) =
 let (ONCE_ASM_REWRITE_TAC: thm list -> tactic) =
   ASM ONCE_REWRITE_TAC;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_ASM_REWRITE_TAC.html>
+
 `PURE_ASM_REWRITE_TAC`, `ASM_REWRITE_TAC`, `PURE_ONCE_ASM_REWRITE_TAC`,
 `ONCE_ASM_REWRITE_TAC` are the same as the non-`ASM_` variants, but they add
 the current assumptions to the rewrite list.
@@ -758,7 +776,10 @@ let GEN_SIMPLIFY_CONV (strat:strategy) ss lev thl =
 
 ```ocaml
 let ONCE_SIMPLIFY_CONV ss = GEN_SIMPLIFY_CONV ONCE_DEPTH_SQCONV ss 1;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_SIMPLIFY_CONV.html>
 
+```ocaml
 let SIMPLIFY_CONV ss = GEN_SIMPLIFY_CONV TOP_DEPTH_SQCONV ss 3;;
 
 (* ------------------------------------------------------------------------- *)
@@ -792,13 +813,18 @@ let SIMP_CONV thl = SIMPLIFY_CONV (basic_ss []) thl;;
 let PURE_SIMP_CONV thl = SIMPLIFY_CONV empty_ss thl;;
 
 let ONCE_SIMP_CONV thl = ONCE_SIMPLIFY_CONV (basic_ss []) thl;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_SIMP_CONV.html>
 
+```ocaml
 let SIMP_RULE thl = CONV_RULE(SIMP_CONV thl);;
 
 let PURE_SIMP_RULE thl = CONV_RULE(PURE_SIMP_CONV thl);;
 
 let ONCE_SIMP_RULE thl = CONV_RULE(ONCE_SIMP_CONV thl);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_SIMP_RULE.html>
+
 `SIMP_RULE`, `PURE_SIMP_RULE`, `ONCE_SIMP_RULE` are the same as the `_CONV`
 variants, but they call `CONV_RULE`.
 
@@ -809,6 +835,8 @@ let PURE_SIMP_TAC thl = CONV_TAC(PURE_SIMP_CONV thl);;
 
 let ONCE_SIMP_TAC thl = CONV_TAC(ONCE_SIMP_CONV thl);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_SIMP_TAC.html>
+
 `SIMP_TAC`, `PURE_SIMP_TAC`, `ONCE_SIMP_TAC` are the same as the `_CONV`
 variants, but they call `CONV_TAC`.
 
@@ -822,6 +850,8 @@ let PURE_ASM_SIMP_TAC = ASM PURE_SIMP_TAC;;
 
 let ONCE_ASM_SIMP_TAC = ASM ONCE_SIMP_TAC;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_ASM_SIMP_TAC.html>
+
 `ASM_SIMP_TAC`, `PURE_ASM_SIMP_TAC`, `ONCE_ASM_SIMP_TAC` are the same as the
 non-`ASM_` variants, but they add the current assumptions to the rewrite list.
 

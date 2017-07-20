@@ -173,7 +173,11 @@ let ((ORELSEC):conv -> conv -> conv) =
   fun conv1 conv2 t ->
     try conv1 t with Failure _ -> conv2 t;;
 ```
-`c1 ORELSEC c2` rewrites with c1; if it fails, it rewrites with c2 instead.
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ORELSEC.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/orelsec_.html>
+
+`c1 ORELSEC c2` rewrites with `c1`; if it fails, it rewrites with `c2` instead.
 
 ```ocaml
 let (FIRST_CONV:conv list -> conv) = end_itlist (fun c1 c2 -> c1 ORELSEC c2);;
@@ -334,6 +338,8 @@ let (ONCE_DEPTH_CONV: conv->conv),
         with Failure _ -> th1
     with Failure _ -> conv2 tm
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_DEPTH_CONV.html>
+
 `THENQC c1 c2` is like `(c1 THENC c2) ORELSEC c1 ORELSEC c2`.
 
 ```ocaml

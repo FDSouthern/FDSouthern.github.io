@@ -49,14 +49,19 @@ here.
 
 ```ocaml
 let (o) = fun f g x -> f(g x);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/o.html>
 
+Function composition.
+
+```ocaml
 let (F_F) = fun f g (x,y) -> (f x,g y);;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/F_F.html>
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/f_f_.html>
 
-Composition and 'apply over pairs' (I wonder if this has a name?
+'Apply over pairs' (I wonder if this has a name?
 I've seen it mentioned in a paper from Mark Adams comparing HOL systems).
 
 The second version `f_f_` is defined by camlp5 magic in `pa_j.ml`.

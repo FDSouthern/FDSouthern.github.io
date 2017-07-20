@@ -102,7 +102,10 @@ let theorems = ref([]:(string*thm)list);;
 (* ------------------------------------------------------------------------- *)
 
 let omit t = mk_comb(mk_var("<omit this pattern>",W mk_fun_ty (type_of t)),t);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/omit.html>
 
+```ocaml
 let exactly t = mk_comb(mk_var("<match aconv>",W mk_fun_ty (type_of t)),t);;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/exactly.html>

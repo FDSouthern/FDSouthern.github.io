@@ -188,6 +188,10 @@ let ((ORELSE): tactic -> tactic -> tactic) =
   fun tac1 tac2 g ->
     try tac1 g with Failure _ -> tac2 g;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ORELSE.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/orelse_.html>
+
 `tac1 ORELSE tac2` means apply `tac1`; if it fails, apply `tac2`.
 
 ```ocaml
@@ -311,6 +315,10 @@ let ((ORELSE_TCL): thm_tactical -> thm_tactical -> thm_tactical) =
   fun ttcl1 ttcl2 ttac th ->
     try ttcl1 ttac th with Failure _ -> ttcl2 ttac th;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ORELSE_TCL.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/orelse_tcl_.html>
+
 `(thtc1 ORELSE_TCL thtc2) tht th` is equivalent to
 `(tht (thtc1 th)) ORELSE (tht (thtc2 th))`.
 

@@ -56,7 +56,10 @@ let override_interface (sym,tm) =
   let namty = try dest_const tm with Failure _ -> dest_var tm in
   let interface = filter ((<>)sym o fst) (!the_interface) in
   the_interface := (sym,namty)::interface;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/override_interface.html>
 
+```ocaml
 let overload_interface (sym,tm) =
   let gty = try assoc sym (!the_overload_skeletons) with Failure _ ->
             failwith ("symbol \""^sym^"\" is not overloadable") in
@@ -65,7 +68,10 @@ let overload_interface (sym,tm) =
   then failwith "Not an instance of type skeleton" else
   let interface = filter ((<>) (sym,namty)) (!the_interface) in
   the_interface := (sym,namty)::interface;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/overload_interface.html>
 
+```ocaml
 let prioritize_overload ty =
   do_list
    (fun (s,gty) ->
