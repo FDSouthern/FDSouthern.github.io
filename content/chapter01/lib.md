@@ -339,7 +339,10 @@ let rec partition p l =
   | h::t -> let yes,no = partition p t in
             if p(h) then (if yes == t then l,[] else h::yes,no)
             else (if no == t then [],l else yes,h::no);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/partition.html>
 
+```ocaml
 let rec mapfilter f l =
   match l with
     [] -> []
@@ -584,8 +587,15 @@ and num_10 = Int 10;;
 
 ```ocaml
 let pow2 n = power_num num_2 (Int n);;
-let pow10 n = power_num num_10 (Int n);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/pow2.html>
 
+```ocaml
+let pow10 n = power_num num_10 (Int n);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/pow10.html>
+
+```ocaml
 let numdom r =
   let r' = Ratio.normalize_ratio (ratio_of_num r) in
   num_of_big_int(Ratio.numerator_ratio r'),
@@ -1078,6 +1088,8 @@ let print_fpf (f:('a,'b)func) = Format.print_string "<func>";;
 
 #install_printer print_fpf;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/print_fpf.html>
+
 Double hmm
 
 ```ocaml

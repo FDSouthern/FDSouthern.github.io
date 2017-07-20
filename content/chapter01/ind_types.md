@@ -817,7 +817,10 @@ let parse_inductive_type_specification =
     let spec,rst = (parse_type_definition o lex o explode) s in
     if rst = [] then spec
     else failwith "parse_inductive_type_specification: junk after def";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/parse_inductive_type_specification.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Use this temporary version to define the sum type.                        *)
 (* ------------------------------------------------------------------------- *)
@@ -973,7 +976,10 @@ let prove_constructors_injective =
     let cls = conjuncts(snd(strip_exists(snd(strip_forall(concl ax))))) in
     let pats = map (rand o lhand o snd o strip_forall) cls in
     end_itlist CONJ (mapfilter (prove_distinctness ax) pats);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prove_constructors_injective.html>
 
+```ocaml
 let prove_constructors_distinct =
   let num_ty = `:num` in
   let rec allopairs f l m =
@@ -1004,7 +1010,10 @@ let prove_constructors_distinct =
     let pats = map (fun f -> map snd (filter ((=)f o fst) lefts)) fns in
     end_itlist CONJ
      (end_itlist (@) (mapfilter (prove_distinct ax) pats));;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prove_constructors_distinct.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Automatically prove the case analysis theorems.                           *)
 (* ------------------------------------------------------------------------- *)
@@ -1050,7 +1059,10 @@ let prove_cases_thm =
     let ith = BETA_RULE (INST (zip xpreds preds) (SPEC_ALL th)) in
     let eclauses = conjuncts(fst(dest_imp(concl ith))) in
     MP ith (end_itlist CONJ (map prove_eclause eclauses));;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prove_cases_thm.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Now deal with nested recursion. Need a store of previous theorems.        *)
 (* ------------------------------------------------------------------------- *)

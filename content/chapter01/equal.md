@@ -479,7 +479,8 @@ let PATH_CONV =
     | _::t -> ABS_CONV (path_conv t cnv) in
   fun s cnv -> path_conv (explode s) cnv;;
 ```
-`PATH_CONV path c`
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PATH_CONV.html>
+
 For example, `PATH_CONV ["b";"l";"r";"r"] c` rewrites the operand of the operand
 of the operator of the abstraction body with `c`.
 
@@ -497,7 +498,10 @@ let PAT_CONV =
     else
       ABS_CONV (PCONV xs (body pat) conv) in
   fun pat -> let xs,pbod = strip_abs pat in PCONV xs pbod;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PAT_CONV.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Symmetry conversion.                                                      *)
 (* ------------------------------------------------------------------------- *)

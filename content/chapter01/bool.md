@@ -67,6 +67,8 @@ let PINST tyin tmin =
   fun th -> try iterm_fn (itype_fn th)
             with Failure _ -> failwith "PINST";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PINST.html>
+
 `PINST tyin tmin th` instantiates types in `th` according to `tyin` and terms
 according to `tmin`.
 
@@ -80,6 +82,8 @@ let PROVE_HYP ath bth =
   then EQ_MP (DEDUCT_ANTISYM_RULE ath bth) ath
   else bth;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PROVE_HYP.html>
+
 If the conclusion of `ath` is a hypothesis of `bth`, then returns `bth` except
 that this hypothesis is replaced by the hypotheses of `ath`; otherwise returns
 `bth` unchanged.

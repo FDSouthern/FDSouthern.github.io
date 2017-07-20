@@ -87,7 +87,10 @@ let prove_recursive_functions_exist =
     let fth = itlist SIMPLE_EXISTS ufns (EQ_MP (SYM tth) (ASSUME ebod)) in
     let gth = itlist scrub_def (map concl trths) fth in
     PROVE_HYP eth (itlist SIMPLE_CHOOSE evs gth);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prove_recursive_functions_exist.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Version that defines function(s).                                         *)
 (* ------------------------------------------------------------------------- *)

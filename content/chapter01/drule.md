@@ -457,6 +457,8 @@ let PART_MATCH,GEN_PART_MATCH =
       with Failure _ -> failwith "PART_MATCH: Sanity check failure" in
   PART_MATCH,GEN_PART_MATCH;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/partition.html>
+
 `PART_MATCH partfn th tm` matches `(partfn (concl (SPEC_ALL th)))` against `tm`
 and instantiates the theorem appropriately.
 

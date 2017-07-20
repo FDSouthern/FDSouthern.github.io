@@ -853,7 +853,10 @@ let instantiate_casewise_recursion,
       let th =  break_down_admissibility(instantiate_casewise_recursion dtm) in
       if concl th = dtm then th
       else failwith "prove_general_recursive_function_exists: sanity" in
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/pure_prove_recursive_function_exists.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Same, but attempt to prove the wellfoundedness hyp by good guesses.       *)
 (* ------------------------------------------------------------------------- *)
@@ -952,7 +955,11 @@ let instantiate_casewise_recursion,
   instantiate_casewise_recursion,
   pure_prove_recursive_function_exists,
   prove_general_recursive_function_exists;;
+```
 
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prove_general_recursive_function_exists.html>
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Simple "define" function.                                                 *)
 (* ------------------------------------------------------------------------- *)

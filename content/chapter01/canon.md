@@ -18,6 +18,8 @@ let PRESIMP_CONV =
     LEFT_EXISTS_AND_THM; RIGHT_EXISTS_AND_THM;
     LEFT_FORALL_OR_THM; RIGHT_FORALL_OR_THM];;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PRESIMP_CONV.html>
+
 `PRESIMP_CONV` is a conversion which simplifies the literals `T` and `F` as the
 arguments of not,and,or,implies,equality, etc.; and moves connectives out of the
 scope of quantifiers whenever possible.
@@ -413,7 +415,9 @@ let PRENEX_CONV =
     OR_EXISTS_THM; LEFT_OR_EXISTS_THM; RIGHT_OR_EXISTS_THM;
     LEFT_AND_EXISTS_THM; RIGHT_AND_EXISTS_THM];;
 ```
-`PRENEX_CONV` moves universal quantifiers outward past or,and.
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PRENEX_CONV.html>
+
+`PRENEX_CONV` converts term in NNF to PNF.
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -804,6 +808,7 @@ let rec PROP_ATOM_CONV conv tm =
   | Comb(Const("~",_),_) -> RAND_CONV (PROP_ATOM_CONV conv) tm
   | _ -> TRY_CONV conv tm;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PROP_ATOM_CONV.html>
 
 - Previous: [trivia.ml](trivia.md)
 - [Index](index.md)

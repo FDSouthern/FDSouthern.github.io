@@ -418,6 +418,8 @@ let (POP_ASSUM: thm_tactic -> tactic) =
    function (((_,th)::asl),w) -> ttac th (asl,w)
     | _ -> failwith "POP_ASSUM: No assumption to pop";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/POP_ASSUM.html>
+
 `POP_ASSUM tht` removes the first (most recently added) assumption (call it
 `th`) from assumption list, and applies tactic `(tht th)`.
 
@@ -433,8 +435,9 @@ assumptions.
 ```ocaml
 let (POP_ASSUM_LIST: (thm list -> tactic) -> tactic) =
   fun asltac (asl,w) -> asltac (map snd asl) ([],w);;
-
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/POP_ASSUM_LIST.html>
+
 `POP_ASSUM_LIST thlt` applies tactic `(thlt thl)` after removing all
 assumptions, where `thl` is the list of assumptions.
 
@@ -1232,7 +1235,10 @@ let (print_goal:goal->unit) =
     Format.print_newline();
     if asl <> [] then (print_hyps 0 (rev asl); Format.print_newline()) else ();
     print_qterm w; Format.print_newline();;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/print_goal.html>
 
+```ocaml
 let (print_goalstack:goalstack->unit) =
   let print_goalstate k gs =
     let (_,gl,_) = gs in
@@ -1254,7 +1260,10 @@ let (print_goalstack:goalstack->unit) =
       let p = length gl - length gl0 in
       let p' = if p < 1 then 1 else p + 1 in
       print_goalstate p' gs;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/print_goalstack.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Convert a tactic into a refinement on head subgoal in current state.      *)
 (* ------------------------------------------------------------------------- *)
@@ -1326,7 +1335,10 @@ let prove(t,tac) =
   if t' = t then th else
   try EQ_MP (ALPHA t' t) th
   with Failure _ -> failwith "prove: justification generated wrong theorem";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prove.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Interactive "subgoal package" stuff.                                      *)
 (* ------------------------------------------------------------------------- *)
@@ -1386,7 +1398,10 @@ let b() =
 ```ocaml
 let p() =
   !current_goalstack;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/p.html>
 
+```ocaml
 let top_realgoal() =
   let (_,((asl,w)::_),_)::_ = !current_goalstack in
   asl,w;;

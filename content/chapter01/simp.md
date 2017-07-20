@@ -664,13 +664,19 @@ let GEN_REWRITE_CONV (cnvl:conv->conv) thl =
 ```ocaml
 let PURE_REWRITE_CONV thl =
   GENERAL_REWRITE_CONV true TOP_DEPTH_CONV empty_net thl;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_REWRITE_CONV.html>
 
+```ocaml
 let REWRITE_CONV thl =
   GENERAL_REWRITE_CONV true TOP_DEPTH_CONV (basic_net()) thl;;
 
 let PURE_ONCE_REWRITE_CONV thl =
   GENERAL_REWRITE_CONV false ONCE_DEPTH_CONV empty_net thl;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_ONCE_REWRITE_CONV.html>
 
+```ocaml
 let ONCE_REWRITE_CONV thl =
   GENERAL_REWRITE_CONV false ONCE_DEPTH_CONV (basic_net()) thl;;
 ```
@@ -687,11 +693,17 @@ let GEN_REWRITE_RULE cnvl thl = CONV_RULE(GEN_REWRITE_CONV cnvl thl);;
 
 ```ocaml
 let PURE_REWRITE_RULE thl = CONV_RULE(PURE_REWRITE_CONV thl);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_REWRITE_RULE.html>
 
+```ocaml
 let REWRITE_RULE thl = CONV_RULE(REWRITE_CONV thl);;
 
 let PURE_ONCE_REWRITE_RULE thl = CONV_RULE(PURE_ONCE_REWRITE_CONV thl);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_ONCE_REWRITE_RULE.html>
 
+```ocaml
 let ONCE_REWRITE_RULE thl = CONV_RULE(ONCE_REWRITE_CONV thl);;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_REWRITE_RULE.html>
@@ -699,7 +711,10 @@ let ONCE_REWRITE_RULE thl = CONV_RULE(ONCE_REWRITE_CONV thl);;
 ```ocaml
 let PURE_ASM_REWRITE_RULE thl th =
     PURE_REWRITE_RULE ((map ASSUME (hyp th)) @ thl) th;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_ASM_REWRITE_RULE.html>
 
+```ocaml
 let ASM_REWRITE_RULE thl th =
     REWRITE_RULE ((map ASSUME (hyp th)) @ thl) th;;
 ```
@@ -708,7 +723,10 @@ let ASM_REWRITE_RULE thl th =
 ```ocaml
 let PURE_ONCE_ASM_REWRITE_RULE thl th =
     PURE_ONCE_REWRITE_RULE ((map ASSUME (hyp th)) @ thl) th;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_ONCE_ASM_REWRITE_RULE.html>
 
+```ocaml
 let ONCE_ASM_REWRITE_RULE thl th =
     ONCE_REWRITE_RULE ((map ASSUME (hyp th)) @ thl) th;;
 ```
@@ -725,11 +743,17 @@ let GEN_REWRITE_TAC cnvl thl = CONV_TAC(GEN_REWRITE_CONV cnvl thl);;
 
 ```ocaml
 let PURE_REWRITE_TAC thl = CONV_TAC(PURE_REWRITE_CONV thl);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_REWRITE_TAC.html>
 
+```ocaml
 let REWRITE_TAC thl = CONV_TAC(REWRITE_CONV thl);;
 
 let PURE_ONCE_REWRITE_TAC thl = CONV_TAC(PURE_ONCE_REWRITE_CONV thl);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_ONCE_REWRITE_TAC.html>
 
+```ocaml
 let ONCE_REWRITE_TAC thl = CONV_TAC(ONCE_REWRITE_CONV thl);;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_REWRITE_TAC.html>
@@ -741,7 +765,10 @@ instead of `CONV_RULE`.
 ```ocaml
 let (PURE_ASM_REWRITE_TAC: thm list -> tactic) =
   ASM PURE_REWRITE_TAC;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_ASM_REWRITE_TAC.html>
 
+```ocaml
 let (ASM_REWRITE_TAC: thm list -> tactic) =
   ASM REWRITE_TAC;;
 ```
@@ -750,7 +777,10 @@ let (ASM_REWRITE_TAC: thm list -> tactic) =
 ```ocaml
 let (PURE_ONCE_ASM_REWRITE_TAC: thm list -> tactic) =
   ASM PURE_ONCE_REWRITE_TAC;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_ONCE_ASM_REWRITE_TAC.html>
 
+```ocaml
 let (ONCE_ASM_REWRITE_TAC: thm list -> tactic) =
   ASM ONCE_REWRITE_TAC;;
 ```
@@ -811,7 +841,10 @@ congruences and it returns the resulting simpset.
 let SIMP_CONV thl = SIMPLIFY_CONV (basic_ss []) thl;;
 
 let PURE_SIMP_CONV thl = SIMPLIFY_CONV empty_ss thl;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_SIMP_CONV.html>
 
+```ocaml
 let ONCE_SIMP_CONV thl = ONCE_SIMPLIFY_CONV (basic_ss []) thl;;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_SIMP_CONV.html>
@@ -820,7 +853,10 @@ let ONCE_SIMP_CONV thl = ONCE_SIMPLIFY_CONV (basic_ss []) thl;;
 let SIMP_RULE thl = CONV_RULE(SIMP_CONV thl);;
 
 let PURE_SIMP_RULE thl = CONV_RULE(PURE_SIMP_CONV thl);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_SIMP_RULE.html>
 
+```ocaml
 let ONCE_SIMP_RULE thl = CONV_RULE(ONCE_SIMP_CONV thl);;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_SIMP_RULE.html>
@@ -832,7 +868,10 @@ variants, but they call `CONV_RULE`.
 let SIMP_TAC thl = CONV_TAC(SIMP_CONV thl);;
 
 let PURE_SIMP_TAC thl = CONV_TAC(PURE_SIMP_CONV thl);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_SIMP_TAC.html>
 
+```ocaml
 let ONCE_SIMP_TAC thl = CONV_TAC(ONCE_SIMP_CONV thl);;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_SIMP_TAC.html>
@@ -847,7 +886,10 @@ let ASM_SIMP_TAC = ASM SIMP_TAC;;
 
 ```ocaml
 let PURE_ASM_SIMP_TAC = ASM PURE_SIMP_TAC;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/PURE_ASM_SIMP_TAC.html>
 
+```ocaml
 let ONCE_ASM_SIMP_TAC = ASM ONCE_SIMP_TAC;;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/ONCE_ASM_SIMP_TAC.html>

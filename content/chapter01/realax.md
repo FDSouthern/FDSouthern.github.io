@@ -49,6 +49,8 @@ do_list overload_interface
 
 let prioritize_num() = prioritize_overload(mk_type("num",[]));;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prioritize_num.html>
+
 `prioritize_num()` sets operator overloading to default to the type `num`.
 
 ```ocaml
@@ -1777,7 +1779,10 @@ do_list overload_interface
   "&",`real_of_num:num->real`];;
 
 let prioritize_real() = prioritize_overload(mk_type("real",[]));;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prioritize_real.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Additional definitions.                                                   *)
 (* ------------------------------------------------------------------------- *)

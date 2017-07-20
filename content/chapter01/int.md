@@ -62,7 +62,10 @@ do_list overload_interface
   "&",`int_of_num:num->int`];;
 
 let prioritize_int() = prioritize_overload(mk_type("int",[]));;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prioritize_int.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Definitions and closure derivations of all operations but "inv" and "/".  *)
 (* ------------------------------------------------------------------------- *)

@@ -70,6 +70,8 @@ let print_num n =
 
 #install_printer print_num;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/print_num.html>
+
 Some stuff to handle and display arbitrary precision integers.
 
 - Previous: [hol.ml](hol.md)

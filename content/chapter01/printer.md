@@ -89,6 +89,12 @@ let unparse_as_binder,parse_as_binder,parses_as_binder,binders =
   (fun n  -> mem n (!binder_list)),
   (fun () -> !binder_list);;
 ```
+
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/parse_as_binder.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/parses_as_binder.html>
+
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/binders.html>
 
 ```ocaml
@@ -99,7 +105,13 @@ let unparse_as_prefix,parse_as_prefix,is_prefix,prefixes =
   (fun n  -> mem n (!prefix_list)),
   (fun () -> !prefix_list);;
 ```
+
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/parse_as_prefix.html>
+
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_prefix.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prefixes.html>
 
 ```ocaml
 let unparse_as_infix,parse_as_infix,get_infix_status,infixes =
@@ -112,6 +124,10 @@ let unparse_as_infix,parse_as_infix,get_infix_status,infixes =
   (fun n     -> assoc n (!infix_list)),
   (fun ()    -> !infix_list);;
 ```
+
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/parse_as_infix.html>
+
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/get_infix_status.html>
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/infixes.html>
@@ -150,13 +166,19 @@ let unspaced_binops = ref [","; ".."; "$"];;
 (* ------------------------------------------------------------------------- *)
 
 let prebroken_binops = ref ["==>"];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prebroken_binops.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Force explicit indications of bound variables in set abstractions.        *)
 (* ------------------------------------------------------------------------- *)
 
 let print_unambiguous_comprehensions = ref false;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/print_unambiguous_comprehensions.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Print the universal set UNIV:A->bool as "(:A)".                           *)
 (* ------------------------------------------------------------------------- *)
@@ -168,7 +190,10 @@ let typify_universal_set = ref true;;
 (* ------------------------------------------------------------------------- *)
 
 let print_all_thm = ref true;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/print_all_thm.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Get the name of a constant or variable.                                   *)
 (* ------------------------------------------------------------------------- *)
@@ -201,7 +226,12 @@ let pp_print_type,pp_print_qtype =
     | con,args -> (soc "," true (map (sot 0) args))^con in
   (fun fmt ty -> pp_print_string fmt (sot 0 ty)),
   (fun fmt ty -> pp_print_string fmt ("`:" ^ sot 0 ty ^ "`"));;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/pp_print_type.html>
 
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/pp_print_qtype.html>
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Allow the installation of user printers. Must fail quickly if N/A.        *)
 (* ------------------------------------------------------------------------- *)
@@ -507,7 +537,10 @@ let pp_print_term =
                pp_print_string fmt " -> ";
                print_term 1 r)
   in print_term 0;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/pp_print_term.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Print term with quotes.                                                   *)
 (* ------------------------------------------------------------------------- *)
@@ -516,7 +549,10 @@ let pp_print_qterm fmt tm =
   pp_print_string fmt "`";
   pp_print_term fmt tm;
   pp_print_string fmt "`";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/pp_print_qterm.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Printer for theorems.                                                     *)
 (* ------------------------------------------------------------------------- *)
@@ -537,17 +573,39 @@ let pp_print_thm fmt th =
    pp_print_string fmt "|- ";
    pp_print_term fmt tm;
    pp_close_box fmt ());;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/pp_print_thm.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Print on standard output.                                                 *)
 (* ------------------------------------------------------------------------- *)
 
 let print_type = pp_print_type std_formatter;;
-let print_qtype = pp_print_qtype std_formatter;;
-let print_term = pp_print_term std_formatter;;
-let print_qterm = pp_print_qterm std_formatter;;
-let print_thm = pp_print_thm std_formatter;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/print_type.html>
 
+```ocaml
+let print_qtype = pp_print_qtype std_formatter;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/print_qtype.html>
+
+```ocaml
+let print_term = pp_print_term std_formatter;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/print_term.html>
+
+```ocaml
+let print_qterm = pp_print_qterm std_formatter;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/print_qterm.html>
+
+```ocaml
+let print_thm = pp_print_thm std_formatter;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/print_thm.html>
+
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Install all the printers.                                                 *)
 (* ------------------------------------------------------------------------- *)
@@ -573,7 +631,10 @@ let print_to_string printer =
     let s = Buffer.contents buf in
     let () = Buffer.reset buf in
     s;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/print_to_string.html>
 
+```ocaml
 let string_of_type = print_to_string pp_print_type;;
 let string_of_term = print_to_string pp_print_term;;
 let string_of_thm = print_to_string pp_print_thm;;

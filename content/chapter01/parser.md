@@ -91,7 +91,10 @@ let rightbin prs sep cons err =
 let possibly prs input =
   try let x,rest = prs input in [x],rest
   with Noparse -> [],input;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/possibly.html>
 
+```ocaml
 let some p =
   function
       [] -> raise Noparse
@@ -247,7 +250,10 @@ let parse_pretype =
       ||| (type_atom >> (fun x -> [x]))) i
   and typelist i = listof pretype (a (Ident ",")) "type" i in
   pretype;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/parse_pretype.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Hook to allow installation of user parsers.                               *)
 (* ------------------------------------------------------------------------- *)
@@ -532,7 +538,10 @@ let parse_preterm =
             String.sub s (String.length s - 1) 1 = "\"")
       -> Varp(s,dpty),[]
     | _ -> preterm inp);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/parse_preterm.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Type and term parsers.                                                    *)
 (* ------------------------------------------------------------------------- *)
@@ -541,13 +550,17 @@ let parse_type s =
   let pty,l = (parse_pretype o lex o explode) s in
   if l = [] then type_of_pretype pty
   else failwith "Unparsed input following type";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/parse_type.html>
 
+```ocaml
 let parse_term s =
   let ptm,l = (parse_preterm o lex o explode) s in
   if l = [] then
    (term_of_preterm o (retypecheck [])) ptm
   else failwith "Unparsed input following term";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/parse_term.html>
 
 - Previous: [preterm.ml](preterm.md)
 - [Index](index.md)

@@ -81,7 +81,10 @@ let prioritize_overload ty =
           overload_interface(s,mk_var(n,t))
       with Failure _ -> ())
    (!the_overload_skeletons);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prioritize_overload.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Type abbreviations.                                                       *)
 (* ------------------------------------------------------------------------- *)
@@ -143,7 +146,10 @@ let rec pretype_of_type ty =
   try let con,args = dest_type ty in
       Ptycon(con,map pretype_of_type args)
   with Failure _ -> Utv(dest_vartype ty);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/pretype_of_type.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Preterm syntax.                                                           *)
 (* ------------------------------------------------------------------------- *)
@@ -170,7 +176,10 @@ let rec preterm_of_term tm =
   with Failure _ ->
       let l,r = dest_comb tm in
       Combp(preterm_of_term l,preterm_of_term r);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/preterm_of_term.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Main pretype->type, preterm->term and retypechecking functions.           *)
 (* ------------------------------------------------------------------------- *)

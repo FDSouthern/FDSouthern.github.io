@@ -348,7 +348,10 @@ let prove_monotonicity_hyps =
   fun th ->
     let mths = mapfilter prove_mth (filter (not o is_eq) (hyp th)) in
     itlist PROVE_HYP mths th;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prove_monotonicity_hyps.html>
 
+```ocaml
 (* ========================================================================= *)
 (* Part 3: The final user wrapper, with schematic variables added.           *)
 (* ========================================================================= *)
@@ -427,6 +430,8 @@ let prove_inductive_relations_exist,new_inductive_definition =
     thtr in
   prove_inductive_relations_exist,new_inductive_definition;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/prove_inductive_relations_exist.html>
+
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/new_inductive_definition.html>
 
 ```ocaml
