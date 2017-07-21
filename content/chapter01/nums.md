@@ -336,7 +336,10 @@ let is_numeral = can dest_numeral;;
 (* ------------------------------------------------------------------------- *)
 
 let the_specifications = ref [];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/the_specifications.html>
 
+```ocaml
 let new_specification =
   let code c = mk_small_numeral (Char.code (c.[0])) in
   let mk_code name =

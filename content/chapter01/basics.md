@@ -46,7 +46,10 @@ let rec tysubst alist ty =
   if is_vartype ty then ty else
   let tycon,tyvars = dest_type ty in
   mk_type(tycon,map (tysubst alist) tyvars);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/tysubst.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* A bit more syntax.                                                        *)
 (* ------------------------------------------------------------------------- *)
@@ -193,7 +196,10 @@ let rec type_match vty cty sofar =
      let vop,vargs = dest_type vty and cop,cargs = dest_type cty in
      if vop = cop then itlist2 type_match vargs cargs sofar
      else failwith "type_match";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/type_match.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Conventional matching version of mk_const (but with a sanity test).       *)
 (* ------------------------------------------------------------------------- *)
@@ -239,7 +245,10 @@ let list_mk_icomb cname args =
 let thm_frees th =
   let asl,c = dest_thm th in
   itlist (union o frees) asl (frees c);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/thm_frees.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Is one term free in another?                                              *)
 (* ------------------------------------------------------------------------- *)

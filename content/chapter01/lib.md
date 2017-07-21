@@ -83,7 +83,10 @@ let tl l =
   match l with
    h::t -> t
   | _ -> failwith "tl";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/tl.html>
 
+```ocaml
 let map f =
   let rec mapf l =
     match l with
@@ -385,7 +388,10 @@ let rec tryfind f l =
   match l with
       [] -> failwith "tryfind"
     | (h::t) -> try f h with Failure _ -> tryfind f t;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/tryfind.html>
 
+```ocaml
 let flat l = itlist (@) l [];;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/flat.html>
@@ -737,6 +743,8 @@ let time f x =
                           (string_of_float(finish_time -. start_time))^": ");
       raise e;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/time.html>
+
 Timing could be fun.  Where is it used?
 
 ```ocaml
@@ -962,7 +970,10 @@ let apply f = applyd f (fun x -> failwith "apply");;
 
 ```ocaml
 let tryapplyd f a d = applyd f (fun x -> d) a;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/tryapplyd.html>
 
+```ocaml
 let defined f x = try apply f x; true with Failure _ -> false;;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/defined.html>

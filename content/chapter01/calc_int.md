@@ -71,7 +71,10 @@ let term_of_rat =
     let ptm = mk_realintconst p in
     if q = num_1 then ptm
     else mk_comb(mk_comb(div_tm,ptm),mk_realintconst q);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/term_of_rat.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Some elementary "bootstrapping" lemmas we need below.                     *)
 (* ------------------------------------------------------------------------- *)

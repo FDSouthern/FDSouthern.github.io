@@ -283,6 +283,8 @@ let install_parser,delete_parser,installed_parsers,try_user_parser =
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/installed_parsers.html>
 
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/try_user_parser.html>
+
 ```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Initial preterm parsing. This uses binder and precedence/associativity/   *)

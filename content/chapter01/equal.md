@@ -171,6 +171,10 @@ let ((THENC):conv -> conv -> conv) =
     let th2 = conv2 (rand(concl th1)) in
     TRANS th1 th2;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/THENC.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/thenc_.html>
+
 `c1 THENC c2` rewrites with c1 then c2.
 
 ```ocaml
@@ -227,6 +231,8 @@ to the original term.
 ```ocaml
 let TRY_CONV conv = conv ORELSEC ALL_CONV;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/TRY_CONV.html>
+
 `TRY_CONV c` rewrites with `c`; if it fails, it does not change the term
 (and does not fail).
 
@@ -449,6 +455,10 @@ until no change
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEPTH_CONV.html>
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REDEPTH_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/TOP_DEPTH_CONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/TOP_SWEEP_CONV.html>
 
 `ONCE_DEPTH_CONV`, `DEPTH_CONV`, `REDEPTH_CONV`, `TOP_DEPTH_CONV`,
 `TOP_SWEEP_CONV`:  like the `QCONV` variants, except they never fail.

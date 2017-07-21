@@ -144,9 +144,15 @@ let unparse_as_infix,parse_as_infix,get_infix_status,infixes =
 (* ------------------------------------------------------------------------- *)
 
 let the_interface = ref ([] :(string * (string * hol_type)) list);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/the_interface.html>
 
+```ocaml
 let the_overload_skeletons = ref ([] : (string * hol_type) list);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/the_overload_skeletons.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Now the printer.                                                          *)
 (* ------------------------------------------------------------------------- *)
@@ -193,7 +199,10 @@ let print_unambiguous_comprehensions = ref false;;
 (* ------------------------------------------------------------------------- *)
 
 let typify_universal_set = ref true;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/typify_universal_set.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Flag controlling whether hypotheses print.                                *)
 (* ------------------------------------------------------------------------- *)
@@ -255,6 +264,8 @@ let install_user_printer,delete_user_printer,try_user_printer =
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/install_user_printer.html>
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/delete_user_printer.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/try_user_printer.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)

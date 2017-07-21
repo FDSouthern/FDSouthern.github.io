@@ -37,6 +37,8 @@ let hol_dir = ref
 
 let temp_path = ref "/tmp";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/temp_path.html>
+
 Fairly obvious things, I think.
 
 ```ocaml

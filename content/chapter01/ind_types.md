@@ -1470,7 +1470,10 @@ let the_inductive_types = ref
  ["list = NIL | CONS A list",(list_INDUCT,list_RECURSION);
   "option = NONE | SOME A",(option_INDUCT,option_RECURSION);
   "sum = INL A | INR B",(sum_INDUCT,sum_RECURSION)];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/the_inductive_types.html>
 
+```ocaml
 let define_type s =
   try let retval = assoc s (!the_inductive_types) in
       (warn true "Benign redefinition of inductive type"; retval)

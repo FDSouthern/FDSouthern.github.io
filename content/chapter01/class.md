@@ -144,7 +144,10 @@ extend_basic_rewrites [SELECT_REFL];;
 (* ------------------------------------------------------------------------- *)
 
 let the_type_definitions = ref ([]:((string*string*string)*(thm*thm))list);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/the_type_definitions.html>
 
+```ocaml
 let new_type_definition tyname (absname,repname) th =
   try let th',tth' = assoc (tyname,absname,repname) (!the_type_definitions) in
       if concl th' <> concl th then failwith "" else
@@ -228,6 +231,8 @@ let TAUT =
   let TAUT_TAC = REPEAT(GEN_TAC ORELSE CONJ_TAC) THEN REPEAT RTAUT_TAC in
   fun tm -> prove(tm,TAUT_TAC);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/TAUT.html>
+
 `TAUT tm` tries to prove the term.  Starts with `(REPEAT GEN_TAC)`, then
 rewrites with the basic rewrites and does case splits on free boolean variables
 using `BOOL_CASES_TAC`.

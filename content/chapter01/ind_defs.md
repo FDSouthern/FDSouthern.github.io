@@ -362,7 +362,10 @@ let prove_monotonicity_hyps =
 (* ========================================================================= *)
 
 let the_inductive_definitions = ref [];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/the_inductive_definitions.html>
 
+```ocaml
 let prove_inductive_relations_exist,new_inductive_definition =
   let rec pare_comb qvs tm =
     if intersect (frees tm) qvs = [] && forall is_var (snd(strip_comb tm))

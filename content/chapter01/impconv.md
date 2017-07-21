@@ -1856,7 +1856,10 @@ let TARGET_REWRITE_TAC sths th =
   IMPCONV_TAC
   (TARGET_REWRITE_IMPCONV sths' (map patterns_of_thm ths)
     + imp_conv_of_ctx_imp_conv (REWRITE_CTXIMPCONV ths))
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/TARGET_REWRITE_TAC.html>
 
+```ocaml
 let HINT_EXISTS_TAC = CTXIMPCONV_TAC (TOP_DEPTH_CTXIMPCONV EXISTS_CTXIMPCONV)
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/HINT_EXISTS_TAC.html>

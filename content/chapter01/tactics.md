@@ -178,6 +178,14 @@ let (THEN),(THENL) =
       else tacsequence gstate tac2l in
   then_,thenl_;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/THEN.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/then_.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/THENL.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/thenl_.html>
+
 `tac1 THEN tac2` means apply `tac1`, then apply `tac2` to all subgoals created.
 
 `t THENL [t1;t2;...;tn]` means apply `t`, then apply `t1` to the first subgoal,
@@ -222,6 +230,8 @@ let (ALL_TAC:tactic) =
 let TRY tac =
   tac ORELSE ALL_TAC;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/TRY.html>
+
 `TRY tac` is `tac ORELSE ALL_TAC`.
 
 ```ocaml
@@ -313,6 +323,10 @@ very different from this.
 let ((THEN_TCL): thm_tactical -> thm_tactical -> thm_tactical) =
   fun ttcl1 ttcl2 ttac -> ttcl1 (ttcl2 ttac);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/THEN_TCL.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/then_tcl_.html>
+
 `(thtc1 THEN_TCL thtc2) tht th` is equivalent to `tht (thtc1 (thtc2 th))`.
 
 ```ocaml
@@ -952,7 +966,10 @@ let (TRANS_TAC:thm->term->tactic) =
         itlist2 type_match (map type_of [x;y;z])(map type_of [l;tm;r]) [] in
       let th' = INST_TYPE ilist th in
       (MATCH_MP_TAC th' THEN EXISTS_TAC tm) gl;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/TRANS_TAC.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Theorem continuations.                                                    *)
 (* ------------------------------------------------------------------------- *)
@@ -1376,7 +1393,10 @@ let (TAC_PROOF : goal * tactic -> thm) =
     let _,sgs,just = by tac gstate in
     if sgs = [] then just null_inst []
     else failwith "TAC_PROOF: Unsolved goals";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/TAC_PROOF.html>
 
+```ocaml
 let prove(t,tac) =
   let th = TAC_PROOF(([],t),tac) in
   let t' = concl th in
@@ -1462,15 +1482,24 @@ let p() =
 let top_realgoal() =
   let (_,((asl,w)::_),_)::_ = !current_goalstack in
   asl,w;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/top_realgoal.html>
 
+```ocaml
 let top_goal() =
   let asl,w = top_realgoal() in
   map (concl o snd) asl,w;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/top_goal.html>
 
+```ocaml
 let top_thm() =
   let (_,[],f)::_ = !current_goalstack in
   f null_inst [];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/top_thm.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Install the goal-related printers.                                        *)
 (* ------------------------------------------------------------------------- *)

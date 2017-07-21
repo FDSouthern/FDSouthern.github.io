@@ -129,7 +129,10 @@ Types and vartypes?  Type variables.
 (* ------------------------------------------------------------------------- *)
 
   let types() = !the_type_constants
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/types.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Lookup function for type constants. Returns arity if it succeeds.         *)
 (* ------------------------------------------------------------------------- *)
@@ -214,7 +217,10 @@ I think this deserves a comment.
       function
           (Tyapp(_,args)) -> itlist (union o tyvars) args []
         | (Tyvar v as tv) -> [tv]
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/tyvars.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Substitute types for type variables.                                      *)
 (*                                                                           *)
@@ -228,7 +234,10 @@ I think this deserves a comment.
           let args' = qmap (type_subst i) args in
           if args' == args then ty else Tyapp(tycon,args')
       | _ -> rev_assocd ty i ty
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/type_subst.html>
 
+```ocaml
   let bool_ty = Tyapp("bool",[])
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/bool_ty.html>
@@ -289,7 +298,10 @@ I think this deserves a comment.
     | Const(_,ty) -> ty
     | Comb(s,_) -> (match type_of s with Tyapp("fun",[dty;rty]) -> rty)
     | Abs(Var(_,ty),t) -> Tyapp("fun",[ty;type_of t])
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/type_of.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Primitive discriminators.                                                 *)
 (* ------------------------------------------------------------------------- *)
@@ -430,7 +442,10 @@ I think this deserves a comment.
     | Const(_,ty)      -> tyvars ty
     | Comb(s,t)        -> union (type_vars_in_term s) (type_vars_in_term t)
     | Abs(Var(_,ty),t) -> union (tyvars ty) (type_vars_in_term t)
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/type_vars_in_term.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* For name-carrying syntax, we need this early.                             *)
 (* ------------------------------------------------------------------------- *)
@@ -578,7 +593,10 @@ I think this deserves a comment.
                          if c = 0 then h1::(term_union t1 t2)
                          else if c < 0 then h1::(term_union t1 l2)
                          else h2::(term_union l1 t2)
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/term_union.html>
 
+```ocaml
   let rec term_remove t l =
     match l with
       s::ss -> let c = alphaorder t s in
@@ -633,6 +651,8 @@ Okay, below here we've got HOL Light's inference rules:
         when alphaorder m1 m2 = 0 -> Sequent(term_union asl1 asl2,Comb(eql,r))
     | _ -> failwith "TRANS"
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/TRANS.html>
+
 `` TRANS `ASM1 |- a = b` `ASM2 |- b = c` `` gives `ASM1+ASM2 |- a = c`.
 
 ```ocaml
@@ -771,7 +791,10 @@ instantiated.
 (* ------------------------------------------------------------------------- *)
 
   let the_definitions = ref ([]:thm list)
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/the_definitions.html>
 
+```ocaml
   let definitions() = !the_definitions
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/definitions.html>

@@ -108,6 +108,8 @@ let term_order =
       else f1 > f2 in
   dyn_order `T`;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/term_order.html>
+
 `term_order` is an ordering function which is AC-compatible for any binary
 operator.
 
@@ -538,6 +540,10 @@ let ONCE_DEPTH_SQCONV,DEPTH_SQCONV,REDEPTH_SQCONV,
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DEPTH_SQCONV.html>
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/REDEPTH_SQCONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/TOP_DEPTH_SQCONV.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/TOP_SWEEP_SQCONV.html>
 
 `IMP_REWRITES_CONV strat ss lev` tris to find a conversion for `tm` at level < 4
 (i.e., not a congruence rule) which is either unconditional or (if lev > 0) such

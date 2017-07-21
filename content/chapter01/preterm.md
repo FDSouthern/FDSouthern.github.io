@@ -22,15 +22,24 @@ let ignore_constant_varstruct = ref true;;
 (* ------------------------------------------------------------------------- *)
 
 let type_invention_warning = ref true;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/type_invention_warning.html>
 
+```ocaml
 let type_invention_error = ref false;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/type_invention_error.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Implicit types or type schemes for non-constants.                         *)
 (* ------------------------------------------------------------------------- *)
 
 let the_implicit_types = ref ([]:(string*hol_type)list);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/the_implicit_types.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Overloading and interface mapping.                                        *)
 (* ------------------------------------------------------------------------- *)
@@ -109,6 +118,8 @@ let new_type_abbrev,remove_type_abbrev,type_abbrevs =
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/new_type_abbrev.html>
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/remove_type_abbrev.html>
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/type_abbrevs.html>
 
 ```ocaml
 (* ------------------------------------------------------------------------- *)
@@ -447,7 +458,10 @@ let type_of_pretype,term_of_preterm,retypecheck =
                mk_vartype(s)
     | Utv(v) -> mk_vartype(v)
     | Ptycon(con,args) -> mk_type(con,map type_of_pretype args) in
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/type_of_pretype.html>
 
+```ocaml
   (* ----------------------------------------------------------------------- *)
   (* Maps preterms to terms.                                                 *)
   (* ----------------------------------------------------------------------- *)
@@ -468,7 +482,10 @@ let type_of_pretype,term_of_preterm,retypecheck =
     fun ptm -> stvs_translated := false;
                let tm = term_of_preterm ptm in
                report_type_invention (); tm in
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/term_of_preterm.html>
 
+```ocaml
   (* ----------------------------------------------------------------------- *)
   (* Overall typechecker: initial typecheck plus overload resolution pass.   *)
   (* ----------------------------------------------------------------------- *)

@@ -335,7 +335,10 @@ let (term_match:term list -> term -> term -> instantiation) =
     let tyins = get_type_insts (fst pinsts_homs) [] in
     let insts = term_homatch lconsts tyins pinsts_homs in
     separate_insts insts;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/term_match.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* First order unification (no type instantiation -- yet).                   *)
 (* ------------------------------------------------------------------------- *)
@@ -373,7 +376,10 @@ let (term_unify:term list -> term -> term -> instantiation) =
       and l2,r2 = dest_comb tm2 in
       unify vars l1 l2 (unify vars r1 r2 sofar) in
   fun vars tm1 tm2 -> [],unify vars tm1 tm2 [],[];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/term_unify.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Modify bound variable names at depth. (Not very efficient...)             *)
 (* ------------------------------------------------------------------------- *)
