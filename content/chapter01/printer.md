@@ -68,7 +68,7 @@ let reserve_words,unreserve_words,is_reserved_word,reserved_words =
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/reserve_words.html>
 
-<>
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/unreserve_words.html>
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_reserved_word.html>
 
@@ -95,7 +95,7 @@ let unparse_as_binder,parse_as_binder,parses_as_binder,binders =
   (fun n  -> mem n (!binder_list)),
   (fun () -> !binder_list);;
 ```
-
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/unparse_as_binder.html>
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/parse_as_binder.html>
 
@@ -111,7 +111,7 @@ let unparse_as_prefix,parse_as_prefix,is_prefix,prefixes =
   (fun n  -> mem n (!prefix_list)),
   (fun () -> !prefix_list);;
 ```
-
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/unparse_as_prefix.html>
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/parse_as_prefix.html>
 
@@ -130,7 +130,7 @@ let unparse_as_infix,parse_as_infix,get_infix_status,infixes =
   (fun n     -> assoc n (!infix_list)),
   (fun ()    -> !infix_list);;
 ```
-
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/unparse_as_infix.html>
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/parse_as_infix.html>
 
@@ -175,7 +175,10 @@ let reverse_interface_mapping = ref true;;
 (* ------------------------------------------------------------------------- *)
 
 let unspaced_binops = ref [","; ".."; "$"];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/unspaced_binops.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Binary operators to print at start of line when breaking.                 *)
 (* ------------------------------------------------------------------------- *)

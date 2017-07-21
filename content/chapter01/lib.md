@@ -24,7 +24,10 @@ let curry f x y = f(x,y);;
 
 ```ocaml
 let uncurry f(x,y) = f x y;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/uncurry.html>
 
+```ocaml
 let I x = x;;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/I.html>
@@ -447,9 +450,15 @@ let insert x l =
 
 ```ocaml
 let union l1 l2 = itlist insert l1 l2;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/union.html>
 
+```ocaml
 let unions l = itlist union l [];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/unions.html>
 
+```ocaml
 let intersect l1 l2 = filter (fun x -> mem x l2) l1;;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/intersect.html>
@@ -509,6 +518,8 @@ let rec unzip =
          | ((a,b)::rest) -> let alist,blist = unzip rest in
                             (a::alist,b::blist);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/unzip.html>
+
 Dum dee dum.
 
 ```ocaml
@@ -567,6 +578,8 @@ let rec uniq l =
                       if t'==t then l else x::t'
  | _ -> l;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/uniq.html>
+
 I'm sure I learnt this as `destutter`.
 
 ```ocaml
@@ -852,7 +865,10 @@ Source for Patricia trees.
 (* ------------------------------------------------------------------------- *)
 
 let undefined = Empty;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/undefined.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* In case of equality comparison worries, better use this.                  *)
 (* ------------------------------------------------------------------------- *)
@@ -1016,6 +1032,8 @@ let undefine =
       | _ -> t in
     und;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/undefine.html>
+
 And here.  What is this??
 
 ```ocaml
@@ -1179,9 +1197,15 @@ let insert' eq x l =
 
 ```ocaml
 let union' eq l1 l2 = itlist (insert' eq) l1 l2;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/union_prime.html>
 
+```ocaml
 let unions' eq l = itlist (union' eq) l [];;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/unions_prime.html>
 
+```ocaml
 let subtract' eq l1 l2 = filter (fun x -> not (mem' eq x l2)) l1;;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/subtract_prime.html>

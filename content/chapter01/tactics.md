@@ -502,6 +502,8 @@ let (USE_THEN:string->thm_tactic->tactic) =
              failwith("USE_TAC: didn't find assumption "^s) in
     ttac th gl;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/USE_THEN.html>
+
 `USE_THEN s tht` finds the first assumption with label `s`
 (call this assumption `th`) and applies tactic `(tht th)`.
 
@@ -747,8 +749,7 @@ let (EQ_TAC: tactic) =
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/EQ_TAC.html>
 
-`EQ_TAC` converts goal `` `(a:bool) = b` `` to `` `a ==> b` `` and
-`` `b ==> a` ``.
+`EQ_TAC` converts goal `(a:bool) = b` to `a ==> b` and `b ==> a`.
 
 ```ocaml
 let (UNDISCH_TAC: term -> tactic) =
@@ -759,9 +760,10 @@ let (UNDISCH_TAC: term -> tactic) =
        fun i [th] -> MP th (INSTANTIATE_ALL i thm)
    with Failure _ -> failwith "UNDISCH_TAC";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/UNDISCH_TAC.html>
+
 `` UNDISCH_TAC `a` `` finds an assumption with a conclusion alpha-equivalent to
-`` `a` ``, removes this assumption, and converts goal `` `b` `` to
-`` `a ==> b` ``.
+`a`, removes this assumption, and converts goal `b` to `a ==> b`.
 
 ```ocaml
 let (SPEC_TAC: term * term -> tactic) =
@@ -1139,6 +1141,8 @@ let (UNDISCH_THEN:term->thm_tactic->tactic) =
     let thp,asl' = remove (fun (_,th) -> aconv (concl th) tm) asl in
     ttac (snd thp) (asl',w);;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/UNDISCH_THEN.html>
+
 `` UNDISCH_THEN `a` tht `` finds an assumption `|- a`, removes the assumption,
 and applies the tactic `` (tht `|- a`) ``.
 

@@ -281,6 +281,8 @@ let UNDISCH th =
   try MP th (ASSUME(rand(rator(concl th))))
   with Failure _ -> failwith "UNDISCH";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/UNDISCH.html>
+
 `` UNDISCH `ASM |- a ==> b` `` gives `ASM,a |- b`.
 
 ```ocaml
@@ -288,6 +290,8 @@ let rec UNDISCH_ALL th =
   if is_imp (concl th) then UNDISCH_ALL (UNDISCH th)
   else th;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/UNDISCH_ALL.html>
+
 `UNDISCH_ALL` repeats `UNDISCH` until the conclusion is not an implication.
 
 ```ocaml

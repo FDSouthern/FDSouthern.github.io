@@ -16,7 +16,10 @@ let UNIFY_ACCEPT_TAC mvs th (asl,w) =
   ([],insts),[],
   let th' = INSTANTIATE insts th in
   fun i [] -> INSTANTIATE i th';;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/UNIFY_ACCEPT_TAC.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* The actual prover, as a tactic.                                           *)
 (* ------------------------------------------------------------------------- *)

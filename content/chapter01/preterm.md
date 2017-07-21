@@ -135,7 +135,7 @@ let hide_constant,unhide_constant,is_hidden =
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/hide_constant.html>
 
-
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/unhide_constant.html>
 
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/is_hidden.html>
 
