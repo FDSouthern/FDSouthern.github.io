@@ -384,6 +384,8 @@ let WF_INDUCT_TAC =
     (MATCH_MP_TAC th2 THEN MAP_EVERY X_GEN_TAC fvs THEN
      CONV_TAC(LAND_CONV qqconvs) THEN DISCH_THEN ASSUME_TAC) gl;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/WF_INDUCT_TAC.html>
+
 `WF_INDUCT_TAC` performs wellfounded induction over a nominated measure
 function.  Sometimes it avoids an explicit `!n t. size(t) = n ==> ...` goal.
 

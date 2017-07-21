@@ -140,7 +140,10 @@ let (VALID:tactic->tactic) =
     if aconv w' w'' &
        forall (fun t -> exists (aconv t) maxasms) (subtract asl' [false_tm])
     then res else failwith "VALID: Invalid tactic";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/VALID.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Various simple combinators for tactics, identity tactic etc.              *)
 (* ------------------------------------------------------------------------- *)
@@ -817,7 +820,11 @@ let (X_GEN_TAC: term -> tactic),
     fun i [th] -> EXISTS (instantiate i w,instantiate i t) th in
   X_GEN_TAC,X_CHOOSE_TAC,EXISTS_TAC;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/X_GEN_TAC.html>
+
 `` X_GEN_TAC `x` `` converts a goal `` `!y. P[y]` `` to `` `P[x]` ``.
+
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/X_CHOOSE_TAC.html>
 
 `` X_CHOOSE_TAC `x` `|- ?y. P[y]` `` adds a new assumption `` `P[x]` ``.
 
@@ -1031,6 +1038,8 @@ let (DISCH_THEN: thm_tactic -> tactic) =
 let (X_CHOOSE_THEN: term -> thm_tactical) =
   fun x ttac th -> X_CHOOSE_TAC x th THEN POP_ASSUM ttac;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/X_CHOOSE_THEN.html>
+
 `` X_CHOOSE_THEN `x` tht `|- ?y. P[y]` `` applies tactic `` (tht `|- P[x]`) ``.
 
 ```ocaml
@@ -1204,6 +1213,8 @@ let (X_META_EXISTS_TAC: term -> tactic) =
         fun i [th] -> EXISTS (instantiate i w,instantiate i t) th
     with Failure _ -> failwith "X_META_EXISTS_TAC";;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/X_META_EXISTS_TAC.html>
+
 `` X_META_EXISTS_TAC `x` `` converts goal `?y. P[y]` to `P[x]`, where `x` is a
 metavariable.
 

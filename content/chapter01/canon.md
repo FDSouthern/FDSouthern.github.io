@@ -470,6 +470,8 @@ let WEAK_DNF_CONV,DNF_CONV =
     TRANS th (strengthen(rand(concl th))) in
   weakdnf,strongdnf;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/WEAK_DNF_CONV.html>
+
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/DNF_CONV.html>
 
 `DNF_CONV` uses DeMorgan's laws and associativity to move to disjunctive normal
@@ -518,6 +520,8 @@ let WEAK_CNF_CONV,CNF_CONV =
     TRANS th (strengthen(rand(concl th))) in
   weakcnf,strongcnf;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/WEAK_CNF_CONV.html>
+
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/CNF_CONV.html>
 
 `CNF_CONV` uses DeMorgan's laws and associativity to move to conjunctive normal

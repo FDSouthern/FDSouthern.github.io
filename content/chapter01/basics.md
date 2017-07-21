@@ -125,14 +125,17 @@ let mk_binary s =
 let rec variants av vs =
   if vs = [] then [] else
   let vh = variant av (hd vs) in vh::(variants (vh::av) (tl vs));;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/variants.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Gets all variables (free and/or bound) in a term.                         *)
 (* ------------------------------------------------------------------------- *)
 
 let variables =
   let rec vars(acc,tm) =
-    if is_var tm then insert tm acc
+    if is_var tm tlhen insert tm acc
     else if is_const tm then acc
     else if is_abs tm then
       let v,bod = dest_abs tm in
@@ -141,7 +144,10 @@ let variables =
       let l,r = dest_comb tm in
       vars(vars(acc,l),r) in
   fun tm -> vars([],tm);;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/variables.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* General substitution (for any free expression).                           *)
 (* ------------------------------------------------------------------------- *)

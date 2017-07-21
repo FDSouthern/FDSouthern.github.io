@@ -431,7 +431,10 @@ I think this deserves a comment.
       Abs(bv,bod) -> v <> bv && vfree_in v bod
     | Comb(s,t) -> vfree_in v s || vfree_in v t
     | _ -> Pervasives.compare tm v = 0
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/vfree_in.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Finds the type variables (free) in a term.                                *)
 (* ------------------------------------------------------------------------- *)
@@ -455,7 +458,10 @@ I think this deserves a comment.
     match v with
       Var(s,ty) -> variant avoid (Var(s^"'",ty))
     | _ -> failwith "variant: not a variable"
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/variant.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Substitution primitive (substitution for variables only!)                 *)
 (* ------------------------------------------------------------------------- *)
@@ -480,7 +486,10 @@ I think this deserves a comment.
       if forall (function (t,Var(_,y)) -> Pervasives.compare (type_of t) y = 0
                         | _ -> false) theta
       then vsubst theta else failwith "vsubst: Bad substitution list"
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/vsubst.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Type instantiation primitive.                                             *)
 (* ------------------------------------------------------------------------- *)

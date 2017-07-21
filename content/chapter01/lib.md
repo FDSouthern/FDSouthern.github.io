@@ -45,6 +45,8 @@ let C f x y = f y x;;
 ```ocaml
 let W f x = f x x;;
 ```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/W.html>
+
 This appears to be a variant of the
 [B, C, K, W system](https://en.wikipedia.org/wiki/B,_C,_K,_W_system).
 I'll try and keep an eye out for where they're used later and put some links
@@ -512,7 +514,10 @@ let rec zip l1 l2 =
         ([],[]) -> []
       | (h1::t1,h2::t2) -> (h1,h2)::(zip t1 t2)
       | _ -> failwith "zip";;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/zip.html>
 
+```ocaml
 let rec unzip =
   function [] -> [],[]
          | ((a,b)::rest) -> let alist,blist = unzip rest in
@@ -716,12 +721,19 @@ let report s =
 
 let warn cond s =
   if cond then report ("Warning: "^s) else ();;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/warn.html>
 
+```ocaml
 (* ------------------------------------------------------------------------- *)
 (* Flags to switch on verbose mode.                                          *)
 (* ------------------------------------------------------------------------- *)
 
 let verbose = ref true;;
+```
+<http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/verbose.html>
+
+```ocaml
 let report_timing = ref true;;
 ```
 <http://www.cl.cam.ac.uk/~jrh13/hol-light/HTML/report_timing.html>
