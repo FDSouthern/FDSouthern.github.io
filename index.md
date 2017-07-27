@@ -7,4 +7,5 @@ This document is intended to serve as a guide to the
 implementation and usage of the interactive theorem prover
 [HOL Light](http://www.cl.cam.ac.uk/~jrh13/hol-light/).
 
-1. [Introduction](content/chapter01/background.md)
+1. [Chapter 1](content/chapter01/background.md)
+2. [Chapter 2](content/chapter02/prime.md)
